@@ -1,0 +1,52 @@
+---
+title: Grayscale - Docs
+---
+<section id="docs" class="top-section">
+	<div class="container">
+		<div class="col-lg-3 hidden-md hidden-sm hidden-xs">
+			<nav id="sidebar">
+				{{>sidenav}}
+			</nav>
+		</div>
+		<div class="col-lg-9">
+			<section id="content">
+				{{#eachPartial "**/*.md"}}
+					{{#mdpartial partialName partialData}}
+					<a id="{{partialName}}" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="{{type}} img-rounded">
+						{{#if type}}
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										{{#is type "GET"}}
+											<span class="img-rounded label-success">{{type}}</span>
+										{{/is}}
+										{{#is type "PUT"}}
+											<span class="img-rounded label-warning">{{type}}</span>
+										{{/is}}
+										{{#is type "POST"}}
+											<span class="img-rounded label-info">{{type}}</span>
+										{{/is}}
+										{{#is type "DELETE"}}
+											<span class="img-rounded label-danger">{{type}}</span>
+										{{/is}}
+										<span class="gray">
+											{{path}} {{#if beta}}<span class="label label-danger" title="This might change.">beta</span>{{/if}}
+										</span>
+									</code>
+									<span class="hidden-xs">{{title}}</span>
+								</h2>
+							</a>
+						{{else}}
+							<h2>{{title}}</h2>
+						{{/if}}
+						<section class="body img-rounded">
+							{{this.content}}
+						</section>
+					</article>
+					{{/mdpartial}}
+				{{/eachPartial}}
+			</section>
+		</div>
+	</div>
+</section>
