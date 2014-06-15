@@ -29,7 +29,7 @@ Returns a JSON object.
 
 - **status codes** - `200`, `400` (if no method is specified)
 
-Example response:
+Example response - returns the result without envelope:
 ```js
-{ "value": ...result... }
+"result"
 ```
