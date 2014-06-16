@@ -1,15 +1,24 @@
 # humanstxt.org/
 # The humans responsible & technology colophon
 
+     ____  ___ _ ____ ___ _ 
+    / __ \/ __` / ___/ __` /
+   / /_/ / /_/ / /  / /_/ / 
+  / .___/\__,_/_/   \__,_/ io.org
+ /_/                        
+
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Alexander Bogdanovski -- lead developer
+    Twitter: albogdano
 
 # THANKS
 
-    <name>
+    Everyone who contributed to this project,
+    ElasticSearch, Hazelcast creators,
+    and the cool people on Twitter esp. buhtum (Svilen)
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3
-    Normalize.css, jQuery, Modernizr
+    Generated with bootUp (Assemble + Bootstrap)
+    https://github.com/albogdano/bootup

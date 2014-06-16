@@ -1,7 +1,7 @@
 {
 	"dest": "dist",
-	"ga": "UA-XXXXX-X",
-	"domain": "domain.com",
+	"ga": "UA-51972923-1",
+	"domain": "paraio.org",
 	"templates": "src",
 	"plugins": "<%= site.templates %>/plugins",
 	"helpers": "<%= site.templates %>/helpers",
