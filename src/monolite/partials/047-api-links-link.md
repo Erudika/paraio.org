@@ -18,17 +18,16 @@ the `id` field of another object (parent).
 
 #### Parameters
 
-- `type` - the `type` of the second object (required)
 - `id` - the `id` field of the second object (required)
 
 ### Response
 
-Returns the `id` of the `Linker` object - the `linkId`.
+Returns the `id` of the `Linker` object - the `linkId` - which contains the types and ids of the two objects.
 
 - **status codes** - `200`, `400` (if any of the parameters are missing)
 
 Example response:
 
 ```js
-"linkid"
+"type1:id1:type2:id2"
 ```
