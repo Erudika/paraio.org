@@ -11,4 +11,5 @@ fi
 git add -A && git commit -am "updated docs"
 git push origin gh-pages
 git checkout master
+git push origin master
 echo "-- done --"
