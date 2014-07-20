@@ -1,7 +1,7 @@
 ---
 title: Find linked objects
 category: REST API
-path: /v1/{type}/{id}/links
+path: /v1/{type}/{id}/links/{type2}/{id2}
 type: GET
 ---
 
@@ -11,19 +11,22 @@ Call this method to search for objects that linked to the object with the given 
 
 - `{type}` - the type of the first object, e.g. "users"
 - `{id}` - the `id` of the first object
+- `{type2}` - the `type` of the second object (required)
+- `{id2}` - the `id` field of the second object (not required)
 
 #### Parameters
 
-- `type` - the `type` of the second object (required)
-- `id` - the `id` field of the second object (not required)
-- `childrenOnly` - if set and `id` is not set, will return a list of child objects
-(these are the objects with `parentid` equal to `{id}` above)
+- `childrenonly` - if set and `id` is not set, will return a list of child objects
+(these are the objects with `parentid` equal to `{id}` above). Also if `field` and `term` parameters are set, the results
+are filtered by the specified field and the value of that field (term).
+- `count` - if set will return no items an the total number of linked objects. If `childrenonly` is set, this will
+return only the count of child objects.
 
 ### Response
 
 - If the `id` parameter is specified, the response will be a boolean - `true` if objects are linked.
 - If the `id` parameter is missing, the response will be a list of linked objects. (pagination parameters are applicable)
-- `childrenOnly` - if set, the response will be a list of child objects (pagination parameters are applicable)
+- `childrenonly` - if set, the response will be a list of child objects (pagination parameters are applicable)
 
 - **status codes** - `200`, `400` (if `type` parameter is missing)
 

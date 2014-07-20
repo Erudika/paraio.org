@@ -15,7 +15,7 @@
 # THANKS
 
     Everyone who contributed to this project,
-    ElasticSearch, Hazelcast creators,
+    Elasticsearch, Hazelcast creators,
     and the cool people on Twitter esp. buhtum (Svilen)
 
 # TECHNOLOGY COLOPHON

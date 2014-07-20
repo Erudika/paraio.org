@@ -1,11 +1,11 @@
 ---
 title: Advanced search
 category: REST API
-path: /v1/{search}
+path: /v1/search/{querytype}
 type: GET
 ---
 
-Performs a search query.
+Executes a search query.
 
 ### Queries
 
@@ -63,7 +63,8 @@ This executes the method `findTermInList()` with these **parameters**:
 This executes the method `findTerms()` with these **parameters**:
 - `matchall` - if `true` executes an `AND` query, otherwise an `OR` query
 - `terms` - a list of `field:term` pairs (example: `?terms=field1:term1&terms=field2:term2`)
-- `count` - if present will return the number of results only and not the objects
+- `count` - if present will return 0 objects but the "totalHits" field will contain the total number of results found
+that match the given terms.
 
 <hr>
 
@@ -76,11 +77,14 @@ This executes the method `findWildcard()` with these **parameters**:
 #### `count` query
 This executes the method `getCount()` with **no parameters**.
 
+### Request
+
+- `{querytype}` - the type of query to execute (optional, use one of the above types).
+
 ### Request parameters
 
 - `q` - a search query string (optional). Defaults to `*` (all).
 - `type` - the type of objects to search for (optional).
-- `querytype` - the type of query to execute (optional). One of: `id`, `nearby`, `similar`
 `prefix`, `tagged`, `in`, `terms`, `wildcard`, `count`. (see [Search](#015-search))
 - `desc` - sort order - `true` for descending (optional). Default is `true`.
 - `sort` - the field to sort by (optional).

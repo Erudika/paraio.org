@@ -6,7 +6,6 @@ type: GET
 ---
 
 Returns a list of objects given their `id` fields.
-**Note:** Requests to this path and `/v1/{type}` are handled identically.
 
 ### Parameters
 

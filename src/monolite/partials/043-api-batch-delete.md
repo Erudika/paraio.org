@@ -7,16 +7,14 @@ type: DELETE
 
 Deletes multiple objects with a single request.
 
-### Request
+### Parameters
 
-- **body** - a JSON array of objects to update (required).
+- `ids` - a list of `id`s of existing objects (required).
 
-**Note:** The only required fields are `id` and `type`.
-For example `DELETE [{ "id":"id1", "type":"myobject" }, { "id":"id2", "type":"myobject" }]`
-will delete these two objects.
+Example: `DELETE /v1/_batch?ids=1&ids=2` will delete the two objects with an `id` of `1` and `2`, respectively.
 
 ### Response
 
-- **status codes** - `200`, `400` (if request body is missing)
+- **status codes** - `200`, `400` (if request maximum number of `ids` is over the limit of ~30)
 
 No content.

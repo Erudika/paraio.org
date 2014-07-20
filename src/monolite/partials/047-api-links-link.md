@@ -1,7 +1,7 @@
 ---
 title: Link objects
 category: REST API
-path: /v1/{type}/{id}/links
+path: /v1/{type}/{id}/links/{id2}
 type: POST
 ---
 
@@ -15,10 +15,7 @@ the `id` field of another object (parent).
 
 - `{type}` - the type of the first object, e.g. "users"
 - `{id}` - the `id` of the first object
-
-#### Parameters
-
-- `id` - the `id` field of the second object (required)
+- `{id2}` - the `id` field of the second object (required)
 
 ### Response
 

@@ -1,7 +1,7 @@
 ---
 title: Basic search
 category: REST API
-path: /v1/{type}/search
+path: /v1/{type}/search/{querytype}
 type: GET
 ---
 
@@ -11,13 +11,12 @@ Searches for objects of type `{type}`.
 ### Request
 
 - `{type}` - the plural form of the object's type, e.g. "users"
+- `{querytype}` - the type of query to execute (optional, see [Search](#015-search))
 - `{id}` - the `id`
 
 #### Parameters
 
 - `q` - a search query string (optional). Defaults to `*` (all).
-- `querytype` - the type of query to execute (optional). One of: `id`, `nearby`,
-`prefix`, `tagged`, `in`, `terms`, `wildcard`, `count`. (see [Search](#015-search))
 - `desc` - sort order - `true` for descending (optional). Default is `true`.
 - `sort` - the field to sort by (optional).
 - `page` - starting page for results (optional). (note: page size is 30 items by default)
