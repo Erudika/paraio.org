@@ -15,3 +15,10 @@ many different clients and applications. This is done through Para's simple REST
 
 And if you are building a server-side application, add Para as a dependency to quickly make your domain objects
 persistable and searchable. You can still keep the RESTful API feature or turn it off completely.
+
+### Quick start
+
+1. [Download the JAR](https://github.com/erudika/para/releases/download/v{{version}}/para-{{version}}.jar)
+2. Run it with `java -jar para-{{version}}.jar` - Para is now running in embedded mode, suitable for development.
+3. Call `curl localhost:8080/v1/setup` to get the access and secret keys (give it a few seconds to initialize)
+4. Start using the RESTful API directly or using the provided `ParaClient` class.
