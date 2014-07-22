@@ -3,11 +3,12 @@ title: User-defined classes
 category: Core classes
 ---
 
-Let's say you have a class `Article` in your application that you wish to persist. You make it a subclass of `PObject`
-then add a few data fields to it. You need to specify which fields you want to be saved by adding the `@Stored` annotation.
+Let's say you have a class `Article` in your application that you wish to persist. You first implement `ParaObject`,
+then add a few data fields to it. You need to specify which fields you want to be saved by adding the
+`@Stored` annotation.
 
 ```java
-class Article extends PObject {
+class Article implements ParaObject {
 	@Stored private String title;
 	@Stored private String text;
 }
@@ -39,7 +40,7 @@ cache respectively.
 
 If you want to read an object, first you have to get access to the `DAO` object. You can either:
 - call `Para.getDAO()`
-- get it from another `PObject` with `pobj.getDao()`
+- get it from another `ParaObject` with `pobj.getDao()`
 - `@Inject` it with `Para.injectInto()`
 
 Then you can read an object using its id:

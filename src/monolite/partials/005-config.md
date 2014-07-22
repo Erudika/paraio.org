@@ -46,8 +46,9 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.pass_reset_timeout`		</td><td>`30 * 60` sec.</td><td>Long</td></tr>
 		<tr><td>`para.cache_enabled`				</td><td>`false` || `para.env == production`</td><td>Boolean</td></tr>
 		<tr><td>`para.search_enabled`				</td><td>`true`</td><td>Boolean</td></tr>
-		<tr><td>`para.rest_enabled`					</td><td>`true`</td><td>Boolean</td></tr>
+		<tr><td>`para.api_enabled`					</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.read_from_index`			</td><td>`true`</td><td>Boolean</td></tr>
+		<tr><td>`para.security.api`					</td><td> `enabled` </td><td> String </td></tr>
 		<tr><td>`para.security.protected.{name}`		</td><td> `["/{path}", "/{path}/**", ["{role}"]]` </td><td> Array </td></tr>
 		<tr><td>`para.security.ignored`							</td><td> `["/{path}/**", "/{path}/**"]` </td><td> Array </td></tr>
 		<tr><td>`para.security.signin`							</td><td> `/signin` </td><td> String </td></tr>

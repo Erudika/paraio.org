@@ -6,7 +6,7 @@ category: Core classes
 In the package `para.core` there are a number of core domain classes that are used throughout Para.
 These are common classes like `User` and `Tag` which you can use in you application directly or extend them.
 
-Below is a list of classes and their descriptions. All of these extend `PObject` which is the main abstract class.
+Below is a list of classes and their descriptions. All of these implement `ParaObject` which is the core interface.
 It contains all core fields, getters, setters and also implements basic functionality like voting, linking and tagging.
 
 <table class="table table-striped">

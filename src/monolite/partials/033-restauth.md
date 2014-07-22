@@ -10,7 +10,6 @@ dependency. In terms of security, both algorithms are considered very secure so 
 In order to make a request to the API you need to have a pair of access and secret keys. Access keys are part of the
 HTTP request and secret keys are used for signing only and must be kept safe.
 
-
 ### First-time setup
 
 Call `GET /v1/setup` to get your first key pair. Once you do this you will get back a response like:
@@ -30,6 +29,13 @@ have their own separate keys (see [Apps](#34)).
 ### Changing keys
 
 Call `POST /v1/newkeys` to generate a new secret key (*the request must be signed with the old keys*).
+
+### Disabling API security
+
+To disable the API security completely, set the config parameter `para.security.api` to `"disabled"`
+(actually any string other than "enabled" would do the same thing).
+
+If you wish to disable all API functions completely, set the config parameter `para.api_enabled" to `false`. 
 
 > For more information see the [AWS documentation](http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 for REST authentication.

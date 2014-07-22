@@ -1,5 +1,5 @@
 ---
-title: The Para Object
+title: The ParaObject interface
 category: Getting Started
 ---
 
@@ -12,10 +12,10 @@ class User {
 }
 ```
 
-and turn them into persistable Para objects just by adding one annotation and extending the core Para class `PObject`:
+and turn them into persistable Para objects just by adding one annotation and extending the core Para class `ParaObject`:
 
 ```java
-class User extends PObject {
+class User implements ParaObject {
 	@Stored public String name;
 	@Stored public int age;
 }
@@ -38,3 +38,5 @@ Once the objects is created and persisted we can search for it like this:
 // returns a list of users found
 List<User> users = Para.getSearch().findQuery(u.getType(), "freeman");
 ```
+
+**Note:** Since 1.7, the `PObject` superclass is removed. Your classes no longer need to extend that parent class.
