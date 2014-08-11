@@ -25,7 +25,7 @@ Para.addDestroyListener(new Para.DestroyListener() {
 	}
 });
 ```
-
+ 
 ### Custom context initializers
 
 Para will automatically pick up your classes which extend the `Para` class. They should be annotated
