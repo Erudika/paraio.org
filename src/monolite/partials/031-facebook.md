@@ -6,28 +6,19 @@ category: Security
 Support for logging in with Facebook is implemented by the `FacebookAuthFilter`. This filter responds to requests at
 `/facebook_auth`.
 
-The filter takes three parameters:
+To initiate a login with Facebook just redirect the user to the link Facebook API endpoint
+`https://www.facebook.com/dialog/oauth`. Pass the parameter `redirect_uri=/facebook_auth` so Para
+can handle the response from Facebook.
 
-- `fbsig` - the signature of the authentication token (required)
-- `fbemail` - the email of the user (used for registration)
-- `fbname` - the name of the user (used for registration)
+**Note:** You need to register a new application with Facebook in order to obtain an access and secret keys.
 
-Below is an example JavaScript code for a Facebook login button:
+Below is an example Javascript code for a Facebook login button:
 
 ```js
-$("#fb-login-btn").on("click touchend", function() {
-	FB.login(function(response) {
-		if (response.authResponse) {
-			FB.api("/me", function(resp) {
-				window.location = "/facebook_auth?fbsig=" +
-					encodeURIComponent(response.authResponse.signedRequest) +
-					"&fbname=" + encodeURIComponent(resp.name) +
-					"&fbemail=" + encodeURIComponent(resp.email);
-			});
-		} else {
-			window.location = "/facebook_auth";
-		}
-	}, {scope: "email"});
-	return false;
+$("#facebookLoginBtn").click(function() {
+		window.location = "https://www.facebook.com/dialog/oauth?response_type=code" +
+				"&client_id={FACEBOOK_APP_ID}&scope=email&state=" + (new Date().getTime()) + "&redirect_uri=" +
+				window.location.origin + "/facebook_auth";
+		return false;
 });
 ```

@@ -3,13 +3,10 @@ title: Plugins
 category: Configuration
 ---
 
-Para doesn't have a proper plugin mechanism yet but you can "weave in" functionality by overriding `AOPModule`.
-You can intercept calls to `DAO` methods and execute your own code.
+Para allows you to "weave in" functionality by overriding `AOPModule`. You can intercept calls to `DAO` methods
+and execute your own code.
 
 ### Custom event listeners
-Also you can override the `ParaContextListener` which is the main entry point for Para. Like the modules above, you can
-implement `javax.servlet.ServletContextListener` in `META-INF/services` and create a subclass of `ParaContextListener`
-which loads Para and, say, some other services for your app.
 
 You can also register your own `InitializeListener`s and `DestroyListener`s which will execute when Para is initialized
 and destroyed, respectively.
@@ -28,6 +25,17 @@ Para.addDestroyListener(new Para.DestroyListener() {
 	}
 });
 ```
+
+### Custom context initializers
+
+Para will automatically pick up your classes which extend the `Para` class. They should be annotated
+with `@Configuration`, `@EnableAutoConfiguration` and `@ComponentScan`. The `Para` class implements Spring Boot's
+`WebApplicationInitializer` which creates the root application context.
+
+In your custom initializers you have full access to the `ServletContext` and this is a good place to register
+your own filters and servlets. These initializer classes also act as an alternative to
+`web.xml` by providing programmatic configuration capabilities.
+
 ### Custom API resource handlers
 
 Since version 1.7, you can register custom API resources by implementing the `CustomResourceHandler` interface.
@@ -39,9 +47,17 @@ The `CustomResourceHandler` interface is simple:
 
 ```java
 public interface CustomResourceHandler {
-	// the path of the resource, e.g "mystuff"
+	// the path of the resource, e.g. "my-resource"
 	String getRelativePath();
-	// the code to handle the requests
-	Response handle(ContainerRequestContext ctx);
+	// handle GET requests
+	Response handleGet(ContainerRequestContext ctx);
+	// handle PUT requests
+	Response handlePut(ContainerRequestContext ctx);
+	// handle POST requests
+	Response handlePost(ContainerRequestContext ctx);
+	// handle DELETE requests
+	Response handleDelete(ContainerRequestContext ctx);
 }
 ```
+
+You can use `@Inject` in your custom handlers to inject any object managed by Para.

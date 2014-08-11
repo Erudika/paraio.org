@@ -26,6 +26,7 @@ Here's a list of all configuration properties that can be set in the config file
 	<tbody>
 		<tr><td>`para.env`									</td><td>	`embedded`</td><td>String</td></tr>
 		<tr><td>`para.aws_access_key`				</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.aws_secret_key`				</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.aws_region`						</td><td>`eu-west-1`</td><td>String</td></tr>
 		<tr><td>`para.fb_app_id`						</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.fb_secret`						</td><td>-</td><td>String</td></tr>
@@ -47,8 +48,11 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.cache_enabled`				</td><td>`false` || `para.env == production`</td><td>Boolean</td></tr>
 		<tr><td>`para.search_enabled`				</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.api_enabled`					</td><td>`true`</td><td>Boolean</td></tr>
+		<tr><td>`para.cors_enabled`					</td><td>`true`</td><td>Boolean</td></tr>
+		<tr><td>`para.gzip_enabled`					</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.read_from_index`			</td><td>`true`</td><td>Boolean</td></tr>
-		<tr><td>`para.security.api`					</td><td> `enabled` </td><td> String </td></tr>
+
+		<tr><td>`para.security.api`									</td><td> `enabled` </td><td> String </td></tr>
 		<tr><td>`para.security.protected.{name}`		</td><td> `["/{path}", "/{path}/**", ["{role}"]]` </td><td> Array </td></tr>
 		<tr><td>`para.security.ignored`							</td><td> `["/{path}/**", "/{path}/**"]` </td><td> Array </td></tr>
 		<tr><td>`para.security.signin`							</td><td> `/signin` </td><td> String </td></tr>
@@ -56,6 +60,12 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.security.returnto`						</td><td> `returnto` </td><td> String </td></tr>
 		<tr><td>`para.security.signin_success`			</td><td> `/` </td><td> String </td></tr>
 		<tr><td>`para.security.signin_failure`			</td><td> `/signin` </td><td> String </td></tr>
+
+		<tr><td>`para.s3.bucket`										</td><td> `org.paraio.files` </td><td> String </td></tr>
+		<tr><td>`para.s3.max_filesize_mb`						</td><td> 10 </td><td> String </td></tr>
+		<tr><td>`para.localstorage.folder`					</td><td> - </td><td> String </td></tr>
+		<tr><td>`para.localstorage.max_filesize_mb`	</td><td> 10 </td><td> String </td></tr>
+
 	</tbody>
 </table>
 

@@ -17,7 +17,7 @@ int timeOfEvent = 1399554448;
 int timeNow = System.currentTimeMillis();
 // calculate elapsed time
 String s2 = ht.approximately(timeNow - timeOfEvent);
-System.out.println("Event happend " + s2 + " time ago");
+System.out.println("Event happened " + s2 + " time ago");
 ```
 
 > For more information about HumanTime see [the docs](http://johannburkard.de/blog/programming/java/date-formatting-parsing-humans-humantime.html).

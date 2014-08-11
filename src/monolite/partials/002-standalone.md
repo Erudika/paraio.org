@@ -1,6 +1,6 @@
 ---
 category: Getting Started
-title: Standalone
+title: Standalone mode
 ---
 
 There are two ways to run Para as a standalone server. The first one is by downloading the "fat" JAR file and executing it:
@@ -31,7 +31,7 @@ Here's a simple diagram of that architecture:
 | Para | Para | Para | Para |  ...   |
 | Node | Node | Node | Node |        |
 |      |      |      |      |        |
-+------+------+------+------+--------+ 
++------+------+------+------+--------+
 </pre>
 
 

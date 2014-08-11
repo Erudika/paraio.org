@@ -12,7 +12,7 @@ These are the core modules defined in Para:
 - `AOPModule` - manages the indexing and caching aspects of Para objects
 - `I18nModule` - defines a currency converter service implementation
 - `QueueModule` - defines a queue service implementation
-- `StorageModule` - defines a file storage service, e.g. S3 (*not implemented yet*)
+- `StorageModule` - defines a file storage service, e.g. Amazon S3
 
 You can override all of the above using the `ServiceLoader` mechanism in Java like so:
 
