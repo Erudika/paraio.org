@@ -16,6 +16,7 @@ There are several configuration properties for Elasticsearch:
 		</tr>
 	</thead>
 	<tbody>
+		<tr><td>`para.es.async_enabled`</td><td> Asynchronous operation when indexing/unindexing. Defaults to `false`.</td></tr>
 		<tr><td>`para.es.shards`</td><td> The number of shards per index. Used when creating an new index. Default is `5`.</td></tr>
 		<tr><td>`para.es.replicas`</td><td> The number of copies of an index. Default is `0`. </td></tr>
 		<tr><td>`para.es.dir`</td><td> The directory where Elasticsearch will store data, logs etc. Default is `/var/lib/elasticsearch`. </td></tr>

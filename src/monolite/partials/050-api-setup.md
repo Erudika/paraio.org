@@ -1,7 +1,7 @@
 ---
 title: Initial setup
 category: REST API
-path: /v1/setup
+path: /v1/_setup
 type: GET
 ---
 
@@ -10,7 +10,7 @@ the REST API.
 
 ### Request
 
-**No paramteres**.
+**No parameters**.
 
 ### Response
 

@@ -34,7 +34,8 @@ Example response if `id` is missing:
 
 ```js
 {
-	"totalHits":X,
+	"page":X,
+	"totalHits":Y,
 	"items":[
 		...
 	]

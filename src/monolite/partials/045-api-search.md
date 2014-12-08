@@ -66,6 +66,10 @@ This executes the method `findTerms()` with these **parameters**:
 - `count` - if present will return 0 objects but the "totalHits" field will contain the total number of results found
 that match the given terms.
 
+Since v1.9, the terms query supports ranges. For example if you have a pair like `'age':25` and you want to
+find objects with higher `age` value, you can modify the key to have a relational operator `'age >':25`. You can
+use the `>, <, >=, <=` operators by appending them to the keys of the terms map.
+
 <hr>
 
 #### `wildcard` query
@@ -97,6 +101,7 @@ This executes the method `getCount()` with **no parameters**.
 Example response for counting all objects (just three for this example):
 ```js
 {
+	"page":0,
 	"totalHits":3,
 	"items":[
 	]

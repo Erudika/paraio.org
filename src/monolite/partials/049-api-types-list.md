@@ -1,7 +1,7 @@
 ---
 title: List types
 category: REST API
-path: /v1/types
+path: /v1/_types
 type: GET
 ---
 
@@ -12,7 +12,7 @@ See [User-defined classes](#010-userdefined) for more details.
 
 ### Request
 
-**No paramteres**.
+**No parameters**.
 
 ### Response
 

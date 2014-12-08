@@ -25,6 +25,7 @@ Here's a list of all configuration properties that can be set in the config file
 	</thead>
 	<tbody>
 		<tr><td>`para.env`									</td><td>	`embedded`</td><td>String</td></tr>
+		<tr><td>`para.print_logo`						</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.aws_access_key`				</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.aws_secret_key`				</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.aws_region`						</td><td>`eu-west-1`</td><td>String</td></tr>
@@ -52,13 +53,17 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.gzip_enabled`					</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.read_from_index`			</td><td>`true`</td><td>Boolean</td></tr>
 
-		<tr><td>`para.security.api`									</td><td> `enabled` </td><td> String </td></tr>
+		<tr><td>`para.security.api_security`				</td><td> `true` </td><td> Boolean </td></tr>
+		<tr><td>`para.security.csrf_protection`			</td><td> `true` </td><td> Boolean </td></tr>
+		<tr><td>`para.security.csrf_cookie`					</td><td> - </td><td> String </td></tr>
 		<tr><td>`para.security.protected.{name}`		</td><td> `["/{path}", "/{path}/**", ["{role}"]]` </td><td> Array </td></tr>
 		<tr><td>`para.security.ignored`							</td><td> `["/{path}/**", "/{path}/**"]` </td><td> Array </td></tr>
 		<tr><td>`para.security.signin`							</td><td> `/signin` </td><td> String </td></tr>
+		<tr><td>`para.security.signout`							</td><td> `/signout` </td><td> String </td></tr>
 		<tr><td>`para.security.access_denied`				</td><td> `/403` </td><td> String </td></tr>
 		<tr><td>`para.security.returnto`						</td><td> `returnto` </td><td> String </td></tr>
 		<tr><td>`para.security.signin_success`			</td><td> `/` </td><td> String </td></tr>
+		<tr><td>`para.security.signout_success`			</td><td> `/signin` </td><td> String </td></tr>
 		<tr><td>`para.security.signin_failure`			</td><td> `/signin` </td><td> String </td></tr>
 
 		<tr><td>`para.s3.bucket`										</td><td> `org.paraio.files` </td><td> String </td></tr>

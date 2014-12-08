@@ -28,6 +28,7 @@ Searches for objects of type `{type}`.
 Example response for querying all tags:
 ```js
 {
+	"page":0,
 	"totalHits":3,
 	"items":[{
 		"id":"tag:tag3",

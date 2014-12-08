@@ -1,7 +1,7 @@
 ---
 title: Reset API keys
 category: REST API
-path: /v1/newkeys
+path: /v1/_newkeys
 type: POST
 ---
 
@@ -10,7 +10,7 @@ Make sure you save it and use it for signing future requests.
 
 ### Request
 
-**No paramteres**.
+**No parameters**.
 
 ### Response
 
