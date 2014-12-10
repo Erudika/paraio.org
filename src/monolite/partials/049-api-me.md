@@ -1,5 +1,5 @@
 ---
-title: "Me" object
+title: 'Me' object
 category: REST API
 path: /v1/_me
 type: GET
