@@ -52,7 +52,7 @@ Article readA = dao.read(id);
 
 You can also define custom types of objects through the REST API by changing the `type` property on your objects.
 Keep in mind that the following are reserved words and they *should not* be used for naming your types (plural form included):
-**"setup(s)", "newkey(s)", "type(s)", "search(es)", "util(s)", "_batch(es)"**.
+**"search(es)", "util(s)"**.
 
 > Note that you can create objects with custom types and fields [through the REST API](#036-api-create) without having
 > to define them as Java classes like above. These custom objects will be based on the generic `Sysprop` class but
