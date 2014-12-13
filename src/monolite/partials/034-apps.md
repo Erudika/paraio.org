@@ -3,8 +3,6 @@ title: Apps
 category: REST API
 ---
 
-> **Note:** This feature is still being developed and might change.
-
 Apps allow you to have separate namespaces and data models for different purposes. Each app lives in its own separate
 database and is independent from apps.
 
