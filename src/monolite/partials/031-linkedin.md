@@ -6,7 +6,7 @@ category: Security
 Support for logging in with LinkedIn is implemented by the `LinkedInAuthFilter`. This filter responds to requests at
 `/linkedin_auth`.
 
-To initiate a login with LinkedIn just redirect the user to the link LinkedIn API endpoint
+To initiate a login with LinkedIn just redirect the user to the link LinkedIn OAuth endpoint
 `https://www.linkedin.com/uas/oauth2/authorization`. Pass the parameter `redirect_uri=/linkedin_auth` so Para
 can handle the response from LinkedIn.
 

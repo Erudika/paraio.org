@@ -6,7 +6,7 @@ category: Security
 Support for logging in with Google+ is implemented by the `GoogleAuthFilter`. This filter responds to requests at
 `/google_auth`.
 
-To initiate a login with Google+ just redirect the user to the link Google API endpoint
+To initiate a login with Google+ just redirect the user to the link Google OAuth endpoint
 `https://accounts.google.com/o/oauth2/auth`. Pass the parameter `redirect_uri=/google_auth` so Para
 can handle the response from Google+.
 

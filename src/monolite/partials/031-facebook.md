@@ -6,7 +6,7 @@ category: Security
 Support for logging in with Facebook is implemented by the `FacebookAuthFilter`. This filter responds to requests at
 `/facebook_auth`.
 
-To initiate a login with Facebook just redirect the user to the link Facebook API endpoint
+To initiate a login with Facebook just redirect the user to the link Facebook OAuth endpoint
 `https://www.facebook.com/dialog/oauth`. Pass the parameter `redirect_uri=/facebook_auth` so Para
 can handle the response from Facebook.
 
