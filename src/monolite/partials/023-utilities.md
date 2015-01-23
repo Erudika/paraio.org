@@ -35,7 +35,7 @@ The `Utils` static class contains a variety of utility methods. These are summar
 		<tr><td>`String noSpaces(String str, String replaceWith)`</td></tr>
 		<tr><td> Spaces are replaced with something or removed completely. </td></tr>
 		<tr><td>`String formatMessage(String msg, Object... params)`</td></tr>
-		<tr><td> Replaces placeholders like {0}, {1}, etc. with the corresponding objects (numbers, strings, booleans). </td></tr>
+		<tr><td> Replaces placeholders like `{0}`, `{1}`, etc. with the corresponding objects (numbers, strings, booleans). </td></tr>
 	</tbody>
 </table>
 

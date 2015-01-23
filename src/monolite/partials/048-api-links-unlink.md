@@ -5,7 +5,7 @@ path: /v1/{type}/{id}/links/{type2}/{id2}
 type: DELETE
 ---
 
-Unlinks the object with the specified `{id}` from another object.
+Unlinks or deletes the objects linked to the object with the specified `{id}`.
 
 ### Request
 
@@ -20,9 +20,9 @@ Unlinks the object with the specified `{id}` from another object.
 - `childrenonly` - if set, all child objects will be deleted rather than unlinked (be careful!)
 
 **Note:**
-- If both `{type2}` and `{id2}` are not set, all linked objects will be unlinked from this one.
+- If both `{type2}` and `{id2}` are not set, **all linked objects will be unlinked from this one**.
 - If `id` is set - the two objects are unlinked.
-- If both `all` and `id` are not set, but `childrenonly` is set then the child objects with type `type` are **deleted**!
+- If `all` and `id` are not set, but `childrenonly` is set then the child objects with type `type` are **deleted**!
 (these are the objects with `parentid` equal to `{id}` above)
 
 ### Response

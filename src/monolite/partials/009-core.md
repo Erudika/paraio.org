@@ -19,7 +19,7 @@ It contains all core fields, getters, setters and also implements basic function
 	<tbody>
 		<tr><td>`User`</td><td> Defines a basic user with a name, email, password. Used for user registration and security.</td></tr>
 		<tr><td>`Address`</td><td> Defines an address with optional geographical coordinates. Used for location based searching. </td></tr>
-		<tr><td>`App`</td><td> Defines an application within Para. Used only when Para is running in standalone mode. </td></tr>
+		<tr><td>`App`</td><td> Defines an application within Para. Usually there's only one existing (root) app.</td></tr>
 		<tr><td>`Tag`</td><td> Simple tag class which contains a tag and its frequency count. Basically any Para object can be tagged. Used for searching.</td></tr>
 		<tr><td>`Vote`</td><td> Defines a user vote - negative or positive. Useful for modeling posts which can be voted on. </td></tr>
 		<tr><td>`Translation`</td><td> Holds a translated string. Can be used for collecting translations from users. </td></tr>

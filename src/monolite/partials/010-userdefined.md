@@ -3,8 +3,11 @@ title: User-defined classes
 category: Core classes
 ---
 
-Let's say you have a class `Article` in your application that you wish to persist. You first implement `ParaObject`,
-then add a few data fields to it. You need to specify which fields you want to be saved by adding the
+Let's say you have a class `Article` in your application that you wish to persist. You first implement the `ParaObject`
+interface, then add a few data fields to it. Implementing the interface is trivial as the basic functionality of
+the required methods is already implemented in the `CoreUtils`. 
+
+You need to specify which fields you want to be saved by adding the
 `@Stored` annotation.
 
 ```java

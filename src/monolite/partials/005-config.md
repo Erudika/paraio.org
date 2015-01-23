@@ -52,6 +52,14 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.cors_enabled`					</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.gzip_enabled`					</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.read_from_index`			</td><td>`true`</td><td>Boolean</td></tr>
+		<tr><td>`para.max_items_per_page`		</td><td>`30`</td><td>Integer</td></tr>
+		<tr><td>`para.max_datatypes_per_app`</td><td>`256`</td><td>Integer</td></tr>
+		<tr><td>`para.max_pages`						</td><td>`10000`</td><td>Integer</td></tr>
+		<tr><td>`para.max_img_px`						</td><td>`1024`</td><td>Integer</td></tr>
+		<tr><td>`para.max_entity_size_bytes`</td><td>`1024 * 1024`</td><td>Integer</td></tr>
+		<tr><td>`para.min_password_length`	</td><td>`6`</td><td>Integer</td></tr>
+		<tr><td>`para.default_separator`		</td><td>`:`</td><td>String</td></tr>
+		<tr><td>`para.default_encoding`			</td><td>`UTF-8`</td><td>String</td></tr>
 
 		<tr><td>`para.security.api_security`				</td><td> `true` </td><td> Boolean </td></tr>
 		<tr><td>`para.security.csrf_protection`			</td><td> `true` </td><td> Boolean </td></tr>
