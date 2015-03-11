@@ -7,7 +7,9 @@ type: GET
 
 Executes a search query.
 
-### Queries
+### Request
+
+- `{querytype}` - the type of query to execute (optional), use one of types below:
 
 The `querytype` parameter switches between the different query types. If this parameter is missing
 then the generic `findQuery()` method will be executed by default.
@@ -81,9 +83,7 @@ This executes the method `findWildcard()` with these **parameters**:
 #### `count` query
 This executes the method `getCount()` with **no parameters**.
 
-### Request
 
-- `{querytype}` - the type of query to execute (optional, use one of the above types).
 
 ### Request parameters
 

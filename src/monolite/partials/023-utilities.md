@@ -18,18 +18,18 @@ The `Utils` static class contains a variety of utility methods. These are summar
 	</tbody>
 </table>
 
-### String
+### Strings
 
 <table class="table table-striped">
 	<tbody>
 		<tr><td>`String stripHtml(String html)`</td></tr>
 		<tr><td> Strips all HTML tags from a string leaving only the text. </td></tr>
 		<tr><td>`String markdownToHtml(String markdownString)`</td></tr>
-		<tr><td> Convert a Markdown string to HTML. Based on [Txtmark](https://github.com/rjeschke/txtmark). Handy!</td></tr>
+		<tr><td> Convert a Markdown string to HTML. Based on [Txtmark](https://github.com/rjeschke/txtmark).</td></tr>
+		<tr><td>`String compileMustache(Map<String, Object> scope, String template)`</td></tr>
+		<tr><td> Compile a Mustache template string to HTML. Based on [Mustache.java](https://github.com/spullara/mustache.java).</td></tr>
 		<tr><td>`String abbreviate(String str, int max)`</td></tr>
 		<tr><td> Abbreviates a string to a given length. </td></tr>
-		<tr><td>`String abbreviateInt(Number number, int decPlaces)`</td></tr>
-		<tr><td> Rounds a number like "10000" to "10K", "1000000" to "1M", etc. </td></tr>
 		<tr><td>`String stripAndTrim(String str)`</td></tr>
 		<tr><td> Removes punctuation and symbols and normalizes whitespace. </td></tr>
 		<tr><td>`String noSpaces(String str, String replaceWith)`</td></tr>
@@ -39,7 +39,22 @@ The `Utils` static class contains a variety of utility methods. These are summar
 	</tbody>
 </table>
 
-### Date
+### Numbers
+
+<table class="table table-striped">
+	<tbody>
+		<tr><td>`String formatPrice(double price)`</td></tr>
+		<tr><td> Formats a price to a decimal with two fractional digits. </td></tr>
+		<tr><td>`double roundHalfUp(double d)`</td></tr>
+		<tr><td> Rounds up a double using the "half up" method, scale is 2 fractional digits.</td></tr>
+		<tr><td>`double roundHalfUp(double d, int scale)`</td></tr>
+		<tr><td> Rounds up a double using the "half up" method.</td></tr>
+		<tr><td>`String abbreviateInt(Number number, int decPlaces)`</td></tr>
+		<tr><td> Rounds a number like "10000" to "10K", "1000000" to "1M", etc. </td></tr>
+	</tbody>
+</table>
+
+### Dates
 
 <table class="table table-striped">
 	<tbody>
@@ -88,7 +103,7 @@ The `Utils` static class contains a variety of utility methods. These are summar
 	</tbody>
 </table>
 
-### URL
+### URLs
 
 <table class="table table-striped">
 	<tbody>

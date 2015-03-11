@@ -42,9 +42,43 @@ the API.
 
 To manually validate an object you can use:
 ```java
-String[] errors = Utils.validateObject(App app, ParaObject po);
+String[] errors = ValidationUtils.validateObject(App app, ParaObject po);
 ```
 The returned string array contains 0 elements if the `po` is valid or a list of errors that were encountered on validation.
+
+### Integration with the client-side
+
+You can easily implement client-side validation by getting the JSON object containing all validation constraints for
+all Para classes.
+
+```java
+String jsonValidations = ValidationUtils.getAllValidationConstraints(App app);
+```
+
+This returned JSON is in the following format (note that type names are all in lowercase):
+
+```js
+'user': {
+	'email': {
+		'email': {
+			'message': 'messages.email'
+		},
+		'required': {
+			'message': 'messages.required'
+		}
+	},
+	'identifier': {
+		'required': {
+			'message': 'messages.required'
+		}
+	}
+	...
+},
+...
+```
+
+This format used by the excellent JavaScript validation tool [Valdr](https://github.com/netceteragroup/valdr) but can
+easily be integrated with other client-side validators.
 
 
 > Para uses [Hibernate Validator](http://hibernate.org/validator/) for data validation.

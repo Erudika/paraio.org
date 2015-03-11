@@ -20,7 +20,7 @@ This implementation uses AWS S3 as file storage location. The location of each f
 cofiguration property `para.s3.bucket`. There is also the `para.s3.max_filesize_mb` property which restricts the size of
 the upload.
 
-Before each upload, files are prepended a timestamp, for example `myfile.txt` becomes `1405632454930.myfile.txt`.
+Before each upload, files are prepended with a timestamp, for example `myfile.txt` becomes `1405632454930.myfile.txt`.
 Currently all files are set to be stored with "Reduced Redundancy" turned on.
 
 You can Gzip compress files before uploading uploading but you must append the `.gz` extension in order for the correct
