@@ -3,10 +3,13 @@
 
 grunt && git commit -am "updated docs" && git checkout gh-pages
 cp -Rf dist/* .
-if [ -n "$1" ]; then  
-  rm -rf javadocs
-  wget -O jdocs.zip https://oss.sonatype.org/service/local/repositories/releases/content/com/erudika/para-core/$1/para-core-$1-javadoc.jar && 
-  unzip jdocs.zip -d javadocs && rm jdocs.zip
+if [ -n "$1" ]; then
+  rm -rf javadocs-core
+  rm -rf javadocs-server
+  wget -O jdocs1.zip https://oss.sonatype.org/service/local/repositories/releases/content/com/erudika/para-core/$1/para-core-$1-javadoc.jar &&
+  wget -O jdocs2.zip https://oss.sonatype.org/service/local/repositories/releases/content/com/erudika/para-server/$1/para-server-$1-javadoc.jar &&
+  unzip jdocs1.zip -d javadocs-core && rm jdocs1.zip
+  unzip jdocs2.zip -d javadocs-server && rm jdocs2.zip
 fi
 git add -A && git commit -am "updated docs"
 git push origin gh-pages
