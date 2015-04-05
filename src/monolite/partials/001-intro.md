@@ -18,8 +18,8 @@ persistable and searchable. You can still keep the RESTful API feature or turn i
 
 ### Quick start
 
-1. [Download the JAR](https://github.com/erudika/para/releases/download/v{{version}}/para-{{version}}.jar)
-2. Run it with `java -jar para-{{version}}.jar` - Para is now running in embedded mode, suitable for development.
+1. [Download the JAR](https://github.com/erudika/para/releases/download/v{{version}}/para-server-{{version}}.jar)
+2. Run it with `java -jar para-server-{{version}}.jar` - Para is now running in embedded mode, suitable for development.
 3. Call `curl localhost:8080/v1/_setup` to get the access and secret keys (give it a few seconds to initialize)
 4. Start using the RESTful API directly or use the provided `ParaClient` to connect to the server.
 
