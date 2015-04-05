@@ -8,7 +8,7 @@ Para is hosted on Maven Central. To add it to your project just include this int
 ```xml
 <dependency>
   <groupId>com.erudika</groupId>
-  <artifactId>para</artifactId>
+  <artifactId>para-server</artifactId>
   <version>{{version}}</version>
 </dependency>
 ```
@@ -32,5 +32,5 @@ Adding Para to your Java or JVM based application allows you to build a distribu
 | nodes   |   | nodes   |   | nodes   |
 +---------+   +---------+   +---------+
 
-  Node 1        Node 2        Node N   
+  Node 1        Node 2        Node N
 </pre>

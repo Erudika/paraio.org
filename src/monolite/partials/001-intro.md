@@ -21,4 +21,24 @@ persistable and searchable. You can still keep the RESTful API feature or turn i
 1. [Download the JAR](https://github.com/erudika/para/releases/download/v{{version}}/para-{{version}}.jar)
 2. Run it with `java -jar para-{{version}}.jar` - Para is now running in embedded mode, suitable for development.
 3. Call `curl localhost:8080/v1/_setup` to get the access and secret keys (give it a few seconds to initialize)
-4. Start using the RESTful API directly or using the provided `ParaClient` class.
+4. Start using the RESTful API directly or use the provided `ParaClient` to connect to the server.
+
+The Java client for Para is a separate module with these Maven coordinates:
+
+```xml
+<dependency>
+  <groupId>com.erudika</groupId>
+  <artifactId>para-client</artifactId>
+  <version>{{version}}</version>
+</dependency>
+```
+
+In your own project you can create a new `ParaClient` instance like so:
+
+```java
+ParaClient pc = new ParaClient(accessKey, secretKey);
+// for development the default endpoint is http://localhost:8080
+pc.setEndpoint(paraServerURL);
+// send a test request - this should return a JSON object of type 'app'
+pc.me();
+```
