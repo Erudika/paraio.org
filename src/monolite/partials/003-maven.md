@@ -38,4 +38,5 @@ Adding Para to your Java or JVM based application allows you to build a distribu
 ### Javadocs
 
 <a href="/javadocs-core/" class="btn btn-default">para-core</a> &nbsp;
-<a href="/javadocs-server/" class="btn btn-default">para-server</a>
+<a href="/javadocs-server/" class="btn btn-default">para-server</a> &nbsp;
+<a href="/javadocs-client/" class="btn btn-default">para-client</a>
