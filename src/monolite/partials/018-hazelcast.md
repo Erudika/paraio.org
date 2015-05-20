@@ -24,6 +24,8 @@ There are several configuration properties for Hazelcast:
 		<tr><td>`para.hc.eviction_percentage`</td><td> Cache eviction percentage. Defaults to `25` percent.</td></tr>
 		<tr><td>`para.hc.max_size`</td><td> Cache size as a percentage of used heap. Defaults to `25` percent.</td></tr>
 		<tr><td>`para.hc.jmx_enabled`</td><td> JMX reporting. Default is `true`. </td></tr>
+		<tr><td>`para.hc.ec2_discovery_enabled`</td><td> Enables AWS EC2 auto discovery. Default is `true`.</td></tr>
+		<tr><td>`para.hc.discovery_group`</td><td> Security group for cloud discovery of nodes. Default is `hazelcast`.</td></tr>
 	</tbody>
 </table>
 

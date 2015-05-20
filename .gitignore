@@ -25,3 +25,5 @@ dist
 *.sublime-*
 nbproject
 validation-status.json
+javadoc-*
+javadoc-*/**

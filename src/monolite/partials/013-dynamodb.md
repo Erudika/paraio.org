@@ -15,4 +15,5 @@ NoSQL data stores like Cassandra.
 
 See [Modules](#006-modules) for more information about how you can override the default implementation.
 
-> For more information about DyanamoDB see the [documentation on AWS](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html).
+> For more information about DyanamoDB see the
+[documentation on AWS](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html).

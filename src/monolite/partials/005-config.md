@@ -51,6 +51,7 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.api_enabled`					</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.cors_enabled`					</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.gzip_enabled`					</td><td>`true`</td><td>Boolean</td></tr>
+		<tr><td>`para.access_log_enabled`		</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.read_from_index`			</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.max_items_per_page`		</td><td>`30`</td><td>Integer</td></tr>
 		<tr><td>`para.max_datatypes_per_app`</td><td>`256`</td><td>Integer</td></tr>
