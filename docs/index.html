@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+
+<!--
+     ____  ___ _ ____ ___ _
+    / __ \/ __` / ___/ __` /
+   / /_/ / /_/ / /  / /_/ /
+  / .___/\__,_/_/   \__,_/ io.org
+ /_/
+
+-->
+
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -245,6 +255,33 @@
 		
 		
 	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
 
 	
 		<li>
@@ -303,6 +340,10 @@
 				
 					
 						<li class=""><a href="#011-annotations">Annotations</a></li>
+					
+				
+					
+						<li class=""><a href="#011-validation">Validation</a></li>
 					
 				
 			</ul>
@@ -439,6 +480,10 @@
 					
 				
 					
+						<li class=""><a href="#031-github">GitHub support</a></li>
+					
+				
+					
 						<li class=""><a href="#031-google">Google+ support</a></li>
 					
 				
@@ -447,7 +492,15 @@
 					
 				
 					
+						<li class=""><a href="#031-twitter">Twitter support</a></li>
+					
+				
+					
 						<li class=""><a href="#032-roles">Groups and roles</a></li>
+					
+				
+					
+						<li class=""><a href="#033-csrf">CSRF protection</a></li>
 					
 				
 			</ul>
@@ -522,6 +575,26 @@
 					
 				
 					
+						<li class="PUT"><a href="#049-api-constraints-add">Add constraint</a></li>
+					
+				
+					
+						<li class="GET"><a href="#049-api-constraints-get">List constraints</a></li>
+					
+				
+					
+						<li class="DELETE"><a href="#049-api-constraints-rem">Remove constraint</a></li>
+					
+				
+					
+						<li class="GET"><a href="#049-api-id">Read by id</a></li>
+					
+				
+					
+						<li class="GET"><a href="#049-api-me">Me object</a></li>
+					
+				
+					
 						<li class="GET"><a href="#049-api-types-list">List types</a></li>
 					
 				
@@ -568,11 +641,25 @@ many different clients and applications. This is done through Para’s simple RE
 persistable and searchable. You can still keep the RESTful API feature or turn it off completely.</p>
 <h3 id="quick-start">Quick start</h3>
 <ol>
-<li><a href="https://github.com/erudika/para/releases/download/v1.8.0/para-1.8.0.jar">Download the JAR</a></li>
-<li>Run it with <code>java -jar para-1.8.0.jar</code> - Para is now running in embedded mode, suitable for development.</li>
-<li>Call <code>curl localhost:8080/v1/setup</code> to get the access and secret keys (give it a few seconds to initialize)</li>
-<li>Start using the RESTful API directly or using the provided <code>ParaClient</code> class.</li>
+<li><a href="https://github.com/erudika/para/releases/download/v/para-server-.jar">Download the JAR</a></li>
+<li>Run it with <code>java -jar para-server-.jar</code> - Para is now running in embedded mode, suitable for development.</li>
+<li>Call <code>curl localhost:8080/v1/_setup</code> to get the access and secret keys (give it a few seconds to initialize)</li>
+<li>Start using the RESTful API directly or use the provided <code>ParaClient</code> to connect to the server.</li>
 </ol>
+<p>The Java client for Para is a separate module with these Maven coordinates:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>para-client<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">dependency</span>&gt;</span>
+</code></pre>
+<p>In your own project you can create a new <code>ParaClient</code> instance like so:</p>
+<pre><code class="lang-java">ParaClient pc = <span class="hljs-keyword">new</span> ParaClient(accessKey, secretKey);
+<span class="hljs-comment">// for development the default endpoint is http://localhost:8080</span>
+pc.setEndpoint(paraServerURL);
+<span class="hljs-comment">// send a test request - this should return a JSON object of type 'app'</span>
+pc.me();
+</code></pre>
 
 						</section>
 					</article>
@@ -634,8 +721,8 @@ to <code>ROOT.war</code> before deploying. See <a href="#005-config">the Config<
 							<p>Para is hosted on Maven Central. To add it to your project just include this into your <code>pom.xml</code>:</p>
 <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>para<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span>1.8.0<span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>para-server<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">dependency</span>&gt;</span>
 </code></pre>
 <p>Adding Para to your Java or JVM based application allows you to build a distributed architecture like this:</p>
@@ -656,8 +743,14 @@ to <code>ROOT.war</code> before deploying. See <a href="#005-config">the Config<
 | nodes   |   | nodes   |   | nodes   |
 +---------+   +---------+   +---------+
 
-  Node 1        Node 2        Node N   
+  Node 1        Node 2        Node N
 </pre>
+
+<h3 id="javadocs">Javadocs</h3>
+<p><a href="/javadocs-core/" class="btn btn-default">para-core</a> &nbsp;
+<a href="/javadocs-server/" class="btn btn-default">para-server</a> &nbsp;
+<a href="/javadocs-client/" class="btn btn-default">para-client</a></p>
+
 						</section>
 					</article>
 					
@@ -670,13 +763,13 @@ to <code>ROOT.war</code> before deploying. See <a href="#005-config">the Config<
 						
 						<section class="body img-rounded">
 							<p>Para allows you to have plain objects like this:</p>
-<pre><code class="lang-java">class User {
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>{
     <span class="hljs-keyword">public</span> String name;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> age;
 }
 </code></pre>
 <p>and turn them into persistable Para objects just by adding one annotation and extending the core Para class <code>ParaObject</code>:</p>
-<pre><code class="lang-java">class User implements ParaObject {
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ParaObject</span> </span>{
     <span class="hljs-annotation">@Stored</span> <span class="hljs-keyword">public</span> String name;
     <span class="hljs-annotation">@Stored</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> age;
 }
@@ -726,6 +819,7 @@ If you have a file called <code>application.conf</code> or <code>application.jso
     </thead>
     <tbody>
         <tr><td><code>para.env</code>                                    </td><td>    <code>embedded</code></td><td>String</td></tr>
+        <tr><td><code>para.print_logo</code>                        </td><td><code>true</code></td><td>Boolean</td></tr>
         <tr><td><code>para.aws_access_key</code>                </td><td>-</td><td>String</td></tr>
         <tr><td><code>para.aws_secret_key</code>                </td><td>-</td><td>String</td></tr>
         <tr><td><code>para.aws_region</code>                        </td><td><code>eu-west-1</code></td><td>String</td></tr>
@@ -751,15 +845,28 @@ If you have a file called <code>application.conf</code> or <code>application.jso
         <tr><td><code>para.api_enabled</code>                    </td><td><code>true</code></td><td>Boolean</td></tr>
         <tr><td><code>para.cors_enabled</code>                    </td><td><code>true</code></td><td>Boolean</td></tr>
         <tr><td><code>para.gzip_enabled</code>                    </td><td><code>true</code></td><td>Boolean</td></tr>
+        <tr><td><code>para.access_log_enabled</code>        </td><td><code>true</code></td><td>Boolean</td></tr>
         <tr><td><code>para.read_from_index</code>            </td><td><code>true</code></td><td>Boolean</td></tr>
+        <tr><td><code>para.max_items_per_page</code>        </td><td><code>30</code></td><td>Integer</td></tr>
+        <tr><td><code>para.max_datatypes_per_app</code></td><td><code>256</code></td><td>Integer</td></tr>
+        <tr><td><code>para.max_pages</code>                        </td><td><code>10000</code></td><td>Integer</td></tr>
+        <tr><td><code>para.max_img_px</code>                        </td><td><code>1024</code></td><td>Integer</td></tr>
+        <tr><td><code>para.max_entity_size_bytes</code></td><td><code>1024 * 1024</code></td><td>Integer</td></tr>
+        <tr><td><code>para.min_password_length</code>    </td><td><code>6</code></td><td>Integer</td></tr>
+        <tr><td><code>para.default_separator</code>        </td><td><code>:</code></td><td>String</td></tr>
+        <tr><td><code>para.default_encoding</code>            </td><td><code>UTF-8</code></td><td>String</td></tr>
 
-        <tr><td><code>para.security.api</code>                                    </td><td> <code>enabled</code> </td><td> String </td></tr>
+        <tr><td><code>para.security.api_security</code>                </td><td> <code>true</code> </td><td> Boolean </td></tr>
+        <tr><td><code>para.security.csrf_protection</code>            </td><td> <code>true</code> </td><td> Boolean </td></tr>
+        <tr><td><code>para.security.csrf_cookie</code>                    </td><td> - </td><td> String </td></tr>
         <tr><td><code>para.security.protected.{name}</code>        </td><td> <code>[&quot;/{path}&quot;, &quot;/{path}/**&quot;, [&quot;{role}&quot;]]</code> </td><td> Array </td></tr>
         <tr><td><code>para.security.ignored</code>                            </td><td> <code>[&quot;/{path}/**&quot;, &quot;/{path}/**&quot;]</code> </td><td> Array </td></tr>
         <tr><td><code>para.security.signin</code>                            </td><td> <code>/signin</code> </td><td> String </td></tr>
+        <tr><td><code>para.security.signout</code>                            </td><td> <code>/signout</code> </td><td> String </td></tr>
         <tr><td><code>para.security.access_denied</code>                </td><td> <code>/403</code> </td><td> String </td></tr>
         <tr><td><code>para.security.returnto</code>                        </td><td> <code>returnto</code> </td><td> String </td></tr>
         <tr><td><code>para.security.signin_success</code>            </td><td> <code>/</code> </td><td> String </td></tr>
+        <tr><td><code>para.security.signout_success</code>            </td><td> <code>/signin</code> </td><td> String </td></tr>
         <tr><td><code>para.security.signin_failure</code>            </td><td> <code>/signin</code> </td><td> String </td></tr>
 
         <tr><td><code>para.s3.bucket</code>                                        </td><td> <code>org.paraio.files</code> </td><td> String </td></tr>
@@ -806,8 +913,8 @@ see the <a href="https://github.com/typesafehub/config/blob/master/README.md">RE
 </ol>
 <p>For example, let’s say you want to implement a new <code>PersistenceModule</code> which connects to MySQL.
 You can define it like so:</p>
-<pre><code class="lang-java">class MySqlModule extends AbstractModule {
-    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span>() {
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MySqlModule</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractModule</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span><span class="hljs-params">()</span> </span>{
         bind(DAO.class).to(MySqlDAO.class).asEagerSingleton();
     }
 }
@@ -878,13 +985,13 @@ and execute your own code.</p>
 and destroyed, respectively.</p>
 <pre><code class="lang-java"><span class="hljs-comment">// this has to be registered before Para.initialize() is called</span>
 Para.addInitListener(<span class="hljs-keyword">new</span> Para.InitializeListener() {
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onInitialize</span>() {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onInitialize</span><span class="hljs-params">()</span> </span>{
         <span class="hljs-comment">// init code...</span>
     }
 });
 
 Para.addDestroyListener(<span class="hljs-keyword">new</span> Para.DestroyListener() {
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDestroy</span>() {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span> </span>{
         <span class="hljs-comment">// shutdown code...</span>
     }
 });
@@ -902,17 +1009,17 @@ Use the <code>ServiceLoader</code> mechanism to tell Para to load your handlers 
 <code>com.erudika.para.rest.CustomResourceHandler</code> in <code>META-INF/services</code> where each line contains the full class name
 of your custom resource handler class. On startup Para will load these and register them as API resource handlers.</p>
 <p>The <code>CustomResourceHandler</code> interface is simple:</p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">CustomResourceHandler</span> {</span>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">CustomResourceHandler</span> </span>{
     <span class="hljs-comment">// the path of the resource, e.g. "my-resource"</span>
-    String getRelativePath();
+    <span class="hljs-function">String <span class="hljs-title">getRelativePath</span><span class="hljs-params">()</span></span>;
     <span class="hljs-comment">// handle GET requests</span>
-    Response handleGet(ContainerRequestContext ctx);
+    <span class="hljs-function">Response <span class="hljs-title">handleGet</span><span class="hljs-params">(ContainerRequestContext ctx)</span></span>;
     <span class="hljs-comment">// handle PUT requests</span>
-    Response handlePut(ContainerRequestContext ctx);
+    <span class="hljs-function">Response <span class="hljs-title">handlePut</span><span class="hljs-params">(ContainerRequestContext ctx)</span></span>;
     <span class="hljs-comment">// handle POST requests</span>
-    Response handlePost(ContainerRequestContext ctx);
+    <span class="hljs-function">Response <span class="hljs-title">handlePost</span><span class="hljs-params">(ContainerRequestContext ctx)</span></span>;
     <span class="hljs-comment">// handle DELETE requests</span>
-    Response handleDelete(ContainerRequestContext ctx);
+    <span class="hljs-function">Response <span class="hljs-title">handleDelete</span><span class="hljs-params">(ContainerRequestContext ctx)</span></span>;
 }
 </code></pre>
 <p>You can use <code>@Inject</code> in your custom handlers to inject any object managed by Para.</p>
@@ -942,7 +1049,7 @@ It contains all core fields, getters, setters and also implements basic function
     <tbody>
         <tr><td><code>User</code></td><td> Defines a basic user with a name, email, password. Used for user registration and security.</td></tr>
         <tr><td><code>Address</code></td><td> Defines an address with optional geographical coordinates. Used for location based searching. </td></tr>
-        <tr><td><code>App</code></td><td> Defines an application within Para. Used only when Para is running in standalone mode. </td></tr>
+        <tr><td><code>App</code></td><td> Defines an application within Para. Usually there’s only one existing (root) app.</td></tr>
         <tr><td><code>Tag</code></td><td> Simple tag class which contains a tag and its frequency count. Basically any Para object can be tagged. Used for searching.</td></tr>
         <tr><td><code>Vote</code></td><td> Defines a user vote - negative or positive. Useful for modeling posts which can be voted on. </td></tr>
         <tr><td><code>Translation</code></td><td> Holds a translated string. Can be used for collecting translations from users. </td></tr>
@@ -961,10 +1068,12 @@ It contains all core fields, getters, setters and also implements basic function
 							<h2>User-defined classes</h2>
 						
 						<section class="body img-rounded">
-							<p>Let’s say you have a class <code>Article</code> in your application that you wish to persist. You first implement <code>ParaObject</code>,
-then add a few data fields to it. You need to specify which fields you want to be saved by adding the
+							<p>Let’s say you have a class <code>Article</code> in your application that you wish to persist. You first implement the <code>ParaObject</code>
+interface, then add a few data fields to it. Implementing the interface is trivial as the basic functionality of
+the required methods is already implemented in the <code>CoreUtils</code>. </p>
+<p>You need to specify which fields you want to be saved by adding the
 <code>@Stored</code> annotation.</p>
-<pre><code class="lang-java">class Article implements ParaObject {
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Article</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ParaObject</span> </span>{
     <span class="hljs-annotation">@Stored</span> <span class="hljs-keyword">private</span> String title;
     <span class="hljs-annotation">@Stored</span> <span class="hljs-keyword">private</span> String text;
 }
@@ -998,7 +1107,7 @@ Article readA = dao.read(id);
 </code></pre>
 <p>You can also define custom types of objects through the REST API by changing the <code>type</code> property on your objects.
 Keep in mind that the following are reserved words and they <em>should not</em> be used for naming your types (plural form included):
-<strong>“setup(s)”, “newkey(s)”, “type(s)”, “search(es)”, “util(s)”, “_batch(es)”</strong>.</p>
+<strong>“search(es)”, “util(s)”</strong>.</p>
 <blockquote>
 <p>Note that you can create objects with custom types and fields <a href="#036-api-create">through the REST API</a> without having
 to define them as Java classes like above. These custom objects will be based on the generic <code>Sysprop</code> class but
@@ -1017,19 +1126,79 @@ can have any number of custom properties (fields).</p>
 						
 						<section class="body img-rounded">
 							<p>Para uses annotations to mark what attributes of a class need to be saved. There are several annotations that Para uses
-but we’ll focus on two on those - <code>@Stored</code> and <code>@Locked</code>.</p>
+but the two main ones are <code>@Stored</code> and <code>@Locked</code>.</p>
 <p><code>@Stored</code> tell Para that an attribute needs to be persisted but
 that field should not be declared as <code>transient</code> otherwise it will be skipped.</p>
 <p><code>@Locked</code> is used as a filter for those
 attributes that are read-only like <code>type</code> and <code>id</code>. These are created once and never change so when calling <code>update()</code>
 they will be skipped.</p>
-<p>You can also add constraints to your attributes like so:</p>
+<p><code>@Cached</code> is used internally by Para for caching and you don’t need to used it in your projects.</p>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="011-validation" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class=" img-rounded">
+						
+							<h2>Validation</h2>
+						
+						<section class="body img-rounded">
+							<p>Para supports JSR-303 validation annotations and also allows you to define validation constraints in two different ways.
+One way is to attach annotations to fields in Java classes. The other way is by using the constraints API to add
+validation constraints to any object, be it core or user-defined. This method is more flexible as it allows you to
+validate any property of any object.</p>
+<p><strong>Note:</strong> Objects are validated on <code>create()</code> and <code>update()</code> operations only.</p>
+<h3 id="annotation-based-validation-constraints">Annotation-based validation constraints</h3>
+<p>You can use any of the JSR 303 annotations specified by the <code>javax.validation.constraints</code> package, part of Java EE.
+Example:</p>
 <pre><code class="lang-java"><span class="hljs-annotation">@Stored</span> <span class="hljs-annotation">@NotBlank</span> <span class="hljs-annotation">@Email</span>
 <span class="hljs-keyword">private</span> String email;
 </code></pre>
 <p>This will tell Para to validate that field and check that it actually contains an email. If the validation fails, the
 object containing that field will not be created or updated.</p>
-<p>To manually validate an object use <code>Utils.validateObject(ParaObject po)</code>.</p>
+<h3 id="user-defined-validation-constraints">User-defined validation constraints</h3>
+<p>Annotations work fine for most objects but are less useful when we want to define objects through the API.
+For this purpose we can use the constraints API:</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">addValidationConstraint</span><span class="hljs-params">(String type, String field, Constraint c)</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">removeValidationConstraint</span><span class="hljs-params">(String type, String field, String constraintName)</span></span>;
+</code></pre>
+<p>To create a constraint you can use the static methods provided by the <code>Constraint</code> class. For example calling
+<code>Constraint.email()</code> will return a new constraint object for checking email addresses.</p>
+<p>We can use these methods to define constraints on custom types and fields that are not yet defined or are created by
+the API.</p>
+<p>To manually validate an object you can use:</p>
+<pre><code class="lang-java">String[] errors = ValidationUtils.validateObject(App app, ParaObject po);
+</code></pre>
+<p>The returned string array contains 0 elements if the <code>po</code> is valid or a list of errors that were encountered on validation.</p>
+<h3 id="integration-with-the-client-side">Integration with the client-side</h3>
+<p>You can easily implement client-side validation by getting the JSON object containing all validation constraints for
+all Para classes.</p>
+<pre><code class="lang-java">String jsonValidations = ValidationUtils.getAllValidationConstraints(App app);
+</code></pre>
+<p>This returned JSON is in the following format (note that type names are all in lowercase):</p>
+<pre><code class="lang-js"><span class="hljs-string">'user'</span>: {
+    <span class="hljs-string">'email'</span>: {
+        <span class="hljs-string">'email'</span>: {
+            <span class="hljs-string">'message'</span>: <span class="hljs-string">'messages.email'</span>
+        },
+        <span class="hljs-string">'required'</span>: {
+            <span class="hljs-string">'message'</span>: <span class="hljs-string">'messages.required'</span>
+        }
+    },
+    <span class="hljs-string">'identifier'</span>: {
+        <span class="hljs-string">'required'</span>: {
+            <span class="hljs-string">'message'</span>: <span class="hljs-string">'messages.required'</span>
+        }
+    }
+    ...
+},
+...
+</code></pre>
+<p>This format used by the excellent JavaScript validation tool <a href="https://github.com/netceteragroup/valdr">Valdr</a> but can
+easily be integrated with other client-side validators.</p>
 <blockquote>
 <p>Para uses <a href="http://hibernate.org/validator/">Hibernate Validator</a> for data validation.</p>
 </blockquote>
@@ -1088,7 +1257,8 @@ all update requests in a sequence.</p>
 NoSQL data stores like Cassandra.</p>
 <p>See <a href="#006-modules">Modules</a> for more information about how you can override the default implementation.</p>
 <blockquote>
-<p>For more information about DyanamoDB see the <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html">documentation on AWS</a>.</p>
+<p>For more information about DyanamoDB see the
+<a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html">documentation on AWS</a>.</p>
 </blockquote>
 
 						</section>
@@ -1166,7 +1336,7 @@ These methods are:</p>
 						<section class="body img-rounded">
 							<p>Elasticsearch is used as the default search engine in Para. The <code>Search</code> interface is implemented in the <code>Elasticsearch</code>
 class.</p>
-<p>There are several configuration properties for Elasticsearch:</p>
+<p>There are several configuration properties for Elasticsearch (these go in your <code>application.conf</code> file):</p>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -1175,9 +1345,18 @@ class.</p>
         </tr>
     </thead>
     <tbody>
+        <tr><td><code>para.es.async_enabled</code></td><td> Asynchronous operation when indexing/unindexing. Defaults to <code>false</code>.</td></tr>
+        <tr><td><code>para.es.cors_enabled</code></td><td> Enable CORS for HTTP requests to Elasticsearch. Default is <code>false</code> only if running in production.</td></tr>
+        <tr><td><code>para.es.discovery_type</code></td><td> Discovery mechanism when running in production. Default is <code>ec2</code>.</td></tr>
+        <tr><td><code>para.es.discovery_group</code></td><td> Security group for cloud discovery of nodes. Default is <code>elasticsearch</code>.</td></tr>
+        <tr><td><code>para.es.local_node</code></td><td> Run locally on the JVM. Default is <code>true</code>.</td></tr>
+        <tr><td><code>para.es.data_node</code></td><td> Allow the current node to store index data. Default is <code>true</code>.</td></tr>
         <tr><td><code>para.es.shards</code></td><td> The number of shards per index. Used when creating an new index. Default is <code>5</code>.</td></tr>
-        <tr><td><code>para.es.replicas</code></td><td> The number of copies of an index. Default is <code>0</code>. </td></tr>
-        <tr><td><code>para.es.dir</code></td><td> The directory where Elasticsearch will store data, logs etc. Default is <code>/var/lib/elasticsearch</code>. </td></tr>
+        <tr><td><code>para.es.replicas</code></td><td> The number of copies of an index. Default is <code>0</code>.</td></tr>
+        <tr><td><code>para.es.dir</code></td><td> The directory where Elasticsearch will store data, logs etc. Default is <code>/var/lib/elasticsearch</code>.</td></tr>
+        <tr><td><code>para.es.use_transportclient</code></td><td> Use <code>TransportClient</code> to connect to a remote ES node. Default is <code>false</code>.</td></tr>
+        <tr><td><code>para.es.transportclient_host</code></td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is <code>localhost</code>.</td></tr>
+        <tr><td><code>para.es.transportclient_port</code></td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is <code>9300</code>.</td></tr>
     </tbody>
 </table>
 
@@ -1234,6 +1413,25 @@ class.</p>
 support for distributed data structures like maps and sets. It allows us to use a portion of the memory on each node
 for caching without having to manage a separate caching server or cluster.</p>
 <p>Para organizes caches by application name - each application has its own separate distributed map with the same name.</p>
+<p>There are several configuration properties for Hazelcast:</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>property</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>para.hc.async_enabled</code></td><td> Asynchronous operation when putting objects in cache. Defaults to <code>false</code>.</td></tr>
+        <tr><td><code>para.hc.eviction_policy</code></td><td> Cache eviction policy - <code>LRU</code> or <code>LFU</code>. Defaults to <code>LRU</code>.</td></tr>
+        <tr><td><code>para.hc.eviction_percentage</code></td><td> Cache eviction percentage. Defaults to <code>25</code> percent.</td></tr>
+        <tr><td><code>para.hc.max_size</code></td><td> Cache size as a percentage of used heap. Defaults to <code>25</code> percent.</td></tr>
+        <tr><td><code>para.hc.jmx_enabled</code></td><td> JMX reporting. Default is <code>true</code>. </td></tr>
+        <tr><td><code>para.hc.ec2_discovery_enabled</code></td><td> Enables AWS EC2 auto discovery. Default is <code>true</code>.</td></tr>
+        <tr><td><code>para.hc.discovery_group</code></td><td> Security group for cloud discovery of nodes. Default is <code>hazelcast</code>.</td></tr>
+    </tbody>
+</table>
+
 <blockquote>
 <p>For more information see the <a href="http://www.hazelcast.org/docs/latest/manual/html-single">Hazelcast docs</a>.</p>
 </blockquote>
@@ -1401,27 +1599,41 @@ resources.</p>
     </tbody>
 </table>
 
-<h3 id="string">String</h3>
+<h3 id="strings">Strings</h3>
 <table class="table table-striped">
     <tbody>
         <tr><td><code>String stripHtml(String html)</code></td></tr>
         <tr><td> Strips all HTML tags from a string leaving only the text. </td></tr>
         <tr><td><code>String markdownToHtml(String markdownString)</code></td></tr>
-        <tr><td> Convert a Markdown string to HTML. Based on <a href="https://github.com/rjeschke/txtmark">Txtmark</a>. Handy!</td></tr>
+        <tr><td> Convert a Markdown string to HTML. Based on <a href="https://github.com/rjeschke/txtmark">Txtmark</a>.</td></tr>
+        <tr><td><code>String compileMustache(Map&lt;String, Object&gt; scope, String template)</code></td></tr>
+        <tr><td> Compile a Mustache template string to HTML. Based on <a href="https://github.com/spullara/mustache.java">Mustache.java</a>.</td></tr>
         <tr><td><code>String abbreviate(String str, int max)</code></td></tr>
         <tr><td> Abbreviates a string to a given length. </td></tr>
-        <tr><td><code>String abbreviateInt(Number number, int decPlaces)</code></td></tr>
-        <tr><td> Rounds a number like “10000” to “10K”, “1000000” to “1M”, etc. </td></tr>
         <tr><td><code>String stripAndTrim(String str)</code></td></tr>
         <tr><td> Removes punctuation and symbols and normalizes whitespace. </td></tr>
         <tr><td><code>String noSpaces(String str, String replaceWith)</code></td></tr>
         <tr><td> Spaces are replaced with something or removed completely. </td></tr>
         <tr><td><code>String formatMessage(String msg, Object... params)</code></td></tr>
-        <tr><td> Replaces placeholders like {0}, {1}, etc. with the corresponding objects (numbers, strings, booleans). </td></tr>
+        <tr><td> Replaces placeholders like <code>{0}</code>, <code>{1}</code>, etc. with the corresponding objects (numbers, strings, booleans). </td></tr>
     </tbody>
 </table>
 
-<h3 id="date">Date</h3>
+<h3 id="numbers">Numbers</h3>
+<table class="table table-striped">
+    <tbody>
+        <tr><td><code>String formatPrice(double price)</code></td></tr>
+        <tr><td> Formats a price to a decimal with two fractional digits. </td></tr>
+        <tr><td><code>double roundHalfUp(double d)</code></td></tr>
+        <tr><td> Rounds up a double using the “half up” method, scale is 2 fractional digits.</td></tr>
+        <tr><td><code>double roundHalfUp(double d, int scale)</code></td></tr>
+        <tr><td> Rounds up a double using the “half up” method.</td></tr>
+        <tr><td><code>String abbreviateInt(Number number, int decPlaces)</code></td></tr>
+        <tr><td> Rounds a number like “10000” to “10K”, “1000000” to “1M”, etc. </td></tr>
+    </tbody>
+</table>
+
+<h3 id="dates">Dates</h3>
 <table class="table table-striped">
     <tbody>
         <tr><td><code>String formatDate(Long timestamp, String format, Locale loc)</code></td></tr>
@@ -1467,7 +1679,7 @@ resources.</p>
     </tbody>
 </table>
 
-<h3 id="url">URL</h3>
+<h3 id="urls">URLs</h3>
 <table class="table table-striped">
     <tbody>
         <tr><td><code>boolean isValidURL(String url)</code></td></tr>
@@ -1495,7 +1707,7 @@ easy to convert a timestamp to an approximation in the form of “X minutes ago�
 <p>For example you can do:</p>
 <pre><code class="lang-java">HumanTime ht = Utils.getHumanTime();
 <span class="hljs-comment">// prints 15 h 45 m</span>
-String s1 = ht.approximately(<span class="hljs-number">56720083</span>L);
+String s1 = ht.approximately(<span class="hljs-number">56720083L</span>);
 
 <span class="hljs-keyword">int</span> timeOfEvent = <span class="hljs-number">1399554448</span>;
 <span class="hljs-keyword">int</span> timeNow = System.currentTimeMillis();
@@ -1545,8 +1757,8 @@ List&lt;Tag&gt; tags = search.findTags(<span class="hljs-string">"tag1"</span>, 
 						
 						<section class="body img-rounded">
 							<p>The <code>Emailer</code> interface has a simple API for sending email messages.</p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Emailer</span> {</span>
-    <span class="hljs-keyword">boolean</span> sendEmail(List&lt;String&gt; emails, String subject, String body);
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Emailer</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">sendEmail</span><span class="hljs-params">(List&lt;String&gt; emails, String subject, String body)</span></span>;
 }
 </code></pre>
 <p>Currently this interface is implemented by the <code>AWSEmailer</code> class which relies on the AWS Simple Email Service for
@@ -1564,11 +1776,11 @@ sending emails.</p>
 						
 						<section class="body img-rounded">
 							<p>The <code>Queue</code> interface is another simple API for pushing and pulling messages to and from a queue.</p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Queue</span> {</span>
-    String pull();
-    <span class="hljs-keyword">void</span> push(String task);
-    String getName();
-    <span class="hljs-keyword">void</span> setName(String name);
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Queue</span> </span>{
+    <span class="hljs-function">String <span class="hljs-title">pull</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(String task)</span></span>;
+    <span class="hljs-function">String <span class="hljs-title">getName</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span></span>;
 }
 </code></pre>
 <p>Currently this interface is implemented by the <code>AWSQueue</code> class which relies on the AWS Simple Queue Service.</p>
@@ -1586,17 +1798,17 @@ sending emails.</p>
 						<section class="body img-rounded">
 							<p>The <code>FileStore</code> interface allows you to have different storage services, like S3 or Google Drive, connected to
 your application. You can save and load files from disk or cloud storage services easily.</p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FileStore</span> {</span>
-    InputStream load(String path);
-    String store(String path, InputStream data);
-    <span class="hljs-keyword">boolean</span> delete(String path);
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FileStore</span> </span>{
+    <span class="hljs-function">InputStream <span class="hljs-title">load</span><span class="hljs-params">(String path)</span></span>;
+    <span class="hljs-function">String <span class="hljs-title">store</span><span class="hljs-params">(String path, InputStream data)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">delete</span><span class="hljs-params">(String path)</span></span>;
 }
 </code></pre>
 <h3 id="awsfilestore">AWSFileStore</h3>
 <p>This implementation uses AWS S3 as file storage location. The location of each file is controlled by the bucket name
 cofiguration property <code>para.s3.bucket</code>. There is also the <code>para.s3.max_filesize_mb</code> property which restricts the size of
 the upload.</p>
-<p>Before each upload, files are prepended a timestamp, for example <code>myfile.txt</code> becomes <code>1405632454930.myfile.txt</code>.
+<p>Before each upload, files are prepended with a timestamp, for example <code>myfile.txt</code> becomes <code>1405632454930.myfile.txt</code>.
 Currently all files are set to be stored with “Reduced Redundancy” turned on.</p>
 <p>You can Gzip compress files before uploading uploading but you must append the <code>.gz</code> extension in order for the correct
 content encoding header to be set. The extension is removed before upload.</p>
@@ -1659,15 +1871,43 @@ either logged in or registered.</p>
 						<section class="body img-rounded">
 							<p>Support for logging in with Facebook is implemented by the <code>FacebookAuthFilter</code>. This filter responds to requests at
 <code>/facebook_auth</code>.</p>
-<p>To initiate a login with Facebook just redirect the user to the link Facebook API endpoint
+<p>To initiate a login with Facebook just redirect the user to the Facebook OAuth endpoint
 <code>https://www.facebook.com/dialog/oauth</code>. Pass the parameter <code>redirect_uri=/facebook_auth</code> so Para
 can handle the response from Facebook.</p>
 <p><strong>Note:</strong> You need to register a new application with Facebook in order to obtain an access and secret keys.</p>
 <p>Below is an example Javascript code for a Facebook login button:</p>
-<pre><code class="lang-js">$(<span class="hljs-string">"#facebookLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-        window.location = <span class="hljs-string">"https://www.facebook.com/dialog/oauth?response_type=code"</span> +
-                <span class="hljs-string">"&amp;client_id={FACEBOOK_APP_ID}&amp;scope=email&amp;state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) + <span class="hljs-string">"&amp;redirect_uri="</span> +
-                window.location.origin + <span class="hljs-string">"/facebook_auth"</span>;
+<pre><code class="lang-js">$(<span class="hljs-string">"#facebookLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://www.facebook.com/dialog/oauth?"</span> +
+                <span class="hljs-string">"response_type=code&amp;client_id={FACEBOOK_APP_ID}"</span> +
+                <span class="hljs-string">"&amp;scope=email&amp;state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) +
+                <span class="hljs-string">"&amp;redirect_uri="</span> + <span class="hljs-built_in">window</span>.location.origin + <span class="hljs-string">"/facebook_auth"</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+});
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="031-github" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class=" img-rounded">
+						
+							<h2>GitHub support</h2>
+						
+						<section class="body img-rounded">
+							<p>Support for logging in with GitHub is implemented by the <code>GitHubAuthFilter</code>. This filter responds to requests at
+<code>/github_auth</code>.</p>
+<p>To initiate a login with GitHub just redirect the user to the GitHub OAuth endpoint
+<code>https://github.com/login/oauth/authorize</code>. Pass the parameter <code>redirect_uri=/github_auth</code> so Para
+can handle the response from GitHub.</p>
+<p><strong>Note:</strong> You need to register a new application with GitHub in order to obtain an access and secret keys.</p>
+<p>Below is an example Javascript code for a GitHub login button:</p>
+<pre><code class="lang-js">$(<span class="hljs-string">"#githubLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://github.com/login/oauth/authorize?"</span> +
+                <span class="hljs-string">"response_type=code&amp;client_id={GITHUB_APP_ID}"</span> +
+                <span class="hljs-string">"&amp;scope=user&amp;state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) +
+                <span class="hljs-string">"&amp;redirect_uri="</span> + <span class="hljs-built_in">window</span>.location.origin + <span class="hljs-string">"/github_auth"</span>;
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 });
 </code></pre>
@@ -1685,17 +1925,17 @@ can handle the response from Facebook.</p>
 						<section class="body img-rounded">
 							<p>Support for logging in with Google+ is implemented by the <code>GoogleAuthFilter</code>. This filter responds to requests at
 <code>/google_auth</code>.</p>
-<p>To initiate a login with Google+ just redirect the user to the link Google API endpoint
+<p>To initiate a login with Google+ just redirect the user to the Google OAuth endpoint
 <code>https://accounts.google.com/o/oauth2/auth</code>. Pass the parameter <code>redirect_uri=/google_auth</code> so Para
 can handle the response from Google+.</p>
 <p><strong>Note:</strong> You need to register a new application with Google+ in order to obtain an access and secret keys.</p>
 <p>Below is an example Javascript code for a Google+ login button:</p>
-<pre><code class="lang-js">$(<span class="hljs-string">"#googleLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-        <span class="hljs-keyword">var</span> baseUrl = window.location.origin;
-        window.location = <span class="hljs-string">"https://accounts.google.com/o/oauth2/auth?"</span> +
-                <span class="hljs-string">"client_id={GOOGLE_APP_ID}&amp;"</span> +
-                <span class="hljs-string">"response_type=code&amp;scope=openid%20email&amp;redirect_uri="</span> + baseUrl + <span class="hljs-string">"/google_auth&amp;"</span> +
-                <span class="hljs-string">"state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) + <span class="hljs-string">"&amp;"</span> + <span class="hljs-string">"openid.realm="</span> + baseUrl;
+<pre><code class="lang-js">$(<span class="hljs-string">"#googleLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">var</span> baseUrl = <span class="hljs-built_in">window</span>.location.origin;
+        <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://accounts.google.com/o/oauth2/auth?"</span> +
+                <span class="hljs-string">"client_id={GOOGLE_APP_ID}&amp;response_type=code"</span> +
+                <span class="hljs-string">"&amp;scope=openid%20email&amp;redirect_uri="</span> + baseUrl + <span class="hljs-string">"/google_auth"</span> +
+                <span class="hljs-string">"&amp;state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) + <span class="hljs-string">"&amp;"</span> + <span class="hljs-string">"openid.realm="</span> + baseUrl;
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 });
 </code></pre>
@@ -1713,15 +1953,41 @@ can handle the response from Google+.</p>
 						<section class="body img-rounded">
 							<p>Support for logging in with LinkedIn is implemented by the <code>LinkedInAuthFilter</code>. This filter responds to requests at
 <code>/linkedin_auth</code>.</p>
-<p>To initiate a login with LinkedIn just redirect the user to the link LinkedIn API endpoint
+<p>To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint
 <code>https://www.linkedin.com/uas/oauth2/authorization</code>. Pass the parameter <code>redirect_uri=/linkedin_auth</code> so Para
 can handle the response from LinkedIn.</p>
 <p><strong>Note:</strong> You need to register a new application with LinkedIn in order to obtain an access and secret keys.</p>
 <p>Below is an example Javascript code for a LinkedIn login button:</p>
-<pre><code class="lang-js">$(<span class="hljs-string">"#linkedinLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-        window.location = <span class="hljs-string">"https://www.linkedin.com/uas/oauth2/authorization?response_type=code"</span> +
-                <span class="hljs-string">"&amp;client_id={LINKEDIN_APP_ID}&amp;scope=r_emailaddress&amp;state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) + <span class="hljs-string">"&amp;redirect_uri="</span> +
-                window.location.origin + <span class="hljs-string">"/linkedin_auth"</span>;
+<pre><code class="lang-js">$(<span class="hljs-string">"#linkedinLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://www.linkedin.com/uas/oauth2/authorization?"</span> +
+                <span class="hljs-string">"response_type=code&amp;client_id={LINKEDIN_APP_ID}"</span> +
+                <span class="hljs-string">"&amp;scope=r_emailaddress&amp;state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) +
+                <span class="hljs-string">"&amp;redirect_uri="</span> + <span class="hljs-built_in">window</span>.location.origin + <span class="hljs-string">"/linkedin_auth"</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+});
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="031-twitter" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class=" img-rounded">
+						
+							<h2>Twitter support</h2>
+						
+						<section class="body img-rounded">
+							<p>Support for logging in with Twitter is implemented by the <code>TwitterAuthFilter</code>. This filter responds to requests at
+<code>/twitter_auth</code>.</p>
+<p>To initiate a login with Twitter just redirect the user to the <code>/twitter_auth</code>. This will redirect the user to Twitter
+for authentication.</p>
+<p><strong>Note:</strong> You need to register a new application with Twitter in order to obtain an access and secret keys.
+<strong>The Twitter API does not share users’ emails so users are assigned an invalid email
+when signing in for the first time.</strong></p>
+<p>Below is an example Javascript code for a Twitter login button:</p>
+<pre><code class="lang-js">$(<span class="hljs-string">"#twitterLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"/twitter_auth"</span>;
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 });
 </code></pre>
@@ -1750,6 +2016,29 @@ can handle the response from LinkedIn.</p>
 					
 				
 					
+					<a id="033-csrf" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class=" img-rounded">
+						
+							<h2>CSRF protection</h2>
+						
+						<section class="body img-rounded">
+							<p>Cross-Site Request Forgery protection is enabled by default for all <code>POST</code>, <code>PUT</code> and <code>DELETE</code> requests.
+It works by verifying that incoming requests contain a security token (CSRF token) and it matches the one stored on the
+server. CSRF protection is disabled for API requests.</p>
+<p>To disable the CSRF protection set <code>para.security.csrf_protection</code> to <code>false</code>. You can also tell Para to send a cookie
+containing the CSRF token by setting <code>para.security.csrf_cookie</code> as the cookie name. Leaving this parameter blank will
+disable the CSRF cookie.</p>
+<p>For example, if you wish to integrate CSRF protection with AngularJS you can do so by setting
+the cookie name to <code>XSRF-TOKEN</code> which is the default cookie used by AngularJS. Also you need to configure AngularJS to
+send the correct CSRF header to Para which is <code>X-CSRF-TOKEN</code> like so:</p>
+<pre><code class="lang-js">$httpProvider.defaults.xsrfHeaderName = <span class="hljs-string">"X-CSRF-TOKEN"</span>;
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
 					<a id="033-restauth" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
 					<article class=" img-rounded">
 						
@@ -1762,7 +2051,7 @@ dependency. In terms of security, both algorithms are considered very secure so 
 <p>In order to make a request to the API you need to have a pair of access and secret keys. Access keys are part of the
 HTTP request and secret keys are used for signing only and must be kept safe.</p>
 <h3 id="first-time-setup">First-time setup</h3>
-<p>Call <code>GET /v1/setup</code> to get your first key pair. Once you do this you will get back a response like:</p>
+<p>Call <code>GET /v1/_setup</code> to get your first key pair. Once you do this you will get back a response like:</p>
 <pre><code class="lang-js">{
     <span class="hljs-string">"secretKey"</span>: <span class="hljs-string">"U3VTNifLPqnZ1W2S3pVVuKG4HOVbimMocdDMl8T69BB001AXGZtwZw=="</span>,
     <span class="hljs-string">"accessKey"</span>: <span class="hljs-string">"YXBwOnBhcmE="</span>,
@@ -1773,11 +2062,10 @@ HTTP request and secret keys are used for signing only and must be kept safe.</p
 keys you can start making signed requests to the API. Also you can use these keys to create applications which will
 have their own separate keys (see <a href="#34">Apps</a>).</p>
 <h3 id="changing-keys">Changing keys</h3>
-<p>Call <code>POST /v1/newkeys</code> to generate a new secret key (<em>the request must be signed with the old keys</em>).</p>
+<p>Call <code>POST /v1/_newkeys</code> to generate a new secret key (<em>the request must be signed with the old keys</em>).</p>
 <h3 id="disabling-api-security">Disabling API security</h3>
-<p>To disable the API security completely, set the config parameter <code>para.security.api</code> to <code>&quot;disabled&quot;</code>
-(actually any string other than “enabled” would do the same thing).</p>
-<p>If you wish to disable all API functions completely, set the config parameter <code>para.api_enabled&quot; to</code>false`. </p>
+<p>To disable the API security completely, set the config parameter <code>para.security.api_security</code> to <code>false</code>.</p>
+<p>If you wish to disable all API functions completely, set the config parameter <code>para.api_enabled&quot; to</code>false`.</p>
 <blockquote>
 <p>For more information see the <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">AWS documentation</a>
 for REST authentication.</p>
@@ -1794,16 +2082,18 @@ for REST authentication.</p>
 							<h2>Apps</h2>
 						
 						<section class="body img-rounded">
-							<blockquote>
-<p><strong>Note:</strong> This feature is still being developed and might change.</p>
-</blockquote>
-<p>Apps allow you to have separate namespaces and data models for different purposes. Apps will have separate data tables
-and their objects will be independent from one another.</p>
+							<p>Apps allow you to have separate namespaces and data models for different purposes. Each app lives in its own separate
+database and is independent from apps.</p>
 <p>Apps have a unique <code>appid</code> key which is used to identify them. They also have a set of data types. Data types can be
 created on-the-fly, for example you can create a type called “article” and it will have its own API URL at
 <code>/v1/article</code></p>
-<p>Initially Para creates a default root app with an <code>appid</code> equal to the value of the <code>para.app_name</code>
-configuration parameter.</p>
+<p>Initially Para creates a default root app with an <code>id</code> equal to the value of the <code>para.app_name</code>
+configuration parameter. If you need to have only one app then you don’t need to do anything. If you want to have
+multiple apps then you can simply create them with <code>appid</code> equal to the root app’s <code>id</code>.</p>
+<p>Currently Para creates separate database tables for all apps and uses a single shared search index unless an app has
+<code>shared = false</code>. If this is the case then a separate search index is created for that app. It is possible to make
+Para use a single database table for all apps by prefixing <code>id</code> fields (e.g. <code>app1_id1</code>-&gt;<code>data</code>) but this is not yet
+implemented.</p>
 
 						</section>
 					</article>
@@ -2240,6 +2530,7 @@ These are required for mapping types to URLs.</p>
 </ul>
 <p>Example response for querying all tags:</p>
 <pre><code class="lang-js">{
+    <span class="hljs-string">"page"</span>:<span class="hljs-number">0</span>,
     <span class="hljs-string">"totalHits"</span>:<span class="hljs-number">3</span>,
     <span class="hljs-string">"items"</span>:[{
         <span class="hljs-string">"id"</span>:<span class="hljs-string">"tag:tag3"</span>,
@@ -2305,7 +2596,10 @@ These are required for mapping types to URLs.</p>
 						
 						<section class="body img-rounded">
 							<p>Executes a search query.</p>
-<h3 id="queries">Queries</h3>
+<h3 id="request">Request</h3>
+<ul>
+<li><code>{querytype}</code> - the type of query to execute (optional), use one of types below:</li>
+</ul>
 <p>The <code>querytype</code> parameter switches between the different query types. If this parameter is missing
 then the generic <code>findQuery()</code> method will be executed by default.</p>
 <h4 id="-id-query"><code>id</code> query</h4>
@@ -2370,6 +2664,9 @@ then the generic <code>findQuery()</code> method will be executed by default.</p
 <li><code>count</code> - if present will return 0 objects but the “totalHits” field will contain the total number of results found
 that match the given terms.</li>
 </ul>
+<p>Since v1.9, the terms query supports ranges. For example if you have a pair like <code>&#39;age&#39;:25</code> and you want to
+find objects with higher <code>age</code> value, you can modify the key to have a relational operator <code>&#39;age &gt;&#39;:25</code>. You can
+use the <code>&gt;, &lt;, &gt;=, &lt;=</code> operators by appending them to the keys of the terms map.</p>
 <hr>
 
 <h4 id="-wildcard-query"><code>wildcard</code> query</h4>
@@ -2381,10 +2678,6 @@ that match the given terms.</li>
 
 <h4 id="-count-query"><code>count</code> query</h4>
 <p>This executes the method <code>getCount()</code> with <strong>no parameters</strong>.</p>
-<h3 id="request">Request</h3>
-<ul>
-<li><code>{querytype}</code> - the type of query to execute (optional, use one of the above types).</li>
-</ul>
 <h3 id="request-parameters">Request parameters</h3>
 <ul>
 <li><code>q</code> - a search query string (optional). Defaults to <code>*</code> (all).</li>
@@ -2400,6 +2693,7 @@ that match the given terms.</li>
 </ul>
 <p>Example response for counting all objects (just three for this example):</p>
 <pre><code class="lang-js">{
+    <span class="hljs-string">"page"</span>:<span class="hljs-number">0</span>,
     <span class="hljs-string">"totalHits"</span>:<span class="hljs-number">3</span>,
     <span class="hljs-string">"items"</span>:[
     ]
@@ -2459,7 +2753,8 @@ return only the count of child objects.</li>
 </ul>
 <p>Example response if <code>id</code> is missing:</p>
 <pre><code class="lang-js">{
-    <span class="hljs-string">"totalHits"</span>:X,
+    <span class="hljs-string">"page"</span>:X,
+    <span class="hljs-string">"totalHits"</span>:Y,
     <span class="hljs-string">"items"</span>:[
         ...
     ]
@@ -2538,7 +2833,7 @@ the <code>id</code> field of another object (parent).</p>
 							</a>
 						
 						<section class="body img-rounded">
-							<p>Unlinks the object with the specified <code>{id}</code> from another object.</p>
+							<p>Unlinks or deletes the objects linked to the object with the specified <code>{id}</code>.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{type}</code> - the type of the first object, e.g. “users”</li>
@@ -2553,9 +2848,9 @@ the <code>id</code> field of another object (parent).</p>
 </ul>
 <p><strong>Note:</strong></p>
 <ul>
-<li>If both <code>{type2}</code> and <code>{id2}</code> are not set, all linked objects will be unlinked from this one.</li>
+<li>If both <code>{type2}</code> and <code>{id2}</code> are not set, <strong>all linked objects will be unlinked from this one</strong>.</li>
 <li>If <code>id</code> is set - the two objects are unlinked.</li>
-<li>If both <code>all</code> and <code>id</code> are not set, but <code>childrenonly</code> is set then the child objects with type <code>type</code> are <strong>deleted</strong>!
+<li>If <code>all</code> and <code>id</code> are not set, but <code>childrenonly</code> is set then the child objects with type <code>type</code> are <strong>deleted</strong>!
 (these are the objects with <code>parentid</code> equal to <code>{id}</code> above)</li>
 </ul>
 <h3 id="response">Response</h3>
@@ -2563,6 +2858,339 @@ the <code>id</code> field of another object (parent).</p>
 <li><strong>status codes</strong> - <code>200</code></li>
 </ul>
 <p>No content.</p>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="049-api-constraints-add" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="PUT img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+										
+											<span class="img-rounded label-warning">PUT</span>
+										
+										
+										
+										<span class="gray">
+											/v1/_constraints/{type}/{field}/{cname} 
+										</span>
+									</code>
+									<span class="hidden-xs">Add constraint</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>Adds a new validation constraint to the list of constraints for the given field and type.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><strong>body</strong> - the JSON payload of the constraint (see the table below)</li>
+<li><code>{type}</code> - the object type to which the constraint applies (required)</li>
+<li><code>{field}</code> - the name of the field to which the constraint applies (required)</li>
+<li><p><code>{cname}</code> - the constraint name (required), one of the following:</p>
+<table class="table table-striped">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Payload (example)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>required</code></td><td>none</td>
+      </tr>
+      <tr>
+          <td><code>email</code></td><td>none</td>
+      </tr>
+      <tr>
+          <td><code>false</code></td><td>none</td>
+      </tr>
+      <tr>
+          <td><code>true</code></td><td>none</td>
+      </tr>
+      <tr>
+          <td><code>past</code></td><td>none</td>
+      </tr>
+      <tr>
+          <td><code>present</code></td><td>none</td>
+      </tr>
+      <tr>
+          <td><code>url</code></td><td>none</td>
+      </tr>
+      <tr>
+          <td><code>min</code></td><td><code>{ &quot;value&quot;: 123 }</code></td>
+      </tr>
+      <tr>
+          <td><code>max</code></td><td><code>{ &quot;value&quot;: 123 }</code></td>
+      </tr>
+      <tr>
+          <td><code>size</code></td><td><code>{ &quot;min&quot;: 123, &quot;max&quot;: 456 }</code></td>
+      </tr>
+      <tr>
+          <td><code>digits</code></td><td><code>{ &quot;integer&quot;: 4, &quot;fraction&quot;: 2 }</code></td>
+      </tr>
+      <tr>
+          <td><code>pattern</code></td><td><code>{ &quot;value&quot;: &quot;^[a-zA-Z]+$&quot; }</code></td>
+      </tr>
+  </tbody>
+</table>
+
+</li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object containing the validation constraints for the given type.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code></li>
+</ul>
+<p>Example response:</p>
+<pre><code class="lang-js">{
+    <span class="hljs-string">"User"</span> : {
+        <span class="hljs-string">"identifier"</span> : {
+            <span class="hljs-string">"required"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.required"</span>
+            }
+        },
+        <span class="hljs-string">"groups"</span> : {
+            <span class="hljs-string">"required"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.required"</span>
+            }
+        },
+        <span class="hljs-string">"email"</span> : {
+            <span class="hljs-string">"required"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.required"</span>
+            },
+            <span class="hljs-string">"email"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.email"</span>
+            }
+        }
+    },
+    ...
+}
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="049-api-constraints-get" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="GET img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+											<span class="img-rounded label-success">GET</span>
+										
+										
+										
+										
+										<span class="gray">
+											/v1/_constraints/{type} 
+										</span>
+									</code>
+									<span class="hidden-xs">List constraints</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>Returns an object containing all validation constraints for all defined types in the current app.
+This information can be used to power client-side validation libraries like
+<a href="https://github.com/netceteragroup/valdr">valdr</a>.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><code>{type}</code> - when supplied, returns only the constraints for this type (optional). If this parameter is omitted, all
+constraints for all types will be returned.</li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object with all validation constraints for a given type. The <code>message</code> field is a
+key that can be used to retrieve a localized message.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code></li>
+</ul>
+<p>Example response:</p>
+<pre><code class="lang-js">{
+    <span class="hljs-string">"User"</span> : {
+        <span class="hljs-string">"identifier"</span> : {
+            <span class="hljs-string">"required"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.required"</span>
+            }
+        },
+        <span class="hljs-string">"groups"</span> : {
+            <span class="hljs-string">"required"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.required"</span>
+            }
+        },
+        <span class="hljs-string">"email"</span> : {
+            <span class="hljs-string">"required"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.required"</span>
+            },
+            <span class="hljs-string">"email"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.email"</span>
+            }
+        }
+    },
+    ...
+}
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="049-api-constraints-rem" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="DELETE img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+										
+										
+										
+											<span class="img-rounded label-danger">DELETE</span>
+										
+										<span class="gray">
+											/v1/_constraints/{type}/{field}/{cname} 
+										</span>
+									</code>
+									<span class="hidden-xs">Remove constraint</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>Removes a validation constraint from the list of constraints for the given field and type.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><code>{type}</code> - the object type to which the constraint applies (required)</li>
+<li><code>{field}</code> - the name of the field to which the constraint applies (required)</li>
+<li><code>{cname}</code> - the constraint name (required, see the table above)</li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object containing the validation constraints for the given type.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code></li>
+</ul>
+<p>Example response:</p>
+<pre><code class="lang-js">{
+    <span class="hljs-string">"User"</span> : {
+        <span class="hljs-string">"identifier"</span> : {
+            <span class="hljs-string">"required"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.required"</span>
+            }
+        },
+        <span class="hljs-string">"groups"</span> : {
+            <span class="hljs-string">"required"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.required"</span>
+            }
+        },
+        <span class="hljs-string">"email"</span> : {
+            <span class="hljs-string">"required"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.required"</span>
+            },
+            <span class="hljs-string">"email"</span> : {
+                <span class="hljs-string">"message"</span> : <span class="hljs-string">"messages.email"</span>
+            }
+        }
+    },
+    ...
+}
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="049-api-id" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="GET img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+											<span class="img-rounded label-success">GET</span>
+										
+										
+										
+										
+										<span class="gray">
+											/v1/_id/{id} 
+										</span>
+									</code>
+									<span class="hidden-xs">Read by id</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>Returns the object for the given <code>{id}</code>.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><code>{id}</code> - the <code>id</code></li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>404</code></li>
+</ul>
+<p>Example response:</p>
+<pre><code class="lang-js">{
+    <span class="hljs-string">"id"</span> : <span class="hljs-string">"417283630780387328"</span>,
+  <span class="hljs-string">"timestamp"</span> : <span class="hljs-number">1409572755025</span>,
+  <span class="hljs-string">"type"</span> : <span class="hljs-string">"user"</span>,
+    <span class="hljs-string">"name"</span> : <span class="hljs-string">"Gordon Freeman"</span>
+    ...
+}
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="049-api-me" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="GET img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+											<span class="img-rounded label-success">GET</span>
+										
+										
+										
+										
+										<span class="gray">
+											/v1/_me 
+										</span>
+									</code>
+									<span class="hidden-xs">Me object</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>Returns the currently authenticated <code>User</code> or <code>App</code> object. If the request is unauthenticated 401 error is returned.</p>
+<h3 id="request">Request</h3>
+<p><strong>No parameters</strong>.</p>
+<h3 id="response">Response</h3>
+<p>Returns the JSON object for the authenticated <code>User</code> or <code>App</code>.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>401</code></li>
+</ul>
+<p>Example response:</p>
+<pre><code class="lang-js">{
+    <span class="hljs-string">"id"</span> : <span class="hljs-string">"417283630780387328"</span>,
+  <span class="hljs-string">"timestamp"</span> : <span class="hljs-number">1409572755025</span>,
+  <span class="hljs-string">"type"</span> : <span class="hljs-string">"user"</span>,
+    <span class="hljs-string">"name"</span> : <span class="hljs-string">"Gordon Freeman"</span>
+    ...
+}
+</code></pre>
 
 						</section>
 					</article>
@@ -2582,7 +3210,7 @@ the <code>id</code> field of another object (parent).</p>
 										
 										
 										<span class="gray">
-											/v1/types 
+											/v1/_types 
 										</span>
 									</code>
 									<span class="hidden-xs">List types</span>
@@ -2595,7 +3223,7 @@ User-defined types are custom types which can be defined through the REST API an
 the standard CRUD methods on them as if they were defined as regular Para objects.
 See <a href="#010-userdefined">User-defined classes</a> for more details.</p>
 <h3 id="request">Request</h3>
-<p><strong>No paramteres</strong>.</p>
+<p><strong>No parameters</strong>.</p>
 <h3 id="response">Response</h3>
 <p>Returns a list of all types that are defined for this application.</p>
 <ul>
@@ -2631,7 +3259,7 @@ See <a href="#010-userdefined">User-defined classes</a> for more details.</p>
 										
 										
 										<span class="gray">
-											/v1/setup 
+											/v1/_setup 
 										</span>
 									</code>
 									<span class="hidden-xs">Initial setup</span>
@@ -2642,7 +3270,7 @@ See <a href="#010-userdefined">User-defined classes</a> for more details.</p>
 							<p>Creates the root application and generates the first pair of API keys. Calling this method will enable you to access
 the REST API.</p>
 <h3 id="request">Request</h3>
-<p><strong>No paramteres</strong>.</p>
+<p><strong>No parameters</strong>.</p>
 <h3 id="response">Response</h3>
 <p>Returns the access and secret keys for this application which will be used for request signing.</p>
 <ul>
@@ -2680,7 +3308,7 @@ the REST API.</p>
 										
 										
 										<span class="gray">
-											/v1/newkeys 
+											/v1/_newkeys 
 										</span>
 									</code>
 									<span class="hidden-xs">Reset API keys</span>
@@ -2691,7 +3319,7 @@ the REST API.</p>
 							<p>This will reset your API secret key by generating a new one.
 Make sure you save it and use it for signing future requests.</p>
 <h3 id="request">Request</h3>
-<p><strong>No paramteres</strong>.</p>
+<p><strong>No parameters</strong>.</p>
 <h3 id="response">Response</h3>
 <p>Returns the access and secret keys for this application which will be used for request signing.</p>
 <ul>
@@ -2772,8 +3400,8 @@ Make sure you save it and use it for signing future requests.</p>
 	<footer>
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<p>Generated on <i>2014-08-12</i> with <a href="https://github.com/albogdano/bootup">bootUP</a> and hosted on <a href="https://github.com/erudika/paraio.org"><i class="fa fa-github fa-lg"></i></a></p>
-				<p>&copy; 2014 <a href="http://erudika.com">Erudika</a></p>
+				<p>Generated on <i>2015-05-21</i> with <a href="https://github.com/albogdano/bootup">bootUP</a> and hosted on <a href="https://github.com/erudika/paraio.org"><i class="fa fa-github fa-lg"></i></a></p>
+				<p>&copy; 2015 <a href="http://erudika.com">Erudika</a></p>
 			</div>
 		</div>
 	</footer>
