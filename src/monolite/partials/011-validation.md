@@ -8,6 +8,9 @@ One way is to attach annotations to fields in Java classes. The other way is by 
 validation constraints to any object, be it core or user-defined. This method is more flexible as it allows you to
 validate any property of any object.
 
+The built-in constraints are: `required`, `min`, `max`, `size`, `email`,
+`digits`, `pattern`, `false`, `true`, `future`, `past`, `url`.
+
 **Note:** Objects are validated on `create()` and `update()` operations only.
 
 ### Annotation-based validation constraints
@@ -44,6 +47,13 @@ To manually validate an object you can use:
 ```java
 String[] errors = ValidationUtils.validateObject(App app, ParaObject po);
 ```
+Or through `ParaClient`:
+
+```java
+// return a JSON object with all validation constraints
+paraClient.validationConstraints();
+```
+
 The returned string array contains 0 elements if the `po` is valid or a list of errors that were encountered on validation.
 
 ### Integration with the client-side

@@ -1,11 +1,11 @@
 ---
-title: Update objects
+title: Overwrite objects
 category: REST API
 path: /v1/{type}/{id}
-type: PATCH
+type: PUT
 ---
 
-Updates objects of type `{type}`. Partial objects are supported.
+Overwrites an object of type `{type}`. If the object with this `{id}` doesn't exist then a new one will be created.
 
 ### Request
 

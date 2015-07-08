@@ -2,10 +2,10 @@
 title: Batch update
 category: REST API
 path: /v1/_batch
-type: PUT
+type: PATCH
 ---
 
-Updates multiple objects with a single request.
+Updates multiple objects with a single request. Partial objects are supported.
 **Note:** These objects will not be validated as this would require us to read them first and validate them one by one.
 
 ### Request

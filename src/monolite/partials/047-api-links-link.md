@@ -11,6 +11,8 @@ The created link represents a many-to-many relationship (see also [one-to-many r
 Creating one-to-many links is trivial - just set the `parentid` of an object (child) to be equal to
 the `id` field of another object (parent).
 
+`PUT` requests to this resource are equivalent to `POST`.
+
 ### Request
 
 - `{type}` - the type of the first object, e.g. "users"

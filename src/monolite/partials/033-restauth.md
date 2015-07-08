@@ -10,6 +10,8 @@ dependency. In terms of security, both algorithms are considered very secure so 
 In order to make a request to the API you need to have a pair of access and secret keys. Access keys are part of the
 HTTP request and secret keys are used for signing only and must be kept safe.
 
+We recommend that you choose one of our API client libraries to handle the authentication for you. 
+
 ### First-time setup
 
 Call `GET /v1/_setup` to get your first key pair. Once you do this you will get back a response like:

@@ -5,7 +5,7 @@ path: /v1/_batch
 type: POST
 ---
 
-Creates multiple objects with a single request.
+Creates multiple objects with a single request. `PUT` requests to this resource are equivalent to `POST`.
 
 ### Request
 
