@@ -18,3 +18,6 @@ send the correct CSRF header to Para which is `X-CSRF-TOKEN` like so:
 ```js
 $httpProvider.defaults.xsrfHeaderName = "X-CSRF-TOKEN";
 ```
+
+In order to get a CSRF token from the server you need to send a `POST` request to a protected resource
+like `POST /protected/ping` and the server will return the token as cookie.

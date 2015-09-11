@@ -21,7 +21,7 @@ persistable and searchable. You can still keep the RESTful API feature or turn i
 1. [Download the JAR](https://github.com/erudika/para/releases/download/v{{version}}/para-server-{{version}}.jar)
 2. Run it with `java -jar para-server-{{version}}.jar` - Para is now running in embedded mode, suitable for development.
 3. Call `curl localhost:8080/v1/_setup` to get the access and secret keys (give it a few seconds to initialize)
-4. Start using the RESTful API directly or use the provided `ParaClient` to connect to the server.
+4. Start using the RESTful API directly or use one of the provided client libraries below.
 
 The Java client for Para is a separate module with these Maven coordinates:
 
@@ -42,3 +42,33 @@ pc.setEndpoint(paraServerURL);
 // send a test request - this should return a JSON object of type 'app'
 pc.me();
 ```
+
+### Client libraries
+
+<div class="btn-client-div">
+	<a href="https://github.com/Erudika/para/tree/master/para-client" class="btn-client">
+		<i class="devicon-java-plain-wordmark"></i>
+	</a><br>
+	<a href="https://github.com/Erudika/para/tree/master/para-client">para-client-java</a>
+</div>
+
+<div class="btn-client-div">
+	<a href="https://github.com/Erudika/para-client-js" class="btn-client">
+		<i class="devicon-nodejs-plain"></i>
+	</a><br>
+	<a href="https://github.com/Erudika/para-client-js">para-client-js</a>
+</div>
+
+<div class="btn-client-div">
+	<a href="https://github.com/Erudika/para-client-php" class="btn-client">
+		<i class="devicon-php-plain"></i>
+	</a><br>
+	<a href="https://github.com/Erudika/para-client-php">para-client-php</a>
+</div>
+
+<div class="btn-client-div">
+	<a href="https://github.com/Erudika/para-client-csharp" class="btn-client">
+		<i class="devicon-dot-net-plain-wordmark"></i>
+	</a><br>
+	<a href="https://github.com/Erudika/para-client-csharp">para-client-csharp</a>
+</div>
