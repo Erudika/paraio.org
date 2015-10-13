@@ -16,7 +16,7 @@ Unlinks or deletes the objects linked to the object with the specified `{id}`.
 
 #### Parameters
 
-- `all` -
+- `all` - setting this will **delete all** linked objects (be careful!)
 - `childrenonly` - if set, all child objects will be deleted rather than unlinked (be careful!)
 
 **Note:**
