@@ -20,6 +20,7 @@
 		<title>Para - Documentation</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="google-site-verification" content="YXojLKu08NjIbC9uXuTBV-TmbaEHNGjyqaFcCzVyD-U" />
 		<meta property="og:image" content="http://www.paraio.org/apple-touch-icon-precomposed.png">
 		<link rel="image_src" href="http://www.paraio.org/apple-touch-icon-precomposed.png">
 
@@ -30,6 +31,7 @@
 
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 		<link href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css" rel="stylesheet">
+		<link href="https://cdn.rawgit.com/konpa/devicon/89f2f44ba07ea3fff7e561c2142813b278c2d6c6/devicon.min.css" rel="stylesheet">
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 		<link href="/css/main.css" rel="stylesheet">
 	</head>
@@ -67,9 +69,6 @@
 				<li class="page-scroll">
 					<a href="/#about">About</a>
 				</li>
-				<li class="page-scroll">
-					<a href="/#contact">Support</a>
-				</li>
 			</ul>
 		</div>
 	</div>
@@ -91,6 +90,9 @@
 	
 		
 			<li><a href="#001-intro">Introduction</a></li>
+		
+	
+		
 		
 	
 		
@@ -531,7 +533,11 @@
 					
 				
 					
-						<li class="PUT"><a href="#038-api-update">Update objects</a></li>
+						<li class="PUT"><a href="#038-api-overwrite">Overwrite objects</a></li>
+					
+				
+					
+						<li class="PATCH"><a href="#038-api-update">Update objects</a></li>
 					
 				
 					
@@ -547,7 +553,7 @@
 					
 				
 					
-						<li class="PUT"><a href="#042-api-batch-update">Batch update</a></li>
+						<li class="PATCH"><a href="#042-api-batch-update">Batch update</a></li>
 					
 				
 					
@@ -641,10 +647,10 @@ many different clients and applications. This is done through Para’s simple RE
 persistable and searchable. You can still keep the RESTful API feature or turn it off completely.</p>
 <h3 id="quick-start">Quick start</h3>
 <ol>
-<li><a href="https://github.com/erudika/para/releases/download/v/para-server-.jar">Download the JAR</a></li>
+<li><a href="https://github.com/erudika/para/releases">Download the JAR</a></li>
 <li>Run it with <code>java -jar para-server-.jar</code> - Para is now running in embedded mode, suitable for development.</li>
 <li>Call <code>curl localhost:8080/v1/_setup</code> to get the access and secret keys (give it a few seconds to initialize)</li>
-<li>Start using the RESTful API directly or use the provided <code>ParaClient</code> to connect to the server.</li>
+<li>Start using the RESTful API directly or use one of the provided client libraries below.</li>
 </ol>
 <p>The Java client for Para is a separate module with these Maven coordinates:</p>
 <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
@@ -660,6 +666,34 @@ pc.setEndpoint(paraServerURL);
 <span class="hljs-comment">// send a test request - this should return a JSON object of type 'app'</span>
 pc.me();
 </code></pre>
+<h3 id="client-libraries">Client libraries</h3>
+<div class="btn-client-div">
+    <a href="https://github.com/Erudika/para/tree/master/para-client" class="btn-client">
+        <i class="devicon-java-plain-wordmark"></i>
+    </a><br>
+    <a href="https://github.com/Erudika/para/tree/master/para-client">para-client-java</a>
+</div>
+
+<div class="btn-client-div">
+    <a href="https://github.com/Erudika/para-client-js" class="btn-client">
+        <i class="devicon-nodejs-plain"></i>
+    </a><br>
+    <a href="https://github.com/Erudika/para-client-js">para-client-js</a>
+</div>
+
+<div class="btn-client-div">
+    <a href="https://github.com/Erudika/para-client-php" class="btn-client">
+        <i class="devicon-php-plain"></i>
+    </a><br>
+    <a href="https://github.com/Erudika/para-client-php">para-client-php</a>
+</div>
+
+<div class="btn-client-div">
+    <a href="https://github.com/Erudika/para-client-csharp" class="btn-client">
+        <i class="devicon-dot-net-plain-wordmark"></i>
+    </a><br>
+    <a href="https://github.com/Erudika/para-client-csharp">para-client-csharp</a>
+</div>
 
 						</section>
 					</article>
@@ -1149,6 +1183,8 @@ they will be skipped.</p>
 One way is to attach annotations to fields in Java classes. The other way is by using the constraints API to add
 validation constraints to any object, be it core or user-defined. This method is more flexible as it allows you to
 validate any property of any object.</p>
+<p>The built-in constraints are: <code>required</code>, <code>min</code>, <code>max</code>, <code>size</code>, <code>email</code>,
+<code>digits</code>, <code>pattern</code>, <code>false</code>, <code>true</code>, <code>future</code>, <code>past</code>, <code>url</code>.</p>
 <p><strong>Note:</strong> Objects are validated on <code>create()</code> and <code>update()</code> operations only.</p>
 <h3 id="annotation-based-validation-constraints">Annotation-based validation constraints</h3>
 <p>You can use any of the JSR 303 annotations specified by the <code>javax.validation.constraints</code> package, part of Java EE.
@@ -1171,6 +1207,10 @@ For this purpose we can use the constraints API:</p>
 the API.</p>
 <p>To manually validate an object you can use:</p>
 <pre><code class="lang-java">String[] errors = ValidationUtils.validateObject(App app, ParaObject po);
+</code></pre>
+<p>Or through <code>ParaClient</code>:</p>
+<pre><code class="lang-java"><span class="hljs-comment">// return a JSON object with all validation constraints</span>
+paraClient.validationConstraints();
 </code></pre>
 <p>The returned string array contains 0 elements if the <code>po</code> is valid or a list of errors that were encountered on validation.</p>
 <h3 id="integration-with-the-client-side">Integration with the client-side</h3>
@@ -2033,6 +2073,8 @@ the cookie name to <code>XSRF-TOKEN</code> which is the default cookie used by A
 send the correct CSRF header to Para which is <code>X-CSRF-TOKEN</code> like so:</p>
 <pre><code class="lang-js">$httpProvider.defaults.xsrfHeaderName = <span class="hljs-string">"X-CSRF-TOKEN"</span>;
 </code></pre>
+<p>In order to get a CSRF token from the server you need to send a <code>POST</code> request to a protected resource
+like <code>POST /protected/ping</code> and the server will return the token as cookie.</p>
 
 						</section>
 					</article>
@@ -2050,6 +2092,7 @@ of OAuth because it is less complicated and is already implemented inside the AW
 dependency. In terms of security, both algorithms are considered very secure so there’s no compromise in that aspect.</p>
 <p>In order to make a request to the API you need to have a pair of access and secret keys. Access keys are part of the
 HTTP request and secret keys are used for signing only and must be kept safe.</p>
+<p>We recommend that you choose one of our API client libraries to handle the authentication for you. </p>
 <h3 id="first-time-setup">First-time setup</h3>
 <p>Call <code>GET /v1/_setup</code> to get your first key pair. Once you do this you will get back a response like:</p>
 <pre><code class="lang-js">{
@@ -2109,6 +2152,10 @@ implemented.</p>
 							<blockquote>
 <p>All API methods below <strong>require authentication</strong> by default unless it’s written otherwise.</p>
 </blockquote>
+<h2 id="limiting-which-fields-are-returned-by-the-api">Limiting which fields are returned by the API</h2>
+<p>Field limiting is supported on all requests by using the query parameter <code>select=xxx,yyy</code>.
+This parameter takes a comma separated list of fields to include. For example:</p>
+<p><code>GET /myobjects?select=id,name,custom_field1,custom_field2</code></p>
 
 						</section>
 					</article>
@@ -2121,6 +2168,7 @@ implemented.</p>
 							<a href="#">
 								<h2 class="img-rounded">
 									<code>
+										
 										
 										
 										
@@ -2187,6 +2235,7 @@ These are required for mapping types to URLs.</p>
 										
 										
 										
+										
 										<span class="gray">
 											/v1/{type}/{id} 
 										</span>
@@ -2227,7 +2276,7 @@ These are required for mapping types to URLs.</p>
 					
 				
 					
-					<a id="038-api-update" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<a id="038-api-overwrite" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
 					<article class="PUT img-rounded">
 						
 							<a href="#">
@@ -2236,6 +2285,60 @@ These are required for mapping types to URLs.</p>
 										
 										
 											<span class="img-rounded label-warning">PUT</span>
+										
+										
+										
+										
+										<span class="gray">
+											/v1/{type}/{id} 
+										</span>
+									</code>
+									<span class="hidden-xs">Overwrite objects</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>Overwrites an object of type <code>{type}</code>. If the object with this <code>{id}</code> doesn’t exist then a new one will be created.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><strong>body</strong> - the JSON data to merge with the stored object</li>
+<li><code>{type}</code> - the plural form of the object’s type, e.g. “users”</li>
+<li><code>{id}</code> - the <code>id</code></li>
+</ul>
+<h3 id="response">Response</h3>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code>, <code>404</code>, <code>500</code></li>
+</ul>
+<p>Example response for a <code>Tag</code> with updated <code>count</code>:</p>
+<pre><code class="lang-js">{
+    <span class="hljs-string">"id"</span>:<span class="hljs-string">"tag:tag1"</span>,
+    <span class="hljs-string">"timestamp"</span>:<span class="hljs-number">1399721289987</span>,
+    <span class="hljs-string">"type"</span>:<span class="hljs-string">"tag"</span>,
+    <span class="hljs-string">"appid"</span>:<span class="hljs-string">"para"</span>,
+    <span class="hljs-string">"name"</span>:<span class="hljs-string">"tag tag:tag1"</span>,
+    <span class="hljs-string">"votes"</span>:<span class="hljs-number">0</span>,
+    <span class="hljs-string">"plural"</span>:<span class="hljs-string">"tags"</span>,
+    <span class="hljs-string">"objectURI"</span>:<span class="hljs-string">"/tags/tag1"</span>,
+    <span class="hljs-string">"tag"</span>:<span class="hljs-string">"tag1"</span>,
+    <span class="hljs-string">"count"</span>:<span class="hljs-number">55</span>
+}
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="038-api-update" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="PATCH img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+										
+										
+											<span class="img-rounded label-default">PATCH</span>
 										
 										
 										
@@ -2248,7 +2351,7 @@ These are required for mapping types to URLs.</p>
 							</a>
 						
 						<section class="body img-rounded">
-							<p>Updates objects of type <code>{type}</code>. </p>
+							<p>Updates objects of type <code>{type}</code>. Partial objects are supported.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><strong>body</strong> - the JSON data to merge with the stored object</li>
@@ -2285,6 +2388,7 @@ These are required for mapping types to URLs.</p>
 							<a href="#">
 								<h2 class="img-rounded">
 									<code>
+										
 										
 										
 										
@@ -2326,6 +2430,7 @@ These are required for mapping types to URLs.</p>
 										
 										
 										
+										
 											<span class="img-rounded label-info">POST</span>
 										
 										
@@ -2338,7 +2443,7 @@ These are required for mapping types to URLs.</p>
 							</a>
 						
 						<section class="body img-rounded">
-							<p>Creates multiple objects with a single request.</p>
+							<p>Creates multiple objects with a single request. <code>PUT</code> requests to this resource are equivalent to <code>POST</code>.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><strong>body</strong> - a JSON array of objects to create (required).</li>
@@ -2365,6 +2470,7 @@ These are required for mapping types to URLs.</p>
 									<code>
 										
 											<span class="img-rounded label-success">GET</span>
+										
 										
 										
 										
@@ -2398,14 +2504,15 @@ These are required for mapping types to URLs.</p>
 				
 					
 					<a id="042-api-batch-update" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
-					<article class="PUT img-rounded">
+					<article class="PATCH img-rounded">
 						
 							<a href="#">
 								<h2 class="img-rounded">
 									<code>
 										
 										
-											<span class="img-rounded label-warning">PUT</span>
+										
+											<span class="img-rounded label-default">PATCH</span>
 										
 										
 										
@@ -2418,7 +2525,7 @@ These are required for mapping types to URLs.</p>
 							</a>
 						
 						<section class="body img-rounded">
-							<p>Updates multiple objects with a single request.
+							<p>Updates multiple objects with a single request. Partial objects are supported.
 <strong>Note:</strong> These objects will not be validated as this would require us to read them first and validate them one by one.</p>
 <h3 id="request">Request</h3>
 <ul>
@@ -2460,6 +2567,7 @@ These are required for mapping types to URLs.</p>
 										
 										
 										
+										
 											<span class="img-rounded label-danger">DELETE</span>
 										
 										<span class="gray">
@@ -2496,6 +2604,7 @@ These are required for mapping types to URLs.</p>
 									<code>
 										
 											<span class="img-rounded label-success">GET</span>
+										
 										
 										
 										
@@ -2582,6 +2691,7 @@ These are required for mapping types to URLs.</p>
 									<code>
 										
 											<span class="img-rounded label-success">GET</span>
+										
 										
 										
 										
@@ -2717,6 +2827,7 @@ use the <code>&gt;, &lt;, &gt;=, &lt;=</code> operators by appending them to the
 										
 										
 										
+										
 										<span class="gray">
 											/v1/{type}/{id}/links/{type2}/{id2} 
 										</span>
@@ -2776,6 +2887,7 @@ return only the count of child objects.</li>
 										
 										
 										
+										
 											<span class="img-rounded label-info">POST</span>
 										
 										
@@ -2792,6 +2904,7 @@ return only the count of child objects.</li>
 The created link represents a many-to-many relationship (see also <a href="#019-one-to-many">one-to-many relationships</a>).</p>
 <p>Creating one-to-many links is trivial - just set the <code>parentid</code> of an object (child) to be equal to
 the <code>id</code> field of another object (parent).</p>
+<p><code>PUT</code> requests to this resource are equivalent to <code>POST</code>.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{type}</code> - the type of the first object, e.g. “users”</li>
@@ -2822,6 +2935,7 @@ the <code>id</code> field of another object (parent).</p>
 										
 										
 										
+										
 											<span class="img-rounded label-danger">DELETE</span>
 										
 										<span class="gray">
@@ -2843,7 +2957,7 @@ the <code>id</code> field of another object (parent).</p>
 </ul>
 <h4 id="parameters">Parameters</h4>
 <ul>
-<li><code>all</code> -</li>
+<li><code>all</code> - setting this will <strong>delete all</strong> linked objects (be careful!)</li>
 <li><code>childrenonly</code> - if set, all child objects will be deleted rather than unlinked (be careful!)</li>
 </ul>
 <p><strong>Note:</strong></p>
@@ -2873,6 +2987,7 @@ the <code>id</code> field of another object (parent).</p>
 										
 										
 											<span class="img-rounded label-warning">PUT</span>
+										
 										
 										
 										
@@ -2989,6 +3104,7 @@ the <code>id</code> field of another object (parent).</p>
 										
 										
 										
+										
 										<span class="gray">
 											/v1/_constraints/{type} 
 										</span>
@@ -3049,6 +3165,7 @@ key that can be used to retrieve a localized message.</p>
 							<a href="#">
 								<h2 class="img-rounded">
 									<code>
+										
 										
 										
 										
@@ -3119,6 +3236,7 @@ key that can be used to retrieve a localized message.</p>
 										
 										
 										
+										
 										<span class="gray">
 											/v1/_id/{id} 
 										</span>
@@ -3165,6 +3283,7 @@ key that can be used to retrieve a localized message.</p>
 										
 										
 										
+										
 										<span class="gray">
 											/v1/_me 
 										</span>
@@ -3205,6 +3324,7 @@ key that can be used to retrieve a localized message.</p>
 									<code>
 										
 											<span class="img-rounded label-success">GET</span>
+										
 										
 										
 										
@@ -3258,6 +3378,7 @@ See <a href="#010-userdefined">User-defined classes</a> for more details.</p>
 										
 										
 										
+										
 										<span class="gray">
 											/v1/_setup 
 										</span>
@@ -3304,6 +3425,7 @@ the REST API.</p>
 										
 										
 										
+										
 											<span class="img-rounded label-info">POST</span>
 										
 										
@@ -3346,6 +3468,7 @@ Make sure you save it and use it for signing future requests.</p>
 									<code>
 										
 											<span class="img-rounded label-success">GET</span>
+										
 										
 										
 										
@@ -3400,7 +3523,7 @@ Make sure you save it and use it for signing future requests.</p>
 	<footer>
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<p>Generated on <i>2015-05-21</i> with <a href="https://github.com/albogdano/bootup">bootUP</a> and hosted on <a href="https://github.com/erudika/paraio.org"><i class="fa fa-github fa-lg"></i></a></p>
+				<p>Generated on <i>2015-10-14</i> with <a href="https://github.com/albogdano/bootup">bootUP</a> and hosted on <a href="https://github.com/erudika/paraio.org"><i class="fa fa-github fa-lg"></i></a></p>
 				<p>&copy; 2015 <a href="http://erudika.com">Erudika</a></p>
 			</div>
 		</div>
