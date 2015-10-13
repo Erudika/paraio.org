@@ -9,7 +9,7 @@ Para is hosted on Maven Central. To add it to your project just include this int
 <dependency>
   <groupId>com.erudika</groupId>
   <artifactId>para-server</artifactId>
-  <version>{{version}}</version>
+  <version>{VERSION}</version>
 </dependency>
 ```
 
