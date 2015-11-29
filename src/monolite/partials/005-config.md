@@ -6,12 +6,15 @@ category: Configuration
 Once deployed, Para will initialize itself by loading the default configuration file `reference.conf`.
 To load your own configuration you need to set one of the following system properties:
 
-- `config.resource` specifies a resource name - not a basename, i.e. application.conf not application
-- `config.file` specifies a filesystem path, again it should include the extension, not be a basename
+- `config.resource` specifies a resource name - not a basename, i.e. 'application.conf' and not 'application'
+- `config.file` specifies a filesystem path, again it should include the file extension
 - `config.url` specifies the URL from which to load the config file
 
 You need to set these properties before calling `Para.initialize()` or at the startup of your servlet container.
 If you have a file called `application.conf` or `application.json` on the classpath, Para will pick it up automatically.
+
+> **Important:** In a production environment, set `para.app_secret_key` to some randomly generated secret string.
+> This is important for securing your server because this secret key is used for signing and verifying authentication tokens.
 
 Here's a list of all configuration properties that can be set in the config file:
 
@@ -31,6 +34,14 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.aws_region`						</td><td>`eu-west-1`</td><td>String</td></tr>
 		<tr><td>`para.fb_app_id`						</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.fb_secret`						</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.gp_app_id`						</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.gp_secret`						</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.in_app_id`						</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.in_secret`						</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.tw_app_id`						</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.tw_secret`						</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.gh_app_id`						</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.gh_secret`						</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.openx_api_key`				</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.gmaps_api_key`				</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.admin_ident`					</td><td>-</td><td>String</td></tr>
@@ -42,6 +53,8 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.app_secret_key`				</td><td>`b18c3f7e85b5c35d81ef6efce4870709`</td><td>String</td></tr>
 		<tr><td>`para.core_package_name`		</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.session_timeout`			</td><td>`24 * 60 * 60` sec.</td><td>Long</td></tr>
+		<tr><td>`para.jwt_expires_after`		</td><td>`7 * 24 * 60 * 60` sec.</td><td>Long</td></tr>
+		<tr><td>`para.jwt_refresh_interval`	</td><td>`60 * 60` sec.</td><td>Long</td></tr>
 		<tr><td>`para.request_expires_after`</td><td>`15 * 60` sec.</td><td>Long</td></tr>
 		<tr><td>`para.vote_expires_after`		</td><td>`30 * 24 * 60 * 60` sec.</td><td>Long</td></tr>
 		<tr><td>`para.vote_locked_after`		</td><td>`30` sec.</td><td>Long</td></tr>

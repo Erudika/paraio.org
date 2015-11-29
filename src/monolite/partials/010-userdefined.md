@@ -5,7 +5,7 @@ category: Core classes
 
 Let's say you have a class `Article` in your application that you wish to persist. You first implement the `ParaObject`
 interface, then add a few data fields to it. Implementing the interface is trivial as the basic functionality of
-the required methods is already implemented in the `CoreUtils`. 
+the required methods is already implemented in the `CoreUtils`.
 
 You need to specify which fields you want to be saved by adding the
 `@Stored` annotation.
@@ -14,8 +14,14 @@ You need to specify which fields you want to be saved by adding the
 class Article implements ParaObject {
 	@Stored private String title;
 	@Stored private String text;
+	@Stored private Map<?, ?> someCustomProperty;
 }
 ```
+
+> **Caution:** when defining your custom properties try to stick to basic Java types like maps,
+> strings, numbers, booleans, etc. Complex property objects are **not supported**. This is due to the fact that
+> Para uses the `BeanUtils` class to set deserialize properties and it has no clue how to deserialize
+> your complex objects, so keep it simple.
 
 You don't have to define common fields like `id` or `name` because they are already defined in the parent class.
 Now you can create a new article like so:

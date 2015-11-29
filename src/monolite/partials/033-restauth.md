@@ -7,10 +7,17 @@ Para uses the **AWS Signature Version 4** algorithm for signing API requests. We
 of OAuth because it is less complicated and is already implemented inside the AWS Java SDK, which we have a direct
 dependency. In terms of security, both algorithms are considered very secure so there's no compromise in that aspect.
 
+Para offers two ways of authentication - one for apps using API keys and one for insecure clients (mobile, JS) using JWT.
+Apps authenticated with a secret key have full access to the API. Users authenticated with social login are issued JWT
+tokens and have limited access to the API, for example they can't generate new API keys and they are authorized by
+specific resource permissions (see [Resource permissions](#012-permissions)).
+
+### Full access for apps
+
 In order to make a request to the API you need to have a pair of access and secret keys. Access keys are part of the
 HTTP request and secret keys are used for signing only and must be kept safe.
 
-We recommend that you choose one of our API client libraries to handle the authentication for you. 
+We recommend that you choose one of our API client libraries to handle the authentication for you.
 
 ### First-time setup
 
@@ -40,3 +47,50 @@ If you wish to disable all API functions completely, set the config parameter `p
 
 > For more information see the [AWS documentation](http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 for REST authentication.
+
+### JSON Web Tokens - limited access for users
+
+Para apps can create new users and grant them specific permissions by implementing social login (identity federation).
+First a user authenticates with their social identity provider such as Facebook, then comes back to Para with the
+`access_token` and is issued a new JSON Web Token that allows him to access the REST API.
+
+JWT tokens are a new standard for authentication which is similar to cookies but is more secure, compact and stateless.
+An encoded token looks like this:
+
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG
+4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
+```
+When decoded the token looks like this:
+
+```js
+// HEADER:
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+// PAYLOAD:
+{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "admin": true
+}
+```
+
+To authenticate with users with social login use the Para client:
+
+```java
+paraClient.signIn(String provider, String providerToken);
+```
+
+For example calling `paraClient.signIn("facebook", "facebook_access_token")` should return a new `User` object and would
+store the JWT token in memory. To get an access token from Facebook, use their JavaScript SDK.
+
+To sign out and clear the JWT access token use:
+
+```java
+paraClient.signOut();
+```
+
+Tokens can also be revoked by calling `paraClient.revokeAllTokens()` but this only works for authenticated users.
+The Para client takes care of refreshing the JWT tokens every hour and by default all tokens are valid for a week.

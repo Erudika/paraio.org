@@ -3,7 +3,8 @@ title: The ParaObject interface
 category: Getting Started
 ---
 
-Para allows you to have plain objects like this:
+All domain classes in Para implement the `ParaObject` interface which gives objects basic common properties like
+`id`, `timestamp`, `name`, etc. Let's say you have a plain old Java object like this:
 
 ```java
 class User {
@@ -12,7 +13,8 @@ class User {
 }
 ```
 
-and turn them into persistable Para objects just by adding one annotation and extending the core Para class `ParaObject`:
+and you want to turn it into persistable Para objects. You can do it by just adding one annotation and
+implementing `ParaObject`:
 
 ```java
 class User implements ParaObject {
@@ -38,5 +40,3 @@ Once the objects is created and persisted we can search for it like this:
 // returns a list of users found
 List<User> users = Para.getSearch().findQuery(u.getType(), "freeman");
 ```
-
-**Note:** Since 1.7, the `PObject` superclass is removed. Your classes no longer need to extend that parent class.
