@@ -17,6 +17,8 @@ boolean grantResourcePermission(String subjectid, String resourceName, EnumSet<A
 boolean revokeResourcePermission(String subjectid, String resourceName);
 ```
 
+These methods allow the use of wildcards `*` for `subjectid` and `resourceName` arguments.
+
 **Scenario 1:** Give all users permission to `READ` - this allows them to make `GET` requests:
 
 ```java
@@ -32,9 +34,11 @@ app.grantResourcePermission("1", "_batch", AllowedMethods.WRITE);
 **Scenario 3:** Give user `2` permission ot only make `POST` requests:
 
 ```java
-app.grantResourcePermission("2", "_batch", "POST");
+app.grantResourcePermission("2", "_batch", AllowedMethods.POST);
 ```
 Note that all users still have the `READ` permissions because permissions are compounded.
+However, when `grantResourcePermission()` is called again on the same subject and resource, the new
+permission will overwrite the old one.
 
 **Scenario 4:** Revoke all permissions for user `1` except `READ`:
 
