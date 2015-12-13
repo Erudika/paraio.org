@@ -87,6 +87,9 @@ Supported providers are `facebook`, `google`, `twitter`, `github`, `linkedin`.
 For example calling `paraClient.signIn("facebook", "facebook_access_token")` should return a new `User` object and would
 store the JWT token in memory. To get an access token from Facebook, use their JavaScript SDK.
 
+After you call `paraClient.signIn()` and the request succeeds, the client switches to token-based access to the API.
+This is different from the normal operation using access and secret keys. Tokens can only authenticate users.
+
 To sign out and clear the JWT access token use:
 
 ```java
