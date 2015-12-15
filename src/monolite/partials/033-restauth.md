@@ -71,9 +71,12 @@ When decoded the token looks like this:
 }
 // PAYLOAD:
 {
-  "sub": "1234567890",
-  "name": "John Doe",
-  "admin": true
+  "sub": "587408205806571520",
+  "appid": "app:para",
+	"refresh": 1450137214490,
+  "nbf": 1450133614,
+	"exp": 1450738414,
+	"iat": 1450133614
 }
 ```
 
