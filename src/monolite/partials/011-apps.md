@@ -1,6 +1,6 @@
 ---
 title: Apps
-category: REST API
+category: Core classes
 ---
 
 Apps allow you to have separate namespaces and data models for different purposes. Each app lives in its own separate
