@@ -23,8 +23,6 @@ through the REST API. Here's a simple diagram of that architecture:
 +----+-------------+-----------+------+
 |        REST API over HTTPS          |
 +----+-------------+-----------+------+
-     |             |           |
-+----+-------------+-----------+------+
 |       Cluster Load Balancer         |
 +------+------+------+------+---------+
                    |
@@ -51,4 +49,4 @@ GlassFish, for example.
 **Note:** We recommend deploying the Para at the root context `/`. You can do this by renaming the WAR file
 to `ROOT.war` before deploying. See [the Config](#005-config) for more details about configuring your deployment.
 
-> Go over to the [releases page](https://github.com/erudika/para/releases) to get the latest WAR package.
+> Check the [releases page](https://github.com/erudika/para/releases) for the latest WAR package.
