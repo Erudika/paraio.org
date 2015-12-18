@@ -20,19 +20,19 @@ Adding Para to your Java or JVM based application allows you to build a distribu
            | Load balancer |
            +-------+-------+
                    |
-     +---------------------------+
+     +------------------ ... ----+
      |             |             |
 +----+----+   +----+----+   +----+----+
-| Para App|   | Para App|   | Para App|
-+---------+   +---------+   +---------+
-| Cache   |   | Cache   |   | Cache   |
-+---------+   +---------+   +---------+
-| Search  |   | Search  |   | Search  |
-| and DB  |   | and DB  |   | and DB  |
-| nodes   |   | nodes   |   | nodes   |
-+---------+   +---------+   +---------+
+| Your app|   | Your app|   | Your app|
++---------+   +---------+   +---------+ -
+| Cache   |   | Cache   |   | Cache   |  \
++---------+   +---------+   +---------+   \
+| Search  |   | Search  |   | Search  |    } Para
++---------+   +---------+   +---------+   /
+| Database|   | Database|   | Database|  /
++---------+   +---------+   +---------+ -
 
-  Node 1        Node 2        Node N
+  Node 1        Node 2   ...  Node N
 </pre>
 
 ### Javadocs
