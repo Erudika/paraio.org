@@ -48,7 +48,7 @@ If you wish to disable all API functions completely, set the config parameter `p
 > For more information see the [AWS documentation](http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 for REST authentication.
 
-### JSON Web Tokens - limited access for users
+### JSON Web Tokens - client access based on permissions
 
 Para apps can create new users and grant them specific permissions by implementing social login (identity federation).
 First a user authenticates with their social identity provider such as Facebook, then comes back to Para with the
