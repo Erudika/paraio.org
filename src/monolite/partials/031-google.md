@@ -3,6 +3,9 @@ title: Google+ support
 category: Security
 ---
 
+**Update:** From v1.17.1 we support an easier way to login with Google [through the API](#034-api-jwt-signin).
+Authentication is implemented using JWT tokens instead of cookies.
+
 Support for logging in with Google+ is implemented by the `GoogleAuthFilter`. This filter responds to requests at
 `/google_auth`.
 

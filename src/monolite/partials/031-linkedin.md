@@ -3,6 +3,9 @@ title: LinkedIn support
 category: Security
 ---
 
+**Update:** From v1.17.1 we support an easier way to login with LinkedIn [through the API](#034-api-jwt-signin).
+Authentication is implemented using JWT tokens instead of cookies.
+
 Support for logging in with LinkedIn is implemented by the `LinkedInAuthFilter`. This filter responds to requests at
 `/linkedin_auth`.
 

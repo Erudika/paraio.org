@@ -3,6 +3,9 @@ title: Twitter support
 category: Security
 ---
 
+**Update:** From v1.17.1 we support an easier way to login with Twitter [through the API](#034-api-jwt-signin).
+Authentication is implemented using JWT tokens instead of cookies.
+
 Support for logging in with Twitter is implemented by the `TwitterAuthFilter`. This filter responds to requests at
 `/twitter_auth`.
 

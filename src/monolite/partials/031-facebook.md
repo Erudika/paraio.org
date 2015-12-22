@@ -3,6 +3,9 @@ title: Facebook support
 category: Security
 ---
 
+**Update:** From v1.17.1 we support an easier way to login with Facebook [through the API](#034-api-jwt-signin).
+Authentication is implemented using JWT tokens instead of cookies.
+
 Support for logging in with Facebook is implemented by the `FacebookAuthFilter`. This filter responds to requests at
 `/facebook_auth`.
 

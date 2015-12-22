@@ -16,7 +16,14 @@ using one of the SDKs from Facebook, Google, Twitter, etc.
 
 - **body** - a JSON object containing `appid`, `provider` and `token` properties (required).
 
-Request body example: `{ "appid": "app:myapp", "provider": "facebook", "token": "eyJhbGciOiJIUzI1NiJ9.eWIiO..." }`
+Request body example:
+```
+{
+	"appid": "app:myapp",
+	"provider": "facebook",
+	"token": "eyJhbGciOiJIUzI1NiJ9.eWIiO..."
+}
+```
 The `appid` is the id of your own app that you're trying to sing in to. The `provider` value is a string and can be
 one of `facebook`, `google`, `twitter`, `github`, `linkedin`.
 
