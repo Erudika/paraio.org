@@ -42,9 +42,9 @@ through the REST API. Here's a simple diagram of that architecture:
 
 </pre>
 
+## Deploying to a servlet container
 
-Another option is to get the WAR file and deploy it to your favorite servlet container like Tomcat or
-GlassFish, for example.
+Another option is to deploy the WAR file to a servlet container like Tomcat or GlassFish, for example.
 
 **Note:** We recommend deploying the Para at the root context `/`. You can do this by renaming the WAR file
 to `ROOT.war` before deploying. See [the Config](#005-config) for more details about configuring your deployment.
