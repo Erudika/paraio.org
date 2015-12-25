@@ -3,7 +3,7 @@ title: Introduction
 ---
 
 Para was created because we needed a simple and flexible back-end service to support our front-end work.
-We wanted to have a system that allowed us to persist objects easily to anything - RDBMS, NoSQL data store or memory.
+We wanted to have a system that allowed us to persist objects easily to anything - RDBMS and NoSQL databases.
 Our second requirement was full text search. We wanted to be able to find any persisted object quickly.
 
 There are two ways to use Para:
