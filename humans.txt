@@ -9,15 +9,14 @@
 
 # TEAM
 
-    Name: Alexander Bogdanovski - lead developer
-    Site: https://github.com/albogdano
+    Alexander Bogdanovski -- lead developer
     Twitter: albogdano
 
 # THANKS
 
     Everyone who contributed to this project,
     Elasticsearch, Hazelcast creators,
-    and the cool people on Twitter - buhtum, valentinmihov
+    and the cool people on Twitter esp. buhtum (Svilen)
 
 # TECHNOLOGY COLOPHON
 
