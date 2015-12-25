@@ -13,6 +13,15 @@ To load your own configuration you need to set one of the following system prope
 You need to set these properties before calling `Para.initialize()` or at the startup of your servlet container.
 If you have a file called `application.conf` or `application.json` on the classpath, Para will pick it up automatically.
 
+Here's a sample `application.conf` file:
+
+```
+para.env = "embedded"
+para.print_logo = true
+para.security.api_security = true
+para.security.csrf_protection = true
+```
+
 > **Important:** In a production environment, set `para.app_secret_key` to some randomly generated secret string.
 > This is important for securing your server because this secret key is used for signing and verifying authentication tokens.
 
@@ -96,7 +105,7 @@ Here's a list of all configuration properties that can be set in the config file
 	</tbody>
 </table>
 
-All of the above can be overridden with `System.setProperty()` anywhere in your code.
+All of the above can be overridden with `System.setProperty()`. 
 
 > Para uses the excellent Config library by TypeSafe. For more information about how it works
 > see the [README](https://github.com/typesafehub/config/blob/master/README.md).
