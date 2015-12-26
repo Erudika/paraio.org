@@ -18,8 +18,8 @@ class Article implements ParaObject {
 }
 ```
 
-> **Caution:** when defining your custom properties try to stick to basic Java types like maps,
-> strings, numbers, booleans, etc. Complex property objects are **not supported**. This is due to the fact that
+> **Caution:** when defining your custom properties try to stick to basic Java types like `List`, `Map`,
+> `String`, `boolean`, etc. Complex property objects are **not supported**. This is due to the fact that
 > Para uses the `BeanUtils` class to set deserialize properties and it has no clue how to deserialize
 > your complex objects, so keep it simple.
 
