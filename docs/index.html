@@ -284,6 +284,30 @@
 		
 		
 	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
 
 	
 		<li>
@@ -345,7 +369,15 @@
 					
 				
 					
-						<li class=""><a href="#011-validation">Validation</a></li>
+						<li class=""><a href="#011-apps">Apps</a></li>
+					
+				
+					
+						<li class=""><a href="#011-validations">Validations</a></li>
+					
+				
+					
+						<li class=""><a href="#012-permissions">Resource permissions</a></li>
 					
 				
 			</ul>
@@ -517,7 +549,15 @@
 					
 				
 					
-						<li class=""><a href="#034-apps">Apps</a></li>
+						<li class="POST"><a href="#034-api-jwt-signin">Sign in (JWT)</a></li>
+					
+				
+					
+						<li class="GET"><a href="#035-api-jwt-refresh">Token refresh (JWT)</a></li>
+					
+				
+					
+						<li class="DELETE"><a href="#035-api-jwt-revoke">Revoke all tokens (JWT)</a></li>
 					
 				
 					
@@ -605,6 +645,22 @@
 					
 				
 					
+						<li class="GET"><a href="#050-api-permissions-check">Check permission</a></li>
+					
+				
+					
+						<li class="GET"><a href="#050-api-permissions-get">List permissions</a></li>
+					
+				
+					
+						<li class="PUT"><a href="#050-api-permissions-grant">Grant permissions</a></li>
+					
+				
+					
+						<li class="DELETE"><a href="#050-api-permissions-revoke">Revoke permissions</a></li>
+					
+				
+					
 						<li class="GET"><a href="#050-api-setup">Initial setup</a></li>
 					
 				
@@ -634,7 +690,7 @@
 						
 						<section class="body img-rounded">
 							<p>Para was created because we needed a simple and flexible back-end service to support our front-end work.
-We wanted to have a system that allowed us to persist objects easily to anything - RDBMS, NoSQL data store or memory.
+We wanted to have a system that allowed us to persist objects easily to anything - RDBMS and NoSQL databases.
 Our second requirement was full text search. We wanted to be able to find any persisted object quickly.</p>
 <p>There are two ways to use Para:</p>
 <ul>
@@ -647,8 +703,8 @@ many different clients and applications. This is done through Para’s simple RE
 persistable and searchable. You can still keep the RESTful API feature or turn it off completely.</p>
 <h3 id="quick-start">Quick start</h3>
 <ol>
-<li><a href="https://github.com/erudika/para/releases">Download the JAR</a></li>
-<li>Run it with <code>java -jar para-server-{VERSION}.jar</code> - Para is now running in embedded mode, suitable for development.</li>
+<li><a href="https://github.com/erudika/para/releases">Download the WAR</a></li>
+<li>Run it with <code>java -jar para-war-{VERSION}.war</code> - Para is now running in embedded mode, suitable for development.</li>
 <li>Call <code>curl localhost:8080/v1/_setup</code> to get the access and secret keys (give it a few seconds to initialize)</li>
 <li>Start using the RESTful API directly or use one of the provided client libraries below.</li>
 </ol>
@@ -706,39 +762,46 @@ pc.me();
 							<h2>Standalone mode</h2>
 						
 						<section class="body img-rounded">
-							<p>There are two ways to run Para as a standalone server. The first one is by downloading the “fat” JAR file and executing it:</p>
-<pre><code class="lang-bash">java -jar para-X.Y.Z.jar
+							<p>There are two ways to run Para as a standalone server. The first one is by downloading the executable WAR file and executing it:</p>
+<pre><code class="lang-bash">java -jar para-X.Y.Z.war
 </code></pre>
-<p>The JAR contains an embedded Jetty server and bundles together all the necessary libraries. This is the simplest and
+<p>The WAR contains an embedded Jetty server and bundles together all the necessary libraries. This is the simplest and
 recommended way to run Para.</p>
-<p>This mode allows you to build a distributed cluster of Para nodes and connect to it through the REST API.
-Here’s a simple diagram of that architecture:</p>
+<p>Running a standalone server allows you to build a cluster of distributed Para nodes and connect to it
+through the REST API. Here’s a simple diagram of that architecture:</p>
 <pre>
-+----------+ +----------+ +----------+
-|API Client| |API Client| |API Client|
-+----+-----+ +----+-----+ +----+-----+
-     |            |            |
-+----+------------+------------+-----+
-|          REST OVER HTTPS           |
-+----+------------+------------+-----+
-     |            |            |
-+----+------------+------------+-----+
-|            Para Cluster            |
-+------+------+------+------+--------+
-|      |      |      |      |        |
-| Para | Para | Para | Para |  ...   |
-| Node | Node | Node | Node |        |
-|      |      |      |      |        |
-+------+------+------+------+--------+
++----------+ +----------+ +-----------+
+|API Client| |API Client| |API Client |
++----+-----+ +-----+----+ +----+------+
+     |             |           |
++----+-------------+-----------+------+
+|        REST API over HTTPS          |
++----+-------------+-----------+------+
+|       Cluster Load Balancer         |
++------+------+------+------+---------+
+                   |
+     +------------------ ... ----+
+     |             |             |
++----+----+   +----+----+   +----+----+
+| Your app|   | Your app|   | Your app|
++---------+   +---------+   +---------+
+| Cache   |   | Cache   |   | Cache   |  \
++---------+   +---------+   +---------+   \
+| Search  |   | Search  |   | Search  |    } Para
++---------+   +---------+   +---------+   /
+| Database|   | Database|   | Database|  /
++---------+   +---------+   +---------+
+
+  Node 1        Node 2   ...  Node N
+
 </pre>
 
-
-<p>The second option is to get the WAR file and deploy it to your favorite servlet container like Tomcat or
-GlassFish, for example.</p>
+<h2 id="deploying-to-a-servlet-container">Deploying to a servlet container</h2>
+<p>Another option is to deploy the WAR file to a servlet container like Tomcat or GlassFish, for example.</p>
 <p><strong>Note:</strong> We recommend deploying the Para at the root context <code>/</code>. You can do this by renaming the WAR file
 to <code>ROOT.war</code> before deploying. See <a href="#005-config">the Config</a> for more details about configuring your deployment.</p>
 <blockquote>
-<p>Go over to the <a href="https://github.com/erudika/para/releases">releases page</a> to get the latest JAR or WAR packages.</p>
+<p>Check the <a href="https://github.com/erudika/para/releases">releases page</a> for the latest WAR package.</p>
 </blockquote>
 
 						</section>
@@ -759,27 +822,6 @@ to <code>ROOT.war</code> before deploying. See <a href="#005-config">the Config<
   <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span>{VERSION}<span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">dependency</span>&gt;</span>
 </code></pre>
-<p>Adding Para to your Java or JVM based application allows you to build a distributed architecture like this:</p>
-<pre>
-           +---------------+
-           | Load balancer |
-           +-------+-------+
-                   |
-     +---------------------------+
-     |             |             |
-+----+----+   +----+----+   +----+----+
-| Para App|   | Para App|   | Para App|
-+---------+   +---------+   +---------+
-| Cache   |   | Cache   |   | Cache   |
-+---------+   +---------+   +---------+
-| Search  |   | Search  |   | Search  |
-| and DB  |   | and DB  |   | and DB  |
-| nodes   |   | nodes   |   | nodes   |
-+---------+   +---------+   +---------+
-
-  Node 1        Node 2        Node N
-</pre>
-
 <h3 id="javadocs">Javadocs</h3>
 <p><a href="/javadocs-core/" class="btn btn-default">para-core</a> &nbsp;
 <a href="/javadocs-server/" class="btn btn-default">para-server</a> &nbsp;
@@ -796,13 +838,15 @@ to <code>ROOT.war</code> before deploying. See <a href="#005-config">the Config<
 							<h2>The ParaObject interface</h2>
 						
 						<section class="body img-rounded">
-							<p>Para allows you to have plain objects like this:</p>
+							<p>All domain classes in Para implement the <code>ParaObject</code> interface which gives objects basic common properties like
+<code>id</code>, <code>timestamp</code>, <code>name</code>, etc. Let’s say you have a plain old Java object like this:</p>
 <pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>{
     <span class="hljs-keyword">public</span> String name;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> age;
 }
 </code></pre>
-<p>and turn them into persistable Para objects just by adding one annotation and extending the core Para class <code>ParaObject</code>:</p>
+<p>and you want to turn it into persistable Para objects. You can do it by just adding one annotation and
+implementing <code>ParaObject</code>:</p>
 <pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ParaObject</span> </span>{
     <span class="hljs-annotation">@Stored</span> <span class="hljs-keyword">public</span> String name;
     <span class="hljs-annotation">@Stored</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> age;
@@ -820,7 +864,6 @@ String id = u.create();
 <pre><code class="lang-java"><span class="hljs-comment">// returns a list of users found</span>
 List&lt;User&gt; users = Para.getSearch().findQuery(u.getType(), <span class="hljs-string">"freeman"</span>);
 </code></pre>
-<p><strong>Note:</strong> Since 1.7, the <code>PObject</code> superclass is removed. Your classes no longer need to extend that parent class.</p>
 
 						</section>
 					</article>
@@ -836,12 +879,21 @@ List&lt;User&gt; users = Para.getSearch().findQuery(u.getType(), <span class="hl
 							<p>Once deployed, Para will initialize itself by loading the default configuration file <code>reference.conf</code>.
 To load your own configuration you need to set one of the following system properties:</p>
 <ul>
-<li><code>config.resource</code> specifies a resource name - not a basename, i.e. application.conf not application</li>
-<li><code>config.file</code> specifies a filesystem path, again it should include the extension, not be a basename</li>
+<li><code>config.resource</code> specifies a resource name - not a basename, i.e. ‘application.conf’ and not ‘application’</li>
+<li><code>config.file</code> specifies a filesystem path, again it should include the file extension</li>
 <li><code>config.url</code> specifies the URL from which to load the config file</li>
 </ul>
 <p>You need to set these properties before calling <code>Para.initialize()</code> or at the startup of your servlet container.
 If you have a file called <code>application.conf</code> or <code>application.json</code> on the classpath, Para will pick it up automatically.</p>
+<p>Here’s a sample <code>application.conf</code> file:</p>
+<pre><code>para.env = <span class="hljs-string">"embedded"</span>
+para.print_logo = <span class="hljs-literal">true</span>
+para.security.api_security = <span class="hljs-literal">true</span>
+para.security.csrf_protection = <span class="hljs-literal">true</span>
+</code></pre><blockquote>
+<p><strong>Important:</strong> In a production environment, set <code>para.app_secret_key</code> to some randomly generated secret string.
+This is important for securing your server because this secret key is used for signing and verifying authentication tokens.</p>
+</blockquote>
 <p>Here’s a list of all configuration properties that can be set in the config file:</p>
 <table class="table table-striped">
     <thead>
@@ -859,6 +911,14 @@ If you have a file called <code>application.conf</code> or <code>application.jso
         <tr><td><code>para.aws_region</code>                        </td><td><code>eu-west-1</code></td><td>String</td></tr>
         <tr><td><code>para.fb_app_id</code>                        </td><td>-</td><td>String</td></tr>
         <tr><td><code>para.fb_secret</code>                        </td><td>-</td><td>String</td></tr>
+        <tr><td><code>para.gp_app_id</code>                        </td><td>-</td><td>String</td></tr>
+        <tr><td><code>para.gp_secret</code>                        </td><td>-</td><td>String</td></tr>
+        <tr><td><code>para.in_app_id</code>                        </td><td>-</td><td>String</td></tr>
+        <tr><td><code>para.in_secret</code>                        </td><td>-</td><td>String</td></tr>
+        <tr><td><code>para.tw_app_id</code>                        </td><td>-</td><td>String</td></tr>
+        <tr><td><code>para.tw_secret</code>                        </td><td>-</td><td>String</td></tr>
+        <tr><td><code>para.gh_app_id</code>                        </td><td>-</td><td>String</td></tr>
+        <tr><td><code>para.gh_secret</code>                        </td><td>-</td><td>String</td></tr>
         <tr><td><code>para.openx_api_key</code>                </td><td>-</td><td>String</td></tr>
         <tr><td><code>para.gmaps_api_key</code>                </td><td>-</td><td>String</td></tr>
         <tr><td><code>para.admin_ident</code>                    </td><td>-</td><td>String</td></tr>
@@ -870,6 +930,8 @@ If you have a file called <code>application.conf</code> or <code>application.jso
         <tr><td><code>para.app_secret_key</code>                </td><td><code>b18c3f7e85b5c35d81ef6efce4870709</code></td><td>String</td></tr>
         <tr><td><code>para.core_package_name</code>        </td><td>-</td><td>String</td></tr>
         <tr><td><code>para.session_timeout</code>            </td><td><code>24 * 60 * 60</code> sec.</td><td>Long</td></tr>
+        <tr><td><code>para.jwt_expires_after</code>        </td><td><code>7 * 24 * 60 * 60</code> sec.</td><td>Long</td></tr>
+        <tr><td><code>para.jwt_refresh_interval</code>    </td><td><code>60 * 60</code> sec.</td><td>Long</td></tr>
         <tr><td><code>para.request_expires_after</code></td><td><code>15 * 60</code> sec.</td><td>Long</td></tr>
         <tr><td><code>para.vote_expires_after</code>        </td><td><code>30 * 24 * 60 * 60</code> sec.</td><td>Long</td></tr>
         <tr><td><code>para.vote_locked_after</code>        </td><td><code>30</code> sec.</td><td>Long</td></tr>
@@ -911,7 +973,7 @@ If you have a file called <code>application.conf</code> or <code>application.jso
     </tbody>
 </table>
 
-<p>All of the above can be overridden with <code>System.setProperty()</code> anywhere in your code.</p>
+<p>All of the above can be overridden with <code>System.setProperty()</code>. </p>
 <blockquote>
 <p>Para uses the excellent Config library by TypeSafe. For more information about how it works
 see the <a href="https://github.com/typesafehub/config/blob/master/README.md">README</a>.</p>
@@ -1070,7 +1132,7 @@ of your custom resource handler class. On startup Para will load these and regis
 						
 						<section class="body img-rounded">
 							<p>In the package <code>para.core</code> there are a number of core domain classes that are used throughout Para.
-These are common classes like <code>User</code> and <code>Tag</code> which you can use in you application directly or extend them.</p>
+These are common classes like <code>User</code> and <code>App</code> which you can use in you application directly or extend them.</p>
 <p>Below is a list of classes and their descriptions. All of these implement <code>ParaObject</code> which is the core interface.
 It contains all core fields, getters, setters and also implements basic functionality like voting, linking and tagging.</p>
 <table class="table table-striped">
@@ -1104,14 +1166,21 @@ It contains all core fields, getters, setters and also implements basic function
 						<section class="body img-rounded">
 							<p>Let’s say you have a class <code>Article</code> in your application that you wish to persist. You first implement the <code>ParaObject</code>
 interface, then add a few data fields to it. Implementing the interface is trivial as the basic functionality of
-the required methods is already implemented in the <code>CoreUtils</code>. </p>
+the required methods is already implemented in the <code>CoreUtils</code>.</p>
 <p>You need to specify which fields you want to be saved by adding the
 <code>@Stored</code> annotation.</p>
 <pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Article</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ParaObject</span> </span>{
     <span class="hljs-annotation">@Stored</span> <span class="hljs-keyword">private</span> String title;
     <span class="hljs-annotation">@Stored</span> <span class="hljs-keyword">private</span> String text;
+    <span class="hljs-annotation">@Stored</span> <span class="hljs-keyword">private</span> Map&lt;?, ?&gt; someCustomProperty;
 }
 </code></pre>
+<blockquote>
+<p><strong>Caution:</strong> when defining your custom properties try to stick to basic Java types like <code>List</code>, <code>Map</code>,
+<code>String</code>, <code>boolean</code>, etc. Complex property objects are <strong>not supported</strong>. This is due to the fact that
+Para uses the <code>BeanUtils</code> class to set deserialize properties and it has no clue how to deserialize
+your complex objects, so keep it simple.</p>
+</blockquote>
 <p>You don’t have to define common fields like <code>id</code> or <code>name</code> because they are already defined in the parent class.
 Now you can create a new article like so:</p>
 <pre><code class="lang-java">Article a = <span class="hljs-keyword">new</span> Article();
@@ -1173,10 +1242,34 @@ they will be skipped.</p>
 					
 				
 					
-					<a id="011-validation" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<a id="011-apps" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
 					<article class=" img-rounded">
 						
-							<h2>Validation</h2>
+							<h2>Apps</h2>
+						
+						<section class="body img-rounded">
+							<p>Apps allow you to have separate namespaces and data models for different purposes. Each app lives in its own separate
+database and is independent from apps.</p>
+<p>Apps have a unique <code>appid</code> key which is used to identify them. They also have a set of data types. Data types can be
+created on-the-fly, for example you can create a type called “article” and it will have its own API URL at
+<code>/v1/article</code></p>
+<p>Initially Para creates a default root app with an <code>id</code> equal to the value of the <code>para.app_name</code>
+configuration parameter. If you need to have only one app then you don’t need to do anything. If you want to have
+multiple apps then you can simply create them with <code>appid</code> equal to the root app’s <code>id</code>.</p>
+<p>Currently Para creates separate database tables for all apps and uses a single shared search index unless an app has
+<code>shared = false</code>. If this is the case then a separate search index is created for that app. It is possible to make
+Para use a single database table for all apps by prefixing <code>id</code> fields (e.g. <code>app1_id1</code>-&gt;<code>data</code>) but this is not yet
+implemented.</p>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="011-validations" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class=" img-rounded">
+						
+							<h2>Validations</h2>
 						
 						<section class="body img-rounded">
 							<p>Para supports JSR-303 validation annotations and also allows you to define validation constraints in two different ways.
@@ -1276,6 +1369,53 @@ easily be integrated with other client-side validators.</p>
 
 <p>A <code>DAO</code> object only deals with storing objects in a database. It is not concerned with relationships between objects or
 constraint validation.</p>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="012-permissions" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class=" img-rounded">
+						
+							<h2>Resource permissions</h2>
+						
+						<section class="body img-rounded">
+							<p>When creating new users, we usually want to specify which resources they can access. This is why we added a few methods
+for adding and removing resource permissions. Each app can have any number of users and each user can have a set of
+permissions for a given resource. Resources are identified by name, for example the <code>_batch</code> resource would represent
+requests going to <code>/v1/_batch</code>.</p>
+<p>Let’s look at a few example scenarios where we give users permission to access the <code>_batch</code>. We have two users - user
+one with <code>id = 1</code> and user two with <code>id = 2</code>. We’ll use the following methods:</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">grantResourcePermission</span><span class="hljs-params">(String subjectid, String resourceName, EnumSet&lt;AllowedMethods&gt; permission)</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">revokeResourcePermission</span><span class="hljs-params">(String subjectid, String resourceName)</span></span>;
+</code></pre>
+<p>These methods allow the use of wildcards <code>*</code> for <code>subjectid</code> and <code>resourceName</code> arguments.</p>
+<p><strong>Scenario 1:</strong> Give all users permission to <code>READ</code> - this allows them to make <code>GET</code> requests:</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"_batch"</span>, AllowedMethods.READ);
+</code></pre>
+<p><strong>Scenario 2:</strong> Give user <code>1</code> <code>WRITE</code> permissions - allow HTTP methods <code>POST, PUT, PATCH, DELETE</code>:</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"1"</span>, <span class="hljs-string">"_batch"</span>, AllowedMethods.WRITE);
+</code></pre>
+<p><strong>Scenario 3:</strong> Give user <code>2</code> permission ot only make <code>POST</code> requests:</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"2"</span>, <span class="hljs-string">"_batch"</span>, AllowedMethods.POST);
+</code></pre>
+<p>Note that all users still have the <code>READ</code> permissions because permissions are compounded.
+However, when <code>grantResourcePermission()</code> is called again on the same subject and resource, the new
+permission will overwrite the old one.</p>
+<p><strong>Scenario 4:</strong> Revoke all permissions for user <code>1</code> except <code>READ</code>:</p>
+<pre><code class="lang-java">app.revokeAllResourcePermissions(<span class="hljs-string">"1"</span>);
+</code></pre>
+<p>To get all permissions for both users call:</p>
+<pre><code class="lang-java">app.getAllResourcePermissions(<span class="hljs-string">"1"</span>, <span class="hljs-string">"2"</span>);
+</code></pre>
+<p>The default initial policy for all apps is “deny all” which means that new users won’t be able to access any resources
+unless given explicit permission to do so.</p>
+<p>To check if user <code>1</code> is allowed to access a particular resource call:</p>
+<pre><code class="lang-java"><span class="hljs-comment">// returns 'false'</span>
+app.isAllowedTo(<span class="hljs-string">"1"</span>, <span class="hljs-string">"admin"</span>, <span class="hljs-string">"GET"</span>);
+</code></pre>
 
 						</section>
 					</article>
@@ -1387,6 +1527,7 @@ class.</p>
     <tbody>
         <tr><td><code>para.es.async_enabled</code></td><td> Asynchronous operation when indexing/unindexing. Defaults to <code>false</code>.</td></tr>
         <tr><td><code>para.es.cors_enabled</code></td><td> Enable CORS for HTTP requests to Elasticsearch. Default is <code>false</code> only if running in production.</td></tr>
+        <tr><td><code>para.es.cors_allow_origin</code></td><td> CORS ‘Allow-Origin’ - which hosts are allowed to make HTTP requests to Elasticsearch. Default is <code>localhost</code> only.</td></tr>
         <tr><td><code>para.es.discovery_type</code></td><td> Discovery mechanism when running in production. Default is <code>ec2</code>.</td></tr>
         <tr><td><code>para.es.discovery_group</code></td><td> Security group for cloud discovery of nodes. Default is <code>elasticsearch</code>.</td></tr>
         <tr><td><code>para.es.local_node</code></td><td> Run locally on the JVM. Default is <code>true</code>.</td></tr>
@@ -1909,7 +2050,9 @@ either logged in or registered.</p>
 							<h2>Facebook support</h2>
 						
 						<section class="body img-rounded">
-							<p>Support for logging in with Facebook is implemented by the <code>FacebookAuthFilter</code>. This filter responds to requests at
+							<p><strong>Update:</strong> From v1.17.1 we support an easier way to login with Facebook <a href="#034-api-jwt-signin">through the API</a>.
+Authentication is implemented using JWT tokens instead of cookies.</p>
+<p>Support for logging in with Facebook is implemented by the <code>FacebookAuthFilter</code>. This filter responds to requests at
 <code>/facebook_auth</code>.</p>
 <p>To initiate a login with Facebook just redirect the user to the Facebook OAuth endpoint
 <code>https://www.facebook.com/dialog/oauth</code>. Pass the parameter <code>redirect_uri=/facebook_auth</code> so Para
@@ -1936,7 +2079,9 @@ can handle the response from Facebook.</p>
 							<h2>GitHub support</h2>
 						
 						<section class="body img-rounded">
-							<p>Support for logging in with GitHub is implemented by the <code>GitHubAuthFilter</code>. This filter responds to requests at
+							<p><strong>Update:</strong> From v1.17.1 we support an easier way to login with GitHub <a href="#034-api-jwt-signin">through the API</a>.
+Authentication is implemented using JWT tokens instead of cookies.</p>
+<p>Support for logging in with GitHub is implemented by the <code>GitHubAuthFilter</code>. This filter responds to requests at
 <code>/github_auth</code>.</p>
 <p>To initiate a login with GitHub just redirect the user to the GitHub OAuth endpoint
 <code>https://github.com/login/oauth/authorize</code>. Pass the parameter <code>redirect_uri=/github_auth</code> so Para
@@ -1963,7 +2108,9 @@ can handle the response from GitHub.</p>
 							<h2>Google+ support</h2>
 						
 						<section class="body img-rounded">
-							<p>Support for logging in with Google+ is implemented by the <code>GoogleAuthFilter</code>. This filter responds to requests at
+							<p><strong>Update:</strong> From v1.17.1 we support an easier way to login with Google <a href="#034-api-jwt-signin">through the API</a>.
+Authentication is implemented using JWT tokens instead of cookies.</p>
+<p>Support for logging in with Google+ is implemented by the <code>GoogleAuthFilter</code>. This filter responds to requests at
 <code>/google_auth</code>.</p>
 <p>To initiate a login with Google+ just redirect the user to the Google OAuth endpoint
 <code>https://accounts.google.com/o/oauth2/auth</code>. Pass the parameter <code>redirect_uri=/google_auth</code> so Para
@@ -1991,7 +2138,9 @@ can handle the response from Google+.</p>
 							<h2>LinkedIn support</h2>
 						
 						<section class="body img-rounded">
-							<p>Support for logging in with LinkedIn is implemented by the <code>LinkedInAuthFilter</code>. This filter responds to requests at
+							<p><strong>Update:</strong> From v1.17.1 we support an easier way to login with LinkedIn <a href="#034-api-jwt-signin">through the API</a>.
+Authentication is implemented using JWT tokens instead of cookies.</p>
+<p>Support for logging in with LinkedIn is implemented by the <code>LinkedInAuthFilter</code>. This filter responds to requests at
 <code>/linkedin_auth</code>.</p>
 <p>To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint
 <code>https://www.linkedin.com/uas/oauth2/authorization</code>. Pass the parameter <code>redirect_uri=/linkedin_auth</code> so Para
@@ -2018,7 +2167,9 @@ can handle the response from LinkedIn.</p>
 							<h2>Twitter support</h2>
 						
 						<section class="body img-rounded">
-							<p>Support for logging in with Twitter is implemented by the <code>TwitterAuthFilter</code>. This filter responds to requests at
+							<p><strong>Update:</strong> From v1.17.1 we support an easier way to login with Twitter <a href="#034-api-jwt-signin">through the API</a>.
+Authentication is implemented using JWT tokens instead of cookies.</p>
+<p>Support for logging in with Twitter is implemented by the <code>TwitterAuthFilter</code>. This filter responds to requests at
 <code>/twitter_auth</code>.</p>
 <p>To initiate a login with Twitter just redirect the user to the <code>/twitter_auth</code>. This will redirect the user to Twitter
 for authentication.</p>
@@ -2090,9 +2241,14 @@ like <code>POST /protected/ping</code> and the server will return the token as c
 							<p>Para uses the <strong>AWS Signature Version 4</strong> algorithm for signing API requests. We chose this algorithm instead
 of OAuth because it is less complicated and is already implemented inside the AWS Java SDK, which we have a direct
 dependency. In terms of security, both algorithms are considered very secure so there’s no compromise in that aspect.</p>
+<p>Para offers two ways of authentication - one for apps using API keys and one for insecure clients (mobile, JS) using JWT.
+Apps authenticated with a secret key have full access to the API. Users authenticated with social login are issued JWT
+tokens and have limited access to the API, for example they can’t generate new API keys and they are authorized by
+specific resource permissions (see <a href="#012-permissions">Resource permissions</a>).</p>
+<h3 id="full-access-for-apps">Full access for apps</h3>
 <p>In order to make a request to the API you need to have a pair of access and secret keys. Access keys are part of the
 HTTP request and secret keys are used for signing only and must be kept safe.</p>
-<p>We recommend that you choose one of our API client libraries to handle the authentication for you. </p>
+<p>We recommend that you choose one of our API client libraries to handle the authentication for you.</p>
 <h3 id="first-time-setup">First-time setup</h3>
 <p>Call <code>GET /v1/_setup</code> to get your first key pair. Once you do this you will get back a response like:</p>
 <pre><code class="lang-js">{
@@ -2113,31 +2269,231 @@ have their own separate keys (see <a href="#34">Apps</a>).</p>
 <p>For more information see the <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">AWS documentation</a>
 for REST authentication.</p>
 </blockquote>
+<h3 id="json-web-tokens-client-access-based-on-permissions">JSON Web Tokens - client access based on permissions</h3>
+<p>Para apps can create new users and grant them specific permissions by implementing social login (identity federation).
+First a user authenticates with their social identity provider such as Facebook, then comes back to Para with the
+<code>access_token</code> and is issued a new JSON Web Token that allows him to access the REST API.</p>
+<p>JWT tokens are a new standard for authentication which is similar to cookies but is more secure, compact and stateless.
+An encoded token looks like this:</p>
+<pre><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG
+<span class="hljs-number">4</span>gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
+</code></pre><p>When decoded the token looks like this:</p>
+<pre><code class="lang-js"><span class="hljs-comment">// HEADER:</span>
+{
+  <span class="hljs-string">"alg"</span>: <span class="hljs-string">"HS256"</span>,
+  <span class="hljs-string">"typ"</span>: <span class="hljs-string">"JWT"</span>
+}
+<span class="hljs-comment">// PAYLOAD:</span>
+{
+  <span class="hljs-string">"sub"</span>: <span class="hljs-string">"587408205806571520"</span>,
+  <span class="hljs-string">"appid"</span>: <span class="hljs-string">"app:para"</span>,
+    <span class="hljs-string">"refresh"</span>: <span class="hljs-number">1450137214490</span>,
+  <span class="hljs-string">"nbf"</span>: <span class="hljs-number">1450133614</span>,
+    <span class="hljs-string">"exp"</span>: <span class="hljs-number">1450738414</span>,
+    <span class="hljs-string">"iat"</span>: <span class="hljs-number">1450133614</span>
+}
+</code></pre>
+<p>To authenticate with users with social login use the Para client:</p>
+<pre><code class="lang-java">paraClient.signIn(String provider, String providerToken);
+</code></pre>
+<p>Supported providers are <code>facebook</code>, <code>google</code>, <code>twitter</code>, <code>github</code>, <code>linkedin</code>.</p>
+<p>For example calling <code>paraClient.signIn(&quot;facebook&quot;, &quot;facebook_access_token&quot;)</code> should return a new <code>User</code> object and would
+store the JWT token in memory. To get an access token from Facebook, use their JavaScript SDK.</p>
+<p>After you call <code>paraClient.signIn()</code> and the request succeeds, the client caches the access token and <strong>all subsequent
+requests</strong> to the API will include that token until <code>paraClient.signOut()</code> is called. This is different from the normal
+operation using access and secret keys. Tokens can only authenticate users.</p>
+<p>To get or set access tokens use:</p>
+<pre><code class="lang-java">paraClient.getAccessToken();
+paraClient.setAccessToken(String token);
+</code></pre>
+<p>To sign out and clear the JWT access token use:</p>
+<pre><code class="lang-java">paraClient.signOut();
+</code></pre>
+<p>Tokens can also be revoked by calling <code>paraClient.revokeAllTokens()</code> but this only works for authenticated users.
+The Para client takes care of refreshing the JWT tokens every hour and by default all tokens are valid for a week.</p>
+<blockquote>
+<p><strong>Important:</strong> In a production environment, access to the root app is disabled for API clients for security reasons.
+Setting the configuration property <code>para.clients_can_access_root_app</code> to <code>true</code> would allow clients with access tokens
+to make API calls to the root app. This is useful if you only have one app on the server. This doesn’t affect clients
+that use an <code>accessKey</code> and a <code>secretKey</code>, only those that use access tokens.</p>
+</blockquote>
 
 						</section>
 					</article>
 					
 				
 					
-					<a id="034-apps" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
-					<article class=" img-rounded">
+					<a id="034-api-jwt-signin" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="POST img-rounded">
 						
-							<h2>Apps</h2>
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+										
+										
+										
+											<span class="img-rounded label-info">POST</span>
+										
+										
+										<span class="gray">
+											/jwt_auth 
+										</span>
+									</code>
+									<span class="hidden-xs">Sign in (JWT)</span>
+								</h2>
+							</a>
 						
 						<section class="body img-rounded">
-							<p>Apps allow you to have separate namespaces and data models for different purposes. Each app lives in its own separate
-database and is independent from apps.</p>
-<p>Apps have a unique <code>appid</code> key which is used to identify them. They also have a set of data types. Data types can be
-created on-the-fly, for example you can create a type called “article” and it will have its own API URL at
-<code>/v1/article</code></p>
-<p>Initially Para creates a default root app with an <code>id</code> equal to the value of the <code>para.app_name</code>
-configuration parameter. If you need to have only one app then you don’t need to do anything. If you want to have
-multiple apps then you can simply create them with <code>appid</code> equal to the root app’s <code>id</code>.</p>
-<p>Currently Para creates separate database tables for all apps and uses a single shared search index unless an app has
-<code>shared = false</code>. If this is the case then a separate search index is created for that app. It is possible to make
-Para use a single database table for all apps by prefixing <code>id</code> fields (e.g. <code>app1_id1</code>-&gt;<code>data</code>) but this is not yet
-implemented.</p>
+							<p>Takes an identity provider access token and fetches the user data from that provider. A new <code>User</code> object is created
+if that user doesn’t exist and is then returned. Access tokens are returned upon successful authentication
+using one of the SDKs from Facebook, Google, Twitter, etc.</p>
+<p><strong>Note:</strong> Twitter uses OAuth 1 and gives you a token and a token secret so you must concatenate them first -
+<code>{oauth_token}:{oauth_token_secret}</code>, and then use that as the provider access token.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><strong>body</strong> - a JSON object containing <code>appid</code>, <code>provider</code> and <code>token</code> properties (required).</li>
+</ul>
+<p>Request body example:</p>
+<pre><code>{
+    <span class="hljs-string">"appid"</span>: <span class="hljs-string">"app:myapp"</span>,
+    <span class="hljs-string">"provider"</span>: <span class="hljs-string">"facebook"</span>,
+    <span class="hljs-string">"token"</span>: <span class="hljs-string">"eyJhbGciOiJIUzI1NiJ9.eWIiO..."</span>
+}
+</code></pre><p>The <code>appid</code> is the id of your own app that you’re trying to sing in to. The <code>provider</code> value is a string and can be
+one of <code>facebook</code>, <code>google</code>, <code>twitter</code>, <code>github</code>, <code>linkedin</code>.</p>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object containing JWT properties and a <code>User</code> object. The returned JWT properties are:</p>
+<ul>
+<li><code>access_token</code> - the JWT access token.</li>
+<li><code>expires</code> - a Java timestamp of when the token will expire.</li>
+<li><p><code>refresh</code> - a Java timestamp indicating when API clients should refresh their tokens,
+usually 1 hour after token has been issued.</p>
+</li>
+<li><p><strong>status codes</strong> - <code>200</code>, <code>400</code></p>
+</li>
+</ul>
+<p>Example response:</p>
+<pre><code class="lang-js">{
+    <span class="hljs-string">"jwt"</span>: {
+        <span class="hljs-string">"access_token"</span>: <span class="hljs-string">"eyJhbGciOiJIUzI1NiJ9.eyJ..."</span>,
+        <span class="hljs-string">"expires"</span>: <span class="hljs-number">1450137214490</span>,
+        <span class="hljs-string">"refresh"</span>: <span class="hljs-number">1450137216490</span>
+    },
+    <span class="hljs-string">"user"</span>: {
+        <span class="hljs-string">"id"</span>:<span class="hljs-string">"user1"</span>,
+        <span class="hljs-string">"timestamp"</span>: <span class="hljs-number">1399721289987</span>,
+        <span class="hljs-string">"type"</span>:<span class="hljs-string">"user"</span>,
+        <span class="hljs-string">"appid"</span>:<span class="hljs-string">"myapp"</span>,
+        ...
+    }
+}
+</code></pre>
 
+						</section>
+					</article>
+					
+				
+					
+					<a id="035-api-jwt-refresh" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="GET img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+											<span class="img-rounded label-success">GET</span>
+										
+										
+										
+										
+										
+										<span class="gray">
+											/jwt_auth 
+										</span>
+									</code>
+									<span class="hidden-xs">Token refresh (JWT)</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>Refreshes the access token if and only if the provided token is valid and not expired.
+Tokens should be refreshed periodically in order to keep users logged in for longer periods of time.</p>
+<h3 id="request">Request</h3>
+<p>Request should include an <code>Authorization: Bearer {JWT_TOKEN}</code> header containing a valid access token. (required)
+As an alternative you could provide the token as query parameter instead of a header.</p>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object containing a <strong>new</strong> JWT token and the same <code>User</code> object. The returned JWT properties are:</p>
+<ul>
+<li><code>access_token</code> - the JWT access token.</li>
+<li><code>expires</code> - a Java timestamp of when the token will expire.</li>
+<li><p><code>refresh</code> - a Java timestamp indicating when API clients should refresh their tokens.</p>
+</li>
+<li><p><strong>status codes</strong> - <code>200</code>, <code>400</code></p>
+</li>
+</ul>
+<p>Example response:</p>
+<pre><code class="lang-js">{
+    <span class="hljs-string">"jwt"</span>: {
+        <span class="hljs-string">"access_token"</span>: <span class="hljs-string">"eyJhbGciOiJIUzI1NiJ9.eyJ..."</span>,
+        <span class="hljs-string">"expires"</span>: <span class="hljs-number">1450137214490</span>,
+        <span class="hljs-string">"refresh"</span>: <span class="hljs-number">1450137216490</span>
+    },
+    <span class="hljs-string">"user"</span>: {
+        <span class="hljs-string">"id"</span>:<span class="hljs-string">"user1"</span>,
+        <span class="hljs-string">"timestamp"</span>: <span class="hljs-number">1399721289987</span>,
+        <span class="hljs-string">"type"</span>:<span class="hljs-string">"user"</span>,
+        <span class="hljs-string">"appid"</span>:<span class="hljs-string">"myapp"</span>,
+        ...
+    }
+}
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="035-api-jwt-revoke" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="DELETE img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+										
+										
+										
+										
+											<span class="img-rounded label-danger">DELETE</span>
+										
+										<span class="gray">
+											/jwt_auth 
+										</span>
+									</code>
+									<span class="hidden-xs">Revoke all tokens (JWT)</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>Revokes all user tokens for the user that is currently logged in. This would be equivalent to “logout everywhere”.
+<strong>Note:</strong> Generating a new API secret on the server will also invalidate all client tokens.</p>
+<h3 id="request">Request</h3>
+<p>Request should include an <code>Authorization: Bearer {JWT_TOKEN}</code> header containing a valid access token. (required)
+As an alternative you could provide the token as query parameter instead of a header.</p>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object containing a <strong>new</strong> JWT token and the same <code>User</code> object. The returned JWT properties are:</p>
+<ul>
+<li><code>access_token</code> - the JWT access token.</li>
+<li><code>expires</code> - a Java timestamp of when the token will expire.</li>
+<li><p><code>refresh</code> - a Java timestamp indicating when API clients should refresh their tokens.</p>
+</li>
+<li><p><strong>status codes</strong> - <code>200</code>, <code>400</code></p>
+</li>
+</ul>
+<p>Example response (response is empty):</p>
+<pre><code><span class="hljs-number">200</span> OK
+</code></pre>
 						</section>
 					</article>
 					
@@ -3366,6 +3722,193 @@ See <a href="#010-userdefined">User-defined classes</a> for more details.</p>
 					
 				
 					
+					<a id="050-api-permissions-check" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="GET img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+											<span class="img-rounded label-success">GET</span>
+										
+										
+										
+										
+										
+										<span class="gray">
+											/v1/_permissions/{subjectid}/{resource}/{method} 
+										</span>
+									</code>
+									<span class="hidden-xs">Check permission</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>This checks if a subject is allowed to execute a specific type of request on a resource.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><code>{subjectid}</code> - the subject/user <code>id</code> to grant permissions to. (required)</li>
+<li><code>{resource}</code> - the name of the resource. (required)</li>
+<li><code>{method}</code> - an HTTP method name. (required)</li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns a boolean plain text response - <code>true</code> or <code>false</code>.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code>, <code>404</code></li>
+</ul>
+<p>Example response:</p>
+<pre><code><span class="hljs-literal">true</span>
+</code></pre>
+						</section>
+					</article>
+					
+				
+					
+					<a id="050-api-permissions-get" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="GET img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+											<span class="img-rounded label-success">GET</span>
+										
+										
+										
+										
+										
+										<span class="gray">
+											/v1/_permissions/{subjectid} 
+										</span>
+									</code>
+									<span class="hidden-xs">List permissions</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>Returns a permissions objects containing all permissions. If <code>{subjectid}</code> is provided, the returned object contains
+only the permissions for that subject.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><code>{subjectid}</code> - the subject/user <code>id</code> (optional)</li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object containing the resource permissions for the given user.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code>, <code>404</code></li>
+</ul>
+<p>Example response:</p>
+<pre><code class="lang-js">{
+  <span class="hljs-string">"*"</span>: {
+        <span class="hljs-string">"*"</span>: [<span class="hljs-string">"GET"</span>]
+    },
+  <span class="hljs-string">"user1"</span>: [],
+  <span class="hljs-string">"user2"</span>: {
+        <span class="hljs-string">"posts"</span>: [<span class="hljs-string">"GET"</span>, <span class="hljs-string">"POST"</span>]
+    },
+  <span class="hljs-string">"user3"</span>: {
+    <span class="hljs-string">"*"</span>: [<span class="hljs-string">"*"</span>]
+  }
+}
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="050-api-permissions-grant" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="PUT img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+										
+											<span class="img-rounded label-warning">PUT</span>
+										
+										
+										
+										
+										<span class="gray">
+											/v1/_permissions/{subjectid}/{resource} 
+										</span>
+									</code>
+									<span class="hidden-xs">Grant permissions</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>Grants a set of permissions (allowed HTTP methods) to a subject for a given resource.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><strong>body</strong> - a JSON array of permitted HTTP methods or a wildcard <code>[&quot;*&quot;]</code> to allow all (required).</li>
+<li><code>{subjectid}</code> - the subject/user <code>id</code> to grant permissions to (required)</li>
+<li><code>{resource}</code> - the name of the resource, for example <code>posts</code> corresponds to <code>/v1/posts</code> (required)</li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object containing the resource permissions for the given user.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code>, <code>404</code></li>
+</ul>
+<p>Example response:</p>
+<pre><code class="lang-js">{
+  <span class="hljs-string">"user2"</span>: {
+        <span class="hljs-string">"posts"</span>: [<span class="hljs-string">"GET"</span>, <span class="hljs-string">"POST"</span>]
+    }
+}
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
+					<a id="050-api-permissions-revoke" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="DELETE img-rounded">
+						
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+										
+										
+										
+										
+										
+											<span class="img-rounded label-danger">DELETE</span>
+										
+										<span class="gray">
+											/v1/_permissions/{subjectid}/{resource} 
+										</span>
+									</code>
+									<span class="hidden-xs">Revoke permissions</span>
+								</h2>
+							</a>
+						
+						<section class="body img-rounded">
+							<p>Revokes all permissions for a given subject and resource. If <code>{resource}</code> is not specified, revokes every permission
+that has been granted to that subject.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><code>{subjectid}</code> - the subject/user <code>id</code> to grant permissions to (required)</li>
+<li><code>{resource}</code> - the name of the resource. If omitted, <strong>all permissions</strong> for that subject will be revoked. (optional)</li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object containing the resource permissions for the given user.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code>, <code>404</code></li>
+</ul>
+<p>Example response:</p>
+<pre><code class="lang-js">{
+  <span class="hljs-string">"user1"</span>: [],
+}
+</code></pre>
+
+						</section>
+					</article>
+					
+				
+					
 					<a id="050-api-setup" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
 					<article class="GET img-rounded">
 						
@@ -3523,7 +4066,7 @@ Make sure you save it and use it for signing future requests.</p>
 	<footer>
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<p>Generated on <i>2015-10-14</i> with <a href="https://github.com/albogdano/bootup">bootUP</a> and hosted on <a href="https://github.com/erudika/paraio.org"><i class="fa fa-github fa-lg"></i></a></p>
+				<p>Generated on <i>2015-12-26</i> with <a href="https://github.com/albogdano/bootup">bootUP</a> and hosted on <a href="https://github.com/erudika/paraio.org"><i class="fa fa-github fa-lg"></i></a></p>
 				<p>&copy; 2015 <a href="http://erudika.com">Erudika</a></p>
 			</div>
 		</div>
