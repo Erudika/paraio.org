@@ -49,7 +49,7 @@ module.exports = function(grunt) {
 						if (!lang) {
 							lang = "js";
 						}
-						return require('highlight.js').highlight(lang, code).value;
+						return require("highlight.js").highlight(lang, code).value;
 					},
 					smartypants: true,
 					silent: false
@@ -175,7 +175,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-contrib-jshint");
 	grunt.loadNpmTasks("grunt-contrib-watch");
 	grunt.loadNpmTasks("grunt-contrib-connect");
-	grunt.loadNpmTasks("grunt-html-validation");
+	//grunt.loadNpmTasks("grunt-html-validation");
 	grunt.loadNpmTasks("grunt-prettify");
 
 	// Default tasks to be run.
@@ -183,7 +183,7 @@ module.exports = function(grunt) {
 
 	// Linting and tests.
 	grunt.registerTask("test", ["clean"]);
-	grunt.registerTask("validate", ["jshint", "validation"]);	// html && js validation
-	grunt.registerTask("cb", ["default", "validate"]);	// clean & build
+	//grunt.registerTask("validate", ["jshint", "validation"]);	// html && js validation
+	grunt.registerTask("cb", ["jshint", "default"]);	// clean & build
 	grunt.registerTask("server", ["default", "connect:livereload", "watch"]); // watch & live reload
 };
