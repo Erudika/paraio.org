@@ -89,6 +89,6 @@ You can later override the parent methods, for example if you need to execute so
 @Override
 public String create() {
 	// TODO; write your own code here
-	return getDao().create(getAppid(), this); // this writes to DB
+	return dao.create(getAppid(), this); // this writes to DB
 }
 ```

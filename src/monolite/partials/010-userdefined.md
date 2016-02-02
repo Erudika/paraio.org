@@ -20,7 +20,7 @@ class Article implements ParaObject {
 
 > **Caution:** when defining your custom properties try to stick to basic Java types like `List`, `Map`,
 > `String`, `boolean`, etc. Complex property objects are **not supported**. This is due to the fact that
-> Para uses the `BeanUtils` class to set deserialize properties and it has no clue how to deserialize
+> Para uses `BeanUtils` to set property values and it has no clue how to deserialize
 > your complex objects, so keep it simple.
 
 You don't have to define common fields like `id` or `name` because they are already defined in the parent class.
@@ -49,7 +49,7 @@ cache respectively.
 
 If you want to read an object, first you have to get access to the `DAO` object. You can either:
 - call `Para.getDAO()`
-- get it from another `ParaObject` with `pobj.getDao()`
+- get it by calling `CoreUtils.getInstance().getDao()`
 - `@Inject` it with `Para.injectInto()`
 
 Then you can read an object using its id:

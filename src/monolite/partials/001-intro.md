@@ -72,3 +72,10 @@ pc.me();
 	</a><br>
 	<a href="https://github.com/Erudika/para-client-csharp">para-client-csharp</a>
 </div>
+
+<div class="btn-client-div">
+	<a href="https://github.com/Erudika/para-client-android" class="btn-client">
+		<i class="devicon-android-plain-wordmark"></i>
+	</a><br>
+	<a href="https://github.com/Erudika/para-client-csharp">para-client-android</a>
+</div>
