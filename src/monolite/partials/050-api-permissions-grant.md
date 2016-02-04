@@ -11,7 +11,8 @@ Grants a set of permissions (allowed HTTP methods) to a subject for a given reso
 
 - **body** - a JSON array of permitted HTTP methods or a wildcard `["*"]` to allow all (required).
 - `{subjectid}` - the subject/user `id` to grant permissions to (required)
-- `{resource}` - the name of the resource, for example `posts` corresponds to `/v1/posts` (required)
+- `{resource}` - the resource path or object type (URL encoded), for example
+`posts` corresponds to `/v1/posts`, `posts%2F123` corresponds to `/v1/posts/123` (required)
 
 ### Response
 

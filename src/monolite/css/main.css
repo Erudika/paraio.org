@@ -324,12 +324,6 @@ code {
 	font-size: 90px;
 }
 
-.btn-client-div {
-	width: 150px;
-	/*text-align: center;*/
-	display: inline-block;
-}
-
 /***** Syntax Highlighting Theme *****/
 
 .hljs {

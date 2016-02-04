@@ -10,7 +10,7 @@ This checks if a subject is allowed to execute a specific type of request on a r
 ### Request
 
 - `{subjectid}` - the subject/user `id` to grant permissions to. (required)
-- `{resource}` - the name of the resource. (required)
+- `{resource}` - the resource path or object type (URL encoded). (required)
 - `{method}` - an HTTP method name. (required)
 
 ### Response

@@ -12,12 +12,12 @@ Let's look at a few example scenarios where we give users permission to access t
 one with `id = 1` and user two with `id = 2`. We'll use the following methods:
 
 ```java
-boolean grantResourcePermission(String subjectid, String resourceName, EnumSet<AllowedMethods> permission);
+boolean grantResourcePermission(String subjectid, String resourcePath, EnumSet<AllowedMethods> permission);
 
-boolean revokeResourcePermission(String subjectid, String resourceName);
+boolean revokeResourcePermission(String subjectid, String resourcePath);
 ```
 
-These methods allow the use of wildcards `*` for `subjectid` and `resourceName` arguments.
+These methods allow the use of wildcards `*` for `subjectid` and `resourcePath` arguments.
 
 **Scenario 1:** Give all users permission to `READ` - this allows them to make `GET` requests:
 
@@ -30,6 +30,11 @@ app.grantResourcePermission("*", "_batch", AllowedMethods.READ);
 ```java
 app.grantResourcePermission("1", "_batch", AllowedMethods.WRITE);
 ```
+Also you could grant permissions on specific objects like so:
+```java
+paraClient.grantResourcePermission("user1", "posts/123", AllowedMethods.DELETE);
+```
+This will allow `user1` to delete only the `post` with an `id` of `123`.
 
 **Scenario 3:** Give user `2` permission ot only make `POST` requests:
 

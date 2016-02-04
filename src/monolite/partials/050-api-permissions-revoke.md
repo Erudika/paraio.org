@@ -11,7 +11,8 @@ that has been granted to that subject.
 ### Request
 
 - `{subjectid}` - the subject/user `id` to grant permissions to (required)
-- `{resource}` - the name of the resource. If omitted, **all permissions** for that subject will be revoked. (optional)
+- `{resource}` - the resource path or object type (URL encoded). If omitted,
+**all permissions** for that subject will be revoked. (optional)
 
 ### Response
 
