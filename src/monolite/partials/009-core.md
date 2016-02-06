@@ -1,9 +1,9 @@
 ---
-title: Para classes
+title: Core classes
 category: Core classes
 ---
 
-In the package `para.core` there are a number of core domain classes that are used throughout Para.
+In the package `com.erudika.para.core` there are a number of core domain classes that are used throughout Para.
 These are common classes like `User` and `App` which you can use in you application directly or extend them.
 
 Below is a list of classes and their descriptions. All of these implement `ParaObject` which is the core interface.

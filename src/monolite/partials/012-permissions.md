@@ -34,7 +34,7 @@ Also you could grant permissions on specific objects like so:
 ```java
 paraClient.grantResourcePermission("user1", "posts/123", AllowedMethods.DELETE);
 ```
-This will allow `user1` to delete only the `post` with an `id` of `123`.
+This will allow `user1` to delete only the post object with an `id` of `123`.
 
 **Scenario 3:** Give user `2` permission ot only make `POST` requests:
 

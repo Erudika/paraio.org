@@ -92,3 +92,11 @@ public String create() {
 	return dao.create(getAppid(), this); // this writes to DB
 }
 ```
+
+### Fine-tuning backend operations
+
+From version 1.18 `ParaObject`s have three new flags - `stored`, `indexed` and `cached`. These flags turn on and off
+the three main operations - persistence, indexing and caching. Developers can choose to switch off caching on a number
+of objects that change very often, for example. Also some objects my be hidden from search by setting the `indexed: false`
+flag. And finally you can turn off persistence completely with `stored: false` and thus have objects that
+live only in memory (and search index) but are never stored in the database.

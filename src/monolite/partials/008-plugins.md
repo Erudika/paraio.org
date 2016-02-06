@@ -25,7 +25,7 @@ Para.addDestroyListener(new Para.DestroyListener() {
 	}
 });
 ```
- 
+
 ### Custom context initializers
 
 Para will automatically pick up your classes which extend the `Para` class. They should be annotated
@@ -61,3 +61,37 @@ public interface CustomResourceHandler {
 ```
 
 You can use `@Inject` in your custom handlers to inject any object managed by Para.
+
+### `DAO`, `Search` and `Cache` plugins
+
+In version 1.18 we expanded the support for plugins. Para can now load third-party plugins for various `DAO`
+implementations, like [MongoDB](https://github.com/Erudika/para-dao-mongodb) for example. The plugin `para-dao-mongodb`
+is loaded using the `ServiceLoader` mechanism from the classpath and replaces the default `AWSDynamoDAO` implementation.
+
+To create a plugin you have to create a new project and import `para-core` with Maven and extend one of the three
+interfaces - `DAO`, `Search`, `Cache`. Implement one of these interfaces and name your project by following the
+convention:
+
+- `para-dao-mydao` for `DAO` plugins,
+- `para-search-mysearch` for `Search` plugins,
+- `para-cache-mycache` for `Cache` plugins.
+
+For example, the [plugin for MongoDB](https://github.com/Erudika/para-dao-mongodb) is called `para-dao-mongodb` and
+implements the `DAO` interface with the MongoDB driver for Java.
+
+You also need to create one file inside `src/main/resources/META-INF/services/` in your plugin project:
+
+- `src/main/resources/META-INF/services/com.erudika.para.persistence.DAO` for `DAO` plugins,
+- `src/main/resources/META-INF/services/com.erudika.para.search.Search` for `Search` plugins,
+- `src/main/resources/META-INF/services/com.erudika.para.cache.Cache` for `Cache` plugins.
+
+Inside this file you put the full class name of your implementation, for example `com.erudika.para.persistence.MyDAO`,
+on one line and save the file.
+
+To load a plugin follow these steps:
+
+1. Place the plugin JAR in a folder called `lib` or `WEB-INF/lib` in the same folder as the Para server or
+include the plugin through Maven,
+2. Set the configuration property `para.dao = "MyDAO"` or `para.search = "MySearch"` or `para.cache = "MyCache"`
+(use the simple class name here)
+3. Start the Para server and the new plugin should be loaded
