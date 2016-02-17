@@ -20,6 +20,7 @@ There are several configuration properties for Hazelcast:
 	</thead>
 	<tbody>
 		<tr><td>`para.hc.async_enabled`</td><td> Asynchronous operation when putting objects in cache. Defaults to `false`.</td></tr>
+		<tr><td>`para.hc.lazy_start`</td><td> Start Hazelcast server on first request, not immediately. Defaults to `true`.</td></tr>
 		<tr><td>`para.hc.eviction_policy`</td><td> Cache eviction policy - `LRU` or `LFU`. Defaults to `LRU`.</td></tr>
 		<tr><td>`para.hc.eviction_percentage`</td><td> Cache eviction percentage. Defaults to `25` percent.</td></tr>
 		<tr><td>`para.hc.max_size`</td><td> Cache size as a percentage of used heap. Defaults to `25` percent.</td></tr>
