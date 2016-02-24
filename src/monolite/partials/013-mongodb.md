@@ -20,7 +20,7 @@ There are several configuration properties for MongoDB (these go in your `applic
 	<tbody>
 		<tr><td>`para.mongodb.host`</td><td> The hostname of the MongoDB server. Defaults to `localhost`.</td></tr>
 		<tr><td>`para.mongodb.port`</td><td> The server port to connect to. Defaults to `27017`.</td></tr>
-		<tr><td>`para.mongodb.database`</td><td> The database name that Para will use. Default is equal to `para.app_name` - the name of your app.</td></tr>
+		<tr><td>`para.mongodb.database`</td><td> The database name that Para will use. Default is equal to `para.app_name`.</td></tr>
 		<tr><td>`para.mongodb.user`</td><td> The username with access to the database. Defaults to `""`.</td></tr>
 		<tr><td>`para.mongodb.password`</td><td> The password. Defaults to `""`.</td></tr>
 	</tbody>
@@ -47,4 +47,4 @@ Para.addDestroyListener(new DestroyListener() {
 ```
 See [Plugins](#008-plugins) for more information about how you can create your own plugins.
 
-> For more information about MongoDB see the [official manual](https://docs.mongodb.org/manual/).
+> For more information about using MongoDB, see the [official manual](https://docs.mongodb.org/manual/).
