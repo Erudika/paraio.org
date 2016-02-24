@@ -40,6 +40,9 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.print_logo`						</td><td>`true`</td><td>Boolean</td></tr>
 		<tr><td>`para.aws_access_key`				</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.aws_secret_key`				</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.dao`									</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.search`								</td><td>-</td><td>String</td></tr>
+		<tr><td>`para.cache`								</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.aws_region`						</td><td>`eu-west-1`</td><td>String</td></tr>
 		<tr><td>`para.fb_app_id`						</td><td>-</td><td>String</td></tr>
 		<tr><td>`para.fb_secret`						</td><td>-</td><td>String</td></tr>
@@ -96,6 +99,7 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.security.signin_success`			</td><td> `/` </td><td> String </td></tr>
 		<tr><td>`para.security.signout_success`			</td><td> `/signin` </td><td> String </td></tr>
 		<tr><td>`para.security.signin_failure`			</td><td> `/signin` </td><td> String </td></tr>
+		<tr><td>`para.security.allow_unverified_emails`	</td><td> `false` </td><td> Boolean </td></tr>
 
 		<tr><td>`para.s3.bucket`										</td><td> `org.paraio.files` </td><td> String </td></tr>
 		<tr><td>`para.s3.max_filesize_mb`						</td><td> 10 </td><td> String </td></tr>
@@ -105,7 +109,7 @@ Here's a list of all configuration properties that can be set in the config file
 	</tbody>
 </table>
 
-All of the above can be overridden with `System.setProperty()`. 
+All of the above can be overridden with `System.setProperty()`.
 
 > Para uses the excellent Config library by TypeSafe. For more information about how it works
 > see the [README](https://github.com/typesafehub/config/blob/master/README.md).
