@@ -40,7 +40,7 @@ your own filters and servlets. These initializer classes also act as an alternat
 
 Since version 1.7, you can register custom API resources by implementing the `CustomResourceHandler` interface.
 Use the `ServiceLoader` mechanism to tell Para to load your handlers - add them to a file called
-`com.erudika.para.rest.CustomResourceHandler` in `META-INF/services` where each line contains the full class name
+"com.erudika.para.rest.CustomResourceHandler" in `META-INF/services` where each line contains the full class name
 of your custom resource handler class. On startup Para will load these and register them as API resource handlers.
 
 The `CustomResourceHandler` interface is simple:
@@ -81,9 +81,9 @@ implements the `DAO` interface with the MongoDB driver for Java.
 
 You also need to create one file inside `src/main/resources/META-INF/services/` in your plugin project:
 
-- `src/main/resources/META-INF/services/com.erudika.para.persistence.DAO` for `DAO` plugins,
-- `src/main/resources/META-INF/services/com.erudika.para.search.Search` for `Search` plugins,
-- `src/main/resources/META-INF/services/com.erudika.para.cache.Cache` for `Cache` plugins.
+- `com.erudika.para.persistence.DAO` for `DAO` plugins,
+- `com.erudika.para.search.Search` for `Search` plugins,
+- `com.erudika.para.cache.Cache` for `Cache` plugins.
 
 Inside this file you put the full class name of your implementation, for example `com.erudika.para.persistence.MyDAO`,
 on one line and save the file.

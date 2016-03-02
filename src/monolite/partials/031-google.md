@@ -10,7 +10,7 @@ Support for logging in with Google+ is implemented by the `GoogleAuthFilter`. Th
 `/google_auth`.
 
 To initiate a login with Google+ just redirect the user to the Google OAuth endpoint
-`https://accounts.google.com/o/oauth2/auth`. Pass the parameter `redirect_uri=/google_auth` so Para
+`accounts.google.com/o/oauth2/auth`. Pass the parameter `redirect_uri=/google_auth` so Para
 can handle the response from Google+.
 
 **Note:** You need to register a new application with Google+ in order to obtain an access and secret keys.

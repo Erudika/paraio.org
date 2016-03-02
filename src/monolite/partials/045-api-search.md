@@ -66,7 +66,7 @@ This executes the method `findTermInList()` with these **parameters**:
 #### `terms` query
 This executes the method `findTerms()` with these **parameters**:
 - `matchall` - if `true` executes an `AND` query, otherwise an `OR` query
-- `terms` - a list of `field:term` pairs (example: `?terms=field1:term1&terms=field2:term2`)
+- `terms` - a list of `field:term` pairs (example: `?terms=field:term&terms=field:term`)
 - `count` - if present will return 0 objects but the "totalHits" field will contain the total number of results found
 that match the given terms.
 

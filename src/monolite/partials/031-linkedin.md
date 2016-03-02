@@ -10,7 +10,7 @@ Support for logging in with LinkedIn is implemented by the `LinkedInAuthFilter`.
 `/linkedin_auth`.
 
 To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint
-`https://www.linkedin.com/uas/oauth2/authorization`. Pass the parameter `redirect_uri=/linkedin_auth` so Para
+`linkedin.com/uas/oauth2/authorization`. Pass the parameter `redirect_uri=/linkedin_auth` so Para
 can handle the response from LinkedIn.
 
 **Note:** You need to register a new application with LinkedIn in order to obtain an access and secret keys.

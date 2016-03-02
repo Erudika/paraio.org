@@ -10,7 +10,7 @@ Support for logging in with GitHub is implemented by the `GitHubAuthFilter`. Thi
 `/github_auth`.
 
 To initiate a login with GitHub just redirect the user to the GitHub OAuth endpoint
-`https://github.com/login/oauth/authorize`. Pass the parameter `redirect_uri=/github_auth` so Para
+`github.com/login/oauth/authorize`. Pass the parameter `redirect_uri=/github_auth` so Para
 can handle the response from GitHub.
 
 **Note:** You need to register a new application with GitHub in order to obtain an access and secret keys.

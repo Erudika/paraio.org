@@ -10,7 +10,7 @@ Support for logging in with Facebook is implemented by the `FacebookAuthFilter`.
 `/facebook_auth`.
 
 To initiate a login with Facebook just redirect the user to the Facebook OAuth endpoint
-`https://www.facebook.com/dialog/oauth`. Pass the parameter `redirect_uri=/facebook_auth` so Para
+`facebook.com/dialog/oauth`. Pass the parameter `redirect_uri=/facebook_auth` so Para
 can handle the response from Facebook.
 
 **Note:** You need to register a new application with Facebook in order to obtain an access and secret keys.
