@@ -34,7 +34,7 @@
             <i class="fa fa-bars"></i>
           </button>
           <a class="navbar-brand" href="/">
-            <img src="/img/logo.png" width="121" height="39" alt="logo" />
+            <img src="/img/logo.svg" width="121" height="39" alt="logo" />
           </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -66,10 +66,10 @@
               <h1>A general-purpose back-end framework for the cloud</h1>
               <p class="intro-text">Simple and open source, works well for web and mobile</p>
               <div class="page-scroll">
-                <a href="https://github.com/erudika/para/releases/download/v1.18.1/para-war-1.18.1.war" class="btn btn-default"><i class="fa fa-download"></i> Download</a>
+                <a href="https://github.com/erudika/para/releases/download/v1.18.2/para-1.18.2.war" class="btn btn-default"><i class="fa fa-download"></i> Download</a>
               </div>
               <h4 class="intro-cmd">
-						<code>$ java -jar para-war-1.18.1.war</code>
+						<code>$ java -jar para-1.18.2.war</code>
 					</h4>
             </div>
           </div>
@@ -99,8 +99,8 @@
             <li>Multi-tenancy support - each app has its own table, index and cache</li>
             <li>RESTful JSON API secured with Amazon's Signature 4 algorithm</li>
             <li>Designed for scalable data stores (DynamoDB, Cassandra, MongoDB)</li>
-            <li>Full-text search (Elasticsearch by default)</li>
-            <li>Distributed object cache (Hazelcast by default)</li>
+            <li>Full-text search (Elasticsearch)</li>
+            <li>Distributed object cache (Hazelcast)</li>
             <li>Flexible security - social login, JWT support, CSRF protection, etc.</li>
             <li>Simple but effective resource permissions for client access control</li>
             <li>Robust constraint validation based on JSR-303 and Hibernate Validator</li>
@@ -111,25 +111,57 @@
       </div>
     </section>
     <section id="download" class="container download-section text-center">
-      <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-          <h2>Get Para</h2>
-          <h3>v1.18.1</h3>
-          <p>Get it through Maven or as an <strong>executable WAR</strong> package.</p>
-          <ul class="list-inline banner-social-buttons">
-            <li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default">Source code</a>
-            </li>
-            <li><a href="https://github.com/erudika/para/releases/download/v1.18.1/para-war-1.18.1.war" class="btn btn-default">WAR</a>
-            </li>
-          </ul>
-          <h3>Maven</h3>
-          <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-left">
-              <pre class="btn-default"><code>  &lt;dependency&gt;
+      <h2>Get Para</h2>
+      <h3>v1.18.2</h3>
+      <p>Get it through Maven or as an <strong>executable WAR</strong> package.</p>
+      <ul class="list-inline banner-social-buttons">
+        <li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default">Source code</a>
+        </li>
+        <li><a href="https://github.com/erudika/para/releases/download/v1.18.2/para-1.18.2.war" class="btn btn-default">WAR</a>
+        </li>
+      </ul>
+      <h3>Maven</h3>
+      <pre class="maven-coords text-left"><code>  &lt;dependency&gt;
     &lt;groupId&gt;com.erudika&lt;/groupId&gt;
     &lt;artifactId&gt;para-server&lt;/artifactId&gt;
-    &lt;version&gt;1.18.1&lt;/version&gt;
+    &lt;version&gt;1.18.2&lt;/version&gt;
   &lt;/dependency&gt;</code></pre>
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h2>Clients</h2>
+          <div class="row">
+            <div class="col-md-2 text-center">
+              <a href="https://github.com/Erudika/para/tree/master/para-client" class="btn-client-s" title="Java">
+                <i class="devicon-java-plain"></i>
+              </a>
+            </div>
+            <div class="col-md-2 text-center">
+              <a href="https://github.com/Erudika/para-client-js" class="btn-client-s" title="JavaScript">
+                <i class="devicon-javascript-plain"></i>
+              </a>
+            </div>
+            <div class="col-md-2 text-center">
+              <a href="https://github.com/Erudika/para-client-php" class="btn-client-s" title="PHP">
+                <i class="devicon-php-plain"></i>
+              </a>
+            </div>
+            <div class="col-md-2 text-center">
+              <a href="https://github.com/Erudika/para-client-csharp" class="btn-client-s" title="Microsoft .NET">
+                <i class="devicon-dot-net-plain"></i>
+              </a>
+            </div>
+            <div class="col-md-2 text-center">
+              <a href="https://github.com/Erudika/para-client-android" class="btn-client-s" title="Android">
+                <i class="devicon-android-plain"></i>
+              </a>
+            </div>
+            <div class="col-md-2 text-center">
+              <!--<a href="https://github.com/Erudika/para-client-ios" class="btn-client-s" title="iOS">-->
+              <span class="btn-client-s hljs-comment">
+						<i class="devicon-apple-original"></i>
+					</span>
+              <p class="small gray"><small>soon</small></p>
+              <!--</a>-->
             </div>
           </div>
         </div>
@@ -153,6 +185,10 @@
             <li>
               <a href="https://github.com/erudika/para" class="btn btn-default">
                 <i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+            </li>
+            <li>
+              <a href="https://gitter.im/Erudika/para" class="btn btn-default">
+                <i class="fa fa-comment fa-fw"></i> <span class="network-name">Gitter</span></a>
             </li>
           </ul>
           <p>&nbsp;</p>
