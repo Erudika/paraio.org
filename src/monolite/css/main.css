@@ -3,7 +3,7 @@ html {
 	height: 100%;
 	margin: 0px;
     padding: 0px;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 	webkit-font-smoothing: antialiased;
 }
 body {
@@ -347,12 +347,12 @@ code {
 
 #content article a h2 {
   background: #333333;
-  padding: 15px 10px;
+  padding: 12px 10px 15px 10px;
 }
 
 #content a h2 {
   color: white;
-  font-size: 1.3em;
+  font-size: 1.1em;
   font-weight: normal;
   margin: 0;
 }

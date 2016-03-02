@@ -46,34 +46,34 @@ pc.me();
 ### Client libraries
 
 <div class="row">
-  <div class="col-md-4 text-center">
+  <div class="col-sm-4 text-center">
 		<a href="https://github.com/Erudika/para/tree/master/para-client" class="btn-client">
 			<i class="devicon-java-plain-wordmark"></i>
 		</a>
 	</div>
-  <div class="col-md-4 text-center">
+  <div class="col-sm-4 text-center">
 		<a href="https://github.com/Erudika/para-client-js" class="btn-client">
 			<i class="devicon-javascript-plain"></i>
 		</a>
 	</div>
-  <div class="col-md-4 text-center">
+  <div class="col-sm-4 text-center">
 		<a href="https://github.com/Erudika/para-client-php" class="btn-client">
 			<i class="devicon-php-plain"></i>
 		</a>
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-4 text-center">
+	<div class="col-sm-4 text-center">
 		<a href="https://github.com/Erudika/para-client-csharp" class="btn-client">
 			<i class="devicon-dot-net-plain-wordmark"></i>
 		</a>
 	</div>
-  <div class="col-md-4 text-center">
+  <div class="col-sm-4 text-center">
 		<a href="https://github.com/Erudika/para-client-android" class="btn-client">
 			<i class="devicon-android-plain-wordmark"></i>
 		</a>
 	</div>
-  <div class="col-md-4 text-center">
+  <div class="col-sm-4 text-center">
 		<a href="https://github.com/Erudika/para-client-ios" class="btn-client">
 			<i class="devicon-apple-original"></i>
 		</a>

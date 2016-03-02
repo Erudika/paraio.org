@@ -63,7 +63,7 @@ And here's what a Para object looks like as JSON when returned from the REST API
 
 ### Implementing your own `ParaObject` classes
 
-There was a question about how to implement `ParaObject` and where to start from. First of all there is no need to write
+There was a question about how to implement `ParaObject` and where to start from. First of all, there is no need to write
 your own custom classes if you're going to be using them for simple stuff. So step one is to take a look at the generic
 class called `Sysprop`. Look at the [source code on GitHub](https://github.com/Erudika/para/blob/master/para-core/src/main/java/com/erudika/para/core/Sysprop.java).
 It's pretty simple and implements all of `ParaObject`'s methods. Then you have to decide if you can work with that
@@ -74,7 +74,7 @@ Another option is to extend `Sysprop` like so:
 
 ```java
 public class MyParaObject extends Sysprop implements ParaObject {
-	// implements statement is redundant here
+	// 'implements' is redundant here
 
 	@Stored
 	public String myCustomField;
