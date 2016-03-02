@@ -64,27 +64,60 @@ version: "1.18.2"
 </section>
 
 <section id="download" class="container download-section text-center">
-	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2">
-			<h2>Get Para</h2>
-			<h3>v{{version}}</h3>
-			<p>Get it through Maven or as an <strong>executable WAR</strong> package.</p>
-			<ul class="list-inline banner-social-buttons">
-				<li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default">Source code</a>
-				</li>
-				<li><a href="https://github.com/erudika/para/releases/download/v{{version}}/para-{{version}}.war"
-							 class="btn btn-default">WAR</a>
-				</li>
-			</ul>
+	<h2>Get Para</h2>
+	<h3>v{{version}}</h3>
+	<p>Get it through Maven or as an <strong>executable WAR</strong> package.</p>
+	<ul class="list-inline banner-social-buttons">
+		<li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default">Source code</a>
+		</li>
+		<li><a href="https://github.com/erudika/para/releases/download/v{{version}}/para-{{version}}.war"
+					 class="btn btn-default">WAR</a>
+		</li>
+	</ul>
 
-			<h3>Maven</h3>
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2 text-left">
-					<pre class="btn-default"><code>  &lt;dependency&gt;
+	<h3>Maven</h3>
+	<pre class="maven-coords text-left"><code>  &lt;dependency&gt;
     &lt;groupId&gt;com.erudika&lt;/groupId&gt;
     &lt;artifactId&gt;para-server&lt;/artifactId&gt;
     &lt;version&gt;{{version}}&lt;/version&gt;
   &lt;/dependency&gt;</code></pre>
+
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2">
+			<h2>Clients</h2>
+			<div class="row">
+				<div class="col-md-2 text-center">
+					<a href="https://github.com/Erudika/para/tree/master/para-client" class="btn-client-s" title="Java">
+						<i class="devicon-java-plain"></i>
+					</a>
+				</div>
+				<div class="col-md-2 text-center">
+					<a href="https://github.com/Erudika/para-client-js" class="btn-client-s" title="JavaScript">
+						<i class="devicon-javascript-plain"></i>
+					</a>
+				</div>
+				<div class="col-md-2 text-center">
+					<a href="https://github.com/Erudika/para-client-php" class="btn-client-s" title="PHP">
+						<i class="devicon-php-plain"></i>
+					</a>
+				</div>
+				<div class="col-md-2 text-center">
+					<a href="https://github.com/Erudika/para-client-csharp" class="btn-client-s" title="Microsoft .NET">
+						<i class="devicon-dot-net-plain"></i>
+					</a>
+				</div>
+				<div class="col-md-2 text-center">
+					<a href="https://github.com/Erudika/para-client-android" class="btn-client-s" title="Android">
+						<i class="devicon-android-plain"></i>
+					</a>
+				</div>
+				<div class="col-md-2 text-center">
+					<!--<a href="https://github.com/Erudika/para-client-ios" class="btn-client-s" title="iOS">-->
+					<span class="btn-client-s hljs-comment">
+						<i class="devicon-apple-original"></i>
+					</span>
+					<p class="small gray"><small>soon</small></p>
+					<!--</a>-->
 				</div>
 			</div>
 		</div>

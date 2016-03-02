@@ -174,7 +174,14 @@ a:focus {
 	width: 100%;
 	color: white;
 	background-color: #222222;
-	padding: 100px
+	padding: 100px 10px;
+}
+
+pre.maven-coords {
+	width: 28em;
+	background-color: #444444;
+	color: white;
+	margin: 0 auto;
 }
 
 .contact-section {
@@ -377,6 +384,11 @@ code {
 
 .btn-client {
 	font-size: 90px;
+}
+
+.btn-client-s {
+	font-size: 55px;
+	color: #ededed;
 }
 
 /***** Syntax Highlighting Theme *****/
