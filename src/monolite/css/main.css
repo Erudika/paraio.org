@@ -188,12 +188,13 @@ pre.maven-coords {
 	width: 100%;
 	color: white;
 	background-color: #408BB7;
+	padding: 60px 10px;
 }
 
 .footer-section {
 	width: 100%;
 	color: white;
-	padding-bottom: 100px;
+	padding-bottom: 30px;
 	background-color: #408BB7;
 }
 
