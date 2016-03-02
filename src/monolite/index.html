@@ -8,13 +8,15 @@ version: "1.18.1"
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
-					<h1 class="brand-heading">Para</h1>
-					<p class="intro-text">A general-purpose back-end framework for the cloud.</p>
+					<h1>A general-purpose back-end framework for the cloud</h1>
+					<p class="intro-text">Simple and open source, works well for web and mobile</p>
 					<div class="page-scroll">
-						<a href="#about" class="btn btn-circle">
-							<i class="fa fa-angle-double-down animated"></i>
-						</a>
+						<a href="https://github.com/erudika/para/releases/download/v{{version}}/para-war-{{version}}.war"
+							 class="btn btn-default"><i class="fa fa-download"></i> Download</a>
 					</div>
+					<h4 class="intro-cmd">
+						<code>$ java -jar para-server.war</code>
+					</h4>
 				</div>
 			</div>
 		</div>
@@ -26,9 +28,9 @@ version: "1.18.1"
 		<div class="col-lg-8 col-lg-offset-2">
 			<h2>About Para</h2>
 			<p>Para was designed as a simple and modular back-end framework for object persistence and retrieval.
-				It helps your application store its objects to a datastore (SQL or NoSQL based) while
+				It helps your application store its objects to a datastore or an RDBMS while
 				automatically caching those objects and making them searchable. <i>Why use it?</i> Because it's open source,
-				well documented and tested and it's just easier than most frameworks out there.</p>
+				well documented and tested and it's just easier to use than most frameworks out there.</p>
 			<p>The name "Para" means "steam" in Bulgarian. And just like steam is used to power stuff, you can use
 				Para to power your mobile or web application back-end.</p>
 			<hr />
@@ -40,23 +42,23 @@ version: "1.18.1"
 	</div>
 </section>
 
-<section id="download" class="container content-section text-center">
+<section id="download" class="container download-section text-center">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2">
 			<h2>Get Para</h2>
 			<h3>v{{version}}</h3>
 			<p>Get it through Maven or as an <strong>executable WAR</strong> package.</p>
-			<hr />
 			<ul class="list-inline banner-social-buttons">
-				<li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default btn-lg">Source code</a>
+				<li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default">Source code</a>
 				</li>
-				<li><a href="https://github.com/erudika/para/releases/download/v{{version}}/para-war-{{version}}.war" class="btn btn-default btn-lg">WAR</a>
+				<li><a href="https://github.com/erudika/para/releases/download/v{{version}}/para-war-{{version}}.war"
+							 class="btn btn-default">WAR</a>
 				</li>
 			</ul>
 
 			<h3>Maven</h3>
 			<div class="row">
-				<div class="col-lg-6 col-lg-offset-3 text-left">
+				<div class="col-lg-8 col-lg-offset-2 text-left">
 					<pre class="btn-default"><code>  &lt;dependency&gt;
     &lt;groupId&gt;com.erudika&lt;/groupId&gt;
     &lt;artifactId&gt;para-server&lt;/artifactId&gt;
@@ -68,32 +70,30 @@ version: "1.18.1"
 	</div>
 </section>
 
-<section id="contact" class="container content-section text-center">
+<section id="contact" class="container contact-section text-center">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2">
 			<h2>Talk to us</h2>
 			<p>For support and feedback:</p>
-			<p></p>
+			<p>&nbsp;</p>
 			<ul class="list-inline banner-social-buttons">
-				<li><a href="mailto:para&commat;erudika.com" class="btn btn-default btn-lg">
+				<li><a href="mailto:para&commat;erudika.com" class="btn btn-default">
 						<i class="fa fa-envelope fa-fw"></i> <span class="network-name">Email</span></a>
 				</li>
-				<li><a href="https://twitter.com/para_io" class="btn btn-default btn-lg">
+				<li><a href="https://twitter.com/para_io" class="btn btn-default">
 						<i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
 				</li>
-				<li><a href="https://github.com/erudika/para" class="btn btn-default btn-lg">
+				<li><a href="https://github.com/erudika/para" class="btn btn-default">
 						<i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
 				</li>
 			</ul>
-			<hr />
+
+			<p>&nbsp;</p>
+
 			<iframe src="http://ghbtns.com/github-btn.html?user=Erudika&repo=para&type=fork&count=true&size=large"
 							allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe>
 			<iframe src="http://ghbtns.com/github-btn.html?user=Erudika&repo=para&type=watch&count=true&size=large"
 							allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe>
 		</div>
 	</div>
-</section>
-
-<section id="contact" class="container content-section text-center">
-	&nbsp;
 </section>

@@ -8,8 +8,9 @@ One way is to attach annotations to fields in Java classes. The other way is by 
 validation constraints to any object, be it core or user-defined. This method is more flexible as it allows you to
 validate any property of any object.
 
-The built-in constraints are: `required`, `min`, `max`, `size`, `email`,
-`digits`, `pattern`, `false`, `true`, `future`, `past`, `url`.
+The built-in constraints are: 
+
+`required`, `min`, `max`, `size`, `email`, `digits`, `pattern`, `false`, `true`, `future`, `past`, `url`.
 
 **Note:** Objects are validated on `create()` and `update()` operations only.
 

@@ -65,4 +65,26 @@ Keep in mind that the following are reserved words and they *should not* be used
 
 > Note that you can create objects with custom types and fields [through the REST API](#036-api-create) without having
 > to define them as Java classes like above. These custom objects will be based on the generic `Sysprop` class but
-> can have any number of custom properties (fields).
+> can have any number of custom properties (fields). When doing search on custom fields, add the "properties" prefix to
+> them, like `properties.myfield`.
+
+For example, lets create another custom `Article` object through the API. We'll add to it a custom field called `author`:
+
+```
+POST /v1/articles
+
+{
+ "appid": "myapp",
+ "author": "Gordon Freeman"
+}
+```
+
+This creates a new `Article` and indexes all fields including the custom field `author`. To search for objects through the
+API, containing the `author` field we can do a request like this:
+
+```
+GET /v1/articles/search?q=properties.author:Gordon*
+```
+
+Note that we have `q=properties.author:...` instead of `q=author:...`. This is due to the fact that custom fields are
+stored in Para using a nested `Map` called `properties` (see the `Sysprop` class).

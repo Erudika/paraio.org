@@ -6,7 +6,8 @@ type: GET
 ---
 
 Searches for objects of type `{type}`.
-**Note:** Requests to this path and `/v1/{type}` are handled identically.
+**Note:** Requests to this path and `/v1/{type}` are handled identically. Also, note that
+custom fields must be used in search queries as `properties.myfield`.
 
 ### Request
 

@@ -7,6 +7,8 @@ type: GET
 
 Executes a search query.
 
+**Note:** custom fields must be used in search queries as `properties.myfield`.
+
 ### Request
 
 - `{querytype}` - the type of query to execute (optional), use one of types below:
