@@ -2,13 +2,30 @@
 body {
 	width: 100%;
 	height: 100%;
-	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: "Open Sans", sans-serif;
 	font-size: 1.7em;
 	color: #222222;
 	background-color: white;
 	margin-top: 60px;
 }
-
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  line-height: 1.1;
+  color: inherit;
+}
+h1 small,h2 small,h3 small,h4 small,h5 small,h6 small,
+.h1 small,.h2 small,.h3 small,.h4 small,.h5 small,.h6 small,
+h1 .small,h2 .small,h3 .small,h4 .small,h5 .small,h6 .small,
+.h1 .small,.h2 .small,.h3 .small,.h4 .small,.h5 .small,.h6 .small {
+  font-weight: 300;
+  line-height: 1;
+  color: #999999;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-top: 21px;
+  margin-bottom: 20px;
+}
 html {
 	width: 100%;
 	height: 100%;
@@ -44,18 +61,18 @@ a:focus {
 }
 
 .light {
-	font-weight: 400;
+	font-weight: 300;
 }
 
 .navbar {
 	margin-bottom: 1em;
-	border-bottom: 1px solid #444444;
+	/*border-bottom: 1px solid #444444;*/
 	text-transform: uppercase;
 	background-color: white;
 }
 
 .navbar-brand {
-	font-weight: 700;
+	font-weight: 400;
 	padding: 10px 10px;
 }
 
@@ -92,8 +109,9 @@ a:focus {
 	height: auto;
 	padding: 100px 0;
 	text-align: center;
+	font-weight: 300;
 	color: #222222;
-	background: url(../img/intro-bg.jpg) no-repeat bottom center scroll;
+	/*background: white linear-gradient(to bottom, #A0BBCC 0%, white 100%);*/
 	background-color: white;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -112,11 +130,25 @@ a:focus {
 
 .intro-text {
 	font-size: 18px;
+	margin-bottom: 50px;
+}
+
+.intro-cmd {
+	margin-top: 30px;
+}
+.intro-cmd code {
+	padding: 10px;
+	color: #444444;
+	background-color: white;
+}
+
+.features-list {
+  list-style-type: decimal-leading-zero;	
 }
 
 @media(min-width:767px) {
 	.intro {
-		height: 100%;
+		height: 500px;
 		padding: 0;
 	}
 
@@ -129,41 +161,33 @@ a:focus {
 	}
 }
 
-.btn-circle {
-	width: 70px;
-	height: 70px;
-	margin-top: 15px;
-	padding: 7px 16px;
-	border: 2px solid #222222;
-	border-radius: 35px;
-	font-size: 40px;
-	color: #222222;
-	background: 0 0;
-	-webkit-transition: background .3s ease-in-out;
-	-moz-transition: background .3s ease-in-out;
-	transition: background .3s ease-in-out;
-}
-
-.btn-circle:hover,
-.btn-circle:focus {
-	outline: 0;
-	color: white;
-	background-color: #66CCFF;
-}
-
 .top-section {
 	padding: 20px 0;
 }
 
 .download-section {
 	width: 100%;
-	color: #222222;
-	/*background: url(../img/downloads-bg.jpg) no-repeat center center scroll;*/
-	background-color: white;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	background-size: cover;
-	-o-background-size: cover;
+	color: white;
+	background-color: #222222;
+	padding: 100px
+}
+
+.contact-section {
+	width: 100%;
+	color: white;
+	background-color: #408BB7;
+}
+
+.footer-section {
+	width: 100%;
+	color: white;
+	padding-bottom: 100px;
+	background-color: #408BB7;
+}
+
+.footer-section a {
+	color: white;
+	text-decoration: underline;
 }
 
 #map {
@@ -174,7 +198,7 @@ a:focus {
 
 @media(min-width:767px) {
 	.content-section {
-		padding-top: 250px;
+		padding: 60px;
 	}
 
 	#map {
@@ -183,16 +207,24 @@ a:focus {
 	}
 }
 
+@media(max-width:767px) {
+	body {
+		font-size: 1.4em;
+	}
+	pre {
+		font-size: 55%;
+	}
+}
+
 .btn {
 	text-transform: uppercase;
-	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-weight: 400;
+	/*font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif;*/
 }
 
 .btn-default {
-	border: 1px solid #66CCFF;
-	color: #66CCFF;
-	background-color: transparent;
+	border: 1px solid #1D1D1D;
+	color: #FFFFFF;
+	background-color: #4A4A4A;
 }
 
 .btn-default:hover,
@@ -322,12 +354,6 @@ code {
 
 .btn-client {
 	font-size: 90px;
-}
-
-.btn-client-div {
-	width: 150px;
-	/*text-align: center;*/
-	display: inline-block;
 }
 
 /***** Syntax Highlighting Theme *****/

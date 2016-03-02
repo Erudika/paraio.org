@@ -6,12 +6,7 @@
   / .___/\__,_/_/   \__,_/ io.org
  /_/
 -->
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
 <html lang="en-us" class="no-js">
-  <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,22 +14,18 @@
     <meta name="description" content="Para is an open source, general-purpose, back-end framework for the cloud.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="YXojLKu08NjIbC9uXuTBV-TmbaEHNGjyqaFcCzVyD-U" />
-    <meta property="og:image" content="http://www.paraio.org/apple-touch-icon-precomposed.png">
-    <link rel="image_src" href="http://www.paraio.org/apple-touch-icon-precomposed.png">
+    <meta property="og:image" content="https://www.paraio.org/apple-touch-icon-precomposed.png">
+    <link rel="image_src" href="https://www.paraio.org/apple-touch-icon-precomposed.png">
     <!-- Bootswatch Theme CSS -->
     <link href="https://netdna.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css" rel="stylesheet">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css" rel="stylesheet">
     <link href="https://cdn.rawgit.com/konpa/devicon/89f2f44ba07ea3fff7e561c2142813b278c2d6c6/devicon.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700">
     <link href="/css/main.css" rel="stylesheet">
   </head>
   <body>
-    <!--[if lt IE 9]>
-			<h1 class="browsehappy">You are using an <strong>outdated</strong> browser.
-			Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</h1>
-		<![endif]-->
     <!--  Navigation  -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
       <div class="container">
@@ -72,13 +63,14 @@
         <div class="container">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <h1 class="brand-heading">Para</h1>
-              <p class="intro-text">A general-purpose back-end framework for the cloud.</p>
+              <h1>A general-purpose back-end framework for the cloud</h1>
+              <p class="intro-text">Simple and open source, works well for web and mobile</p>
               <div class="page-scroll">
-                <a href="#about" class="btn btn-circle">
-                  <i class="fa fa-angle-double-down animated"></i>
-                </a>
+                <a href="https://github.com/erudika/para/releases/download/v1.18.1/para-war-1.18.1.war" class="btn btn-default"><i class="fa fa-download"></i> Download</a>
               </div>
+              <h4 class="intro-cmd">
+						<code>$ java -jar para-war-1.18.1.war</code>
+					</h4>
             </div>
           </div>
         </div>
@@ -88,79 +80,96 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
           <h2>About Para</h2>
-          <p>Para was designed as a simple and modular back-end framework for object persistence and retrieval. It helps your application store its objects to a datastore (SQL or NoSQL based) while automatically caching those objects and making them searchable. <i>Why use it?</i> Because it's open source, well documented and tested and it's just easier than most frameworks out there.</p>
-          <p>The name "Para" means "steam" in Bulgarian. And just like steam is used to power stuff, you can use Para to power your mobile or web application back-end.</p>
+          <p>Para was designed as a simple and modular back-end framework for object persistence and retrieval. It helps your application store its objects to a data store or a RDBMS while automatically caching those objects and making them searchable.</p>
+          <p>The name "pára" means "steam" in Bulgarian. And just like steam is used to power stuff, you can use Para to power your mobile or web application back-end.</p>
+          <p><i>Why use it?</i> Because it's open source, well documented and tested and it's just easier to use than most frameworks out there.</p>
           <hr />
           <ul class="list-inline banner-social-buttons">
-            <li><a href="https://paraio.com" class="btn btn-default btn-lg">Get started with our hosted service</a></li>
+            <li><a href="https://paraio.com" class="btn btn-default btn-lg">Try our hosted service</a></li>
           </ul>
           <p>It's <i>free</i> for developers!</p>
         </div>
       </div>
     </section>
-    <section id="download" class="container content-section text-center">
+    <section id="about" class="container content-section text-center">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h2>Features</h2>
+          <ul class="features-list">
+            <li>Multi-tenancy support - each app has its own table, index and cache</li>
+            <li>RESTful JSON API secured with Amazon's Signature 4 algorithm</li>
+            <li>Designed for scalable data stores (DynamoDB, Cassandra, MongoDB)</li>
+            <li>Full-text search (Elasticsearch by default)</li>
+            <li>Distributed object cache (Hazelcast by default)</li>
+            <li>Flexible security - social login, JWT support, CSRF protection, etc.</li>
+            <li>Simple but effective resource permissions for client access control</li>
+            <li>Robust constraint validation based on JSR-303 and Hibernate Validator</li>
+            <li>Per-object control of persistence, index and cache operations</li>
+            <li>Modular design powered by Google Guice and support for plugins</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section id="download" class="container download-section text-center">
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
           <h2>Get Para</h2>
-          <h3>v1.17.1</h3>
+          <h3>v1.18.1</h3>
           <p>Get it through Maven or as an <strong>executable WAR</strong> package.</p>
-          <hr />
           <ul class="list-inline banner-social-buttons">
-            <li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default btn-lg">Source code</a>
+            <li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default">Source code</a>
             </li>
-            <li><a href="https://github.com/erudika/para/releases/download/v1.17.1/para-war-1.17.1.war" class="btn btn-default btn-lg">WAR</a>
+            <li><a href="https://github.com/erudika/para/releases/download/v1.18.1/para-war-1.18.1.war" class="btn btn-default">WAR</a>
             </li>
           </ul>
           <h3>Maven</h3>
           <div class="row">
-            <div class="col-lg-6 col-lg-offset-3 text-left">
+            <div class="col-lg-8 col-lg-offset-2 text-left">
               <pre class="btn-default"><code>  &lt;dependency&gt;
     &lt;groupId&gt;com.erudika&lt;/groupId&gt;
     &lt;artifactId&gt;para-server&lt;/artifactId&gt;
-    &lt;version&gt;1.17.1&lt;/version&gt;
+    &lt;version&gt;1.18.1&lt;/version&gt;
   &lt;/dependency&gt;</code></pre>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section id="contact" class="container content-section text-center">
+    <section id="contact" class="container contact-section text-center">
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
           <h2>Talk to us</h2>
           <p>For support and feedback:</p>
-          <p></p>
+          <p>&nbsp;</p>
           <ul class="list-inline banner-social-buttons">
             <li>
-              <a href="mailto:para&commat;erudika.com" class="btn btn-default btn-lg">
+              <a href="mailto:para&commat;erudika.com" class="btn btn-default">
                 <i class="fa fa-envelope fa-fw"></i> <span class="network-name">Email</span></a>
             </li>
             <li>
-              <a href="https://twitter.com/para_io" class="btn btn-default btn-lg">
+              <a href="https://twitter.com/para_io" class="btn btn-default">
                 <i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
             </li>
             <li>
-              <a href="https://github.com/erudika/para" class="btn btn-default btn-lg">
+              <a href="https://github.com/erudika/para" class="btn btn-default">
                 <i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
             </li>
           </ul>
-          <hr />
-          <iframe src="https://ghbtns.com/github-btn.html?user=Erudika&repo=para&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe>
-          <iframe src="https://ghbtns.com/github-btn.html?user=Erudika&repo=para&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe>
+          <p>&nbsp;</p>
+          <iframe src="http://ghbtns.com/github-btn.html?user=Erudika&repo=para&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=Erudika&repo=para&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe>
         </div>
       </div>
     </section>
-    <section id="contact" class="container content-section text-center">
-      &nbsp;
-    </section>
     <!-- Footer Content -->
-    <div class="container">
+    <div class="container footer-section">
       <p>&nbsp;</p>
       <footer>
         <div class="row">
           <div class="col-lg-12 text-center">
-            <p>Generated on <i>2015-12-26</i> with <a href="https://github.com/albogdano/bootup">bootUP</a> and hosted on <a href="https://github.com/erudika/paraio.org"><i class="fa fa-github fa-lg"></i></a></p>
-            <p>&copy; 2015 <a href="http://erudika.com">Erudika</a></p>
+            <p>Generated on <i>2016-03-02</i> by <a href="https://github.com/albogdano/bootup">bootUP</a> and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
+            <p>Some rights reserved <i class="fa fa-creative-commons"></i> 2016
+              <a href="http://erudika.com">Erudika</a></p>
           </div>
         </div>
       </footer>
