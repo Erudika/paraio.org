@@ -172,6 +172,12 @@ a:focus {
 	padding: 20px 0;
 }
 
+.about-section {
+	width: 100%;
+	background-color: #EEEEEE;
+	padding: 100px 10px;
+}
+
 .download-section {
 	width: 100%;
 	color: white;
