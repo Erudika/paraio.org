@@ -51,14 +51,22 @@ permission will overwrite the old one.
 app.revokeAllResourcePermissions("1");
 ```
 
+**Scenario 5:** Grant full access or deny all access to everyone:
+```java
+app.grantResourcePermission("*", "*", AllowedMethods.ALL);
+```
+```java
+app.grantResourcePermission("*", "*", AllowedMethods.NONE);
+```
+
 To get all permissions for both users call:
 
 ```java
 app.getAllResourcePermissions("1", "2");
 ```
 
-The default initial policy for all apps is "deny all" which means that new users won't be able to access any resources
-unless given explicit permission to do so.
+The default initial policy for all apps is "deny all" which means that new users won't be able to access any resources,
+except their own object and child objects, unless given explicit permission to do so.
 
 To check if user `1` is allowed to access a particular resource call:
 

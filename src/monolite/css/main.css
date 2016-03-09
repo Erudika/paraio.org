@@ -199,6 +199,11 @@ pre.maven-coords {
 	padding: 60px 10px;
 }
 
+.contact-section p a {
+	color: white;
+	text-decoration: underline;
+}
+
 .footer-section {
 	width: 100%;
 	color: white;
