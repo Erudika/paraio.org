@@ -23,8 +23,7 @@ body ::-moz-selection {
 }
 body ::-webkit-selection {
   background-color: #66CCFF;
-}​
-
+}
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
@@ -355,6 +354,11 @@ code {
 
 #sidebar h4 {
 	margin: 5px 0 10px 0;
+}
+
+#sidebar h1 {
+	font-family: inherit;
+	font-weight: 300;
 }
 
 #content article a h2 {

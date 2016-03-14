@@ -68,6 +68,12 @@ app.getAllResourcePermissions("1", "2");
 The default initial policy for all apps is "deny all" which means that new users won't be able to access any resources,
 except their own object and child objects, unless given explicit permission to do so.
 
+You can also create "anonymous" permissions to allow unauthenticated users to access certain resources:
+```java
+app.grantResourcePermission("*", "public/resource", AllowedMethods.READ, true);
+```
+The special permission method `?` means that anyone can do a `GET` request on `public/resource`.
+
 To check if user `1` is allowed to access a particular resource call:
 
 ```java
