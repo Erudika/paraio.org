@@ -17,7 +17,6 @@ There are several configuration properties for Elasticsearch (these go in your `
 	</thead>
 	<tbody>
 		<tr><td>`para.es.async_enabled`</td><td> Asynchronous operation when indexing/unindexing. Defaults to `false`.</td></tr>
-		<tr><td>`para.es.lazy_start`</td><td> Start ES server on first request, not immediately. Defaults to `true`.</td></tr>
 		<tr><td>`para.es.cors_enabled`</td><td> Enable CORS for HTTP requests to Elasticsearch. Default is `false` only if running in production.</td></tr>
 		<tr><td>`para.es.cors_allow_origin`</td><td> CORS 'Allow-Origin' - which hosts are allowed to make HTTP requests to Elasticsearch. Default is `localhost` only.</td></tr>
 		<tr><td>`para.es.discovery_type`</td><td> Discovery mechanism when running in production. Default is `ec2`.</td></tr>

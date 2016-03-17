@@ -1,0 +1,2509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+
+<url>
+  <loc>http://www.paraio.org/</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/docs/</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-client/</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/overview-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/overview-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/allclasses-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/overview-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/overview-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/allclasses-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-client/com/erudika/para/client/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-client/allclasses-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/overview-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/deprecated-list.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index-all.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/help-doc.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?overview-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/allclasses-noframe.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/cache/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/utils/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/email/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/i18n/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/persistence/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/queue/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/rest/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/search/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/storage/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/validation/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/cache/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/utils/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/email/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/i18n/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/persistence/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/queue/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/rest/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/search/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/storage/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/validation/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/Address.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/App.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/App.AllowedMethods.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/cache/Cache.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/Cached.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/Cached.Action.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/Config.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/validation/Constraint.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/utils/CoreUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/i18n/CurrencyConverter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/i18n/CurrencyUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/rest/CustomResourceHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/persistence/DAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/DestroyListener.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/Email.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/email/Emailer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/storage/FileStore.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/rest/GenericExceptionMapper.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/HumanTime.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/Indexed.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/Indexed.Action.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/InitializeListener.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/Linkable.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/Linker.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/Locked.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/cache/MockCache.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/persistence/MockDAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/search/MockSearch.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/Pager.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/ParaObject.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/utils/ParaObjectUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/queue/Queue.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/search/Search.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/rest/Signer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/Stored.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/Sysprop.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/Tag.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/Translation.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/User.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/User.Groups.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/User.Roles.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/Utils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/validation/ValidationUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/Votable.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/Votable.VoteValue.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/Vote.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/overview-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/deprecated-list.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index-all.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/help-doc.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?overview-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/allclasses-noframe.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/aop/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/cache/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/email/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/i18n/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/queue/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/rest/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/search/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/storage/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/aop/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/cache/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/email/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/i18n/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/queue/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/rest/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/search/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/storage/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/package-frame.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/AjaxRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/aop/AOPModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/aop/AOPUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/rest/Api1.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/AppAuthentication.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/AuthenticatedUserDetails.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/AWSDynamoDAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/AWSDynamoUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/email/AWSEmailer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/storage/AWSFileStore.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/queue/AWSQueue.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/CachedCsrfTokenRepository.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/cache/CacheModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/CachingHttpHeadersFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/CORSFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/CORSFilter.CORSRequestType.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/CsrfProtectionRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/search/ElasticSearch.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/search/ElasticSearchUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/email/EmailModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/ErrorFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/FacebookAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/FieldFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/GitHubAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/GoogleAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/GZipResponseUtil.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/GZipServletFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/cache/HazelcastCache.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/cache/HazelcastUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/i18n/I18nModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/IgnoredRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/aop/IndexAndCacheAspect.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/IndexBasedDAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/JWTAuthentication.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/JWTAuthenticationProvider.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/JWTRestfulAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/i18n/LanguageUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/LinkedInAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/storage/LocalFileStore.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/email/NoopEmailer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/OAuth1HmacSigner.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/OpenIDAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/i18n/OXRCurrencyConverter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/Para.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/ParaServer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/PasswordAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/PersistenceModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/queue/QueueModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/RestAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/RestRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/rest/RestUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/search/SearchModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/SecurityConfig.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/SecurityModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/SecurityUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/SimpleAccessDeniedHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/SimpleAuthenticationEntryPoint.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/SimpleAuthenticationFailureHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/SimpleAuthenticationSuccessHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/SimpleAxFetchListFactory.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/SimpleRememberMeServices.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/SimpleRequestCache.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/SimpleUserService.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/storage/StorageModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/TwitterAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/UserAuthentication.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-client/com/erudika/para/client/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-client/com/erudika/para/client/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-client/deprecated-list.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-client/index-all.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-client/help-doc.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-client/index.html?com/erudika/para/client/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-client/allclasses-noframe.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-client/com/erudika/para/client/ParaClient.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?overview-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/cache/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/utils/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/email/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/i18n/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/persistence/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/queue/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/rest/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/search/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/storage/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/validation/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?deprecated-list.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?index-all.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?help-doc.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/constant-values.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/annotations/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/cache/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/cache/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/utils/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/utils/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/email/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/email/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/i18n/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/i18n/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/persistence/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/persistence/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/queue/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/queue/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/rest/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/rest/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/search/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/search/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/storage/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/storage/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/utils/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/validation/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/validation/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/Address.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/Address.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/serialized-form.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/App.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/App.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/App.AllowedMethods.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/App.AllowedMethods.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/cache/class-use/Cache.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/cache/Cache.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/class-use/Cached.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/annotations/Cached.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/class-use/Cached.Action.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/annotations/Cached.Action.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/class-use/Config.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/utils/Config.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/validation/class-use/Constraint.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/validation/Constraint.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/utils/class-use/CoreUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/utils/CoreUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/i18n/class-use/CurrencyConverter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/i18n/CurrencyConverter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/i18n/class-use/CurrencyUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/i18n/CurrencyUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/rest/class-use/CustomResourceHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/rest/CustomResourceHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/persistence/class-use/DAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/persistence/DAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/class-use/DestroyListener.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/DestroyListener.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/class-use/Email.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/annotations/Email.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/email/class-use/Emailer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/email/Emailer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/storage/class-use/FileStore.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/storage/FileStore.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/rest/class-use/GenericExceptionMapper.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/rest/GenericExceptionMapper.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/class-use/HumanTime.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/utils/HumanTime.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/class-use/Indexed.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/annotations/Indexed.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/class-use/Indexed.Action.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/annotations/Indexed.Action.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/class-use/InitializeListener.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/InitializeListener.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/Linkable.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/Linkable.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/Linker.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/Linker.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/class-use/Locked.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/annotations/Locked.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/cache/class-use/MockCache.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/cache/MockCache.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/persistence/class-use/MockDAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/persistence/MockDAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/search/class-use/MockSearch.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/search/MockSearch.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/class-use/Pager.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/utils/Pager.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/ParaObject.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/ParaObject.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/utils/class-use/ParaObjectUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/utils/ParaObjectUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/queue/class-use/Queue.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/queue/Queue.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/search/class-use/Search.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/search/Search.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/rest/class-use/Signer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/rest/Signer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/annotations/class-use/Stored.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/annotations/Stored.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/Sysprop.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/Sysprop.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/Tag.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/Tag.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/Translation.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/Translation.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/User.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/User.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/User.Groups.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/User.Groups.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/User.Roles.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/User.Roles.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/utils/class-use/Utils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/utils/Utils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/validation/class-use/ValidationUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/validation/ValidationUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/Votable.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/Votable.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/Votable.VoteValue.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/Votable.VoteValue.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/com/erudika/para/core/class-use/Vote.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-core/index.html?com/erudika/para/core/Vote.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?overview-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/aop/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/cache/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/email/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/i18n/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/queue/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/rest/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/search/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/storage/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/package-tree.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?deprecated-list.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?index-all.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?help-doc.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/constant-values.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/aop/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/aop/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/cache/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/cache/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/email/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/email/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/i18n/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/i18n/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/persistence/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/queue/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/queue/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/rest/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/rest/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/search/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/search/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/storage/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/storage/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/package-use.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/utils/filters/package-summary.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/AjaxRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/AjaxRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/aop/class-use/AOPModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/aop/AOPModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/aop/class-use/AOPUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/aop/AOPUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/rest/class-use/Api1.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/rest/Api1.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/AppAuthentication.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/AppAuthentication.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/serialized-form.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/AuthenticatedUserDetails.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/AuthenticatedUserDetails.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/class-use/AWSDynamoDAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/persistence/AWSDynamoDAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/class-use/AWSDynamoUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/persistence/AWSDynamoUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/email/class-use/AWSEmailer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/email/AWSEmailer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/storage/class-use/AWSFileStore.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/storage/AWSFileStore.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/queue/class-use/AWSQueue.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/queue/AWSQueue.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/CachedCsrfTokenRepository.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/CachedCsrfTokenRepository.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/cache/class-use/CacheModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/cache/CacheModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/class-use/CachingHttpHeadersFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/utils/filters/CachingHttpHeadersFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/class-use/CORSFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/utils/filters/CORSFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/class-use/CORSFilter.CORSRequestType.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/utils/filters/CORSFilter.CORSRequestType.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/CsrfProtectionRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/CsrfProtectionRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/search/class-use/ElasticSearch.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/search/ElasticSearch.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/search/class-use/ElasticSearchUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/search/ElasticSearchUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/email/class-use/EmailModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/email/EmailModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/class-use/ErrorFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/utils/filters/ErrorFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/FacebookAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/FacebookAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/class-use/FieldFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/utils/filters/FieldFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/GitHubAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/GitHubAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/GoogleAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/GoogleAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/class-use/GZipResponseUtil.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/utils/filters/GZipResponseUtil.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/utils/filters/class-use/GZipServletFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/utils/filters/GZipServletFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/cache/class-use/HazelcastCache.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/cache/HazelcastCache.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/cache/class-use/HazelcastUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/cache/HazelcastUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/i18n/class-use/I18nModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/i18n/I18nModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/IgnoredRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/IgnoredRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/aop/class-use/IndexAndCacheAspect.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/aop/IndexAndCacheAspect.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/class-use/IndexBasedDAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/persistence/IndexBasedDAO.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/JWTAuthentication.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/JWTAuthentication.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/JWTAuthenticationProvider.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/JWTAuthenticationProvider.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/JWTRestfulAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/JWTRestfulAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/i18n/class-use/LanguageUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/i18n/LanguageUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/LinkedInAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/LinkedInAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/storage/class-use/LocalFileStore.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/storage/LocalFileStore.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/email/class-use/NoopEmailer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/email/NoopEmailer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/OAuth1HmacSigner.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/OAuth1HmacSigner.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/OpenIDAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/OpenIDAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/i18n/class-use/OXRCurrencyConverter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/i18n/OXRCurrencyConverter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/class-use/Para.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/Para.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/class-use/ParaServer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/ParaServer.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/PasswordAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/PasswordAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/persistence/class-use/PersistenceModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/persistence/PersistenceModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/queue/class-use/QueueModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/queue/QueueModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/RestAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/RestAuthFilter.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/RestRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/RestRequestMatcher.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/rest/class-use/RestUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/rest/RestUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/search/class-use/SearchModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/search/SearchModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/SecurityConfig.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/SecurityConfig.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/SecurityModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/SecurityModule.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/SecurityUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/SecurityUtils.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/SimpleAccessDeniedHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/SimpleAccessDeniedHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/SimpleAuthenticationEntryPoint.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/SimpleAuthenticationEntryPoint.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/SimpleAuthenticationFailureHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/SimpleAuthenticationFailureHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/SimpleAuthenticationSuccessHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/SimpleAuthenticationSuccessHandler.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/SimpleAxFetchListFactory.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/index.html?com/erudika/para/security/SimpleAxFetchListFactory.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.paraio.org/javadocs-server/com/erudika/para/security/class-use/SimpleRememberMeServices.html</loc>
+  <lastmod>2016-03-14T14:03:17+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+</urlset>
