@@ -12,7 +12,7 @@ Unlinks or deletes the objects linked to the object with the specified `{id}`.
 - `{type}` - the type of the first object, e.g. "users"
 - `{id}` - the `id` of the first object
 - `{type2}` - the `type` of the second object (not required, if this and `{id2}` are missing, it will unlink everything)
-- `{id2}` - the `id` field of the second object (not required)
+- `{id2}` - the `id` field of the second object (optional)
 
 #### Parameters
 

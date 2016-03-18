@@ -13,7 +13,8 @@ one with `id = 1` and user two with `id = 2`. We'll use the following methods:
 
 ```java
 boolean grantResourcePermission(String subjectid, String resourcePath, EnumSet<AllowedMethods> permission);
-
+// when not using the Java client - permission is an array of HTTP methods
+boolean grantResourcePermission(String subjectid, String resourcePath, String[] permission);
 boolean revokeResourcePermission(String subjectid, String resourcePath);
 ```
 

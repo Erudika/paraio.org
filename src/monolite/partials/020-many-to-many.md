@@ -22,14 +22,21 @@ Para objects - they can be persisted, indexed and cached.
 +----------+
 </pre>
 
-Linking and unlinking two objects is done like this:
+**Note:** The following methods are only used when creating "many-to-many" links.
+Linking and unlinking two objects, `object1` and `object2`, is done like this:
 
 ```java
-object1.link(Object2.class, object2.getId());
-object1.unlink(Object2.class, object2.getId());
+object1.link(object2.getType(), object2.getId());
+object1.unlink(object2.getType(), object2.getId());
 // delete all links to/from object1
 object1.unlinkAll();
 ```
 
-To check if two objects are linked use `object1.isLinked(Object2.class, object2.getId())`. Also you can count the number
-of links by calling `object1.countLinks(Object2.class)`.
+To check if two objects are linked use `object1.isLinked(object2.getType(), object2.getId())`.
+Also you can count the number of links by calling `object1.countLinks(object2.getType())`.
+
+Finally, to read all objects that are linked to `object1`, use:
+
+```java
+object1.getLinkedObjects(object2.getType(), Pager... pager);
+```

@@ -8,8 +8,8 @@ type: POST
 This will link the object with `{id}` to another object with the specified id in the `id` parameter.
 The created link represents a many-to-many relationship (see also [one-to-many relationships](#019-one-to-many)).
 
-Creating one-to-many links is trivial - just set the `parentid` of an object (child) to be equal to
-the `id` field of another object (parent).
+Don't use this method for "one-to-many" links. Creating one-to-many links is trivial - just set the `parentid`
+of an object (child) to be equal to the `id` field of another object (parent).
 
 `PUT` requests to this resource are equivalent to `POST`.
 
