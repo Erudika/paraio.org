@@ -1,9 +1,12 @@
 #!/bin/bash
 
+if [ -n "$1" ]; then
+  sed -e "1,/version: / s/version: .*/version: \"$1\"/" -i.bak ./src/monolite/index.html
+fi
 grunt && git commit -am "updated docs" && git checkout gh-pages
 cp -Rf dist/* .
 if [ -n "$1" ]; then
-	sed -e "1,/version: / s/version: .*/version: \"$1\"/" -i.bak ./src/monolite/index.html
+  sed -e "1,/version: / s/version: .*/version: \"$1\"/" -i.bak ./src/monolite/index.html
   rm -rf javadocs-core
   rm -rf javadocs-server
   rm -rf javadocs-client
@@ -13,7 +16,7 @@ if [ -n "$1" ]; then
   unzip jdocs1.zip -d javadocs-core && rm jdocs1.zip
   unzip jdocs2.zip -d javadocs-server && rm jdocs2.zip
   unzip jdocs3.zip -d javadocs-client && rm jdocs3.zip
-	rm ./src/monolite/index.html.bak
+  rm ./src/monolite/index.html.bak
 fi
 git add -A && git commit -am "updated docs"
 git push origin gh-pages
