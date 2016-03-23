@@ -10,8 +10,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Para - a general-purpose back-end framework for the cloud</title>
-    <meta name="description" content="Para is an open source, general-purpose, back-end framework for the cloud.">
+    <title>Para - a general-purpose backend framework for the cloud</title>
+    <meta name="description" content="Para is an open source, general-purpose, backend framework for the cloud.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="YXojLKu08NjIbC9uXuTBV-TmbaEHNGjyqaFcCzVyD-U" />
     <meta property="og:image" content="https://www.paraio.org/apple-touch-icon-precomposed.png">
@@ -63,7 +63,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <h1>A general-purpose back-end framework for the cloud</h1>
+              <h1>A general-purpose backend framework for the cloud</h1>
               <p class="intro-text">Simple and open source, works well for web and mobile</p>
               <div class="page-scroll">
                 <a href="https://github.com/erudika/para/releases/download/v1.18.2/para-1.18.2.war" class="btn btn-default"><i class="fa fa-download"></i> Download</a>
@@ -71,19 +71,31 @@
               <h4 class="intro-cmd">
 						<code>$ java -jar para-1.18.2.war</code>
 					</h4>
+              <h4>
+						<a href="http://console.paraio.org" target="_blank">console.paraio.org</a>
+					</h4>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section id="about" class="container content-section text-center">
+    <div class="container">
       <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
+        <div class="col-md-12">
+          <div class="browser-mockup">
+            <img src="/img/grab.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <section id="about" class="container about-section text-center">
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
           <h2>About Para</h2>
-          <p>Para was designed as a simple and modular back-end framework for object persistence and retrieval. It helps your application store its objects to a data store or a RDBMS while automatically caching those objects and making them searchable.</p>
-          <p>The name "pára" means "steam" in Bulgarian. And just like steam is used to power stuff, you can use Para to power your mobile or web application back-end.</p>
+          <p><b>Para</b> was designed as a simple and modular backend framework for object persistence and retrieval. It helps you build applications faster by taking care of the backend. It works on three levels - objects are stored in a NoSQL data store or any old relational database, then automatically indexed by a search engine and finally, cached.</p>
+          <p>The name "pára" means "steam" in Bulgarian. And just like steam is used to power stuff, you can use Para to power your mobile or web application backend.</p>
           <p><i>Why use it?</i> Because it's open source, well documented and tested and it's just easier to use than most frameworks out there.</p>
-          <hr />
+          <hr/>
           <ul class="list-inline banner-social-buttons">
             <li><a href="https://paraio.com" class="btn btn-default btn-lg">Try our hosted service</a></li>
           </ul>
@@ -106,6 +118,7 @@
             <li>Robust constraint validation based on JSR-303 and Hibernate Validator</li>
             <li>Per-object control of persistence, index and cache operations</li>
             <li>Modular design powered by Google Guice and support for plugins</li>
+            <li><a href="http://console.paraio.org" target="_blank">Para Web Console</a> - admin user interface</li>
           </ul>
         </div>
       </div>
@@ -127,35 +140,35 @@
     &lt;version&gt;1.18.2&lt;/version&gt;
   &lt;/dependency&gt;</code></pre>
       <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
+        <div class="col-lg-6 col-lg-offset-3">
           <h2>Clients</h2>
           <div class="row">
-            <div class="col-md-2 text-center">
+            <div class="col-sm-2 text-center">
               <a href="https://github.com/Erudika/para/tree/master/para-client" class="btn-client-s" title="Java">
                 <i class="devicon-java-plain"></i>
               </a>
             </div>
-            <div class="col-md-2 text-center">
+            <div class="col-sm-2 text-center">
               <a href="https://github.com/Erudika/para-client-js" class="btn-client-s" title="JavaScript">
                 <i class="devicon-javascript-plain"></i>
               </a>
             </div>
-            <div class="col-md-2 text-center">
+            <div class="col-sm-2 text-center">
               <a href="https://github.com/Erudika/para-client-php" class="btn-client-s" title="PHP">
                 <i class="devicon-php-plain"></i>
               </a>
             </div>
-            <div class="col-md-2 text-center">
+            <div class="col-sm-2 text-center">
               <a href="https://github.com/Erudika/para-client-csharp" class="btn-client-s" title="Microsoft .NET">
                 <i class="devicon-dot-net-plain"></i>
               </a>
             </div>
-            <div class="col-md-2 text-center">
+            <div class="col-sm-2 text-center">
               <a href="https://github.com/Erudika/para-client-android" class="btn-client-s" title="Android">
                 <i class="devicon-android-plain"></i>
               </a>
             </div>
-            <div class="col-md-2 text-center">
+            <div class="col-sm-2 text-center">
               <!--<a href="https://github.com/Erudika/para-client-ios" class="btn-client-s" title="iOS">-->
               <span class="btn-client-s hljs-comment">
 						<i class="devicon-apple-original"></i>
@@ -169,9 +182,8 @@
     </section>
     <section id="contact" class="container contact-section text-center">
       <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
+        <div class="col-lg-6 col-lg-offset-3">
           <h2>Talk to us</h2>
-          <p>For support and feedback:</p>
           <p>&nbsp;</p>
           <ul class="list-inline banner-social-buttons">
             <li>
@@ -192,6 +204,11 @@
             </li>
           </ul>
           <p>&nbsp;</p>
+          <h2>Hosting &amp; Support</h2>
+          <p>
+            We offer hosting and premium support at <a href="https://paraio.com">paraio.com</a> where you can try Para online with a <strong>free developer account</strong>. Browse and manage your users and objects, do backups and edit permissions with a few clicks in the web console. By upgrading to a premium account you will be able to scale you projects up and down in seconds and manage multiple apps.
+          </p>
+          <p>&nbsp;</p>
           <iframe src="http://ghbtns.com/github-btn.html?user=Erudika&repo=para&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe>
           <iframe src="http://ghbtns.com/github-btn.html?user=Erudika&repo=para&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="130" height="30"></iframe>
         </div>
@@ -203,7 +220,7 @@
       <footer>
         <div class="row">
           <div class="col-lg-12 text-center">
-            <p>Generated on <i>2016-03-02</i> by <a href="https://github.com/albogdano/bootup">bootUP</a> and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
+            <p>Generated on <i>2016-03-23</i> by <a href="https://github.com/albogdano/bootup">bootUP</a> and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
             <p>Some rights reserved <i class="fa fa-creative-commons"></i> 2016
               <a href="http://erudika.com">Erudika</a></p>
           </div>

@@ -720,34 +720,34 @@ pc.me();
 </code></pre>
 <h3 id="client-libraries">Client libraries</h3>
 <div class="row">
-  <div class="col-md-4 text-center">
+  <div class="col-sm-4 text-center">
         <a href="https://github.com/Erudika/para/tree/master/para-client" class="btn-client">
             <i class="devicon-java-plain-wordmark"></i>
         </a>
     </div>
-  <div class="col-md-4 text-center">
+  <div class="col-sm-4 text-center">
         <a href="https://github.com/Erudika/para-client-js" class="btn-client">
             <i class="devicon-javascript-plain"></i>
         </a>
     </div>
-  <div class="col-md-4 text-center">
+  <div class="col-sm-4 text-center">
         <a href="https://github.com/Erudika/para-client-php" class="btn-client">
             <i class="devicon-php-plain"></i>
         </a>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4 text-center">
+    <div class="col-sm-4 text-center">
         <a href="https://github.com/Erudika/para-client-csharp" class="btn-client">
             <i class="devicon-dot-net-plain-wordmark"></i>
         </a>
     </div>
-  <div class="col-md-4 text-center">
+  <div class="col-sm-4 text-center">
         <a href="https://github.com/Erudika/para-client-android" class="btn-client">
             <i class="devicon-android-plain-wordmark"></i>
         </a>
     </div>
-  <div class="col-md-4 text-center">
+  <div class="col-sm-4 text-center">
         <a href="https://github.com/Erudika/para-client-ios" class="btn-client">
             <i class="devicon-apple-original"></i>
         </a>
@@ -887,7 +887,7 @@ List&lt;User&gt; users = Para.getSearch().findQuery(u.getType(), <span class="hl
 </span>}
 </code></pre>
 <h3 id="implementing-your-own-paraobject-classes">Implementing your own <code>ParaObject</code> classes</h3>
-<p>There was a question about how to implement <code>ParaObject</code> and where to start from. First of all there is no need to write
+<p>There was a question about how to implement <code>ParaObject</code> and where to start from. First of all, there is no need to write
 your own custom classes if you’re going to be using them for simple stuff. So step one is to take a look at the generic
 class called <code>Sysprop</code>. Look at the <a href="https://github.com/Erudika/para/blob/master/para-core/src/main/java/com/erudika/para/core/Sysprop.java">source code on GitHub</a>.
 It’s pretty simple and implements all of <code>ParaObject</code>‘s methods. Then you have to decide if you can work with that
@@ -895,7 +895,7 @@ generic class or not. If you really need custom properties and methods then that
 Just copy the getters and setters and add your own fields and methods.</p>
 <p>Another option is to extend <code>Sysprop</code> like so:</p>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyParaObject</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Sysprop</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ParaObject</span> </span>{
-    <span class="hljs-comment">// implements statement is redundant here</span>
+    <span class="hljs-comment">// 'implements' is redundant here</span>
 
     <span class="hljs-annotation">@Stored</span>
     <span class="hljs-keyword">public</span> String myCustomField;
@@ -1232,7 +1232,7 @@ It contains all core fields, getters, setters and also implements basic function
         <tr><td><code>Address</code></td><td> Defines an address with optional geographical coordinates. Used for location based searching. </td></tr>
         <tr><td><code>App</code></td><td> Defines an application within Para. Usually there’s only one existing (root) app.</td></tr>
         <tr><td><code>Tag</code></td><td> Simple tag class which contains a tag and its frequency count. Basically any Para object can be tagged. Used for searching.</td></tr>
-        <tr><td><code>Vote</code></td><td> Defines a user vote - negative or positive. Useful for modeling posts which can be voted on. </td></tr>
+        <tr><td><code>Vote</code></td><td> Defines a user vote - negative or positive. Useful for modeling objects which can be voted on (likes, +1s, favs, etc). </td></tr>
         <tr><td><code>Translation</code></td><td> Holds a translated string. Can be used for collecting translations from users. </td></tr>
         <tr><td><code>Sysprop</code></td><td> <strong>System class</strong> used as a general-purpose data container. It’s basically a map. </td></tr>
         <tr><td><code>Linker</code></td><td> <strong>System class</strong> used for implementing a many-to-many relationship between objects. </td></tr>
@@ -1486,7 +1486,8 @@ requests going to <code>/v1/_batch</code>.</p>
 <p>Let’s look at a few example scenarios where we give users permission to access the <code>_batch</code>. We have two users - user
 one with <code>id = 1</code> and user two with <code>id = 2</code>. We’ll use the following methods:</p>
 <pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">grantResourcePermission</span><span class="hljs-params">(String subjectid, String resourcePath, EnumSet&lt;AllowedMethods&gt; permission)</span></span>;
-
+<span class="hljs-comment">// when not using the Java client - permission is an array of HTTP methods</span>
+<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">grantResourcePermission</span><span class="hljs-params">(String subjectid, String resourcePath, String[] permission)</span></span>;
 <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">revokeResourcePermission</span><span class="hljs-params">(String subjectid, String resourcePath)</span></span>;
 </code></pre>
 <p>These methods allow the use of wildcards <code>*</code> for <code>subjectid</code> and <code>resourcePath</code> arguments.</p>
@@ -1509,11 +1510,20 @@ permission will overwrite the old one.</p>
 <p><strong>Scenario 4:</strong> Revoke all permissions for user <code>1</code> except <code>READ</code>:</p>
 <pre><code class="lang-java">app.revokeAllResourcePermissions(<span class="hljs-string">"1"</span>);
 </code></pre>
+<p><strong>Scenario 5:</strong> Grant full access or deny all access to everyone:</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"*"</span>, AllowedMethods.ALL);
+</code></pre>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"*"</span>, AllowedMethods.NONE);
+</code></pre>
 <p>To get all permissions for both users call:</p>
 <pre><code class="lang-java">app.getAllResourcePermissions(<span class="hljs-string">"1"</span>, <span class="hljs-string">"2"</span>);
 </code></pre>
-<p>The default initial policy for all apps is “deny all” which means that new users won’t be able to access any resources
-unless given explicit permission to do so.</p>
+<p>The default initial policy for all apps is “deny all” which means that new users won’t be able to access any resources,
+except their own object and child objects, unless given explicit permission to do so.</p>
+<p>You can also create “anonymous” permissions to allow unauthenticated users to access certain resources:</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"public/resource"</span>, AllowedMethods.READ, <span class="hljs-keyword">true</span>);
+</code></pre>
+<p>The special permission method <code>?</code> means that anyone can do a <code>GET</code> request on <code>public/resource</code>.</p>
 <p>To check if user <code>1</code> is allowed to access a particular resource call:</p>
 <pre><code class="lang-java"><span class="hljs-comment">// returns 'false'</span>
 app.isAllowedTo(<span class="hljs-string">"1"</span>, <span class="hljs-string">"admin"</span>, <span class="hljs-string">"GET"</span>);
@@ -1678,7 +1688,6 @@ class.</p>
     </thead>
     <tbody>
         <tr><td><code>para.es.async_enabled</code></td><td> Asynchronous operation when indexing/unindexing. Defaults to <code>false</code>.</td></tr>
-        <tr><td><code>para.es.lazy_start</code></td><td> Start ES server on first request, not immediately. Defaults to <code>true</code>.</td></tr>
         <tr><td><code>para.es.cors_enabled</code></td><td> Enable CORS for HTTP requests to Elasticsearch. Default is <code>false</code> only if running in production.</td></tr>
         <tr><td><code>para.es.cors_allow_origin</code></td><td> CORS ‘Allow-Origin’ - which hosts are allowed to make HTTP requests to Elasticsearch. Default is <code>localhost</code> only.</td></tr>
         <tr><td><code>para.es.discovery_type</code></td><td> Discovery mechanism when running in production. Default is <code>ec2</code>.</td></tr>
@@ -1757,7 +1766,6 @@ for caching without having to manage a separate caching server or cluster.</p>
     </thead>
     <tbody>
         <tr><td><code>para.hc.async_enabled</code></td><td> Asynchronous operation when putting objects in cache. Defaults to <code>false</code>.</td></tr>
-        <tr><td><code>para.hc.lazy_start</code></td><td> Start Hazelcast server on first request, not immediately. Defaults to <code>true</code>.</td></tr>
         <tr><td><code>para.hc.eviction_policy</code></td><td> Cache eviction policy - <code>LRU</code> or <code>LFU</code>. Defaults to <code>LRU</code>.</td></tr>
         <tr><td><code>para.hc.eviction_percentage</code></td><td> Cache eviction percentage. Defaults to <code>25</code> percent.</td></tr>
         <tr><td><code>para.hc.max_size</code></td><td> Cache size as a percentage of used heap. Defaults to <code>25</code> percent.</td></tr>
@@ -1836,14 +1844,18 @@ Para objects - they can be persisted, indexed and cached.</p>
 +----------+
 </pre>
 
-<p>Linking and unlinking two objects is done like this:</p>
-<pre><code class="lang-java">object1.link(Object2.class, object2.getId());
-object1.unlink(Object2.class, object2.getId());
+<p><strong>Note:</strong> The following methods are only used when creating “many-to-many” links.
+Linking and unlinking two objects, <code>object1</code> and <code>object2</code>, is done like this:</p>
+<pre><code class="lang-java">object1.link(object2.getType(), object2.getId());
+object1.unlink(object2.getType(), object2.getId());
 <span class="hljs-comment">// delete all links to/from object1</span>
 object1.unlinkAll();
 </code></pre>
-<p>To check if two objects are linked use <code>object1.isLinked(Object2.class, object2.getId())</code>. Also you can count the number
-of links by calling <code>object1.countLinks(Object2.class)</code>.</p>
+<p>To check if two objects are linked use <code>object1.isLinked(object2.getType(), object2.getId())</code>.
+Also you can count the number of links by calling <code>object1.countLinks(object2.getType())</code>.</p>
+<p>Finally, to read all objects that are linked to <code>object1</code>, use:</p>
+<pre><code class="lang-java">object1.getLinkedObjects(object2.getType(), Pager... pager);
+</code></pre>
 
 						</section>
 					</article>
@@ -3352,16 +3364,19 @@ use the <code>&gt;, &lt;, &gt;=, &lt;=</code> operators by appending them to the
 						
 						<section class="body img-rounded">
 							<p>Call this method to search for objects that linked to the object with the given <code>{id}</code>.</p>
+<p><strong>Note:</strong> When called with the parameter <code>?childrenonly</code>, the request is treated as a “one-to-many” search request.
+It will do asearch for child objects directly connected to their parent by the <code>parentid</code> field. Without <code>?childrenonly</code>
+the request is treated as a “many-to-many” search request.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{type}</code> - the type of the first object, e.g. “users”</li>
 <li><code>{id}</code> - the <code>id</code> of the first object</li>
 <li><code>{type2}</code> - the <code>type</code> of the second object (required)</li>
-<li><code>{id2}</code> - the <code>id</code> field of the second object (not required)</li>
+<li><code>{id2}</code> - the <code>id</code> field of the second object (optional)</li>
 </ul>
 <h4 id="parameters">Parameters</h4>
 <ul>
-<li><code>childrenonly</code> - if set and <code>id</code> is not set, will return a list of child objects
+<li><code>childrenonly</code> - if set and <code>{id2}</code> is not set, will return a list of child objects
 (these are the objects with <code>parentid</code> equal to <code>{id}</code> above). Also if <code>field</code> and <code>term</code> parameters are set, the results
 are filtered by the specified field and the value of that field (term).</li>
 <li><code>count</code> - if set will return no items an the total number of linked objects. If <code>childrenonly</code> is set, this will
@@ -3369,8 +3384,8 @@ return only the count of child objects.</li>
 </ul>
 <h3 id="response">Response</h3>
 <ul>
-<li>If the <code>id</code> parameter is specified, the response will be a boolean - <code>true</code> if objects are linked.</li>
-<li>If the <code>id</code> parameter is missing, the response will be a list of linked objects. (pagination parameters are applicable)</li>
+<li>If the <code>{id2}</code> parameter is specified, the response will be a boolean text value - <code>true</code> if objects are linked.</li>
+<li>If the <code>{id2}</code> parameter is missing, the response will be a list of linked objects. (pagination parameters are applicable)</li>
 <li><p><code>childrenonly</code> - if set, the response will be a list of child objects (pagination parameters are applicable)</p>
 </li>
 <li><p><strong>status codes</strong> - <code>200</code>, <code>400</code> (if <code>type</code> parameter is missing)</p>
@@ -3416,8 +3431,8 @@ return only the count of child objects.</li>
 						<section class="body img-rounded">
 							<p>This will link the object with <code>{id}</code> to another object with the specified id in the <code>id</code> parameter.
 The created link represents a many-to-many relationship (see also <a href="#019-one-to-many">one-to-many relationships</a>).</p>
-<p>Creating one-to-many links is trivial - just set the <code>parentid</code> of an object (child) to be equal to
-the <code>id</code> field of another object (parent).</p>
+<p>Don’t use this method for “one-to-many” links. Creating one-to-many links is trivial - just set the <code>parentid</code>
+of an object (child) to be equal to the <code>id</code> field of another object (parent).</p>
 <p><code>PUT</code> requests to this resource are equivalent to <code>POST</code>.</p>
 <h3 id="request">Request</h3>
 <ul>
@@ -3467,7 +3482,7 @@ the <code>id</code> field of another object (parent).</p>
 <li><code>{type}</code> - the type of the first object, e.g. “users”</li>
 <li><code>{id}</code> - the <code>id</code> of the first object</li>
 <li><code>{type2}</code> - the <code>type</code> of the second object (not required, if this and <code>{id2}</code> are missing, it will unlink everything)</li>
-<li><code>{id2}</code> - the <code>id</code> field of the second object (not required)</li>
+<li><code>{id2}</code> - the <code>id</code> field of the second object (optional)</li>
 </ul>
 <h4 id="parameters">Parameters</h4>
 <ul>
@@ -4225,7 +4240,7 @@ Make sure you save it and use it for signing future requests.</p>
 	<footer>
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<p>Generated on <i>2016-03-02</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+				<p>Generated on <i>2016-03-23</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 					and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 				<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2016
 					<a href="http://erudika.com">Erudika</a></p>
