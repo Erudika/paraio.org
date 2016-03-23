@@ -114,3 +114,38 @@ The Para client takes care of refreshing the JWT tokens every hour and by defaul
 > Setting the configuration property `para.clients_can_access_root_app` to `true` would allow clients with access tokens
 > to make API calls to the root app. This is useful if you only have one app on the server. This doesn't affect clients
 > that use an `accessKey` and a `secretKey`, only those that use access tokens.
+
+### Creating "super" tokens
+
+Since v1.18.3 we've added the support for "super" JSON web tokens. These are just like normal tokens for users, but
+instead of authenticating users we can authenticate apps witht them. You don't need to connect to a social identity
+provider like Facebook or Twitter - you simply generate the tokens on the client-side. Your code will need both the
+access key and secret key for this purpose.
+
+For example, lets assume we have some JavaScript app running in the browser and we need admin access to our Para app.
+We could use the [JavaScript client for Para](https://github.com/Erudika/para-client-js) but putting the secret key
+inside client-side code on the browser is *not a smart move*. So we pull in a library for generating JWT, like
+[jsrsasign](https://github.com/kjur/jsrsasign) and we create the token ourselves. Here's a snippet:
+
+```js
+function getJWT(appid, secret) {
+	var now = new Date().getTime() / 1000;
+	var sClaim = JSON.stringify({
+		exp: now + (7 * 24 * 60 * 60), // expires at
+		iat: now, // issued at
+		nbf: now, // not valid before
+		appid: appid // app id must be present
+	});
+	var sHeader = JSON.stringify({'alg': 'HS256', 'typ': 'JWT'});
+	return KJUR.jws.JWS.sign(null, sHeader, sClaim, secret);
+}
+```
+
+Your JS app could ask the user for the access keys, create a JWT and then discard the keys and use the newly generated
+"super" token. Once we have this we can attach it to every request as a header:
+
+```js
+Authorization: Bearer eyJhbGciOiVCJ9.eyJzdWIiOi0._MKAH6SGiKSoqgwmqUaxuMyE
+```
+When calling the Para API from JavaScript in the browser, make sure you are running a web server and not as `file:///`
+or your browser might not allow CORS requests. Also check that CORS is enabled in Para with `para.cors_enabled = true`.
