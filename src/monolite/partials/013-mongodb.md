@@ -3,7 +3,7 @@ title: MongoDB
 category: Persistence
 ---
 
-Since `v1.18.0` Para supports plugins and the the first official plugin adds [support for MongoDB](https://github.com/Erudika/para-dao-mongodb).
+Since v1.18.0 Para supports plugins and the the first official plugin adds [support for MongoDB](https://github.com/Erudika/para-dao-mongodb).
 The class `MongoDBDAO` is a `DAO` implementation and is responsible for connecting to a [MongoDB](https://www.mongodb.org/)
 server and storing/retrieving objects (items) to/from it. All operations are carried out using the latest MongoDB
 Java Driver compatible with MongoDB 3.2.

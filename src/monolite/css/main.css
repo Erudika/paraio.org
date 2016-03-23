@@ -2,8 +2,8 @@ html {
 	width: 100%;
 	height: 100%;
 	margin: 0px;
-    padding: 0px;
-    overflow-x: hidden;
+	padding: 0px;
+	overflow-x: hidden;
 	webkit-font-smoothing: antialiased;
 }
 body {
@@ -39,7 +39,7 @@ h1 .small,h2 .small,h3 .small,h4 .small,h5 .small,h6 .small,
   color: #999999;
 }
 h1, .h1, h2, .h2, h3, .h3 {
-  margin-top: 21px;
+  margin-top: 40px;
   margin-bottom: 20px;
 }
 
@@ -386,6 +386,7 @@ code {
 #sidebar h1 {
 	font-family: inherit;
 	font-weight: 300;
+	margin-top: 0;
 }
 
 #content article a h2 {
