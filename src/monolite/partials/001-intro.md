@@ -19,9 +19,10 @@ persistable and searchable. You can still keep the RESTful API feature or turn i
 ### Quick start
 
 1. [Download the WAR](https://github.com/erudika/para/releases)
-2. Run it with `java -jar para-{VERSION}.war` - Para is now running in embedded mode, suitable for development.
-3. Call `curl localhost:8080/v1/_setup` to get the access and secret keys (give it a few seconds to initialize)
-4. Start using the RESTful API directly or use one of the provided client libraries below.
+2. Run it with `java -jar para-{VERSION}.war`
+3. Call `curl localhost:8080/v1/_setup` to get the access and secret keys
+4. Open the [Para Web Console](http://console.paraio.org) or use one of the provided
+client libraries below to connect to the API.
 
 The Java client for Para is a separate module with these Maven coordinates:
 

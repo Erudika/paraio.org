@@ -44,7 +44,10 @@ This executes the method `findPrefix()` with these **parameters**:
 
 #### `similar` query
 This executes the method `findSimilar()` with these **parameters**:
-- `fields` - a list of fields (example: `?fields=field1&fields=field2`)
+- `fields` - a list of fields, for example:
+```
+GET /v1/search/similar?fields=field1&fields=field2
+```
 - `filterid` - an id filter; excludes a particular object from the results
 - `like` - the source text to use for comparison
 
@@ -52,7 +55,10 @@ This executes the method `findSimilar()` with these **parameters**:
 
 #### `tagged` query
 This executes the method `findTagged()` with these **parameters**:
-- `tags` - a list of tags (example: `?tags=tag1&tags=tag2`)
+- `tags` - a list of tags, for example:
+```
+GET /v1/search/tagged?tags=tag1&tags=tag2
+```
 
 <hr>
 
@@ -66,7 +72,10 @@ This executes the method `findTermInList()` with these **parameters**:
 #### `terms` query
 This executes the method `findTerms()` with these **parameters**:
 - `matchall` - if `true` executes an `AND` query, otherwise an `OR` query
-- `terms` - a list of `field:term` pairs (example: `?terms=field:term&terms=field:term`)
+- `terms` - a list of `field:term` pairs, for example:
+```
+GET /v1/search/terms?terms=field1:term1&terms=field2:term2
+```
 - `count` - if present will return 0 objects but the "totalHits" field will contain the total number of results found
 that match the given terms.
 
@@ -84,7 +93,6 @@ This executes the method `findWildcard()` with these **parameters**:
 
 #### `count` query
 This executes the method `getCount()` with **no parameters**.
-
 
 
 ### Request parameters

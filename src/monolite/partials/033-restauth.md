@@ -110,10 +110,10 @@ paraClient.signOut();
 Tokens can also be revoked by calling `paraClient.revokeAllTokens()` but this only works for authenticated users.
 The Para client takes care of refreshing the JWT tokens every hour and by default all tokens are valid for a week.
 
-> **Important:** In a production environment, access to the root app is disabled for API clients for security reasons.
-> Setting the configuration property `para.clients_can_access_root_app` to `true` would allow clients with access tokens
-> to make API calls to the root app. This is useful if you only have one app on the server. This doesn't affect clients
-> that use an `accessKey` and a `secretKey`, only those that use access tokens.
+**Important:** In a production environment, access to the root app is disabled for API clients for security reasons.
+Setting the configuration property `para.clients_can_access_root_app` to `true` would allow clients with access tokens
+to make API calls to the root app. This is useful if you only have one app on the server. This doesn't affect clients
+that use an `accessKey` and a `secretKey`, only those that use access tokens.
 
 ### Creating "super" tokens
 
