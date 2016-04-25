@@ -88,7 +88,7 @@ paraClient.signIn(String provider, String providerToken);
 Supported providers are `facebook`, `google`, `twitter`, `github`, `linkedin`.
 
 You will have to add the API credentials for each of these in your `application.conf` configuration file:
-```cfg
+```
 # facebook
 para.fb_app_id = "..."
 para.fb_secret = "..."
