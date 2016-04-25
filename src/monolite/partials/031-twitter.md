@@ -6,6 +6,13 @@ category: Security
 **Update:** From v1.17.1 we support an easier way to login with Twitter [through the API](#034-api-jwt-signin).
 Authentication is implemented using JWT tokens instead of cookies.
 
+First of all you need to have your API credentials ready by creating an app on Twitter.
+Then add them to your `application.conf` configuration file:
+```cfg
+para.tw_app_id = "..."
+para.tw_secret = "..."
+```
+
 Support for logging in with Twitter is implemented by the `TwitterAuthFilter`. This filter responds to requests at
 `/twitter_auth`.
 

@@ -357,10 +357,9 @@ code {
 
 #sidebar {
 	padding: 10px 1em 160px 0;
-	background-color: white;
 	position: fixed;
 	overflow: auto;
-	height: 91%;
+	height: 80%;
 	font-size: 1em;
 	width: 260px;
 }

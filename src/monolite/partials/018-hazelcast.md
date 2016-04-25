@@ -22,6 +22,7 @@ There are several configuration properties for Hazelcast:
 		<tr><td>`para.hc.async_enabled`</td><td> Asynchronous operation when putting objects in cache. Defaults to `false`.</td></tr>
 		<tr><td>`para.hc.eviction_policy`</td><td> Cache eviction policy - `LRU` or `LFU`. Defaults to `LRU`.</td></tr>
 		<tr><td>`para.hc.eviction_percentage`</td><td> Cache eviction percentage. Defaults to `25` percent.</td></tr>
+		<tr><td>`para.hc.ttl_seconds`</td><td> 'Time To Live' for cached objects. Defaults to `3600` seconds.</td></tr>
 		<tr><td>`para.hc.max_size`</td><td> Cache size as a percentage of used heap. Defaults to `25` percent.</td></tr>
 		<tr><td>`para.hc.jmx_enabled`</td><td> JMX reporting. Default is `true`. </td></tr>
 		<tr><td>`para.hc.ec2_discovery_enabled`</td><td> Enables AWS EC2 auto discovery. Default is `true`.</td></tr>

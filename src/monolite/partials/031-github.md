@@ -6,6 +6,13 @@ category: Security
 **Update:** From v1.17.1 we support an easier way to login with GitHub [through the API](#034-api-jwt-signin).
 Authentication is implemented using JWT tokens instead of cookies.
 
+First of all you need to have your API credentials ready by creating an app on GitHub.
+Then add them to your `application.conf` configuration file:
+```cfg
+para.gh_app_id = "..."
+para.gh_secret = "..."
+```
+
 Support for logging in with GitHub is implemented by the `GitHubAuthFilter`. This filter responds to requests at
 `/github_auth`.
 

@@ -2,8 +2,8 @@ html {
 	width: 100%;
 	height: 100%;
 	margin: 0px;
-    padding: 0px;
-    overflow-x: hidden;
+	padding: 0px;
+	overflow-x: hidden;
 	webkit-font-smoothing: antialiased;
 }
 body {
@@ -357,10 +357,9 @@ code {
 
 #sidebar {
 	padding: 10px 1em 160px 0;
-	background-color: white;
 	position: fixed;
 	overflow: auto;
-	height: 91%;
+	height: 80%;
 	font-size: 1em;
 	width: 260px;
 }

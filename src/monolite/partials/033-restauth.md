@@ -87,6 +87,25 @@ paraClient.signIn(String provider, String providerToken);
 ```
 Supported providers are `facebook`, `google`, `twitter`, `github`, `linkedin`.
 
+You will have to add the API credentials for each of these in your `application.conf` configuration file:
+```cfg
+# facebook
+para.fb_app_id = "..."
+para.fb_secret = "..."
+# google
+para.gp_app_id = "..."
+para.gp_secret = "..."
+# linkedin
+para.in_app_id = "..."
+para.in_secret = "..."
+# twitter
+para.tw_app_id = "..."
+para.tw_secret = "..."
+# github
+para.gh_app_id = "..."
+para.gh_secret = "..."
+```
+
 For example calling `paraClient.signIn("facebook", "facebook_access_token")` should return a new `User` object and would
 store the JWT token in memory. To get an access token from Facebook, use their JavaScript SDK.
 
