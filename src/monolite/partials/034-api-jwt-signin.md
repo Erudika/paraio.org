@@ -12,7 +12,7 @@ using one of the SDKs from Facebook, Google, Twitter, etc.
 **Note:** Twitter uses OAuth 1 and gives you a token and a token secret so you must concatenate them first -
 `{oauth_token}:{oauth_token_secret}`, and then use that as the provider access token.
 Also if you use the `password` provider, the `token` parameter must be in the format `{email}:{full_name}:{password}` or
-`{email}:{password_hash}`.
+`{email}::{password}` (yes double ::).
 
 ### Request
 
