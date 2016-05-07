@@ -57,6 +57,9 @@
 					<a href="/#download">Download</a>
 				</li>
 				<li class="page-scroll">
+					<a href="http://console.paraio.org">Console</a>
+				</li>
+				<li class="page-scroll">
 					<a href="/#about">About</a>
 				</li>
 			</ul>
@@ -700,9 +703,10 @@ persistable and searchable. You can still keep the RESTful API feature or turn i
 <h3 id="quick-start">Quick start</h3>
 <ol>
 <li><a href="https://github.com/erudika/para/releases">Download the WAR</a></li>
-<li>Run it with <code>java -jar para-{VERSION}.war</code> - Para is now running in embedded mode, suitable for development.</li>
-<li>Call <code>curl localhost:8080/v1/_setup</code> to get the access and secret keys (give it a few seconds to initialize)</li>
-<li>Start using the RESTful API directly or use one of the provided client libraries below.</li>
+<li>Run it with <code>java -jar para-{VERSION}.war</code></li>
+<li>Call <code>curl localhost:8080/v1/_setup</code> to get the access and secret keys</li>
+<li>Open the <a href="http://console.paraio.org">Para Web Console</a> or use one of the provided
+client libraries below to connect to the API.</li>
 </ol>
 <p>The Java client for Para is a separate module with these Maven coordinates:</p>
 <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
@@ -1564,7 +1568,7 @@ NoSQL and relational databases.</p>
 							<h2>MongoDB</h2>
 						
 						<section class="body img-rounded">
-							<p>Since <code>v1.18.0</code> Para supports plugins and the the first official plugin adds <a href="https://github.com/Erudika/para-dao-mongodb">support for MongoDB</a>.
+							<p>Since v1.18.0 Para supports plugins and the the first official plugin adds <a href="https://github.com/Erudika/para-dao-mongodb">support for MongoDB</a>.
 The class <code>MongoDBDAO</code> is a <code>DAO</code> implementation and is responsible for connecting to a <a href="https://www.mongodb.org/">MongoDB</a>
 server and storing/retrieving objects (items) to/from it. All operations are carried out using the latest MongoDB
 Java Driver compatible with MongoDB 3.2.</p>
@@ -1768,6 +1772,7 @@ for caching without having to manage a separate caching server or cluster.</p>
         <tr><td><code>para.hc.async_enabled</code></td><td> Asynchronous operation when putting objects in cache. Defaults to <code>false</code>.</td></tr>
         <tr><td><code>para.hc.eviction_policy</code></td><td> Cache eviction policy - <code>LRU</code> or <code>LFU</code>. Defaults to <code>LRU</code>.</td></tr>
         <tr><td><code>para.hc.eviction_percentage</code></td><td> Cache eviction percentage. Defaults to <code>25</code> percent.</td></tr>
+        <tr><td><code>para.hc.ttl_seconds</code></td><td> ‘Time To Live’ for cached objects. Defaults to <code>3600</code> seconds.</td></tr>
         <tr><td><code>para.hc.max_size</code></td><td> Cache size as a percentage of used heap. Defaults to <code>25</code> percent.</td></tr>
         <tr><td><code>para.hc.jmx_enabled</code></td><td> JMX reporting. Default is <code>true</code>. </td></tr>
         <tr><td><code>para.hc.ec2_discovery_enabled</code></td><td> Enables AWS EC2 auto discovery. Default is <code>true</code>.</td></tr>
@@ -2218,7 +2223,11 @@ either logged in or registered.</p>
 						<section class="body img-rounded">
 							<p><strong>Update:</strong> From v1.17.1 we support an easier way to login with Facebook <a href="#034-api-jwt-signin">through the API</a>.
 Authentication is implemented using JWT tokens instead of cookies.</p>
-<p>Support for logging in with Facebook is implemented by the <code>FacebookAuthFilter</code>. This filter responds to requests at
+<p>First of all you need to have your API credentials ready by creating an app in the Facebook Dev Center.
+Then add them to your <code>application.conf</code> configuration file:</p>
+<pre><code>para.fb_app_id = <span class="hljs-string">"..."</span>
+para.fb_secret = <span class="hljs-string">"..."</span>
+</code></pre><p>Support for logging in with Facebook is implemented by the <code>FacebookAuthFilter</code>. This filter responds to requests at
 <code>/facebook_auth</code>.</p>
 <p>To initiate a login with Facebook just redirect the user to the Facebook OAuth endpoint
 <code>facebook.com/dialog/oauth</code>. Pass the parameter <code>redirect_uri=/facebook_auth</code> so Para
@@ -2247,7 +2256,11 @@ can handle the response from Facebook.</p>
 						<section class="body img-rounded">
 							<p><strong>Update:</strong> From v1.17.1 we support an easier way to login with GitHub <a href="#034-api-jwt-signin">through the API</a>.
 Authentication is implemented using JWT tokens instead of cookies.</p>
-<p>Support for logging in with GitHub is implemented by the <code>GitHubAuthFilter</code>. This filter responds to requests at
+<p>First of all you need to have your API credentials ready by creating an app on GitHub.
+Then add them to your <code>application.conf</code> configuration file:</p>
+<pre><code>para.gh_app_id = <span class="hljs-string">"..."</span>
+para.gh_secret = <span class="hljs-string">"..."</span>
+</code></pre><p>Support for logging in with GitHub is implemented by the <code>GitHubAuthFilter</code>. This filter responds to requests at
 <code>/github_auth</code>.</p>
 <p>To initiate a login with GitHub just redirect the user to the GitHub OAuth endpoint
 <code>github.com/login/oauth/authorize</code>. Pass the parameter <code>redirect_uri=/github_auth</code> so Para
@@ -2276,7 +2289,11 @@ can handle the response from GitHub.</p>
 						<section class="body img-rounded">
 							<p><strong>Update:</strong> From v1.17.1 we support an easier way to login with Google <a href="#034-api-jwt-signin">through the API</a>.
 Authentication is implemented using JWT tokens instead of cookies.</p>
-<p>Support for logging in with Google+ is implemented by the <code>GoogleAuthFilter</code>. This filter responds to requests at
+<p>First of all you need to have your API credentials ready by creating an app in the Google Dev Console.
+Then add them to your <code>application.conf</code> configuration file:</p>
+<pre><code>para.gp_app_id = <span class="hljs-string">"..."</span>
+para.gp_secret = <span class="hljs-string">"..."</span>
+</code></pre><p>Support for logging in with Google+ is implemented by the <code>GoogleAuthFilter</code>. This filter responds to requests at
 <code>/google_auth</code>.</p>
 <p>To initiate a login with Google+ just redirect the user to the Google OAuth endpoint
 <code>accounts.google.com/o/oauth2/auth</code>. Pass the parameter <code>redirect_uri=/google_auth</code> so Para
@@ -2306,7 +2323,11 @@ can handle the response from Google+.</p>
 						<section class="body img-rounded">
 							<p><strong>Update:</strong> From v1.17.1 we support an easier way to login with LinkedIn <a href="#034-api-jwt-signin">through the API</a>.
 Authentication is implemented using JWT tokens instead of cookies.</p>
-<p>Support for logging in with LinkedIn is implemented by the <code>LinkedInAuthFilter</code>. This filter responds to requests at
+<p>First of all you need to have your API credentials ready by creating an app on LinkedIn.
+Then add them to your <code>application.conf</code> configuration file:</p>
+<pre><code>para.in_app_id = <span class="hljs-string">"..."</span>
+para.in_secret = <span class="hljs-string">"..."</span>
+</code></pre><p>Support for logging in with LinkedIn is implemented by the <code>LinkedInAuthFilter</code>. This filter responds to requests at
 <code>/linkedin_auth</code>.</p>
 <p>To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint
 <code>linkedin.com/uas/oauth2/authorization</code>. Pass the parameter <code>redirect_uri=/linkedin_auth</code> so Para
@@ -2335,7 +2356,11 @@ can handle the response from LinkedIn.</p>
 						<section class="body img-rounded">
 							<p><strong>Update:</strong> From v1.17.1 we support an easier way to login with Twitter <a href="#034-api-jwt-signin">through the API</a>.
 Authentication is implemented using JWT tokens instead of cookies.</p>
-<p>Support for logging in with Twitter is implemented by the <code>TwitterAuthFilter</code>. This filter responds to requests at
+<p>First of all you need to have your API credentials ready by creating an app on Twitter.
+Then add them to your <code>application.conf</code> configuration file:</p>
+<pre><code>para.tw_app_id = <span class="hljs-string">"..."</span>
+para.tw_secret = <span class="hljs-string">"..."</span>
+</code></pre><p>Support for logging in with Twitter is implemented by the <code>TwitterAuthFilter</code>. This filter responds to requests at
 <code>/twitter_auth</code>.</p>
 <p>To initiate a login with Twitter just redirect the user to the <code>/twitter_auth</code>. This will redirect the user to Twitter
 for authentication.</p>
@@ -2463,6 +2488,23 @@ An encoded token looks like this:</p>
 <pre><code class="lang-java">paraClient.signIn(String provider, String providerToken);
 </code></pre>
 <p>Supported providers are <code>facebook</code>, <code>google</code>, <code>twitter</code>, <code>github</code>, <code>linkedin</code>.</p>
+<p>You will have to add the API credentials for each of these in your <code>application.conf</code> configuration file:</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># facebook</span>
+para.fb_app_id = <span class="hljs-string">"..."</span>
+para.fb_secret = <span class="hljs-string">"..."</span>
+<span class="hljs-comment"># google</span>
+para.gp_app_id = <span class="hljs-string">"..."</span>
+para.gp_secret = <span class="hljs-string">"..."</span>
+<span class="hljs-comment"># linkedin</span>
+para.in_app_id = <span class="hljs-string">"..."</span>
+para.in_secret = <span class="hljs-string">"..."</span>
+<span class="hljs-comment"># twitter</span>
+para.tw_app_id = <span class="hljs-string">"..."</span>
+para.tw_secret = <span class="hljs-string">"..."</span>
+<span class="hljs-comment"># github</span>
+para.gh_app_id = <span class="hljs-string">"..."</span>
+para.gh_secret = <span class="hljs-string">"..."</span>
+</code></pre>
 <p>For example calling <code>paraClient.signIn(&quot;facebook&quot;, &quot;facebook_access_token&quot;)</code> should return a new <code>User</code> object and would
 store the JWT token in memory. To get an access token from Facebook, use their JavaScript SDK.</p>
 <p>After you call <code>paraClient.signIn()</code> and the request succeeds, the client caches the access token and <strong>all subsequent
@@ -2477,12 +2519,37 @@ paraClient.setAccessToken(String token);
 </code></pre>
 <p>Tokens can also be revoked by calling <code>paraClient.revokeAllTokens()</code> but this only works for authenticated users.
 The Para client takes care of refreshing the JWT tokens every hour and by default all tokens are valid for a week.</p>
-<blockquote>
 <p><strong>Important:</strong> In a production environment, access to the root app is disabled for API clients for security reasons.
 Setting the configuration property <code>para.clients_can_access_root_app</code> to <code>true</code> would allow clients with access tokens
 to make API calls to the root app. This is useful if you only have one app on the server. This doesn’t affect clients
 that use an <code>accessKey</code> and a <code>secretKey</code>, only those that use access tokens.</p>
-</blockquote>
+<h3 id="creating-super-tokens">Creating “super” tokens</h3>
+<p>Since v1.18.3 we’ve added the support for “super” JSON web tokens. These are just like normal tokens for users, but
+instead of authenticating users we can authenticate apps witht them. You don’t need to connect to a social identity
+provider like Facebook or Twitter - you simply generate the tokens on the client-side. Your code will need both the
+access key and secret key for this purpose.</p>
+<p>For example, lets assume we have some JavaScript app running in the browser and we need admin access to our Para app.
+We could use the <a href="https://github.com/Erudika/para-client-js">JavaScript client for Para</a> but putting the secret key
+inside client-side code on the browser is <em>not a smart move</em>. So we pull in a library for generating JWT, like
+<a href="https://github.com/kjur/jsrsasign">jsrsasign</a> and we create the token ourselves. Here’s a snippet:</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getJWT</span><span class="hljs-params">(appid, secret)</span> </span>{
+    <span class="hljs-keyword">var</span> now = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime() / <span class="hljs-number">1000</span>;
+    <span class="hljs-keyword">var</span> sClaim = <span class="hljs-built_in">JSON</span>.stringify({
+        exp: now + (<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>), <span class="hljs-comment">// expires at</span>
+        iat: now, <span class="hljs-comment">// issued at</span>
+        nbf: now, <span class="hljs-comment">// not valid before</span>
+        appid: appid <span class="hljs-comment">// app id must be present</span>
+    });
+    <span class="hljs-keyword">var</span> sHeader = <span class="hljs-built_in">JSON</span>.stringify({<span class="hljs-string">'alg'</span>: <span class="hljs-string">'HS256'</span>, <span class="hljs-string">'typ'</span>: <span class="hljs-string">'JWT'</span>});
+    <span class="hljs-keyword">return</span> KJUR.jws.JWS.sign(<span class="hljs-literal">null</span>, sHeader, sClaim, secret);
+}
+</code></pre>
+<p>Your JS app could ask the user for the access keys, create a JWT and then discard the keys and use the newly generated
+“super” token. Once we have this we can attach it to every request as a header:</p>
+<pre><code class="lang-js">Authorization: Bearer eyJhbGciOiVCJ9.eyJzdWIiOi0._MKAH6SGiKSoqgwmqUaxuMyE
+</code></pre>
+<p>When calling the Para API from JavaScript in the browser, make sure you are running a web server and not as <code>file:///</code>
+or your browser might not allow CORS requests. Also check that CORS is enabled in Para with <code>para.cors_enabled = true</code>.</p>
 
 						</section>
 					</article>
@@ -2517,7 +2584,7 @@ using one of the SDKs from Facebook, Google, Twitter, etc.</p>
 <p><strong>Note:</strong> Twitter uses OAuth 1 and gives you a token and a token secret so you must concatenate them first -
 <code>{oauth_token}:{oauth_token_secret}</code>, and then use that as the provider access token.
 Also if you use the <code>password</code> provider, the <code>token</code> parameter must be in the format <code>{email}:{full_name}:{password}</code> or
-<code>{email}::{password_hash}</code>.</p>
+<code>{email}:{password_hash}</code>.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><strong>body</strong> - a JSON object containing <code>appid</code>, <code>provider</code> and <code>token</code> properties (required).</li>
@@ -3271,7 +3338,8 @@ then the generic <code>findQuery()</code> method will be executed by default.</p
 <h4 id="-similar-query"><code>similar</code> query</h4>
 <p>This executes the method <code>findSimilar()</code> with these <strong>parameters</strong>:</p>
 <ul>
-<li><code>fields</code> - a list of fields (example: <code>?fields=field1&amp;fields=field2</code>)</li>
+<li><code>fields</code> - a list of fields, for example:<pre><code>GET /v1/search/similar?fields=field1&amp;fields=field2
+</code></pre></li>
 <li><code>filterid</code> - an id filter; excludes a particular object from the results</li>
 <li><code>like</code> - the source text to use for comparison</li>
 </ul>
@@ -3280,7 +3348,8 @@ then the generic <code>findQuery()</code> method will be executed by default.</p
 <h4 id="-tagged-query"><code>tagged</code> query</h4>
 <p>This executes the method <code>findTagged()</code> with these <strong>parameters</strong>:</p>
 <ul>
-<li><code>tags</code> - a list of tags (example: <code>?tags=tag1&amp;tags=tag2</code>)</li>
+<li><code>tags</code> - a list of tags, for example:<pre><code>GET /v1/search/tagged?tags=tag1&amp;tags=tag2
+</code></pre></li>
 </ul>
 <hr>
 
@@ -3296,7 +3365,8 @@ then the generic <code>findQuery()</code> method will be executed by default.</p
 <p>This executes the method <code>findTerms()</code> with these <strong>parameters</strong>:</p>
 <ul>
 <li><code>matchall</code> - if <code>true</code> executes an <code>AND</code> query, otherwise an <code>OR</code> query</li>
-<li><code>terms</code> - a list of <code>field:term</code> pairs (example: <code>?terms=field:term&amp;terms=field:term</code>)</li>
+<li><code>terms</code> - a list of <code>field:term</code> pairs, for example:<pre><code>GET /v1/search/terms?terms=field1:term1&amp;terms=field2:term2
+</code></pre></li>
 <li><code>count</code> - if present will return 0 objects but the “totalHits” field will contain the total number of results found
 that match the given terms.</li>
 </ul>
@@ -4240,7 +4310,7 @@ Make sure you save it and use it for signing future requests.</p>
 	<footer>
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<p>Generated on <i>2016-03-23</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+				<p>Generated on <i>2016-05-07</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 					and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 				<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2016
 					<a href="http://erudika.com">Erudika</a></p>
