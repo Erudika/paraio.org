@@ -78,7 +78,6 @@ pc.me();
 		<a href="https://github.com/Erudika/para-client-ios" class="btn-client">
 			<i class="devicon-apple-original"></i>
 		</a>
-		<p><span class="label label-default">Coming soon</span></p>
 	</div>
 </div>
 
