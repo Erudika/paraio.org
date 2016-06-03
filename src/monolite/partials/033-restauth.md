@@ -54,6 +54,11 @@ Para apps can create new users and grant them specific permissions by implementi
 First a user authenticates with their social identity provider such as Facebook, then comes back to Para with the
 `access_token` and is issued a new JSON Web Token that allows him to access the REST API.
 
+> **Important:** By default, access to the root app is disabled for API clients for security reasons.
+> Setting the configuration property `para.clients_can_access_root_app` to `true` would allow clients with access tokens
+> to make API calls to the root app. This is useful if you only have one app on the server. This doesn't affect clients
+> that use an `accessKey` and a `secretKey`, only those that use access tokens.
+
 JWT tokens are a new standard for authentication which is similar to cookies but is more secure, compact and stateless.
 An encoded token looks like this:
 
@@ -129,17 +134,12 @@ paraClient.signOut();
 Tokens can also be revoked by calling `paraClient.revokeAllTokens()` but this only works for authenticated users.
 The Para client takes care of refreshing the JWT tokens every hour and by default all tokens are valid for a week.
 
-**Important:** In a production environment, access to the root app is disabled for API clients for security reasons.
-Setting the configuration property `para.clients_can_access_root_app` to `true` would allow clients with access tokens
-to make API calls to the root app. This is useful if you only have one app on the server. This doesn't affect clients
-that use an `accessKey` and a `secretKey`, only those that use access tokens.
-
 ### Creating "super" tokens
 
 Since v1.18.3 we've added the support for "super" JSON web tokens. These are just like normal tokens for users, but
-instead of authenticating users we can authenticate apps witht them. You don't need to connect to a social identity
-provider like Facebook or Twitter - you simply generate the tokens on the client-side. Your code will need both the
-access key and secret key for this purpose.
+instead of authenticating users we can authenticate apps with them. The give clients full access to the API, bypassing
+permissions. You don't need to connect to a social identity provider like Facebook or Twitter - you simply generate
+the tokens on the client-side. Your code will need both the access key and secret key for this purpose.
 
 For example, lets assume we have some JavaScript app running in the browser and we need admin access to our Para app.
 We could use the [JavaScript client for Para](https://github.com/Erudika/para-client-js) but putting the secret key
