@@ -50,14 +50,17 @@ for REST authentication.
 
 ### JSON Web Tokens - client access based on permissions
 
-Para apps can create new users and grant them specific permissions by implementing social login (identity federation).
-First a user authenticates with their social identity provider such as Facebook, then comes back to Para with the
-`access_token` and is issued a new JSON Web Token that allows him to access the REST API.
-
-> **Important:** By default, access to the root app is disabled for API clients for security reasons.
+> **Important:** Access to the root app can be enabled or disabled for API clients.
 > Setting the configuration property `para.clients_can_access_root_app` to `true` would allow clients with access tokens
 > to make API calls to the root app. This is useful if you only have one app on the server. This doesn't affect clients
 > that use an `accessKey` and a `secretKey`, only those that use access tokens.
+
+In production, when Para is deployed as a multitenant server (hosting many apps), it is recommended that API clients
+are not allowed to access root app through the API with `para.clients_can_access_root_app = false`.
+
+Para apps can create new users and grant them specific permissions by implementing social login (identity federation).
+First a user authenticates with their social identity provider such as Facebook, then comes back to Para with the
+`access_token` and is issued a new JSON Web Token that allows him to access the REST API.
 
 JWT tokens are a new standard for authentication which is similar to cookies but is more secure, compact and stateless.
 An encoded token looks like this:
