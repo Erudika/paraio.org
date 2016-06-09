@@ -73,6 +73,11 @@ You can also create "anonymous" permissions to allow unauthenticated users to ac
 ```java
 app.grantResourcePermission("*", "public/resource", AllowedMethods.READ, true);
 ```
+This resource is now public but to access it you still need to specify your access key as a parameter:
+```
+GET /v1/public/resource?accessKey=app:myapp
+```
+
 The special permission method `?` means that anyone can do a `GET` request on `public/resource`.
 
 To check if user `1` is allowed to access a particular resource call:

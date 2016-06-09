@@ -35,6 +35,12 @@ Make sure you **save** these security credentials because the API can only be ac
 keys you can start making signed requests to the API. Also you can use these keys to create applications which will
 have their own separate keys (see [Apps](#34)).
 
+**Note:** when a resource has public permissions you can access it without setting the `Authorization` header.
+Simply specify your access key as a parameter:
+```
+GET /v1/public/resource?accessKey=app:myapp
+```
+
 ### Changing keys
 
 Call `POST /v1/_newkeys` to generate a new secret key (*the request must be signed with the old keys*).
