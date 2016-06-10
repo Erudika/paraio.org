@@ -157,7 +157,7 @@ inside client-side code on the browser is *not a smart move*. So we pull in a li
 
 ```js
 function getJWT(appid, secret) {
-	var now = new Date().getTime() / 1000;
+	var now = Math.round(new Date().getTime() / 1000);
 	var sClaim = JSON.stringify({
 		exp: now + (7 * 24 * 60 * 60), // expires at
 		iat: now, // issued at
