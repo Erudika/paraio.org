@@ -28,7 +28,7 @@ In v1.19 apps can have their own separate credentials for social sign-in, like a
 are stored within the app object and can be used to create/login users to the app that has these credentials.
 For example, we can send a request to `/facebook_auth?appid=myapp` where `myapp` is not the root app. This will tell
 Para to look for Facebook keys inside that app. This allows for each Para app to have a corresponding Facebook app
-(or any other app on the supported social networks, see [JWT sign in](034-api-jwt-signin)).
+(or any other app on the supported social networks, see [JWT sign in](#034-api-jwt-signin)).
 
 Additionally, we've added two custom settings which can tell Para where to redirect users after a successful login or a
 login failure. These are `signin_success` and `signin_failure` (see [Custom Settings](#050-api-settings-get)).
