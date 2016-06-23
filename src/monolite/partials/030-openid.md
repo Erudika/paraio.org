@@ -3,6 +3,8 @@ title: OpenID support
 category: Security
 ---
 
+**Note**: OpenID 2.0 is no longer supported by Google, and we recommend using OAuth or JWT-based authentication.
+
 Support for OpenID authentication is implemented by the `OpenIDAuthFilter`. The default URL for this filter is
 `/openid_auth`.
 

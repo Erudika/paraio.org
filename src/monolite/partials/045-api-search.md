@@ -17,18 +17,31 @@ The `querytype` parameter switches between the different query types. If this pa
 then the generic `findQuery()` method will be executed by default.
 
 #### `id` query
+Finds the object with the given `id` from the index or `null`.
 This executes the method `findById()` with these **parameters**:
 - `id` - the id to search for
 
 <hr>
 
 #### `ids` query
+Finds all objects matchings the given ids.
 This executes the method `findByIds()` with these **parameters**:
 - `ids` - a list of ids to search for
 
 <hr>
 
+#### `nested` query
+Searches through objects in a nested field named `nstd`. Used internally for joining search queries on linked objects.
+This executes the method `findNestedQuery()` with these **parameters**:
+
+- `q` - a search query string
+- `field` - the name of the field to target within a nested object
+- `type` - a type to search for
+
+<hr>
+
 #### `nearby` query
+Location-based search query. Relies on `Address` objects for coordinates.
 This executes the method `findNearby()` with these **parameters**:
 - `latlng` - latitude and longitude of the center of the search perimeter
 - `radius` - radius of the search perimeter in kilometers.
@@ -36,6 +49,7 @@ This executes the method `findNearby()` with these **parameters**:
 <hr>
 
 #### `prefix` query
+Searches for objects containing a field (property) that starts with the given prefix.
 This executes the method `findPrefix()` with these **parameters**:
 - `field` - the field to search on
 - `prefix` - the prefix
@@ -43,6 +57,7 @@ This executes the method `findPrefix()` with these **parameters**:
 <hr>
 
 #### `similar` query
+"More like this" search query.
 This executes the method `findSimilar()` with these **parameters**:
 - `fields` - a list of fields, for example:
 ```
@@ -54,6 +69,7 @@ GET /v1/search/similar?fields=field1&fields=field2
 <hr>
 
 #### `tagged` query
+Search for objects tagged with a set of tags.
 This executes the method `findTagged()` with these **parameters**:
 - `tags` - a list of tags, for example:
 ```
@@ -63,6 +79,7 @@ GET /v1/search/tagged?tags=tag1&tags=tag2
 <hr>
 
 #### `in` query
+Searches for objects containing any of the terms in the given list (matched exactly).
 This executes the method `findTermInList()` with these **parameters**:
 - `field` - the field to search on
 - `terms` - a list of terms (values)
@@ -70,6 +87,7 @@ This executes the method `findTermInList()` with these **parameters**:
 <hr>
 
 #### `terms` query
+Searches for objects containing all of the specified terms (matched exactly)
 This executes the method `findTerms()` with these **parameters**:
 - `matchall` - if `true` executes an `AND` query, otherwise an `OR` query
 - `terms` - a list of `field:term` pairs, for example:
@@ -86,12 +104,14 @@ use the `>, <, >=, <=` operators by appending them to the keys of the terms map.
 <hr>
 
 #### `wildcard` query
+A wildcard query like "example*".
 This executes the method `findWildcard()` with these **parameters**:
 - `field` - the field to search on
 
 <hr>
 
 #### `count` query
+Returns the total number of results that would be returned by a query.
 This executes the method `getCount()` with **no parameters**.
 
 
@@ -103,6 +123,7 @@ This executes the method `getCount()` with **no parameters**.
 - `desc` - sort order - `true` for descending (optional). Default is `true`.
 - `sort` - the field to sort by (optional).
 - `page` - starting page for results (optional). (note: page size is 30 items by default)
+- `limit` - the number of results to return
 
 ### Response
 

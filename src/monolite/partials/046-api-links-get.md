@@ -25,6 +25,11 @@ the request is treated as a "many-to-many" search request.
 are filtered by the specified field and the value of that field (term).
 - `count` - if set will return no items an the total number of linked objects. If `childrenonly` is set, this will
 return only the count of child objects.
+- `q` - query string, if set, all linked/child objects will be searched and those that match the query are returned.
+To search only child objects that are linked by `parentid` use `q` in combination with `childrenonly`, otherwise
+the `Linker` objects will be searched. Since v1.19 `Linker` objects contain a copy of the two objects they connect. This
+enables Para to execute more complex "joined" search queries. The effectiveness of these is determined by how up-to-date
+the data inside a `Linker` is.
 
 ### Response
 

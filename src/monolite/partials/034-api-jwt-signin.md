@@ -12,7 +12,7 @@ using one of the SDKs from Facebook, Google, Twitter, etc.
 **Note:** Twitter uses OAuth 1 and gives you a token and a token secret so you must concatenate them first -
 `{oauth_token}:{oauth_token_secret}`, and then use that as the provider access token.
 Also if you use the `password` provider, the `token` parameter must be in the format `{email}:{full_name}:{password}` or
-`{email}::{password}` (yes double ::).
+`{email}::{password}` (must be `::` if name is empty).
 
 ### Request
 
@@ -26,8 +26,15 @@ Request body example:
 	"token": "eyJhbGciOiJIUzI1NiJ9.eWIiO..."
 }
 ```
-The `appid` is the id of your own app that you're trying to sing in to. The `provider` value is a string and can be
-one of `facebook`, `google`, `twitter`, `github`, `linkedin` or `password`.
+The `appid` is the id of your own app that you're trying to sign in to. The `provider` field a string and can be
+one of the following values:
+- `facebook` - sign in with Facebook account,
+- `google` - sign in with Google account,
+- `twitter` - sign in with Twitter account,
+- `github` - sign in with GitHub account,
+- `linkedin` - sign in with LinkedIn account,
+- `microsoft` - sign in with Microsoft account,
+- `password` - sign in with email and password.
 
 ### Response
 

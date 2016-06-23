@@ -12,15 +12,22 @@ Then add them to your `application.conf` configuration file:
 para.fb_app_id = "..."
 para.fb_secret = "..."
 ```
-
+Or add these through the [app settings API](#050-api-settings-put):
+```
+{
+	"fb_app_id": "..."
+	"fb_secret": "..."
+}
+```
 Support for logging in with Facebook is implemented by the `FacebookAuthFilter`. This filter responds to requests at
 `/facebook_auth`.
 
 To initiate a login with Facebook just redirect the user to the Facebook OAuth endpoint
 `facebook.com/dialog/oauth`. Pass the parameter `redirect_uri=/facebook_auth` so Para
-can handle the response from Facebook.
+can handle the response from Facebook. For apps other than the root app use the `/facebook_auth?appid=myapp` parameter.
 
-**Note:** You need to register a new application with Facebook in order to obtain an access and secret keys.
+**Note:** You need to [register a new application with Facebook](https://developers.facebook.com/)
+in order to obtain an access and secret keys.
 
 Below is an example Javascript code for a Facebook login button:
 

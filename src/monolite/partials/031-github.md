@@ -12,15 +12,22 @@ Then add them to your `application.conf` configuration file:
 para.gh_app_id = "..."
 para.gh_secret = "..."
 ```
-
+Or add these through the [app settings API](#050-api-settings-put):
+```
+{
+	"gh_app_id": "..."
+	"gh_secret": "..."
+}
+```
 Support for logging in with GitHub is implemented by the `GitHubAuthFilter`. This filter responds to requests at
 `/github_auth`.
 
 To initiate a login with GitHub just redirect the user to the GitHub OAuth endpoint
 `github.com/login/oauth/authorize`. Pass the parameter `redirect_uri=/github_auth` so Para
-can handle the response from GitHub.
+can handle the response from GitHub. For apps other than the root app use the `/github_auth?appid=myapp` parameter.
 
-**Note:** You need to register a new application with GitHub in order to obtain an access and secret keys.
+**Note:** You need to [register a new application with GitHub](https://github.com/settings/profile)
+in order to obtain an access and secret keys.
 
 Below is an example Javascript code for a GitHub login button:
 
