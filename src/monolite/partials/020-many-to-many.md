@@ -32,8 +32,14 @@ object1.unlink(object2.getType(), object2.getId());
 object1.unlinkAll();
 ```
 
-To check if two objects are linked use `object1.isLinked(object2.getType(), object2.getId())`.
-Also you can count the number of links by calling `object1.countLinks(object2.getType())`.
+To check if two objects are linked use:
+```java
+object1.isLinked(object2.getType(), object2.getId())
+```
+Also you can count the number of links by calling:
+```java
+object1.countLinks(object2.getType())
+```
 
 Finally, to read all objects that are linked to `object1`, use:
 

@@ -39,8 +39,11 @@ your own filters and servlets. These initializer classes also act as an alternat
 ### Custom API resource handlers
 
 Since version 1.7, you can register custom API resources by implementing the `CustomResourceHandler` interface.
-Use the `ServiceLoader` mechanism to tell Para to load your handlers - add them to a file called
-"com.erudika.para.rest.CustomResourceHandler" in `META-INF/services` where each line contains the full class name
+Use the `ServiceLoader` mechanism to tell Para to load your handlers - add them to a file named:
+```
+com.erudika.para.rest.CustomResourceHandler
+```
+in `META-INF/services` where each line contains the full class name
 of your custom resource handler class. On startup Para will load these and register them as API resource handlers.
 
 The `CustomResourceHandler` interface is simple:

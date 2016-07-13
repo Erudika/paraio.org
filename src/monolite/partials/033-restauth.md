@@ -57,9 +57,13 @@ for REST authentication.
 ### JSON Web Tokens - client access based on permissions
 
 > **Important:** Access to the root app can be enabled or disabled for API clients.
-> Setting the configuration property `para.clients_can_access_root_app` to `true` would allow clients with access tokens
-> to make API calls to the root app. This is useful if you only have one app on the server. This doesn't affect clients
-> that use an `accessKey` and a `secretKey`, only those that use access tokens.
+
+To allow clients with access tokens to make API calls to the root app, use this configuration property:
+```
+para.clients_can_access_root_app = true
+```
+This is useful if you only have one app on the server. This doesn't affect clients
+that use an `accessKey` and a `secretKey`, only those that use access tokens.
 
 In production, when Para is deployed as a multitenant server (hosting many apps), it is recommended that API clients
 are not allowed to access root app through the API with `para.clients_can_access_root_app = false`.
