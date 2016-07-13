@@ -22,9 +22,12 @@ Or add these through the [app settings API](#050-api-settings-put):
 Support for logging in with Facebook is implemented by the `FacebookAuthFilter`. This filter responds to requests at
 `/facebook_auth`.
 
-To initiate a login with Facebook just redirect the user to the Facebook OAuth endpoint
-`facebook.com/dialog/oauth`. Pass the parameter `redirect_uri=/facebook_auth` so Para
-can handle the response from Facebook. For apps other than the root app use the `/facebook_auth?appid=myapp` parameter.
+To initiate a login with Facebook just redirect the user to the Facebook OAuth endpoint:
+```
+facebook.com/dialog/oauth
+```
+Pass the parameter `redirect_uri=/facebook_auth` so Para can handle the response from Facebook.
+For apps other than the root app use the `/facebook_auth?appid=myapp` parameter.
 
 **Note:** You need to [register a new application with Facebook](https://developers.facebook.com/)
 in order to obtain an access and secret keys.

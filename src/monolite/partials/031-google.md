@@ -22,9 +22,12 @@ Or add these through the [app settings API](#050-api-settings-put):
 Support for logging in with Google acoounts is implemented by the `GoogleAuthFilter`.
 This filter responds to requests at `/google_auth`.
 
-To initiate a login with Google just redirect the user to the Google OAuth endpoint
-`accounts.google.com/o/oauth2/auth`. Pass the parameter `redirect_uri=/google_auth` so Para
-can handle the response from Google. For apps other than the root app use the `/google_auth?appid=myapp` parameter.
+To initiate a login with Google just redirect the user to the Google OAuth endpoint:
+```
+accounts.google.com/o/oauth2/auth
+```
+Pass the parameter `redirect_uri=/google_auth` so Para can handle the response from Google.
+For apps other than the root app use the `/google_auth?appid=myapp` parameter.
 
 **Note:** You need to [register a new application with Google](https://console.developers.google.com/iam-admin/projects)
 in order to obtain an access and secret keys.

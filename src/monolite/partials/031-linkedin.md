@@ -22,9 +22,12 @@ Or add these through the [app settings API](#050-api-settings-put):
 Support for logging in with LinkedIn is implemented by the `LinkedInAuthFilter`. This filter responds to requests at
 `/linkedin_auth`.
 
-To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint
-`linkedin.com/uas/oauth2/authorization`. Pass the parameter `redirect_uri=/linkedin_auth` so Para
-can handle the response from LinkedIn.For apps other than the root app use the `/linkedin_auth?appid=myapp` parameter.
+To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint:
+```
+linkedin.com/uas/oauth2/authorization
+```
+Pass the parameter `redirect_uri=/linkedin_auth` so Para can handle the response from LinkedIn.
+For apps other than the root app use the `/linkedin_auth?appid=myapp` parameter.
 
 **Note:** You need to [register a new application with LinkedIn](https://www.linkedin.com/developer/apps)
 in order to obtain an access and secret keys.

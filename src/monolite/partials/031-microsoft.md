@@ -22,9 +22,12 @@ Or add these through the [app settings API](#050-api-settings-put):
 Support for logging in with Microsoft accounts is implemented by the `MicrosoftAuthFilter`.
 This filter responds to requests at `/microsoft_auth`.
 
-To initiate a login with Microsoft just redirect the user to the Microsoft OAuth endpoint
-`login.microsoftonline.com/common/oauth2/v2.0/authorize`. Pass the parameter `redirect_uri=/microsoft_auth` so Para
-can handle the response from Microsoft. For apps other than the root app use the `/microsoft_auth?appid=myapp` parameter.
+To initiate a login with Microsoft just redirect the user to the Microsoft OAuth endpoint:
+```
+login.microsoftonline.com/common/oauth2/v2.0/authorize
+```
+Pass the parameter `redirect_uri=/microsoft_auth` so Para can handle the response from Microsoft.
+For apps other than the root app use the `/microsoft_auth?appid=myapp` parameter.
 
 **Note:** You need to [register a new application with Microsoft](https://apps.dev.microsoft.com/#/appList)
 in order to obtain an access and secret keys.
