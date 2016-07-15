@@ -25,5 +25,6 @@ It contains all core fields, getters, setters and also implements basic function
 		<tr><td>`Translation`</td><td> Holds a translated string. Can be used for collecting translations from users. </td></tr>
 		<tr><td>`Sysprop`</td><td> **System class** used as a general-purpose data container. It's basically a map. </td></tr>
 		<tr><td>`Linker`</td><td> **System class** used for implementing a many-to-many relationship between objects. </td></tr>
+		<tr><td>`Thing`</td><td> **System class** used for storing IoT devices' state and metadata.</td></tr>
 	</tbody>
 </table>

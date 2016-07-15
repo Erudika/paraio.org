@@ -13,15 +13,32 @@ and destroyed, respectively.
 
 ```java
 // this has to be registered before Para.initialize() is called
-Para.addInitListener(new Para.InitializeListener() {
+Para.addInitListener(new InitializeListener() {
 	public void onInitialize() {
 		// init code...
 	}
 });
 
-Para.addDestroyListener(new Para.DestroyListener() {
+Para.addDestroyListener(new DestroyListener() {
 	public void onDestroy() {
 		// shutdown code...
+	}
+});
+```
+### Custom I/O listeners
+
+An I/O listener is a callback function which is executed after an input/output (CRUD) operation. After a call is made to
+one of the `DAO` methods like `read()`, `update()`, etc., all registered listeners are notified and called.
+It is recommended that the code inside these listeners is asynchronous or less CPU intensive so it does not slow down
+the calls to `DAO`.
+
+```java
+Para.addIOListener(new IOListener() {
+	public void onPreInvoke(Method method, Object[] args) {
+		// do something before the CRUD operation...
+	}
+	public void onPostInvoke(Method method, Object result) {
+		// do something with the result...
 	}
 });
 ```

@@ -85,6 +85,8 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.min_password_length`	</td><td>`6`</td></tr>
 		<tr><td>`para.default_separator`		</td><td>`:`</td></tr>
 		<tr><td>`para.default_encoding`			</td><td>`UTF-8`</td></tr>
+		<tr><td>`para.default_queue_name`		</td><td>`para-default`</td></tr>
+		<tr><td>`para.queue_link_enabled`		</td><td>`false`</td></tr>
 
 		<tr><td>`para.security.api_security`				</td><td> `true` </td></tr>
 		<tr><td>`para.security.csrf_protection`			</td><td> `true` </td></tr>
