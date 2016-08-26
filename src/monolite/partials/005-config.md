@@ -91,7 +91,7 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.security.api_security`				</td><td> `true` </td></tr>
 		<tr><td>`para.security.csrf_protection`			</td><td> `true` </td></tr>
 		<tr><td>`para.security.csrf_cookie`					</td><td> - </td></tr>
-		<tr><td>`para.security.protected.{name}`		</td><td> `["/{path}", "/{path}/**", ["{role}"]]` </td></tr>
+		<tr><td>`para.security.protected.{name}`		</td><td> `["/{path}", "/{path}/**", ["{role}" or {http_method}]]` </td></tr>
 		<tr><td>`para.security.ignored`							</td><td> `["/{path}/**", "/{path}/**"]` </td></tr>
 		<tr><td>`para.security.signin`							</td><td> `/signin` </td></tr>
 		<tr><td>`para.security.signout`							</td><td> `/signout` </td></tr>
