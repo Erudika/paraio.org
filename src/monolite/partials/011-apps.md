@@ -14,10 +14,10 @@ Initially Para creates a default root app with an `id` equal to the value of the
 configuration parameter. If you need to have only one app then you don't need to do anything. If you want to have
 multiple apps then you can simply create them with `appid` equal to the root app's `id`.
 
-Currently Para organizes objects in **one table per app** and uses a single shared search index unless that app sets
-`shared = false`. If this is the case then a separate search index is created for that app. It is possible to make
-Para use a single database table for all apps by prefixing `id` fields (e.g. `app1_id1`: `{data}`) but this is not yet
-implemented.
+Currently Para organizes objects in **one table per app** and uses a single shared search index unless that app has
+`sharingIndex` set to `false`. If this is the case then a separate search index is created for that app.
+It is possible to make Para use a single database table for all apps by prefixing `id` fields
+(e.g. `app1_id1`: `{data}`) but this is not yet implemented.
 
 You can set custom settings to each app through the settings API `/v1/_settings` using `GET`, `PUT` and `DELETE`.
 These can be OAuth credentials for social apps or other configuration details that are specific for the app.

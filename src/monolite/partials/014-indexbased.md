@@ -11,4 +11,4 @@ A local Elasticsearch instance is started each time Para starts and is also stop
 See [Elasticsearch](#014-search) for more information.
 
 > This implementation is intended for development purposes only. When using it also make sure that you are working with
-a single `App` object and its `shared` property is `false`
+a single `App` object and its `sharingIndex` property is `false`
