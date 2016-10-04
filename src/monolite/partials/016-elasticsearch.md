@@ -26,6 +26,7 @@ There are several configuration properties for Elasticsearch (these go in your `
 		<tr><td>`para.es.shards`</td><td> The number of shards per index. Used when creating an new index. Default is `5`.</td></tr>
 		<tr><td>`para.es.replicas`</td><td> The number of copies of an index. Default is `0`.</td></tr>
 		<tr><td>`para.es.dir`</td><td> The directory where Elasticsearch will store data, logs etc. Default is `/var/lib/elasticsearch`.</td></tr>
+		<tr><td>`para.es.auto_expand_replicas`</td><td> Automatically make a replica copy of the index to the number of nodes specified. Default is `0-1`.</td></tr>
 		<tr><td>`para.es.use_transportclient`</td><td> Use `TransportClient` to connect to a remote ES node. Default is `false`.</td></tr>
 		<tr><td>`para.es.transportclient_host`</td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is `localhost`.</td></tr>
 		<tr><td>`para.es.transportclient_port`</td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is `9300`.</td></tr>
