@@ -35,4 +35,4 @@ These methods are:
 - `void unindex(ParaObject obj)`
 - `void unindexAll(List<P> objects)`
 
-> You should not index/unindex your objects manually - Para does this for you.
+> You should *not* index/unindex your objects manually - Para does this for you.
