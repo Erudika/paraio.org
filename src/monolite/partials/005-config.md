@@ -76,8 +76,6 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>Microsoft app id (for OAuth authentication). </td><td></td></tr>
 		<tr><td>`para.ms_secret`						</td><td>-</td></tr>
 		<tr><td>Microsoft app secret. </td><td></td></tr>
-		<tr><td>`para.gmaps_api_key`				</td><td>-</td></tr>
-		<tr><td>Google Maps API key. </td><td></td></tr>
 		<tr><td>`para.admin_ident`					</td><td>-</td></tr>
 		<tr><td>This is the identifier that will be used by the first admin user. It can be the email which the admin
 		user will use to login or a social id in the form of `prefix:social_id`, e.g. `fb:12345`. It is used to assign
