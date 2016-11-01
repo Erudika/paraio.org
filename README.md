@@ -1,7 +1,7 @@
 ![Logo](https://s3-eu-west-1.amazonaws.com/org.paraio/para.png)
 ============================
 
-> [Paraio.org](http://paraio.org) website code
+> [Paraio.org](https://paraio.org) website code
 
 This repo contains the website code for the [Para](https://github.com/Erudika/para) project. It was created with the [bootUP](https://github.com/albogdano/bootup) starter kit.
 
