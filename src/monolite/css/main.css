@@ -362,11 +362,12 @@ code {
 
 #sidebar {
 	padding: 10px 1em 160px 0;
-	position: fixed;
-	overflow: auto;
-	height: 80%;
-	font-size: 1em;
+	/*position: fixed;*/
+	/*overflow: auto;*/
+	/*height: 80%;*/
+	font-size: 0.9em;
 	width: 260px;
+	/*background-color: white;*/
 }
 
 #sidebar ul {
@@ -380,11 +381,11 @@ code {
 }
 
 #sidebar ul li {
-  padding: 0 0 5px;
+  /*padding: 0 0 5px;*/
 }
 
 #sidebar h4 {
-	margin: 5px 0 10px 0;
+	/*margin: 5px 0 10px 0;*/
 }
 
 #sidebar h1 {

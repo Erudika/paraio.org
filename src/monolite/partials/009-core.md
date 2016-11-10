@@ -5,9 +5,8 @@ category: Core classes
 
 In the package `com.erudika.para.core` there are a number of core domain classes that are used throughout Para.
 These are common classes like `User` and `App` which you can use in you application directly or extend them.
-
-Below is a list of classes and their descriptions. All of these implement `ParaObject` which is the core interface.
-It contains all core fields, getters, setters and also implements basic functionality like voting, linking and tagging.
+You can use them for your objects but you're always free to create your own. To do that, simply `POST` a new object
+with `type: mytype` through the API and your new type will be automatically registered.
 
 <table class="table table-striped">
 	<thead>

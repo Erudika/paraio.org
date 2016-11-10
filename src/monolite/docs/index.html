@@ -43,7 +43,7 @@ title: Para - Documentation
 						{{else}}
 							<h2>{{title}}</h2>
 						{{/if}}
-						<section class="body img-rounded">
+						<section class="body {{#if type}}api-body{{/if}} img-rounded">
 							{{this.content}}
 						</section>
 					</article>

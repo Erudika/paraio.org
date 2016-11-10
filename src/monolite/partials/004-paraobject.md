@@ -63,9 +63,10 @@ And here's what a Para object looks like as JSON when returned from the REST API
 
 ### Implementing your own `ParaObject` classes
 
-There was a question about how to implement `ParaObject` and where to start from. First of all, there is no need to write
-your own custom classes if you're going to be using them for simple stuff. So step one is to take a look at the generic
-class called `Sysprop`. Look at the [source code on GitHub](https://github.com/Erudika/para/blob/master/para-core/src/main/java/com/erudika/para/core/Sysprop.java).
+**This step is optional.** There was a question about how to implement `ParaObject` and where to start from.
+First of all, there is no need to write your own custom classes if you're going to be using them for simple stuff.
+So step one is to take a look at the generic class called `Sysprop`. Look at the
+[source code on GitHub](https://github.com/Erudika/para/blob/master/para-core/src/main/java/com/erudika/para/core/Sysprop.java).
 It's pretty simple and implements all of `ParaObject`'s methods. Then you have to decide if you can work with that
 generic class or not. If you really need custom properties and methods then that class is a good starting point.
 Just copy the getters and setters and add your own fields and methods.
@@ -74,11 +75,14 @@ Another option is to extend `Sysprop` like so:
 
 ```java
 public class MyParaObject extends Sysprop implements ParaObject {
-	// 'implements' is redundant here
+	// 'implements ParaObject' is redundant in this case
 
 	@Stored
 	public String myCustomField;
-	// get & set...
+	// this field is ignored and not stored anywhere
+	public transient String secretKey;
+
+	// TODO: write getters & setters...
 }
 ```
 
@@ -95,7 +99,7 @@ public String create() {
 
 ### Fine-tuning backend operations
 
-From version 1.18 `ParaObject`s have three new flags - `stored`, `indexed` and `cached`. These flags turn on and off
+From version 1.18 Para objects have three new flags - `stored`, `indexed` and `cached`. These flags turn on and off
 the three main operations - persistence, indexing and caching. Developers can choose to switch off caching on a number
 of objects that change very often, for example. Also some objects my be hidden from search by setting the `indexed: false`
 flag. And finally you can turn off persistence completely with `stored: false` and thus have objects that

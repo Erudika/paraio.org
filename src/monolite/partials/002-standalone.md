@@ -1,6 +1,6 @@
 ---
-category: Getting Started
 title: Standalone mode
+category: Getting Started
 ---
 
 There are two ways to run Para as a standalone server. The first one is by downloading the executable WAR file and executing it:
