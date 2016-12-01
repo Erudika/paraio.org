@@ -1,23 +1,24 @@
 {
-  "name": "bootup",
-  "description": "Website template with integrated Bootstrap, Assemble, HTML5 boilerplate and Bootswatch themes.",
-  "version": "0.3.1",
-  "homepage": "https://github.com/albogdano/bootup",
+  "name": "para",
+  "private": true,
+  "description": "ParaIO.org site",
+  "version": "1.0.0",
+  "homepage": "https://paraio.org",
   "author": {
     "name": "Alex Bogdanovski",
     "url": "https://github.com/albogdano"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/albogdano/bootup.git"
+    "url": "https://github.com/Erudika/paraio.org"
   },
   "bugs": {
-    "url": "https://github.com/albogdano/bootup/issues"
+    "url": "https://github.com/Erudika/paraio.org/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/albogdano/bootup/blob/master/LICENSE"
+      "url": "https://github.com/Erudika/paraio.org/blob/master/LICENSE"
     }
   ],
   "main": "Gruntfile.js",
@@ -25,23 +26,20 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "assemble": "^0.4.37",
-    "grunt": ">=0.4.4",
-    "grunt-contrib-clean": ">=0.5.0",
-    "grunt-contrib-connect": ">=0.7.1",
-    "grunt-contrib-copy": ">=0.5.0",
-    "grunt-contrib-jshint": ">=0.8.0",
-    "grunt-contrib-uglify": ">=0.4.0",
-    "grunt-contrib-watch": ">=0.5.3",
-    "grunt-prettify": ">=0.3.4",
-    "grunt-html-validation": "^0.1.15",
-    "lodash": "^2.4.1",
-    "gray-matter": "^0.3.4",
-    "marked": "^0.3.2",
-    "minimatch": "^0.2.14",
-    "handlebars-helper-mdpartial": "*",
-    "assemble-partial-data": "*",
-    "highlight.js": "^8.0.0"
+    "assemble-partial-data": "0.2.0",
+    "gray-matter": "2.1.0",
+    "grunt": "1.0.1",
+    "grunt-assemble": "0.5.0",
+    "grunt-contrib-clean": "1.0.0",
+    "grunt-contrib-connect": "1.0.2",
+    "grunt-contrib-copy": "1.0.0",
+    "grunt-contrib-uglify": "2.0.0",
+    "grunt-contrib-watch": "1.0.0",
+    "handlebars-helper-mdpartial": "0.4.1",
+    "highlight.js": "9.8.0",
+    "lodash": "4.17.2",
+    "marked": "0.3.6",
+    "minimatch": "3.0.3"
   },
   "keywords": [
     "assemble",

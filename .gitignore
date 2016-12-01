@@ -21,9 +21,6 @@ TODO.md
 vendor
 _gh_pages
 _gh-pages
-dist
 *.sublime-*
 nbproject
 validation-status.json
-javadoc-*
-javadoc-*/**
