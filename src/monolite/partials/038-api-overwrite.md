@@ -1,5 +1,5 @@
 ---
-title: Overwrite objects
+title: Overwrite object
 category: REST API
 path: /v1/{type}/{id}
 type: PUT

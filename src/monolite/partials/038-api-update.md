@@ -1,11 +1,12 @@
 ---
-title: Update objects
+title: Update object
 category: REST API
 path: /v1/{type}/{id}
 type: PATCH
 ---
 
-Updates objects of type `{type}`. Partial objects are supported.
+Updates an existing object of type `{type}`. Partial objects are supported, meaning that only a few fields could be
+updated, without having to send the whole object.
 
 ### Request
 

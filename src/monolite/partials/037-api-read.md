@@ -1,11 +1,11 @@
 ---
-title: Read objects
+title: Read object
 category: REST API
 path: /v1/{type}/{id}
 type: GET
 ---
 
-Returns objects of type `{type}`.
+Returns an object of type `{type}`.
 
 ### Request
 

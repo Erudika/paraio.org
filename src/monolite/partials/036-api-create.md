@@ -1,11 +1,11 @@
 ---
-title: Create objects
+title: Create object
 category: REST API
 path: /v1/{type}
 type: POST
 ---
 
-Creates new objects of type `{type}`. You can also create objects with custom types and fields (since v1.4.0).
+Creates a new object of type `{type}`. You can also create objects with custom types and fields (since v1.4.0).
 
 ### Request
 

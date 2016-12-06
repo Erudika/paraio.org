@@ -1,11 +1,11 @@
 ---
-title: Delete objects
+title: Delete object
 category: REST API
 path: /v1/{type}/{id}
 type: DELETE
 ---
 
-Deletes objects of type `{type}`.
+Deletes an existing object of type `{type}`. Returns code `200` regardless of the success of the request.
 
 ### Request
 

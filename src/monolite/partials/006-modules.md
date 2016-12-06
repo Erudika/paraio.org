@@ -34,6 +34,16 @@ Then implement the `DAO` interface in your class `MySqlDAO` so that it connects 
 Finally write the full class name `com.company.MySqlModule` to the file `com.google.inject.Module` and Para will use this
 module as its default persistence module.
 
-**Note:** Modules cannot be overridden when Para is running in standalone mode.
+You can also override modules programmatically like this:
 
-> Para uses [Google Guice](https://code.google.com/p/google-guice/) v3 as its module manager and DI system.
+```java
+Para.initialize(Modules.override(ParaServer.getCoreModules()).with(new Module() {
+	public void configure(Binder binder) {
+		binder.bind(DAO.class).to(MyDAO.class).asEagerSingleton();
+		binder.bind(Cache.class).to(MyCache.class).asEagerSingleton();
+		binder.bind(Search.class).to(MySearch.class).asEagerSingleton();
+	}
+}));
+```
+
+> Para uses [Google Guice](https://code.google.com/p/google-guice/) as its module manager and DI system.

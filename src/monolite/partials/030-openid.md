@@ -3,6 +3,8 @@ title: OpenID support
 category: Security
 ---
 
+**DEPRECATED**
+
 **Note**: OpenID 2.0 is no longer supported by Google, and we recommend using one of the other authentication providers
 or JWT-based authentication.
 

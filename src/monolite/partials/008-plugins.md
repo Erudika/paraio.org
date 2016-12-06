@@ -3,8 +3,45 @@ title: Plugins
 category: Configuration
 ---
 
-Para allows you to "weave in" functionality by overriding `AOPModule`. You can intercept calls to `DAO` methods
-and execute your own code.
+Para will look for various plugins like `IOListener`s, `CustomResourceHandler`s, `DAO`s etc, on startup.
+The folder in which plugins JARs should be placed is `./lib/`, by default, but it can be configured like so:
+```
+para.plugin_folder = "plugins/"
+```
+
+### `DAO`, `Search` and `Cache` plugins
+
+In version 1.18 we expanded the support for plugins. Para can now load third-party plugins for various `DAO`
+implementations, like [MongoDB](https://github.com/Erudika/para-dao-mongodb) for example. The plugin `para-dao-mongodb`
+is loaded using the `ServiceLoader` mechanism from the classpath and replaces the default `AWSDynamoDAO` implementation.
+
+To create a plugin you have to create a new project and import `para-core` with Maven and extend one of the three
+interfaces - `DAO`, `Search`, `Cache`. Implement one of these interfaces and name your project by following the
+convention:
+
+- `para-dao-mydao` for `DAO` plugins,
+- `para-search-mysearch` for `Search` plugins,
+- `para-cache-mycache` for `Cache` plugins.
+
+For example, the [plugin for MongoDB](https://github.com/Erudika/para-dao-mongodb) is called `para-dao-mongodb` and
+implements the `DAO` interface with the MongoDB driver for Java.
+
+You also need to create one file inside `src/main/resources/META-INF/services/` in your plugin project:
+
+- `com.erudika.para.persistence.DAO` for `DAO` plugins,
+- `com.erudika.para.search.Search` for `Search` plugins,
+- `com.erudika.para.cache.Cache` for `Cache` plugins.
+
+Inside this file you put the full class name of your implementation, for example `com.erudika.para.persistence.MyDAO`,
+on one line and save the file.
+
+To load a plugin follow these steps:
+
+1. Place the plugin JAR in a folder called `lib` (depends on configuration) or `WEB-INF/lib` in the same folder
+as the Para server or include the plugin through Maven,
+2. Set the configuration property `para.dao = "MyDAO"` or `para.search = "MySearch"` or `para.cache = "MyCache"`
+(use the simple class name here)
+3. Start the Para server and the new plugin should be loaded
 
 ### Custom event listeners
 
@@ -81,37 +118,3 @@ public interface CustomResourceHandler {
 ```
 
 You can use `@Inject` in your custom handlers to inject any object managed by Para.
-
-### `DAO`, `Search` and `Cache` plugins
-
-In version 1.18 we expanded the support for plugins. Para can now load third-party plugins for various `DAO`
-implementations, like [MongoDB](https://github.com/Erudika/para-dao-mongodb) for example. The plugin `para-dao-mongodb`
-is loaded using the `ServiceLoader` mechanism from the classpath and replaces the default `AWSDynamoDAO` implementation.
-
-To create a plugin you have to create a new project and import `para-core` with Maven and extend one of the three
-interfaces - `DAO`, `Search`, `Cache`. Implement one of these interfaces and name your project by following the
-convention:
-
-- `para-dao-mydao` for `DAO` plugins,
-- `para-search-mysearch` for `Search` plugins,
-- `para-cache-mycache` for `Cache` plugins.
-
-For example, the [plugin for MongoDB](https://github.com/Erudika/para-dao-mongodb) is called `para-dao-mongodb` and
-implements the `DAO` interface with the MongoDB driver for Java.
-
-You also need to create one file inside `src/main/resources/META-INF/services/` in your plugin project:
-
-- `com.erudika.para.persistence.DAO` for `DAO` plugins,
-- `com.erudika.para.search.Search` for `Search` plugins,
-- `com.erudika.para.cache.Cache` for `Cache` plugins.
-
-Inside this file you put the full class name of your implementation, for example `com.erudika.para.persistence.MyDAO`,
-on one line and save the file.
-
-To load a plugin follow these steps:
-
-1. Place the plugin JAR in a folder called `lib` or `WEB-INF/lib` in the same folder as the Para server or
-include the plugin through Maven,
-2. Set the configuration property `para.dao = "MyDAO"` or `para.search = "MySearch"` or `para.cache = "MyCache"`
-(use the simple class name here)
-3. Start the Para server and the new plugin should be loaded
