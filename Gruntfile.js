@@ -75,7 +75,7 @@ module.exports = function(grunt) {
 			},
 			misc: {
 				files: [
-					{expand: true, cwd: "<%= site.templates %>/misc", src: ["*.*"], dest: "<%= site.dest %>"}
+					{expand: true, cwd: "<%= site.templates %>/misc", src: ["*"], dest: "<%= site.dest %>"}
 				]
 			},
 			onlycss: { files: [cssCopy] },
