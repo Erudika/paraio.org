@@ -8,6 +8,8 @@ These are common classes like `User` and `App` which you can use in you applicat
 You can use them for your objects but you're always free to create your own. To do that, simply `POST` a new object
 with `type: mytype` through the API and your new type will be automatically registered.
 
+**Note:** Type definitions *cannot* contain the symbols `/` and `#`.
+
 <table class="table table-striped">
 	<thead>
 		<tr>

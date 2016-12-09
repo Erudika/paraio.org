@@ -229,18 +229,18 @@
 					<article class=" img-rounded">
 							<h2>Introduction</h2>
 						<section class="body  img-rounded">
-							<p>Para was created because we needed a simple and flexible back-end service to support our front-end work.
-We wanted to have a system that allowed us to persist objects easily to anything - RDBMS and NoSQL databases.
-Our second requirement was full text search. We wanted to be able to find any persisted object quickly.</p>
-<p>There are two ways to use Para:</p>
-<ul>
-<li>as a standalone service running inside a servlet container like Jetty or Tomcat;</li>
-<li>as part of your project as a Maven dependency.</li>
-</ul>
-<p>Running Para as a standalone service on one or more nodes gives you scalability and allows you to support
-many different clients and applications. This is done through Para’s simple RESTful API which talks JSON to your clients.</p>
-<p>And if you are building a server-side application, add Para as a dependency to quickly make your domain objects
-persistable and searchable. You can still keep the RESTful API feature or turn it off completely.</p>
+							<p>Para is a flexible backend service, created as an open-source project in the year 2013.
+It was born out of our need to have a robust system which would allow us to persist objects easily to anything -
+RDBMS, NoSQL and in-memory databases. We needed a simple solution with an API which would scale well and provide a
+solid foundation for our future projects.</p>
+<p>Para is a <strong>3-tier</strong> backend system with a REST API in front of it. The first tier is the <strong>database</strong>, the second
+tier is the <strong>search index</strong> and the third is the <strong>cache</strong>. Depending on how you use it, Para can either be a
+standalone backend service or a persistence framework that is part of your code base.</p>
+<p>Para is multitenant which means you can run it as a standalone service on one or more nodes and host one or more
+applications (“apps”) on it. An application can be a website, mobile app, desktop app or even a command-line tool.
+This is possible through the API which talks JSON to your apps, and with the client libraries it’s easy to get started.
+And if you are building a server-side application, add Para as a dependency to quickly make your domain objects
+persistable and searchable. You can still keep the REST API or turn it off completely. </p>
 <h3 id="quick-start">Quick start</h3>
 <ol>
 <li><a href="https://github.com/erudika/para/releases">Download the WAR</a></li>
@@ -830,6 +830,7 @@ of your custom resource handler class. On startup Para will load these and regis
 These are common classes like <code>User</code> and <code>App</code> which you can use in you application directly or extend them.
 You can use them for your objects but you’re always free to create your own. To do that, simply <code>POST</code> a new object
 with <code>type: mytype</code> through the API and your new type will be automatically registered.</p>
+<p><strong>Note:</strong> Type definitions <em>cannot</em> contain the symbols <code>/</code> and <code>#</code>.</p>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -1130,6 +1131,8 @@ except their own object and child objects, unless given explicit permission to d
 </code></pre>
 <p>This resource is now public but to access it you still need to specify your access key as a parameter:</p>
 <pre><code>GET /v1/public/resource?accessKey=app:myapp
+</code></pre><p>Alternatively, on the client-side, you can set the <code>Authorization</code> header to indicate that the request is anonymous:</p>
+<pre><code>Authorization: Anonymous app:myapp
 </code></pre><p>The special permission method <code>?</code> means that anyone can do a <code>GET</code> request on <code>public/resource</code>.</p>
 <p>To check if user <code>1</code> is allowed to access a particular resource call:</p>
 <pre><code class="lang-java"><span class="hljs-comment">// returns 'false'</span>
@@ -3881,7 +3884,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>2016-12-07</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>2016-12-09</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2016
 							<a href="https://erudika.com">Erudika</a></p>

@@ -77,6 +77,10 @@ This resource is now public but to access it you still need to specify your acce
 ```
 GET /v1/public/resource?accessKey=app:myapp
 ```
+Alternatively, on the client-side, you can set the `Authorization` header to indicate that the request is anonymous:
+```
+Authorization: Anonymous app:myapp
+```
 
 The special permission method `?` means that anyone can do a `GET` request on `public/resource`.
 
