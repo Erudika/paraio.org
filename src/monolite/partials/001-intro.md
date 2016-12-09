@@ -7,7 +7,7 @@ It was born out of our need to have a robust system which would allow us to pers
 RDBMS, NoSQL and in-memory databases. We needed a simple solution with an API which would scale well and provide a
 solid foundation for our future projects.
 
-Para is a **3-tier** backend system with a REST API in front of it. The first tier is the **database**, the second
+Para is a **3-tier backend system** with a REST API in front of it. The first tier is the **database**, the second
 tier is the **search index** and the third is the **cache**. Depending on how you use it, Para can either be a
 standalone backend service or a persistence framework that is part of your code base.
 
@@ -15,7 +15,7 @@ Para is multitenant which means you can run it as a standalone service on one or
 applications ("apps") on it. An application can be a website, mobile app, desktop app or even a command-line tool.
 This is possible through the API which talks JSON to your apps, and with the client libraries it's easy to get started.
 And if you are building a server-side application, add Para as a dependency to quickly make your domain objects
-persistable and searchable. You can still keep the REST API or turn it off completely. 
+persistable and searchable. You can still keep the REST API or turn it off completely.
 
 ### Quick start
 
@@ -72,7 +72,7 @@ pc.me();
 	</div>
   <div class="col-sm-4 text-center">
 		<a href="https://github.com/Erudika/para-client-android" class="btn-client">
-			<i class="devicon-android-plain-wordmark"></i>
+			<i class="devicon-android-plain"></i>
 		</a>
 	</div>
   <div class="col-sm-4 text-center">
