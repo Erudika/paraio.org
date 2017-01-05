@@ -11,11 +11,11 @@ Para is a **3-tier backend system** with a REST API in front of it. The first ti
 tier is the **search index** and the third is the **cache**. Depending on how you use it, Para can either be a
 standalone backend service or a persistence framework that is part of your code base.
 
-Para is multitenant which means you can run it as a standalone service on one or more nodes and host one or more
-applications ("apps") on it. An application can be a website, mobile app, desktop app or even a command-line tool.
-This is possible through the API which talks JSON to your apps, and with the client libraries it's easy to get started.
-And if you are building a server-side application, add Para as a dependency to quickly make your domain objects
-persistable and searchable. You can still keep the REST API or turn it off completely.
+Para is multitenant, which means you can deploy it as a standalone service on one or more nodes and host one or more
+applications on it ("apps"). An app can be a website, mobile app, desktop app or even a command-line tool.
+This is made possible by the REST API which talks JSON to your apps, and with the help of the client libraries below,
+it's easy to get started. If you're building an application on the JVM, you can also add Para as Maven dependency to
+your project. You can still keep the REST API or turn it off completely.
 
 ### Quick start
 
