@@ -2666,12 +2666,12 @@ These are required for mapping types to URLs.</p>
 						<section class="body api-body img-rounded">
 							<p>Updates an existing object of type <code>{type}</code>. Partial objects are supported, meaning that only a few fields could be
 updated, without having to send the whole object.</p>
-<p><strong>Voting requests</strong>: these are a special kind of <code>PATCH</code> request, which has a body like <code>{&quot;_voteUp&quot;: &quot;user123&quot;}</code> or
-<code>{&quot;_voteDown&quot;: &quot;user123&quot;}</code>. Here <code>user123</code> is the <code>id</code> of the voter. A successful vote request either increments or
+<p><strong>Vote requests</strong>: these are a special kind of <code>PATCH</code> request, which has a body like <code>{&quot;_voteup&quot;: &quot;user123&quot;}</code> or
+<code>{&quot;_votedown&quot;: &quot;user123&quot;}</code>. Here <code>user123</code> is the <code>id</code> of the voter. A successful vote request either increments or
 decrements the <code>votes</code> field by 1.</p>
 <h3 id="request">Request</h3>
 <ul>
-<li><strong>body</strong> - the JSON object to merge with the stored object <strong>OR</strong> a vote request body like <code>{&quot;_voteUp&quot;: &quot;user123&quot;}</code></li>
+<li><strong>body</strong> - the JSON object to merge with the stored object <strong>OR</strong> a vote request body like <code>{&quot;_voteup&quot;: &quot;user123&quot;}</code></li>
 <li><code>{type}</code> - the plural form of the object’s type, e.g. “users”</li>
 <li><code>{id}</code> - the <code>id</code></li>
 </ul>
