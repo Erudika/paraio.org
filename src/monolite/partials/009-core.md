@@ -29,3 +29,10 @@ with `type: mytype` through the API and your new type will be automatically regi
 		<tr><td>`Thing`</td><td> **System class** used for storing IoT devices' state and metadata.</td></tr>
 	</tbody>
 </table>
+
+### Voting
+
+Para implements a simple voting mechanism for objects - each object can be voted up and down an has a `votes` property.
+Voting is useful for many application which require sorting by user votes. When a vote is cast, a new object of type
+`Vote` is created to store the vote in the database. Users have a configurable time window to amend their vote, they can
+no longer vote on that particular object.

@@ -22,6 +22,15 @@ para.security.api_security = true
 para.security.csrf_protection = true
 ```
 
+The configuration logic is to read system properties first, then environment properties and finally check the config file.
+So the order of precedence is as follows:
+```
+System.getProperty() > System.getenv() > application.conf
+```
+
+Note that environment properties containing `.` (dots) are invalid and will be replaced with `_` (underscore).
+For example, the environment property `$para_env` is equivalent to `para.env` in the config file.
+
 > **Important:** In a production environment, set `para.app_secret_key` to some randomly generated secret string.
 > This is important for securing your server because this secret key is used for signing and verifying authentication tokens.
 

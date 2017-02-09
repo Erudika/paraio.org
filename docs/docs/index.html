@@ -215,6 +215,7 @@
 										<li class="GET"><a href="#050-api-settings-get">List custom settings</a></li>
 										<li class="PUT"><a href="#050-api-settings-put">Add custom setting</a></li>
 										<li class="DELETE"><a href="#050-api-settings-rem">Remove custom setting</a></li>
+										<li class="GET"><a href="#050-api-setup-child">Child app setup</a></li>
 										<li class="GET"><a href="#050-api-setup">Initial setup</a></li>
 										<li class="POST"><a href="#051-api-newkeys">Reset API keys</a></li>
 										<li class="GET"><a href="#052-api-utils">Utilities</a></li>
@@ -470,7 +471,12 @@ If you have a file called <code>application.conf</code> or <code>application.jso
 para.print_logo = <span class="hljs-literal">true</span>
 para.security.api_security = <span class="hljs-literal">true</span>
 para.security.csrf_protection = <span class="hljs-literal">true</span>
-</code></pre><blockquote>
+</code></pre><p>The configuration logic is to read system properties first, then environment properties and finally check the config file.
+So the order of precedence is as follows:</p>
+<pre><code>System.getProperty() &gt; System.getenv() &gt; application.conf
+</code></pre><p>Note that environment properties containing <code>.</code> (dots) are invalid and will be replaced with <code>_</code> (underscore).
+For example, the environment property <code>$para_env</code> is equivalent to <code>para.env</code> in the config file.</p>
+<blockquote>
 <p><strong>Important:</strong> In a production environment, set <code>para.app_secret_key</code> to some randomly generated secret string.
 This is important for securing your server because this secret key is used for signing and verifying authentication tokens.</p>
 </blockquote>
@@ -850,6 +856,13 @@ with <code>type: mytype</code> through the API and your new type will be automat
         <tr><td><code>Thing</code></td><td> <strong>System class</strong> used for storing IoT devices’ state and metadata.</td></tr>
     </tbody>
 </table>
+
+<h3 id="voting">Voting</h3>
+<p>Para implements a simple voting mechanism for objects - each object can be voted up and down an has a <code>votes</code> property.
+Voting is useful for many application which require sorting by user votes. When a vote is cast, a new object of type
+<code>Vote</code> is created to store the vote in the database. Users have a configurable time window to amend their vote, they can
+no longer vote on that particular object.</p>
+
 						</section>
 					</article>
 					<a id="010-userdefined" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
@@ -944,13 +957,16 @@ they will be skipped.</p>
 							<h2>Apps</h2>
 						<section class="body  img-rounded">
 							<p>Apps allow you to have separate namespaces and data models for different purposes. Each app lives in its own separate
-database and is independent from apps.</p>
-<p>Apps have a unique <code>appid</code> key which is used to identify them. They also have a set of data types. Data types can be
-created on-the-fly, for example you can create a type called “article” and it will have its own API URL at
-<code>/v1/article</code></p>
+database table and is independent from apps.</p>
+<p>Each app has a unique identifier, like “my-custom-app”. When an object is created, Para will attach the app identifier
+to it automatically. Apps also have a set of data types, as set of permissions and validation constraints.
+Data types can be created on-the-fly, for example you can create a type called “article” and it will have be
+available as a new API resource at <code>/v1/article</code> (and in plural form <code>/v1/articles</code>).</p>
+<h3 id="creating-apps">Creating apps</h3>
 <p>Initially Para creates a default root app with an <code>id</code> equal to the value of the <code>para.app_name</code>
-configuration parameter. If you need to have only one app then you don’t need to do anything. If you want to have
-multiple apps then you can simply create them with <code>appid</code> equal to the root app’s <code>id</code>.</p>
+configuration parameter. If you need to have only one app then you don’t need to do anything. If you want to create
+multiple apps then you must call <code>Para.setup()</code> or make an authenticated request to the API `GET /v1/_setup/{app_name}.
+You are responsible from creating a search index and database table for apps other than the root app (child apps).</p>
 <p>Currently Para organizes objects in <strong>one table per app</strong> and uses a single shared search index unless that app has
 <code>sharingIndex</code> set to <code>false</code>. If this is the case then a separate search index is created for that app.
 It is possible to make Para use a single database table for all apps by prefixing <code>id</code> fields
@@ -2650,15 +2666,18 @@ These are required for mapping types to URLs.</p>
 						<section class="body api-body img-rounded">
 							<p>Updates an existing object of type <code>{type}</code>. Partial objects are supported, meaning that only a few fields could be
 updated, without having to send the whole object.</p>
+<p><strong>Voting requests</strong>: these are a special kind of <code>PATCH</code> request, which has a body like <code>{&quot;_voteUp&quot;: &quot;user123&quot;}</code> or
+<code>{&quot;_voteDown&quot;: &quot;user123&quot;}</code>. Here <code>user123</code> is the <code>id</code> of the voter. A successful vote request either increments or
+decrements the <code>votes</code> field by 1.</p>
 <h3 id="request">Request</h3>
 <ul>
-<li><strong>body</strong> - the JSON data to merge with the stored object</li>
+<li><strong>body</strong> - the JSON object to merge with the stored object <strong>OR</strong> a vote request body like <code>{&quot;_voteUp&quot;: &quot;user123&quot;}</code></li>
 <li><code>{type}</code> - the plural form of the object’s type, e.g. “users”</li>
 <li><code>{id}</code> - the <code>id</code></li>
 </ul>
 <h3 id="response">Response</h3>
 <ul>
-<li><strong>status codes</strong> - <code>200</code>, <code>400</code>, <code>404</code>, <code>500</code></li>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code>, <code>404</code>, <code>500</code>, vote requests return <code>true</code> or <code>false</code></li>
 </ul>
 <p>Example response for a <code>Tag</code> with updated <code>count</code>:</p>
 <pre><code class="lang-js">{
@@ -3760,6 +3779,35 @@ the value can be <code>boolean</code>, <code>Number</code> or <code>String</code
 
 						</section>
 					</article>
+					<a id="050-api-setup-child" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class="GET img-rounded">
+							<a href="#">
+								<h2 class="img-rounded">
+									<code>
+											<span class="img-rounded label-success">GET</span>
+										<span class="gray">
+											/v1/_setup/{app_name} 
+										</span>
+									</code>
+									<span class="hidden-xs">Child app setup</span>
+								</h2>
+							</a>
+						<section class="body api-body img-rounded">
+							<p><strong>Requires authentication with the root app access/secret keys</strong></p>
+<p>Creates a new child app and generates the first pair of API keys. You are responsible for creating the database table
+and index for the new app.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><code>{app_name}</code> - the name of the child app</li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns the access and secret keys for this application which will be used for request signing.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>403</code></li>
+</ul>
+
+						</section>
+					</article>
 					<a id="050-api-setup" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
 					<article class="GET img-rounded">
 							<a href="#">
@@ -3884,7 +3932,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>2017-01-05</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>2017-02-09</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>

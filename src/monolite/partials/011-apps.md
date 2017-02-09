@@ -4,15 +4,19 @@ category: Core classes
 ---
 
 Apps allow you to have separate namespaces and data models for different purposes. Each app lives in its own separate
-database and is independent from apps.
+database table and is independent from apps.
 
-Apps have a unique `appid` key which is used to identify them. They also have a set of data types. Data types can be
-created on-the-fly, for example you can create a type called "article" and it will have its own API URL at
-`/v1/article`
+Each app has a unique identifier, like "my-custom-app". When an object is created, Para will attach the app identifier
+to it automatically. Apps also have a set of data types, as set of permissions and validation constraints.
+Data types can be created on-the-fly, for example you can create a type called "article" and it will have be
+available as a new API resource at `/v1/article` (and in plural form `/v1/articles`).
+
+### Creating apps
 
 Initially Para creates a default root app with an `id` equal to the value of the `para.app_name`
-configuration parameter. If you need to have only one app then you don't need to do anything. If you want to have
-multiple apps then you can simply create them with `appid` equal to the root app's `id`.
+configuration parameter. If you need to have only one app then you don't need to do anything. If you want to create
+multiple apps then you must call `Para.setup()` or make an authenticated request to the API `GET /v1/_setup/{app_name}.
+You are responsible from creating a search index and database table for apps other than the root app (child apps).
 
 Currently Para organizes objects in **one table per app** and uses a single shared search index unless that app has
 `sharingIndex` set to `false`. If this is the case then a separate search index is created for that app.
