@@ -1,8 +1,8 @@
 #!/bin/bash
 
 DIST="docs"
+rm -rf $DIST
 grunt cb
-# cp -Rf docs/* .
 if [ -n "$1" ]; then
   sed -e "1,/version: / s/version: .*/version: \"$1\"/" -i.bak ./src/monolite/index.html
 	rm jdocs1.zip jdocs2.zip jdocs3.zip ./src/monolite/index.html.bak

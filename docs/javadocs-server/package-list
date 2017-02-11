@@ -9,5 +9,6 @@ com.erudika.para.queue
 com.erudika.para.rest
 com.erudika.para.search
 com.erudika.para.security
+com.erudika.para.security.filters
 com.erudika.para.storage
 com.erudika.para.utils.filters
