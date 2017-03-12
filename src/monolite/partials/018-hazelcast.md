@@ -27,6 +27,9 @@ There are several configuration properties for Hazelcast:
 		<tr><td>`para.hc.jmx_enabled`</td><td> JMX reporting. Default is `true`. </td></tr>
 		<tr><td>`para.hc.ec2_discovery_enabled`</td><td> Enables AWS EC2 auto discovery. Default is `true`.</td></tr>
 		<tr><td>`para.hc.discovery_group`</td><td> Security group for cloud discovery of nodes. Default is `hazelcast`.</td></tr>
+		<tr><td>`para.hc.password`</td><td> The Hazelcast cluster password. Default is `hcpasswd`.</td></tr>
+		<tr><td>`para.hc.mancenter_enabled`</td><td> Enables the Hazelcast Management Center. Default is `!IN_PRODUCTION`.</td></tr>
+		<tr><td>`para.hc.mancenter_url`</td><td> The URL for the Management Center server. Default is `http://localhost:8001/mancenter`.</td></tr>
 	</tbody>
 </table>
 
