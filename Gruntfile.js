@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 				layouts: "<%= site.layouts %>",
 				layout: "<%= site.layout %>",
 				plugins: ["assemble-partial-data", "<%= site.plugins %>/*.js"],
-				helpers: ["handlebars-helper-mdpartial", "<%= site.helpers %>/*.js"],
+				helpers: ["handlebars-helper-mdpartial", "helper-moment", "<%= site.helpers %>/*.js"],
 				partials: ["<%= site.partials %>/*.{html,md}", templateDir + "/partials/*.{html,md}"],
 				template: "<%= site.template %>",
 				templateDir: templateDir,

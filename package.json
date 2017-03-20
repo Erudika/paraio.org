@@ -36,6 +36,7 @@
     "grunt-contrib-uglify": "2.2.0",
     "grunt-contrib-watch": "1.0.0",
     "handlebars-helper-mdpartial": "0.4.1",
+    "helper-moment": "^0.2.0",
     "highlight.js": "9.10.0",
     "lodash": "4.17.4",
     "marked": "0.3.6",
