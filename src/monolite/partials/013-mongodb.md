@@ -23,6 +23,8 @@ There are several configuration properties for MongoDB (these go in your `applic
 		<tr><td>`para.mongodb.database`</td><td> The database name that Para will use. Default is equal to `para.app_name`.</td></tr>
 		<tr><td>`para.mongodb.user`</td><td> The username with access to the database. Defaults to `""`.</td></tr>
 		<tr><td>`para.mongodb.password`</td><td> The password. Defaults to `""`.</td></tr>
+		<tr><td>`para.mongodb.ssl_enabled`</td><td> Enables the secure SSL/TLS transport. Defaults to `false`.</td></tr>
+		<tr><td>`para.mongodb.ssl_allow_all`</td><td> Allows any hostname by skipping the certificate verification. Defaults to `false`.</td></tr>
 	</tbody>
 </table>
 
