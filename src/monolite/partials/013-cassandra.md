@@ -24,6 +24,7 @@ There are several configuration properties for Cassandra (these go in your `appl
 		<tr><td>`para.cassandra.user`</td><td> The username with access to the database. Defaults to `""`.</td></tr>
 		<tr><td>`para.cassandra.password`</td><td> The password. Defaults to `""`.</td></tr>
 		<tr><td>`para.cassandra.replication_factor`</td><td> Replication factor for the keyspace. Defaults to `1`.</td></tr>
+		<tr><td>`para.cassandra.ssl_enabled`</td><td> Enables the secure SSL/TLS transport. Defaults to `false`.</td></tr>
 	</tbody>
 </table>
 
