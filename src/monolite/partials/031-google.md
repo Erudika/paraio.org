@@ -3,8 +3,8 @@ title: Google support
 category: Security
 ---
 
-**Update:** From v1.17.1 we support an easier way to login with Google [through the API](#034-api-jwt-signin).
-Authentication is implemented using JWT tokens instead of cookies.
+> This describes the web flow authentication with Google. You could also login with an existing access token from
+> Google [through the API](#034-api-jwt-signin). This web flow sets a cookie, the API returns a JWT instead.
 
 First of all you need to have your API credentials ready by creating an app in the Google Dev Console.
 Then add them to your `application.conf` configuration file:
@@ -27,7 +27,7 @@ To initiate a login with Google just redirect the user to the Google OAuth endpo
 accounts.google.com/o/oauth2/auth
 ```
 Pass the parameter `redirect_uri=/google_auth` so Para can handle the response from Google.
-For apps other than the root app use the `/google_auth?appid=myapp` parameter.
+For apps other than the root app use `redirect_uri=/google_auth?appid=myapp` instead.
 
 **Note:** You need to [register a new application with Google](https://console.developers.google.com/iam-admin/projects)
 in order to obtain an access and secret keys.

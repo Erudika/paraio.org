@@ -3,8 +3,8 @@ title: Twitter support
 category: Security
 ---
 
-**Update:** From v1.17.1 we support an easier way to login with Twitter [through the API](#034-api-jwt-signin).
-Authentication is implemented using JWT tokens instead of cookies.
+> This describes the web flow authentication with Twitter. You could also login with an existing access token from
+> Twitter [through the API](#034-api-jwt-signin). This web flow sets a cookie, the API returns a JWT instead.
 
 First of all you need to have your API credentials ready by creating an app on Twitter.
 Then add them to your `application.conf` configuration file:
@@ -23,7 +23,7 @@ Support for logging in with Twitter is implemented by the `TwitterAuthFilter`. T
 `/twitter_auth`.
 
 To initiate a login with Twitter just redirect the user to the `/twitter_auth`. This will redirect the user to Twitter
-for authentication. For apps other than the root app use the `/twitter_auth?appid=myapp` parameter.
+for authentication. For apps other than the root app, redirect to `/twitter_auth?appid=myapp`.
 
 **Note:** You need to [register a new application with Twitter](https://apps.twitter.com/)
 in order to obtain an access and secret keys.
@@ -35,6 +35,8 @@ Below is an example Javascript code for a Twitter login button:
 ```js
 $("#twitterLoginBtn").click(function() {
 		window.location = "/twitter_auth";
+		// for apps other than the root app use:
+		// window.location = "/twitter_auth?appid=myapp";
 		return false;
 });
 ```

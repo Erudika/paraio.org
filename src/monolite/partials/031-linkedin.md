@@ -3,8 +3,8 @@ title: LinkedIn support
 category: Security
 ---
 
-**Update:** From v1.17.1 we support an easier way to login with LinkedIn [through the API](#034-api-jwt-signin).
-Authentication is implemented using JWT tokens instead of cookies.
+> This describes the web flow authentication with LinkedIn. You could also login with an existing access token from
+> LinkedIn [through the API](#034-api-jwt-signin). This web flow sets a cookie, the API returns a JWT instead.
 
 First of all you need to have your API credentials ready by creating an app on LinkedIn.
 Then add them to your `application.conf` configuration file:
@@ -27,7 +27,7 @@ To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth e
 linkedin.com/uas/oauth2/authorization
 ```
 Pass the parameter `redirect_uri=/linkedin_auth` so Para can handle the response from LinkedIn.
-For apps other than the root app use the `/linkedin_auth?appid=myapp` parameter.
+For apps other than the root app use `redirect_uri=/linkedin_auth?appid=myapp` instead.
 
 **Note:** You need to [register a new application with LinkedIn](https://www.linkedin.com/developer/apps)
 in order to obtain an access and secret keys.

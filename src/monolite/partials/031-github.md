@@ -3,8 +3,8 @@ title: GitHub support
 category: Security
 ---
 
-**Update:** From v1.17.1 we support an easier way to login with GitHub [through the API](#034-api-jwt-signin).
-Authentication is implemented using JWT tokens instead of cookies.
+> This describes the web flow authentication with GitHub. You could also login with an existing access token from
+> GitHub [through the API](#034-api-jwt-signin). This web flow sets a cookie, the API returns a JWT instead.
 
 First of all you need to have your API credentials ready by creating an app on GitHub.
 Then add them to your `application.conf` configuration file:
@@ -27,7 +27,7 @@ To initiate a login with GitHub just redirect the user to the GitHub OAuth endpo
 github.com/login/oauth/authorize
 ```
 Pass the parameter `redirect_uri=/github_auth` so Para can handle the response from GitHub.
-For apps other than the root app use the `/github_auth?appid=myapp` parameter.
+For apps other than the root app use `redirect_uri=/github_auth?appid=myapp` instead.
 
 **Note:** You need to [register a new application with GitHub](https://github.com/settings/profile)
 in order to obtain an access and secret keys.

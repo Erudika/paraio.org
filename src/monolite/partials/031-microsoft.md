@@ -3,8 +3,8 @@ title: Microsoft support
 category: Security
 ---
 
-**Update:** From v1.17.1 we support an easier way to login with Microsoft [through the API](#034-api-jwt-signin).
-Authentication is implemented using JWT tokens instead of cookies.
+> This describes the web flow authentication with Microsoft. You could also login with an existing access token from
+> Microsoft [through the API](#034-api-jwt-signin). This web flow sets a cookie, the API returns a JWT instead.
 
 First of all you need to have your API credentials ready by creating an app on Microsoft.
 Then add them to your `application.conf` configuration file:
@@ -27,7 +27,7 @@ To initiate a login with Microsoft just redirect the user to the Microsoft OAuth
 login.microsoftonline.com/common/oauth2/v2.0/authorize
 ```
 Pass the parameter `redirect_uri=/microsoft_auth` so Para can handle the response from Microsoft.
-For apps other than the root app use the `/microsoft_auth?appid=myapp` parameter.
+For apps other than the root app use `redirect_uri=/microsoft_auth?appid=myapp` instead.
 
 **Note:** You need to [register a new application with Microsoft](https://apps.dev.microsoft.com/#/appList)
 in order to obtain an access and secret keys.
