@@ -83,7 +83,7 @@ The `Utils` static class contains a variety of utility methods. These are summar
 		<tr><td>`boolean typesMatch(ParaObject so)`</td></tr>
 		<tr><td> Validates that an object's class matches its `type` property. </td></tr>
 		<tr><td>`Map<String, Object> getAnnotatedFields(P bean)`</td></tr>
-		<tr><td> Returns a map of all fields marked with the `Strored` annotation for a given object. </td></tr>
+		<tr><td> Returns a map of all fields marked with the `Stored` annotation for a given object. </td></tr>
 		<tr><td>`P setAnnotatedFields(Map<String, Object> data)`</td></tr>
 		<tr><td> Reconstruct an object from a map of fields and their values. </td></tr>
 		<tr><td>`P toObject(String type)`</td></tr>

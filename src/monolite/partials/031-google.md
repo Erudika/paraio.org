@@ -3,7 +3,7 @@ title: Google support
 category: Security
 ---
 
-> This describes the web flow authentication with Google. You could also login with an existing access token from
+> This describes the web authentication flow with Google. You could also login with an existing access token from
 > Google [through the API](#034-api-jwt-signin). This web flow sets a cookie, the API returns a JWT instead.
 
 First of all you need to have your API credentials ready by creating an app in the Google Dev Console.
