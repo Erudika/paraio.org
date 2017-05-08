@@ -11,14 +11,22 @@ Then add them to your `application.conf` configuration file:
 ```
 para.ms_app_id = "..."
 para.ms_secret = "..."
+para.security.signin_success = "http://success.url"
+para.security.signin_failure = "http://failure.url"
 ```
 Or add these through the [app settings API](#050-api-settings-put):
 ```
 {
 	"ms_app_id": "..."
 	"ms_secret": "..."
+	"signin_success": "http://success.url"
+	"signin_failure": "http://failure.url"
 }
 ```
+If you want Para to generate a JWT token upon successful authentication, add the `jwt=?` parameter to your
+`signin_success` url. For example `{ "signin_success": "http://success.url?jwt=?" }`.
+Para will redirect the user back to your host URL with the generated access token.
+
 Support for logging in with Microsoft accounts is implemented by the `MicrosoftAuthFilter`.
 This filter responds to requests at `/microsoft_auth`.
 
@@ -27,7 +35,8 @@ To initiate a login with Microsoft just redirect the user to the Microsoft OAuth
 login.microsoftonline.com/common/oauth2/v2.0/authorize
 ```
 Pass the parameter `redirect_uri=/microsoft_auth` so Para can handle the response from Microsoft.
-For apps other than the root app use `redirect_uri=/microsoft_auth?appid=myapp` instead.
+**Note:** The v2.0 endpoint for OAuth authentication with Microsoft doesn't work well with query parameters in
+the `redirect_uri` parameter. Instead, use the `state` parameter to remember the `appid` of your app (see example below).
 
 **Note:** You need to [register a new application with Microsoft](https://apps.dev.microsoft.com/#/appList)
 in order to obtain an access and secret keys.
@@ -38,7 +47,7 @@ Below is an example Javascript code for a Microsoft login button:
 $("#microsoftLoginBtn").click(function() {
 		window.location = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?" +
 				"response_type=code&client_id={MICROSOFT_APP_ID}" +
-				"&scope=https%3A%2F%2Fgraph.microsoft.com%2Fuser.read&state=" + (new Date().getTime()) +
+				"&scope=https%3A%2F%2Fgraph.microsoft.com%2Fuser.read&state={YOUR_APP_ID}" +
 				"&redirect_uri=" + window.location.origin + "/microsoft_auth;
 		return false;
 });

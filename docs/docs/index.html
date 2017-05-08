@@ -1777,9 +1777,6 @@ resources.</p>
         <tr><td><code>String getNewId()</code></td></tr>
         <tr><td> Generates a new <code>id</code>. Based on <a href="https://github.com/twitter/snowflake/">Twitter’s Snowflake</a> algorithm. </td></tr>
         <tr><td><code>String type(Class&lt;? extends ParaObject&gt; clazz)</code></td></tr>
-        <tr><td> </td></tr>
-        <tr><td> </td></tr>
-        <tr><td> </td></tr>
     </tbody>
 </table>
 
@@ -1791,7 +1788,7 @@ resources.</p>
         <tr><td><code>String getHostFromURL(String url)</code></td></tr>
         <tr><td> Returns the host name of a URL - “example.com” </td></tr>
         <tr><td><code>String getBaseURL(String url)</code></td></tr>
-        <tr><td> Returns th base URL - “<a href="http://example.com">http://example.com</a>“ </td></tr>
+        <tr><td> Returns the base URL, e.g. <a href="http://example.com">http://example.com</a> </td></tr>
     </tbody>
 </table>
 
@@ -1906,7 +1903,7 @@ user registrations and logins.</p>
 <p>The classic way of logging users in is with usernames and passwords. Para implements that mechanism in the
 <code>PasswordAuthFilter</code> class. It takes a username or email and a password and tries to find that user in the database.
 If the user exists then it validates that the hash of the given password matches the hash in the database.
-The hashing algorithm is <em>*BCrypt</em>.</p>
+The hashing algorithm is <strong>BCrypt</strong>.</p>
 <p>The default URL for this filter is <code>/password_auth</code> and all requests to this location will be intercepted and processed
 by it. The default parameters to pass to it are <code>email</code> and <code>password</code>.</p>
 <p>Also see the configuration properties <code>para.security.signin_success</code> and <code>para.security.signin_failure</code> in section Config.
@@ -1990,8 +1987,13 @@ para.fb_secret = <span class="hljs-string">"..."</span>
 <pre><code>{
     <span class="hljs-string">"fb_app_id"</span>: <span class="hljs-string">"..."</span>
     <span class="hljs-string">"fb_secret"</span>: <span class="hljs-string">"..."</span>
+    <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>
+    <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
 }
-</code></pre><p>Support for logging in with Facebook is implemented by the <code>FacebookAuthFilter</code>. This filter responds to requests at
+</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
+<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
+Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Support for logging in with Facebook is implemented by the <code>FacebookAuthFilter</code>. This filter responds to requests at
 <code>/facebook_auth</code>.</p>
 <p>To initiate a login with Facebook just redirect the user to the Facebook OAuth endpoint:</p>
 <pre><code>facebook.com/dialog/oauth
@@ -2027,8 +2029,13 @@ para.gh_secret = <span class="hljs-string">"..."</span>
 <pre><code>{
     <span class="hljs-string">"gh_app_id"</span>: <span class="hljs-string">"..."</span>
     <span class="hljs-string">"gh_secret"</span>: <span class="hljs-string">"..."</span>
+    <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>
+    <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
 }
-</code></pre><p>Support for logging in with GitHub is implemented by the <code>GitHubAuthFilter</code>. This filter responds to requests at
+</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
+<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
+Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Support for logging in with GitHub is implemented by the <code>GitHubAuthFilter</code>. This filter responds to requests at
 <code>/github_auth</code>.</p>
 <p>To initiate a login with GitHub just redirect the user to the GitHub OAuth endpoint:</p>
 <pre><code>github.com/login/oauth/authorize
@@ -2064,11 +2071,16 @@ para.gp_secret = <span class="hljs-string">"..."</span>
 <pre><code>{
     <span class="hljs-string">"gp_app_id"</span>: <span class="hljs-string">"..."</span>
     <span class="hljs-string">"gp_secret"</span>: <span class="hljs-string">"..."</span>
+    <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>
+    <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
 }
-</code></pre><p>Support for logging in with Google acoounts is implemented by the <code>GoogleAuthFilter</code>.
+</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
+<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
+Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Support for logging in with Google acoounts is implemented by the <code>GoogleAuthFilter</code>.
 This filter responds to requests at <code>/google_auth</code>.</p>
 <p>To initiate a login with Google just redirect the user to the Google OAuth endpoint:</p>
-<pre><code>accounts.google.com/o/oauth2/auth
+<pre><code>accounts.google.com/o/oauth2/v2/auth
 </code></pre><p>Pass the parameter <code>redirect_uri=/google_auth</code> so Para can handle the response from Google.
 For apps other than the root app use <code>redirect_uri=/google_auth?appid=myapp</code> instead.</p>
 <p><strong>Note:</strong> You need to <a href="https://console.developers.google.com/iam-admin/projects">register a new application with Google</a>
@@ -2076,7 +2088,7 @@ in order to obtain an access and secret keys.</p>
 <p>Below is an example Javascript code for a Google login button:</p>
 <pre><code class="lang-js">$(<span class="hljs-string">"#googleLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
         <span class="hljs-keyword">var</span> baseUrl = <span class="hljs-built_in">window</span>.location.origin;
-        <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://accounts.google.com/o/oauth2/auth?"</span> +
+        <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://accounts.google.com/o/oauth2/v2/auth?"</span> +
                 <span class="hljs-string">"client_id={GOOGLE_APP_ID}&amp;response_type=code"</span> +
                 <span class="hljs-string">"&amp;scope=openid%20email&amp;redirect_uri="</span> + baseUrl + <span class="hljs-string">"/google_auth"</span> +
                 <span class="hljs-string">"&amp;state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) + <span class="hljs-string">"&amp;"</span> + <span class="hljs-string">"openid.realm="</span> + baseUrl;
@@ -2102,8 +2114,13 @@ para.in_secret = <span class="hljs-string">"..."</span>
 <pre><code>{
     <span class="hljs-string">"in_app_id"</span>: <span class="hljs-string">"..."</span>
     <span class="hljs-string">"in_secret"</span>: <span class="hljs-string">"..."</span>
+    <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>
+    <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
 }
-</code></pre><p>Support for logging in with LinkedIn is implemented by the <code>LinkedInAuthFilter</code>. This filter responds to requests at
+</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
+<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
+Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Support for logging in with LinkedIn is implemented by the <code>LinkedInAuthFilter</code>. This filter responds to requests at
 <code>/linkedin_auth</code>.</p>
 <p>To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint:</p>
 <pre><code>linkedin.com/uas/oauth2/authorization
@@ -2135,24 +2152,32 @@ Microsoft <a href="#034-api-jwt-signin">through the API</a>. This web flow sets 
 Then add them to your <code>application.conf</code> configuration file:</p>
 <pre><code>para.ms_app_id = <span class="hljs-string">"..."</span>
 para.ms_secret = <span class="hljs-string">"..."</span>
+para.security.signin_success = <span class="hljs-string">"http://success.url"</span>
+para.security.signin_failure = <span class="hljs-string">"http://failure.url"</span>
 </code></pre><p>Or add these through the <a href="#050-api-settings-put">app settings API</a>:</p>
 <pre><code>{
     <span class="hljs-string">"ms_app_id"</span>: <span class="hljs-string">"..."</span>
     <span class="hljs-string">"ms_secret"</span>: <span class="hljs-string">"..."</span>
+    <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>
+    <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
 }
-</code></pre><p>Support for logging in with Microsoft accounts is implemented by the <code>MicrosoftAuthFilter</code>.
+</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
+<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
+Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Support for logging in with Microsoft accounts is implemented by the <code>MicrosoftAuthFilter</code>.
 This filter responds to requests at <code>/microsoft_auth</code>.</p>
 <p>To initiate a login with Microsoft just redirect the user to the Microsoft OAuth endpoint:</p>
 <pre><code>login.microsoftonline.com/common/oauth2/v2<span class="hljs-number">.0</span>/authorize
 </code></pre><p>Pass the parameter <code>redirect_uri=/microsoft_auth</code> so Para can handle the response from Microsoft.
-For apps other than the root app use <code>redirect_uri=/microsoft_auth?appid=myapp</code> instead.</p>
+<strong>Note:</strong> The v2.0 endpoint for OAuth authentication with Microsoft doesn’t work well with query parameters in
+the <code>redirect_uri</code> parameter. Instead, use the <code>state</code> parameter to remember the <code>appid</code> of your app (see example below).</p>
 <p><strong>Note:</strong> You need to <a href="https://apps.dev.microsoft.com/#/appList">register a new application with Microsoft</a>
 in order to obtain an access and secret keys.</p>
 <p>Below is an example Javascript code for a Microsoft login button:</p>
 <pre><code class="lang-js">$("#microsoftLoginBtn").click(function() {
         window.location = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?" +
                 "response_type=code&amp;client_id={MICROSOFT_APP_ID}" +
-                "&amp;scope=https%3A%2F%2Fgraph.microsoft.com%2Fuser.read&amp;state=" + (new Date().getTime()) +
+                "&amp;scope=https%3A%2F%2Fgraph.microsoft.com%2Fuser.read&amp;state={YOUR_APP_ID}" +
                 "&amp;redirect_uri=" + window.location.origin + "/microsoft_auth;
         return false;
 });
@@ -2176,8 +2201,13 @@ para.tw_secret = <span class="hljs-string">"..."</span>
 <pre><code>{
     <span class="hljs-string">"tw_app_id"</span>: <span class="hljs-string">"..."</span>
     <span class="hljs-string">"tw_secret"</span>: <span class="hljs-string">"..."</span>
+    <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>
+    <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
 }
-</code></pre><p>Support for logging in with Twitter is implemented by the <code>TwitterAuthFilter</code>. This filter responds to requests at
+</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
+<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
+Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Support for logging in with Twitter is implemented by the <code>TwitterAuthFilter</code>. This filter responds to requests at
 <code>/twitter_auth</code>.</p>
 <p>To initiate a login with Twitter just redirect the user to the <code>/twitter_auth</code>. This will redirect the user to Twitter
 for authentication. For apps other than the root app, redirect to <code>/twitter_auth?appid=myapp</code>.</p>
@@ -3952,7 +3982,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>05 May 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>08 May 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>

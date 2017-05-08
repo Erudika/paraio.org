@@ -17,14 +17,20 @@ Or add these through the [app settings API](#050-api-settings-put):
 {
 	"gp_app_id": "..."
 	"gp_secret": "..."
+	"signin_success": "http://success.url"
+	"signin_failure": "http://failure.url"
 }
 ```
+If you want Para to generate a JWT token upon successful authentication, add the `jwt=?` parameter to your
+`signin_success` url. For example `{ "signin_success": "http://success.url?jwt=?" }`.
+Para will redirect the user back to your host URL with the generated access token.
+
 Support for logging in with Google acoounts is implemented by the `GoogleAuthFilter`.
 This filter responds to requests at `/google_auth`.
 
 To initiate a login with Google just redirect the user to the Google OAuth endpoint:
 ```
-accounts.google.com/o/oauth2/auth
+accounts.google.com/o/oauth2/v2/auth
 ```
 Pass the parameter `redirect_uri=/google_auth` so Para can handle the response from Google.
 For apps other than the root app use `redirect_uri=/google_auth?appid=myapp` instead.
@@ -37,7 +43,7 @@ Below is an example Javascript code for a Google login button:
 ```js
 $("#googleLoginBtn").click(function() {
 		var baseUrl = window.location.origin;
-		window.location = "https://accounts.google.com/o/oauth2/auth?" +
+		window.location = "https://accounts.google.com/o/oauth2/v2/auth?" +
 				"client_id={GOOGLE_APP_ID}&response_type=code" +
 				"&scope=openid%20email&redirect_uri=" + baseUrl + "/google_auth" +
 				"&state=" + (new Date().getTime()) + "&" + "openid.realm=" + baseUrl;

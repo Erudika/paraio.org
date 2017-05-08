@@ -17,8 +17,14 @@ Or add these through the [app settings API](#050-api-settings-put):
 {
 	"in_app_id": "..."
 	"in_secret": "..."
+	"signin_success": "http://success.url"
+	"signin_failure": "http://failure.url"
 }
 ```
+If you want Para to generate a JWT token upon successful authentication, add the `jwt=?` parameter to your
+`signin_success` url. For example `{ "signin_success": "http://success.url?jwt=?" }`.
+Para will redirect the user back to your host URL with the generated access token.
+
 Support for logging in with LinkedIn is implemented by the `LinkedInAuthFilter`. This filter responds to requests at
 `/linkedin_auth`.
 

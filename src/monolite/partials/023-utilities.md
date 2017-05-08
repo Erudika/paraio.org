@@ -97,9 +97,6 @@ The `Utils` static class contains a variety of utility methods. These are summar
 		<tr><td>`String getNewId()`</td></tr>
 		<tr><td> Generates a new `id`. Based on [Twitter's Snowflake](https://github.com/twitter/snowflake/) algorithm. </td></tr>
 		<tr><td>`String type(Class<? extends ParaObject> clazz)`</td></tr>
-		<tr><td> </td></tr>
-		<tr><td> </td></tr>
-		<tr><td> </td></tr>
 	</tbody>
 </table>
 
@@ -112,6 +109,6 @@ The `Utils` static class contains a variety of utility methods. These are summar
 		<tr><td>`String getHostFromURL(String url)`</td></tr>
 		<tr><td> Returns the host name of a URL - "example.com" </td></tr>
 		<tr><td>`String getBaseURL(String url)`</td></tr>
-		<tr><td> Returns th base URL - "http://example.com" </td></tr>
+		<tr><td> Returns the base URL, e.g. http://example.com </td></tr>
 	</tbody>
 </table>
