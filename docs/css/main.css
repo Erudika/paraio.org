@@ -138,6 +138,10 @@ a:focus {
 	margin-bottom: 50px;
 }
 
+.intro-text span {
+	font-weight: 400;
+}
+
 .intro-cmd {
 	margin-top: 30px;
 }

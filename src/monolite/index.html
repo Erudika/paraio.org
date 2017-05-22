@@ -9,13 +9,20 @@ version: "1.24.4"
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<h1>A general-purpose backend framework for the cloud</h1>
-					<p class="intro-text">Simple and open source, works well for web and mobile</p>
+					<p class="intro-text">Simple and open source, works well for
+						<span>web apps</span>
+						<span>mobile apps</span>
+						<span>IoT</span>
+						<span>games</span>
+						<span>console tools</span>
+						<span>prototypes</span>
+					</p>
 					<div class="page-scroll">
 						<a href="https://oss.sonatype.org/service/local/repositories/releases/content/com/erudika/para-war/{{version}}/para-war-{{version}}.war"
 							 class="btn btn-default"><i class="fa fa-download"></i> Download</a>
 					</div>
 					<h4 class="intro-cmd">
-						<code>$ java -jar para-{{version}}.war</code>
+						<code>$ java -jar para-*.war</code>
 					</h4>
 					<h4>
 						<a href="https://console.paraio.org">console.paraio.org</a>
@@ -40,14 +47,16 @@ version: "1.24.4"
 	<div class="row">
 		<div class="col-lg-6 col-lg-offset-3">
 			<h2>About Para</h2>
-			<p><b>Para</b> was designed as a simple and modular backend framework for object persistence and retrieval.
+			<p><b>Para</b> was designed to be a simple and modular backend framework for object persistence and retrieval.
 				It helps you build applications faster by taking care of the backend. It works on three levels -
 				objects are stored in a NoSQL data store or any old relational database, then automatically indexed
-				by a search engine and finally, cached.</p>
+				by a search engine and finally, cached. Para is also multitenant and has a clean and easy-to-use JSON API.</p>
 			<p>The name "pára" means "steam" in Bulgarian. And just like steam is used to power stuff, you can use
 				Para to power your mobile or web application backend.</p>
 			<p><i>Why use it?</i> Because it's open source,	well documented and tested and it's
 				just easier to use than most frameworks out there.</p>
+			<h5>We've built a full-blown StackOverflow clone with Para in just about 4000 lines of code - check it out at
+				<a href="https://scoold.com">https://scoold.com</a></h5>
 			<hr/>
 			<ul class="list-inline banner-social-buttons">
 				<li><a href="https://paraio.com" class="btn btn-default btn-lg">Try our hosted service</a></li>
