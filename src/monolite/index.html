@@ -55,8 +55,6 @@ version: "1.24.4"
 				Para to power your mobile or web application backend.</p>
 			<p><i>Why use it?</i> Because it's open source,	well documented and tested and it's
 				just easier to use than most frameworks out there.</p>
-			<h5>We've built a full-blown StackOverflow clone with Para in just about 4000 lines of code - check it out at
-				<a href="https://scoold.com">https://scoold.com</a></h5>
 			<hr/>
 			<ul class="list-inline banner-social-buttons">
 				<li><a href="https://paraio.com" class="btn btn-default btn-lg">Try our hosted service</a></li>
@@ -89,21 +87,27 @@ version: "1.24.4"
 </section>
 
 <section id="download" class="container download-section text-center">
-	<h2>Get Para</h2>
-	<h3>v{{version}}</h3>
+	<h2>Get Para v{{version}}</h2>
 	<p>Get it through Maven or as an <strong>executable WAR</strong> package.</p>
 	<ul class="list-inline banner-social-buttons">
-		<li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default">Source code</a>
+		<li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default">Source code (.zip)</a>
 		</li>
 		<li><a href="https://oss.sonatype.org/service/local/repositories/releases/content/com/erudika/para-war/{{version}}/para-war-{{version}}.war"
-					 class="btn btn-default">WAR</a>
+					 class="btn btn-default">executable WAR</a>
 		</li>
 	</ul>
 
-	<h3>Maven</h3>
+	<h3>Maven - Para server</h3>
 	<pre class="maven-coords text-left"><code>  &lt;dependency&gt;
     &lt;groupId&gt;com.erudika&lt;/groupId&gt;
     &lt;artifactId&gt;para-server&lt;/artifactId&gt;
+    &lt;version&gt;{{version}}&lt;/version&gt;
+  &lt;/dependency&gt;</code></pre>
+
+	<h3>Maven - Para core + Java client</h3>
+	<pre class="maven-coords text-left"><code>  &lt;dependency&gt;
+    &lt;groupId&gt;com.erudika&lt;/groupId&gt;
+    &lt;artifactId&gt;para-client&lt;/artifactId&gt;
     &lt;version&gt;{{version}}&lt;/version&gt;
   &lt;/dependency&gt;</code></pre>
 
@@ -150,7 +154,8 @@ version: "1.24.4"
 	<div class="row">
 		<div class="col-lg-6 col-lg-offset-3">
 			<h2>Talk to us</h2>
-			<p>&nbsp;</p>
+			<p>We've built a full-blown Stack Overflow clone with Para in just about <strong>4000 lines of code</strong> &mdash;
+				check it out at <a href="https://scoold.com">scoold.com</a></p>
 			<ul class="list-inline banner-social-buttons">
 				<li><a href="mailto:para&commat;erudika.com" class="btn btn-default">
 						<i class="fa fa-envelope fa-fw"></i> <span class="network-name">Email</span></a>
