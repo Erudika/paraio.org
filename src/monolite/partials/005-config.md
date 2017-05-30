@@ -152,7 +152,7 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>Enable/disable table sharing functionality by prepending the `appid` with a space. `DAO` implementations can detect that and switch tables based on it. </td><td></td></tr>
 
 		<tr><td>`para.security.api_security`				</td><td> `true` </td></tr>
-		<tr><td>Enable/disable the API security mechanism. If `false` the API endpoint will be public.</td><td></td></tr>
+		<tr><td>Enable/disable the API security mechanism. If `false`, the API endpoint will **not** check request signatures and all requests will go through. **For development only**.</td><td></td></tr>
 		<tr><td>`para.security.csrf_protection`			</td><td> `true` </td></tr>
 		<tr><td>Enable/disable CSRF protection which checks for valid CSRF tokens in write requests. </td><td></td></tr>
 		<tr><td>`para.security.csrf_cookie`					</td><td> `para-csrf-token` </td></tr>
