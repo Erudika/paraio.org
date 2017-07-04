@@ -50,7 +50,8 @@ $ npm install -g para-cli
 $ para-cli ping
 $ echo "{\"type\":\"todo\", \"name\": \"buy milk\"}" > todo.json
 $ para-cli create todo.json --id todo1 --encodeId false
-$ para read --id todo1
+$ para-cli read --id todo1
+$ para-cli search "type:todo"
 ```
 
 The Java client for Para is a separate module with these Maven coordinates:

@@ -8,6 +8,12 @@ for adding and removing resource permissions. Each app can have any number of us
 permissions for a given resource. Resources are identified by name, for example the `_batch` resource would represent
 requests going to `/v1/_batch`.
 
+There are several methods and flags which control which requests can go through. These are:
+- `GET`, `POST`, `PUT`, `PATCH`, `DELETE` - use these to allow a certain method explicitly
+- `?` - use this to enable public (unauthenticated) access to a resource
+- `-` - use this to deny all access to a resource
+- `*` - wildcard, allow all request to go through
+
 Let's look at a few example scenarios where we give users permission to access the `_batch`. We have two users - user
 one with `id = 1` and user two with `id = 2`. We'll use the following methods:
 
@@ -58,6 +64,12 @@ app.grantResourcePermission("*", "*", AllowedMethods.ALL);
 ```
 ```java
 app.grantResourcePermission("*", "*", AllowedMethods.NONE);
+```
+**Scenario 6:** Grant full access to user `1` but only to the objects he/she created. In this case user `1` will be able
+to create, edit, delete and search `todo` objects but only those which he/she created, i.e. `creatorid == 1`.
+```java
+app.grantResourcePermission("1", "todo", ["*", "OWN"]);
+app.grantResourcePermission("1", "todo/*", ["*", "OWN"]);
 ```
 
 To get all permissions for both users call:
