@@ -25,3 +25,4 @@ _gh-pages
 *.sublime-*
 nbproject
 validation-status.json
+package-lock.json
