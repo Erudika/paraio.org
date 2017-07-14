@@ -271,7 +271,8 @@ para.security.api_security = true
 $ para-cli ping
 $ echo <span class="hljs-string">"{\"type\":\"todo\", \"name\": \"buy milk\"}"</span> &gt; todo.json
 $ para-cli create todo.json --id todo1 --encodeId <span class="hljs-literal">false</span>
-$ para read --id todo1
+$ para-cli read --id todo1
+$ para-cli search <span class="hljs-string">"type:todo"</span>
 </code></pre><p>The Java client for Para is a separate module with these Maven coordinates:</p>
 <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
@@ -652,6 +653,9 @@ This is important for securing your server because this secret key is used for s
         <tr><td><code>para.security.allow_unverified_emails</code>    </td><td> <code>false</code> </td></tr>
         <tr><td>Enable/disable user email verification. When <code>false</code> user accounts are disabled until
         the user checks their email and confirms it. </td><td></td></tr>
+        <tr><td><code>para.security.admins_have_full_api_access</code>            </td><td> <code>true</code> </td></tr>
+        <tr><td>If set to <code>false</code> admin users will be subject to standard resource permissions when accessing the API.
+        This is applicable when <code>paraClient.signIn()</code> is used. By default, they have unlimited access. </td><td></td></tr>
 
         <tr><td><code>para.s3.bucket</code>                                        </td><td> <code>org.paraio.files</code> </td></tr>
         <tr><td>The S3 bucket where files will be stored by <code>FileStore</code> implementations. </td><td></td></tr>
@@ -1130,6 +1134,13 @@ constraint validation.</p>
 for adding and removing resource permissions. Each app can have any number of users and each user can have a set of
 permissions for a given resource. Resources are identified by name, for example the <code>_batch</code> resource would represent
 requests going to <code>/v1/_batch</code>.</p>
+<p>There are several methods and flags which control which requests can go through. These are:</p>
+<ul>
+<li><code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code> - use these to allow a certain method explicitly</li>
+<li><code>?</code> - use this to enable public (unauthenticated) access to a resource</li>
+<li><code>-</code> - use this to deny all access to a resource</li>
+<li><code>*</code> - wildcard, allow all request to go through</li>
+</ul>
 <p>Let’s look at a few example scenarios where we give users permission to access the <code>_batch</code>. We have two users - user
 one with <code>id = 1</code> and user two with <code>id = 2</code>. We’ll use the following methods:</p>
 <pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">grantResourcePermission</span><span class="hljs-params">(String subjectid, String resourcePath, EnumSet&lt;AllowedMethods&gt; permission)</span></span>;
@@ -1161,6 +1172,11 @@ permission will overwrite the old one.</p>
 <pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"*"</span>, AllowedMethods.ALL);
 </code></pre>
 <pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"*"</span>, AllowedMethods.NONE);
+</code></pre>
+<p><strong>Scenario 6:</strong> Grant full access to user <code>1</code> but only to the objects he/she created. In this case user <code>1</code> will be able
+to create, edit, delete and search <code>todo</code> objects but only those which he/she created, i.e. <code>creatorid == 1</code>.</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"1"</span>, <span class="hljs-string">"todo"</span>, [<span class="hljs-string">"*"</span>, <span class="hljs-string">"OWN"</span>]);
+app.grantResourcePermission(<span class="hljs-string">"1"</span>, <span class="hljs-string">"todo/*"</span>, [<span class="hljs-string">"*"</span>, <span class="hljs-string">"OWN"</span>]);
 </code></pre>
 <p>To get all permissions for both users call:</p>
 <pre><code class="lang-java">app.getAllResourcePermissions(<span class="hljs-string">"1"</span>, <span class="hljs-string">"2"</span>);
@@ -1386,7 +1402,7 @@ class.</p>
         <tr><td><code>para.es.data_node</code></td><td> Allow the current node to store index data. Default is <code>true</code>.</td></tr>
         <tr><td><code>para.es.shards</code></td><td> The number of shards per index. Used when creating an new index. Default is <code>5</code>.</td></tr>
         <tr><td><code>para.es.replicas</code></td><td> The number of copies of an index. Default is <code>0</code>.</td></tr>
-        <tr><td><code>para.es.dir</code></td><td> The directory where Elasticsearch will store data, logs etc. Default is <code>/var/lib/elasticsearch</code>.</td></tr>
+        <tr><td><code>para.es.dir</code></td><td> The directory where Elasticsearch will store data, logs etc. Default is <code>./</code>.</td></tr>
         <tr><td><code>para.es.auto_expand_replicas</code></td><td> Automatically make a replica copy of the index to the number of nodes specified. Default is <code>0-1</code>.</td></tr>
         <tr><td><code>para.es.use_transportclient</code></td><td> Use <code>TransportClient</code> to connect to a remote ES node. Default is <code>false</code>.</td></tr>
         <tr><td><code>para.es.transportclient_host</code></td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is <code>localhost</code>.</td></tr>
@@ -3630,11 +3646,18 @@ See <a href="#010-userdefined">User-defined classes</a> for more details.</p>
 							</a>
 						<section class="body api-body img-rounded">
 							<p>This checks if a subject is allowed to execute a specific type of request on a resource.</p>
+<p>There are several methods and flags which control which requests can go through. These are:</p>
+<ul>
+<li><code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code> - use these to allow a certain method explicitly</li>
+<li><code>?</code> - use this to enable public (unauthenticated) access to a resource</li>
+<li><code>-</code> - use this to deny all access to a resource</li>
+<li><code>*</code> - wildcard, allow all request to go through</li>
+</ul>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{subjectid}</code> - the subject/user <code>id</code> to grant permissions to. (required)</li>
 <li><code>{resource}</code> - the resource path or object type (URL encoded). (required)</li>
-<li><code>{method}</code> - an HTTP method name. (required)</li>
+<li><code>{method}</code> - an HTTP method or flag, listed above. (required)</li>
 </ul>
 <h3 id="response">Response</h3>
 <p>Returns a boolean plain text response - <code>true</code> or <code>false</code>.</p>
@@ -3703,9 +3726,16 @@ only the permissions for that subject.</p>
 							</a>
 						<section class="body api-body img-rounded">
 							<p>Grants a set of permissions (allowed HTTP methods) to a subject for a given resource.</p>
+<p>There are several methods and flags which control which requests can go through. These are:</p>
+<ul>
+<li><code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code> - use these to allow a certain method explicitly</li>
+<li><code>?</code> - use this to enable public (unauthenticated) access to a resource</li>
+<li><code>-</code> - use this to deny all access to a resource</li>
+<li><code>*</code> - wildcard, allow all request to go through</li>
+</ul>
 <h3 id="request">Request</h3>
 <ul>
-<li><strong>body</strong> - a JSON array of permitted HTTP methods or a wildcard <code>[&quot;*&quot;]</code> to allow all (required).</li>
+<li><strong>body</strong> - a JSON array of permitted HTTP methods/flags, listed above (required).</li>
 <li><code>{subjectid}</code> - the subject/user <code>id</code> to grant permissions to (required)</li>
 <li><code>{resource}</code> - the resource path or object type (URL encoded), for example
 <code>posts</code> corresponds to <code>/v1/posts</code>, <code>posts%2F123</code> corresponds to <code>/v1/posts/123</code> (required)</li>
@@ -4007,7 +4037,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>30 May 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>14 July 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>
