@@ -10,6 +10,19 @@ public interface Emailer {
 	boolean sendEmail(List<String> emails, String subject, String body);
 }
 ```
+Para can either use the JavaMail API or AWS SES to send emails. This is used for email verification, password recovery
+and notifications. Set `support_email` to be the email address used by the system. An example config for JavaMail:
 
-Currently this interface is implemented by the `AWSEmailer` class which relies on the AWS Simple Email Service for
-sending emails.
+```
+para.emailer = "javamail"
+para.support_email = "support@example.com"
+para.mail.host = "smtp.example.com"
+para.mail.port = 587
+para.mail.username = "user@example.com"
+para.mail.password = "password"
+para.mail.tls = true
+para.mail.ssl = false
+```
+An example email template is located in `src/main/resources/emails/notify.html`.
+Set `para.emailer = "aws"` to use the AWS Simple Email Service and comment out the `para.mail.*`
+properties as they are ignored. Also set `para.aws_access_key` and `para.aws_secret_key`.

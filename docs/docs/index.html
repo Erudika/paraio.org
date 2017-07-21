@@ -994,7 +994,7 @@ available as a new API resource at <code>/v1/article</code> (and in plural form 
 <h3 id="creating-apps">Creating apps</h3>
 <p>Initially Para creates a default root app with an <code>id</code> equal to the value of the <code>para.app_name</code>
 configuration parameter. If you need to have only one app then you don’t need to do anything. If you want to create
-multiple apps then you must call <code>Para.setup()</code> or make an authenticated request to the API `GET /v1/_setup/{app_name}.
+multiple apps then you must call <code>Para.newApp()</code> or make an authenticated request to the API `GET /v1/_setup/{app_name}.
 You are responsible from creating a search index and database table for apps other than the root app (child apps).</p>
 <p>Currently Para organizes objects in <strong>one table per app</strong> and uses a single shared search index unless that app has
 <code>sharingIndex</code> set to <code>false</code>. If this is the case then a separate search index is created for that app.
@@ -1398,13 +1398,11 @@ class.</p>
         <tr><td><code>para.es.cors_allow_origin</code></td><td> CORS ‘Allow-Origin’ - which hosts are allowed to make HTTP requests to Elasticsearch. Default is <code>localhost</code> only.</td></tr>
         <tr><td><code>para.es.discovery_type</code></td><td> Discovery mechanism when running in production. Default is <code>ec2</code>.</td></tr>
         <tr><td><code>para.es.discovery_group</code></td><td> Security group for cloud discovery of nodes. Default is <code>elasticsearch</code>.</td></tr>
-        <tr><td><code>para.es.local_node</code></td><td> Run locally on the JVM. Default is <code>true</code>.</td></tr>
-        <tr><td><code>para.es.data_node</code></td><td> Allow the current node to store index data. Default is <code>true</code>.</td></tr>
         <tr><td><code>para.es.shards</code></td><td> The number of shards per index. Used when creating an new index. Default is <code>5</code>.</td></tr>
         <tr><td><code>para.es.replicas</code></td><td> The number of copies of an index. Default is <code>0</code>.</td></tr>
         <tr><td><code>para.es.dir</code></td><td> The directory where Elasticsearch will store data, logs etc. Default is <code>./</code>.</td></tr>
         <tr><td><code>para.es.auto_expand_replicas</code></td><td> Automatically make a replica copy of the index to the number of nodes specified. Default is <code>0-1</code>.</td></tr>
-        <tr><td><code>para.es.use_transportclient</code></td><td> Use <code>TransportClient</code> to connect to a remote ES node. Default is <code>false</code>.</td></tr>
+        <tr><td><code>para.es.use_transportclient</code></td><td> Use <code>TransportClient</code> to connect to a remote ES node. If <code>false</code>, the REST client will be used. Default is <code>true</code>.</td></tr>
         <tr><td><code>para.es.transportclient_host</code></td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is <code>localhost</code>.</td></tr>
         <tr><td><code>para.es.transportclient_port</code></td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is <code>9300</code>.</td></tr>
     </tbody>
@@ -1888,8 +1886,19 @@ List&lt;Tag&gt; tags = search.findTags(<span class="hljs-string">"tag1"</span>, 
     <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">sendEmail</span><span class="hljs-params">(List&lt;String&gt; emails, String subject, String body)</span></span>;
 }
 </code></pre>
-<p>Currently this interface is implemented by the <code>AWSEmailer</code> class which relies on the AWS Simple Email Service for
-sending emails.</p>
+<p>Para can either use the JavaMail API or AWS SES to send emails. This is used for email verification, password recovery
+and notifications. Set <code>support_email</code> to be the email address used by the system. An example config for JavaMail:</p>
+<pre><code>para.emailer = <span class="hljs-string">"javamail"</span>
+para.support_email = <span class="hljs-string">"support@example.com"</span>
+para.mail.host = <span class="hljs-string">"smtp.example.com"</span>
+para.mail.port = <span class="hljs-number">587</span>
+para.mail.username = <span class="hljs-string">"user@example.com"</span>
+para.mail.password = <span class="hljs-string">"password"</span>
+para.mail.tls = <span class="hljs-literal">true</span>
+para.mail.ssl = <span class="hljs-literal">false</span>
+</code></pre><p>An example email template is located in <code>src/main/resources/emails/notify.html</code>.
+Set <code>para.emailer = &quot;aws&quot;</code> to use the AWS Simple Email Service and comment out the <code>para.mail.*</code>
+properties as they are ignored. Also set <code>para.aws_access_key</code> and <code>para.aws_secret_key</code>.</p>
 
 						</section>
 					</article>
@@ -2478,7 +2487,13 @@ Also if you use the <code>password</code> provider, the <code>token</code> param
 <ul>
 <li><strong>body</strong> - a JSON object containing <code>appid</code>, <code>provider</code> and <code>token</code> properties (required).</li>
 </ul>
-<p>Request body example:</p>
+<p>Request body example for authenticating with email and password:</p>
+<pre><code>{
+    <span class="hljs-string">"appid"</span>: <span class="hljs-string">"app:myapp"</span>,
+    <span class="hljs-string">"provider"</span>: <span class="hljs-string">"password"</span>,
+    <span class="hljs-string">"token"</span>: <span class="hljs-string">"user@domain.com::password123"</span>
+}
+</code></pre><p>Request body example for Facebook:</p>
 <pre><code>{
     <span class="hljs-string">"appid"</span>: <span class="hljs-string">"app:myapp"</span>,
     <span class="hljs-string">"provider"</span>: <span class="hljs-string">"facebook"</span>,
@@ -3900,10 +3915,15 @@ the value can be <code>boolean</code>, <code>Number</code> or <code>String</code
 						<section class="body api-body img-rounded">
 							<p><strong>Requires authentication with the root app access/secret keys</strong></p>
 <p>Creates a new child app and generates the first pair of API keys. You are responsible for creating the database table
-and index for the new app.</p>
+and index for the new app. Equivalent to calling <code>Para.newApp()</code> from your Java code.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{app_name}</code> - the name of the child app</li>
+</ul>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li><code>sharedTable</code> - Set it to <code>false</code> if the app should have its own table</li>
+<li><code>sharedIndex</code> - Set it to <code>false</code> if the app should have its own index</li>
 </ul>
 <h3 id="response">Response</h3>
 <p>Returns the access and secret keys for this application which will be used for request signing.</p>
@@ -4037,7 +4057,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>14 July 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>21 July 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>

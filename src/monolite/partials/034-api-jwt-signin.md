@@ -18,7 +18,15 @@ Also if you use the `password` provider, the `token` parameter must be in the fo
 
 - **body** - a JSON object containing `appid`, `provider` and `token` properties (required).
 
-Request body example:
+Request body example for authenticating with email and password:
+```
+{
+	"appid": "app:myapp",
+	"provider": "password",
+	"token": "user@domain.com::password123"
+}
+```
+Request body example for Facebook:
 ```
 {
 	"appid": "app:myapp",
