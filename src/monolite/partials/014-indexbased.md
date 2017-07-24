@@ -3,6 +3,8 @@ title: In-memory
 category: Persistence
 ---
 
+**Moved to [para-search-elasticsearch](https://github.com/erudika/para-search-elasticsearch) plugin, in v1.25.**
+
 When running in `embedded` mode you are actually using the `IndexBasedDAO` implementation which relies on the search
 index as a persistence layer. It uses the search index as a database.
 

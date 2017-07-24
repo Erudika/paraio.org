@@ -43,6 +43,8 @@ one of the following values:
 - `linkedin` - sign in with LinkedIn account,
 - `microsoft` - sign in with Microsoft account,
 - `password` - sign in with email and password.
+- `oauth2` - sign in with generic OAuth 2.
+- `ldap` - sign in with LDAP.
 
 ### Response
 

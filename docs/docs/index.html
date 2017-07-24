@@ -122,6 +122,7 @@
 							<ul>
 										<li class=""><a href="#015-search">Search interface</a></li>
 										<li class=""><a href="#016-elasticsearch">Elasticsearch</a></li>
+										<li class=""><a href="#016-lucene">Lucene</a></li>
 							</ul>
 						</li>
 						<li>
@@ -168,6 +169,7 @@
 							<h4>Security</h4>
 							<ul>
 										<li class=""><a href="#029-passwords">Simple authentication</a></li>
+										<li class=""><a href="#030-ldap">LDAP support</a></li>
 										<li class=""><a href="#030-oauth">OAuth 2.0 support</a></li>
 										<li class=""><a href="#030-openid">OpenID support</a></li>
 										<li class=""><a href="#031-facebook">Facebook support</a></li>
@@ -1328,7 +1330,8 @@ alongside the server WAR file <code>para-server.war</code>. Para will look for p
 					<article class=" img-rounded">
 							<h2>In-memory</h2>
 						<section class="body  img-rounded">
-							<p>When running in <code>embedded</code> mode you are actually using the <code>IndexBasedDAO</code> implementation which relies on the search
+							<p><strong>Moved to <a href="https://github.com/erudika/para-search-elasticsearch">para-search-elasticsearch</a> plugin, in v1.25.</strong></p>
+<p>When running in <code>embedded</code> mode you are actually using the <code>IndexBasedDAO</code> implementation which relies on the search
 index as a persistence layer. It uses the search index as a database.</p>
 <p>A local Elasticsearch instance is started each time Para starts and is also stopped on <code>Para.destroy()</code>.</p>
 <p>See <a href="#014-search">Elasticsearch</a> for more information.</p>
@@ -1382,8 +1385,10 @@ These methods are:</p>
 					<article class=" img-rounded">
 							<h2>Elasticsearch</h2>
 						<section class="body  img-rounded">
-							<p>Elasticsearch is used as the default search engine in Para. The <code>Search</code> interface is implemented in the <code>Elasticsearch</code>
-class.</p>
+							<p><strong>Moved to <a href="https://github.com/erudika/para-search-elasticsearch">para-search-elasticsearch</a> plugin, in v1.25.</strong></p>
+<p>Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v5 and
+uses the TCP <code>TransportClient</code> by default. Support for the REST HTTP client is expected when ES v6 is released.</p>
+<p>The <code>Search</code> interface is implemented in the <code>ElasticSearch</code> class.</p>
 <p>There are several configuration properties for Elasticsearch (these go in your <code>application.conf</code> file):</p>
 <table class="table table-striped">
     <thead>
@@ -1409,7 +1414,23 @@ class.</p>
 </table>
 
 <blockquote>
-<p>Para relies heavily of <a href="http://www.elasticsearch.org/guide">Elasticsearch</a> for indexing and full text search.</p>
+<p>Read the <a href="https://www.elastic.co/guide/">Elasticsearch</a> docs for more information.</p>
+</blockquote>
+
+						</section>
+					</article>
+					<a id="016-lucene" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class=" img-rounded">
+							<h2>Lucene</h2>
+						<section class="body  img-rounded">
+							<p>Lucene is used as the default search engine in Para. It is a lightweight alternative to Elasticsearch for self-contained
+deployments. It works great for local development and also in production.</p>
+<p>The <code>Search</code> interface is implemented in the <code>LuceneSearch</code> class.</p>
+<p>Keep in mind that each Para app has its own Lucene index, which is automatically created if missing. The path to where
+Lucene files are stored is controlled by <code>para.lucene.dir</code> which defaults to <code>.</code> the current directory. If you set it
+to <code>para.lucene.dir = &quot;/home/user/lucene&quot;</code> index files will be stored in <code>/home/users/lucene/data</code>.</p>
+<blockquote>
+<p>Read the <a href="http://lucene.apache.org/core/">Lucene</a> docs for more information.</p>
 </blockquote>
 
 						</section>
@@ -1969,6 +1990,41 @@ For apps other than the root app use <code>/password_auth?appid=myapp</code>.</p
 
 						</section>
 					</article>
+					<a id="030-ldap" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class=" img-rounded">
+							<h2>LDAP support</h2>
+						<section class="body  img-rounded">
+							<p>Users can be authenticated through an LDAP server, including Active Directory. The implementation uses the UnboundID
+SDK in combination with Spring Security. The user supplies a <code>uid</code> and <code>password</code> and Para connects to the LDAP server
+and tries to bind that user. Then, upon successful login, a new <code>User</code> object is created and the user is signed in.
+The user’s profile data (email, name, uid) is read from the LDAP directory. It is important to note that emails are
+<strong>not</strong> validated and are assumed valid.</p>
+<p>Support for LDAP authentication is implemented by the <code>LdapAuthFilter</code>. The default URL for this filter is
+<code>/ldap_auth</code>. The filter takes two query parameters <code>username</code> and <code>password</code> and answers to any HTTP method.</p>
+<p>These are the configuration options for this filter:</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>property</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>para.security.ldap.server_url</code></td><td>URL of the LDAP server, including scheme and port, defaults to <code>ldap://localhost:8389/</code>. </td></tr>
+        <tr><td><code>para.security.ldap.ldap.base_dn</code></td><td>The base DN, aka domain (default is <code>dc=springframework,dc=org</code>). </td></tr>
+        <tr><td><code>para.security.ldap.user_search_base</code></td><td>Search base for user searches (default is blank).</td></tr>
+        <tr><td><code>para.security.ldap.user_search_filter</code></td><td>Search filter for user searches (default is <code>(cn={0})</code>). </td></tr>
+        <tr><td><code>para.security.ldap.user_dn_pattern</code></td><td>DN pattern for finding users directly (default is <code>uid={0},ou=people</code>). </td></tr>
+        <tr><td><code>para.security.ldap.password_attribute</code></td><td>The password attribute in the directory (default is <code>userPassword</code>). </td></tr>
+        <tr><td><code>para.security.ldap.active_directory_domain</code></td><td> The domain name for AD server. (default is blank, AD is disabled). </td></tr>
+    </tbody>
+</table>
+
+<p><strong>Note:</strong> Active Directory support is enabled when <code>active_directory_domain</code> is set.</p>
+<p>You can configure the URLs for authentication success and failure in the configuration file (see <a href="#005-config">the config</a>)</p>
+
+						</section>
+					</article>
 					<a id="030-oauth" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
 					<article class=" img-rounded">
 							<h2>OAuth 2.0 support</h2>
@@ -2509,6 +2565,8 @@ one of the following values:</p>
 <li><code>linkedin</code> - sign in with LinkedIn account,</li>
 <li><code>microsoft</code> - sign in with Microsoft account,</li>
 <li><code>password</code> - sign in with email and password.</li>
+<li><code>oauth2</code> - sign in with generic OAuth 2.</li>
+<li><code>ldap</code> - sign in with LDAP.</li>
 </ul>
 <h3 id="response">Response</h3>
 <p>Returns a JSON object containing JWT properties and a <code>User</code> object. The returned JWT properties are:</p>
@@ -4057,7 +4115,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>21 July 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>25 July 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>

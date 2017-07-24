@@ -3,8 +3,12 @@ title: Elasticsearch
 category: Search
 ---
 
-Elasticsearch is used as the default search engine in Para. The `Search` interface is implemented in the `Elasticsearch`
-class.
+**Moved to [para-search-elasticsearch](https://github.com/erudika/para-search-elasticsearch) plugin, in v1.25.**
+
+Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v5 and
+uses the TCP `TransportClient` by default. Support for the REST HTTP client is expected when ES v6 is released.
+
+The `Search` interface is implemented in the `ElasticSearch` class.
 
 There are several configuration properties for Elasticsearch (these go in your `application.conf` file):
 
@@ -31,4 +35,4 @@ There are several configuration properties for Elasticsearch (these go in your `
 	</tbody>
 </table>
 
-> Para relies heavily of [Elasticsearch](http://www.elasticsearch.org/guide) for indexing and full text search.
+> Read the [Elasticsearch](https://www.elastic.co/guide/) docs for more information.
