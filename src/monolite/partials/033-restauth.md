@@ -62,8 +62,8 @@ To allow clients with access tokens to make API calls to the root app, use this 
 ```
 para.clients_can_access_root_app = true
 ```
-This is useful if you only have one app on the server. This doesn't affect clients
-that use an `accessKey` and a `secretKey`, only those that use access tokens.
+This is useful if you only have one app on the server. When hosting multiple apps on Para, this should be set to `false`.
+This does not affect clients that use an `accessKey` and a `secretKey`, only those that use access tokens (JWT).
 
 In production, when Para is deployed as a multitenant server (hosting many apps), it is recommended that API clients
 are not allowed to access root app through the API with `para.clients_can_access_root_app = false`.
@@ -103,7 +103,7 @@ To authenticate with users with social login use the Para client:
 ```java
 paraClient.signIn(String provider, String providerToken);
 ```
-Supported providers are `facebook`, `google`, `twitter`, `github`, `linkedin`.
+Supported providers are `facebook`, `google`, `twitter`, `github`, `linkedin`, `microsoft`, `password`, `oauth2`, `ldap`.
 
 You will have to add the API credentials for each of these in your `application.conf` configuration file:
 ```bash
@@ -122,6 +122,12 @@ para.tw_secret = "..."
 # github
 para.gh_app_id = "..."
 para.gh_secret = "..."
+# microsoft
+para.ms_app_id = "..."
+para.ms_secret = "..."
+# generic oauth2
+para.oa2_app_id = "..."
+para.oa2_secret = "..."
 ```
 
 For example calling `paraClient.signIn("facebook", "facebook_access_token")` should return a new `User` object and would

@@ -15,7 +15,7 @@ available as a new API resource at `/v1/article` (and in plural form `/v1/articl
 
 Initially Para creates a default root app with an `id` equal to the value of the `para.app_name`
 configuration parameter. If you need to have only one app then you don't need to do anything. If you want to create
-multiple apps then you must call `Para.newApp()` or make an authenticated request to the API `GET /v1/_setup/{app_name}.
+multiple apps then you must call `Para.newApp()` or make an authenticated request to the API `GET /v1/_setup/{app_name}`.
 You are responsible from creating a search index and database table for apps other than the root app (child apps).
 
 Currently Para organizes objects in **one table per app** and uses a single shared search index unless that app has

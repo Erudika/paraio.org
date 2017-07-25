@@ -35,4 +35,23 @@ There are several configuration properties for Elasticsearch (these go in your `
 	</tbody>
 </table>
 
+The plugin is on Maven Central. Here's the Maven snippet to include in your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>com.erudika</groupId>
+  <artifactId>para-search-elasticsearch</artifactId>
+  <version>{version}</version>
+</dependency>
+```
+Alternatively you can download the JAR from the "Releases" tab above put it in a `lib` folder alongside the server
+WAR file `para-x.y.z.war`. Para will look for plugins inside `lib` and pick up the Elasticsearch plugin.
+
+Finally, set the config property:
+```
+para.search = "ElasticSearch"
+```
+This could be a Java system property or part of a `application.conf` file on the classpath.
+This tells Para to use the Elasticsearch implementation instead of the default (Lucene).
+
 > Read the [Elasticsearch](https://www.elastic.co/guide/) docs for more information.

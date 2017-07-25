@@ -3,7 +3,7 @@ title: DynamoDB
 category: Persistence
 ---
 
-Para uses `AWSDynamoDAO` as the default implementation of the `DAO` interface. That class is responsible for connecting
+Para can work with DynamoDB by using the `AWSDynamoDAO` implementation. That class is responsible for connecting
 to [Amazon's DynamoDB](http://aws.amazon.com/dynamodb/) server and storing/retrieving objects (items) to/from it.
 All operations are carried out using the latest AWS Java SDK.
 

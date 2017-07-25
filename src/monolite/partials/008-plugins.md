@@ -80,6 +80,29 @@ Para.addIOListener(new IOListener() {
 });
 ```
 
+### Custom listeners for app events
+
+These listeners can be registered to execute code when an app is created or deleted. This is useful when we need to
+do additional operations like creating DB tables and/or creating indexes for the new app. Also we might want to clean up
+those after the app is deleted. Example:
+
+```java
+App.addAppCreatedListener(new AppCreatedListener() {
+	public void onAppCreated(App app) {
+		if (app != null) {
+			createTable(app.getAppIdentifier());
+		}
+	}
+});
+App.addAppDeletedListener(new AppDeletedListener() {
+	public void onAppDeleted(App app) {
+		if (app != null) {
+			deleteTable(app.getAppIdentifier());
+		}
+	}
+});
+```
+
 ### Custom context initializers
 
 Para will automatically pick up your classes which extend the `Para` class. They should be annotated

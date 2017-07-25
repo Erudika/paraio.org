@@ -28,25 +28,26 @@ There are several configuration properties for Cassandra (these go in your `appl
 	</tbody>
 </table>
 
-To get started, add the project as dependency through Maven and set the following config property, which could be a
-Java system property or part of your `application.conf` file:
+The plugin is on Maven Central. Here's the Maven snippet to include in your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>com.erudika</groupId>
+  <artifactId>para-dao-cassandra</artifactId>
+  <version>{version}</version>
+</dependency>
+```
+
+Alternatively you can download the JAR from the "Releases" tab above put it in a `lib` folder alongside the server
+WAR file `para-x.y.z.war`. Para will look for plugins inside `lib` and pick up the Cassandra plugin.
+
+Finally, set the config property:
 ```
 para.dao = "CassandraDAO"
 ```
+This could be a Java system property or part of a `application.conf` file on the classpath.
+This tells Para to use the Cassandra Data Access Object (DAO) implementation instead of the default.
 
-This tells Para to switch to the `CassandraDAO` implementation instead of the default.
-Alternatively you can build the plugin and and unzip the file `target/para-dao-cassandra.zip` into a `lib` folder
-alongside the server WAR file `para-server.war`. Para will look for plugins inside `./lib` and pick up the Cassandra plugin.
-
-Finally, make sure you close the client on exit:
-
-```java
-Para.addDestroyListener(new DestroyListener() {
-    public void onDestroy() {
-        CassandraUtils.shutdownClient();
-    }
-});
-```
 See [Plugins](#008-plugins) for more information about how you can create your own plugins.
 
 > For more information about using Cassandra, see the [official docs](https://cassandra.apache.org/doc/latest/).

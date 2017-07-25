@@ -114,6 +114,7 @@
 										<li class=""><a href="#013-cassandra">Cassandra</a></li>
 										<li class=""><a href="#013-dynamodb">DynamoDB</a></li>
 										<li class=""><a href="#013-mongodb">MongoDB</a></li>
+										<li class=""><a href="#014-h2">H2 DB</a></li>
 										<li class=""><a href="#014-indexbased">In-memory</a></li>
 							</ul>
 						</li>
@@ -252,6 +253,10 @@ your project. You can still keep the REST API or turn it off completely.</p>
 <li>Open the <a href="https://console.paraio.org">Para Web Console</a> or use one of the provided
 client libraries below to connect to the API.</li>
 </ol>
+<p>The root app (the initial Para app) is automatically created. If you want to create multiple apps then you must
+call <code>Para.newApp()</code> or make an authenticated request to the API <code>GET /v1/_setup/{app_name}</code>.</p>
+<p>Users are created either from Java code <code>new User().create()</code> or by making an API request to <code>POST /v1/jwt_auth</code>. See
+<a href="#034-api-jwt-signin">Sign in</a> or [] sections for more details.</p>
 <p>Configuration properties belong in your <code>application.conf</code> file.
 Here’s an example configuration for development purposes:</p>
 <pre><code># the name of your app
@@ -328,6 +333,17 @@ pc.me();
     </div>
 </div>
 
+<h3 id="building-para">Building Para</h3>
+<p>Para can be compiled with JDK 6 and up, but using JDK 8+ is recommended.</p>
+<p>To compile it you’ll need Maven. Once you have it, just clone and build:</p>
+<pre><code class="lang-sh">$ git <span class="hljs-built_in">clone</span> https://github.com/erudika/para.git &amp;&amp; <span class="hljs-built_in">cd</span> para
+$ mvn install -DskipTests=<span class="hljs-literal">true</span>
+</code></pre>
+<p>To generate the executable “uber-war” run <code>$ mvn package</code> and it will be in <code>./para-war/target/para-x.y.z-SNAPSHOT.war</code>.
+Two WAR files will be generated in total - the fat one is a bit bigger in size.</p>
+<p>To run a local instance of Para for development, use:</p>
+<pre><code class="lang-sh">$ mvn spring-boot:run
+</code></pre>
 
 						</section>
 					</article>
@@ -387,6 +403,13 @@ to <code>ROOT.war</code> before deploying. See <a href="#005-config">the Config<
 <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>para-server<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>{VERSION}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<p>For building lightweight client-only applications connecting to Para, include only the client module:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>para-client<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>{VERSION}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
@@ -828,6 +851,25 @@ the calls to <code>DAO</code>.</p>
     }
 });
 </code></pre>
+<h3 id="custom-listeners-for-app-events">Custom listeners for app events</h3>
+<p>These listeners can be registered to execute code when an app is created or deleted. This is useful when we need to
+do additional operations like creating DB tables and/or creating indexes for the new app. Also we might want to clean up
+those after the app is deleted. Example:</p>
+<pre><code class="lang-java">App.addAppCreatedListener(<span class="hljs-keyword">new</span> AppCreatedListener() {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAppCreated</span><span class="hljs-params">(App app)</span> </span>{
+        <span class="hljs-keyword">if</span> (app != <span class="hljs-keyword">null</span>) {
+            createTable(app.getAppIdentifier());
+        }
+    }
+});
+App.addAppDeletedListener(<span class="hljs-keyword">new</span> AppDeletedListener() {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAppDeleted</span><span class="hljs-params">(App app)</span> </span>{
+        <span class="hljs-keyword">if</span> (app != <span class="hljs-keyword">null</span>) {
+            deleteTable(app.getAppIdentifier());
+        }
+    }
+});
+</code></pre>
 <h3 id="custom-context-initializers">Custom context initializers</h3>
 <p>Para will automatically pick up your classes which extend the <code>Para</code> class. They should be annotated
 with <code>@Configuration</code>, <code>@EnableAutoConfiguration</code> and <code>@ComponentScan</code>. The <code>Para</code> class implements Spring Boot’s
@@ -996,7 +1038,7 @@ available as a new API resource at <code>/v1/article</code> (and in plural form 
 <h3 id="creating-apps">Creating apps</h3>
 <p>Initially Para creates a default root app with an <code>id</code> equal to the value of the <code>para.app_name</code>
 configuration parameter. If you need to have only one app then you don’t need to do anything. If you want to create
-multiple apps then you must call <code>Para.newApp()</code> or make an authenticated request to the API `GET /v1/_setup/{app_name}.
+multiple apps then you must call <code>Para.newApp()</code> or make an authenticated request to the API <code>GET /v1/_setup/{app_name}</code>.
 You are responsible from creating a search index and database table for apps other than the root app (child apps).</p>
 <p>Currently Para organizes objects in <strong>one table per app</strong> and uses a single shared search index unless that app has
 <code>sharingIndex</code> set to <code>false</code>. If this is the case then a separate search index is created for that app.
@@ -1227,19 +1269,19 @@ Java Driver by DataStax, compatible with Cassandra 3.x.</p>
     </tbody>
 </table>
 
-<p>To get started, add the project as dependency through Maven and set the following config property, which could be a
-Java system property or part of your <code>application.conf</code> file:</p>
-<pre><code>para.dao = <span class="hljs-string">"CassandraDAO"</span>
-</code></pre><p>This tells Para to switch to the <code>CassandraDAO</code> implementation instead of the default.
-Alternatively you can build the plugin and and unzip the file <code>target/para-dao-cassandra.zip</code> into a <code>lib</code> folder
-alongside the server WAR file <code>para-server.war</code>. Para will look for plugins inside <code>./lib</code> and pick up the Cassandra plugin.</p>
-<p>Finally, make sure you close the client on exit:</p>
-<pre><code class="lang-java">Para.addDestroyListener(<span class="hljs-keyword">new</span> DestroyListener() {
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span> </span>{
-        CassandraUtils.shutdownClient();
-    }
-});
+<p>The plugin is on Maven Central. Here’s the Maven snippet to include in your <code>pom.xml</code>:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>para-dao-cassandra<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>{version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
+<p>Alternatively you can download the JAR from the “Releases” tab above put it in a <code>lib</code> folder alongside the server
+WAR file <code>para-x.y.z.war</code>. Para will look for plugins inside <code>lib</code> and pick up the Cassandra plugin.</p>
+<p>Finally, set the config property:</p>
+<pre><code>para.dao = <span class="hljs-string">"CassandraDAO"</span>
+</code></pre><p>This could be a Java system property or part of a <code>application.conf</code> file on the classpath.
+This tells Para to use the Cassandra Data Access Object (DAO) implementation instead of the default.</p>
 <p>See <a href="#008-plugins">Plugins</a> for more information about how you can create your own plugins.</p>
 <blockquote>
 <p>For more information about using Cassandra, see the <a href="https://cassandra.apache.org/doc/latest/">official docs</a>.</p>
@@ -1251,7 +1293,7 @@ alongside the server WAR file <code>para-server.war</code>. Para will look for p
 					<article class=" img-rounded">
 							<h2>DynamoDB</h2>
 						<section class="body  img-rounded">
-							<p>Para uses <code>AWSDynamoDAO</code> as the default implementation of the <code>DAO</code> interface. That class is responsible for connecting
+							<p>Para can work with DynamoDB by using the <code>AWSDynamoDAO</code> implementation. That class is responsible for connecting
 to <a href="http://aws.amazon.com/dynamodb/">Amazon’s DynamoDB</a> server and storing/retrieving objects (items) to/from it.
 All operations are carried out using the latest AWS Java SDK.</p>
 <p><strong>Note:</strong> DynamoDB doesn’t support batch update requests so <code>AWSDynamoDAO</code> does not batch update requests.
@@ -1306,22 +1348,52 @@ Java Driver compatible with MongoDB 3.2.</p>
     </tbody>
 </table>
 
-<p>To get started, add the project as dependency through Maven and set the following config property, which could be a
-Java system property or part of your <code>application.conf</code> file:</p>
-<pre><code>para.dao = <span class="hljs-string">"MongoDBDAO"</span>
-</code></pre><p>This tells Para to switch to the <code>MongoDBDAO</code> implementation instead of the default.
-Alternatively you can build the plugin and and unzip the file <code>target/para-dao-mongodb.zip</code> into a <code>lib</code> folder
-alongside the server WAR file <code>para-server.war</code>. Para will look for plugins inside <code>./lib</code> and pick up the MongoDB plugin.</p>
-<p>Finally, make sure you close the client on exit:</p>
-<pre><code class="lang-java">Para.addDestroyListener(<span class="hljs-keyword">new</span> DestroyListener() {
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span> </span>{
-        MongoDBUtils.shutdownClient();
-    }
-});
+<p>The plugin is on Maven Central. Here’s the Maven snippet to include in your <code>pom.xml</code>:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>para-dao-mongodb<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>{version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
+<p>Alternatively you can <a href="https://github.com/Erudika/para-dao-mongodb/releases">download the JAR</a> and put it in a
+<code>lib</code> folder alongside the server WAR file <code>para-x.y.z.war</code>. Para will look for plugins inside <code>lib</code> and pick up
+the Elasticsearch plugin.</p>
+<p>Finally, set the config property:</p>
+<pre><code>para.dao = <span class="hljs-string">"MongoDBDAO"</span>
+</code></pre><p>This could be a Java system property or part of a <code>application.conf</code> file on the classpath.
+This tells Para to use the MongoDB Data Access Object (DAO) implementation instead of the default.</p>
 <p>See <a href="#008-plugins">Plugins</a> for more information about how you can create your own plugins.</p>
 <blockquote>
 <p>For more information about using MongoDB, see the <a href="https://docs.mongodb.org/manual/">official manual</a>.</p>
+</blockquote>
+
+						</section>
+					</article>
+					<a id="014-h2" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class=" img-rounded">
+							<h2>H2 DB</h2>
+						<section class="body  img-rounded">
+							<p>This is the default database for storing object storage since v1.25. It is lightweight and embedded, which speeds up the
+startup of the server. All tables are stored inside a <code>./data</code> folder by default. Keep in mind that each app has its
+own table which is created automatically when the app is created.</p>
+<p>There are several configuration properties for H2 (these go in your <code>application.conf</code> file):</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>property</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>para.db.dir</code></td><td> The data directory for storing DB files. Defaults to <code>./data</code>.</td></tr>
+        <tr><td><code>para.db.user</code></td><td> The username with access to the database. Defaults to <code>para</code>.</td></tr>
+        <tr><td><code>para.db.password</code></td><td> The password. Defaults to <code>secret</code>.</td></tr>
+        <tr><td><code>para.db.tcpServer</code></td><td> Parameters for the H2 TCP server. Defaults to <code>-baseDir ./data</code>.</td></tr>
+    </tbody>
+</table>
+
+<blockquote>
+<p>This implementation is works well for both development and production environments.</p>
 </blockquote>
 
 						</section>
@@ -1331,9 +1403,9 @@ alongside the server WAR file <code>para-server.war</code>. Para will look for p
 							<h2>In-memory</h2>
 						<section class="body  img-rounded">
 							<p><strong>Moved to <a href="https://github.com/erudika/para-search-elasticsearch">para-search-elasticsearch</a> plugin, in v1.25.</strong></p>
-<p>When running in <code>embedded</code> mode you are actually using the <code>IndexBasedDAO</code> implementation which relies on the search
-index as a persistence layer. It uses the search index as a database.</p>
-<p>A local Elasticsearch instance is started each time Para starts and is also stopped on <code>Para.destroy()</code>.</p>
+<p>The <code>IndexBasedDAO</code> implementation relies on the search index as a persistence layer. In other words, it uses
+Elasticsearch as a database.</p>
+<p>A local Elasticsearch instance <strong>must</strong> be started so that Para can connect to it.</p>
 <p>See <a href="#014-search">Elasticsearch</a> for more information.</p>
 <blockquote>
 <p>This implementation is intended for development purposes only. When using it also make sure that you are working with
@@ -1413,6 +1485,19 @@ uses the TCP <code>TransportClient</code> by default. Support for the REST HTTP 
     </tbody>
 </table>
 
+<p>The plugin is on Maven Central. Here’s the Maven snippet to include in your <code>pom.xml</code>:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>para-search-elasticsearch<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>{version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<p>Alternatively you can download the JAR from the “Releases” tab above put it in a <code>lib</code> folder alongside the server
+WAR file <code>para-x.y.z.war</code>. Para will look for plugins inside <code>lib</code> and pick up the Elasticsearch plugin.</p>
+<p>Finally, set the config property:</p>
+<pre><code>para.search = <span class="hljs-string">"ElasticSearch"</span>
+</code></pre><p>This could be a Java system property or part of a <code>application.conf</code> file on the classpath.
+This tells Para to use the Elasticsearch implementation instead of the default (Lucene).</p>
 <blockquote>
 <p>Read the <a href="https://www.elastic.co/guide/">Elasticsearch</a> docs for more information.</p>
 </blockquote>
@@ -2410,8 +2495,8 @@ for REST authentication.</p>
 </blockquote>
 <p>To allow clients with access tokens to make API calls to the root app, use this configuration property:</p>
 <pre><code>para.clients_can_access_root_app = <span class="hljs-literal">true</span>
-</code></pre><p>This is useful if you only have one app on the server. This doesn’t affect clients
-that use an <code>accessKey</code> and a <code>secretKey</code>, only those that use access tokens.</p>
+</code></pre><p>This is useful if you only have one app on the server. When hosting multiple apps on Para, this should be set to <code>false</code>.
+This does not affect clients that use an <code>accessKey</code> and a <code>secretKey</code>, only those that use access tokens (JWT).</p>
 <p>In production, when Para is deployed as a multitenant server (hosting many apps), it is recommended that API clients
 are not allowed to access root app through the API with <code>para.clients_can_access_root_app = false</code>.</p>
 <p>Para apps can create new users and grant them specific permissions by implementing social login (identity federation).
@@ -2440,7 +2525,7 @@ An encoded token looks like this:</p>
 <p>To authenticate with users with social login use the Para client:</p>
 <pre><code class="lang-java">paraClient.signIn(String provider, String providerToken);
 </code></pre>
-<p>Supported providers are <code>facebook</code>, <code>google</code>, <code>twitter</code>, <code>github</code>, <code>linkedin</code>.</p>
+<p>Supported providers are <code>facebook</code>, <code>google</code>, <code>twitter</code>, <code>github</code>, <code>linkedin</code>, <code>microsoft</code>, <code>password</code>, <code>oauth2</code>, <code>ldap</code>.</p>
 <p>You will have to add the API credentials for each of these in your <code>application.conf</code> configuration file:</p>
 <pre><code class="lang-bash"><span class="hljs-comment"># facebook</span>
 para.fb_app_id = <span class="hljs-string">"..."</span>
@@ -2457,6 +2542,12 @@ para.tw_secret = <span class="hljs-string">"..."</span>
 <span class="hljs-comment"># github</span>
 para.gh_app_id = <span class="hljs-string">"..."</span>
 para.gh_secret = <span class="hljs-string">"..."</span>
+<span class="hljs-comment"># microsoft</span>
+para.ms_app_id = <span class="hljs-string">"..."</span>
+para.ms_secret = <span class="hljs-string">"..."</span>
+<span class="hljs-comment"># generic oauth2</span>
+para.oa2_app_id = <span class="hljs-string">"..."</span>
+para.oa2_secret = <span class="hljs-string">"..."</span>
 </code></pre>
 <p>For example calling <code>paraClient.signIn(&quot;facebook&quot;, &quot;facebook_access_token&quot;)</code> should return a new <code>User</code> object and would
 store the JWT token in memory. To get an access token from Facebook, use their JavaScript SDK.</p>
@@ -3910,23 +4001,28 @@ that has been granted to that subject.</p>
 								</h2>
 							</a>
 						<section class="body api-body img-rounded">
-							<p>Adds a new custom app setting or overwrites an existing one.</p>
+							<p>Adds a new custom app setting or overwrites an existing one. To overwrite all app settings, make a <code>PUT</code> request without
+providing the <code>key</code> parameter, like so:</p>
+<pre><code>PUT /v1/_settings
+{
+    <span class="hljs-string">"fb_app_id"</span>: <span class="hljs-string">"123U3VTNifLPqnZ1W2"</span>,
+    <span class="hljs-string">"fb_secret"</span>: <span class="hljs-string">"YXBwOnBhcmE11234151667"</span>,
+    <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"/dashboard"</span>,
+    <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"/signin?error"</span>
+}
+</code></pre><p>This will replace all app-specific settings with the JSON object in that request.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><strong>body</strong> - a JSON object with a single value field: <code>{ &quot;value&quot;: &quot;setting_value&quot; }</code>,
-the value can be <code>boolean</code>, <code>Number</code> or <code>String</code>.</li>
-<li><code>{key}</code> - a key from the settings map</li>
+or an object containing all app-specific configuration properties.</li>
+<li><code>{key}</code> - a key from the settings map <strong>(optional)</strong>. If <code>{key}</code> is missing, all app settings will be overwritten by
+the JSON in the body of the request.</li>
 </ul>
 <h3 id="response">Response</h3>
-<p>Returns back the value that was supplied.</p>
+<p>Returns an empty response.</p>
 <ul>
 <li><strong>status codes</strong> - <code>200</code></li>
 </ul>
-<p>Example response:</p>
-<pre><code class="lang-js">{
-    <span class="hljs-string">"value"</span>: <span class="hljs-string">"123U3VTNifLPqnZ1W2"</span>,
-}
-</code></pre>
 
 						</section>
 					</article>

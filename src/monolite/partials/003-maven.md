@@ -13,6 +13,15 @@ Para is hosted on Maven Central. To add it to your project just include this int
 </dependency>
 ```
 
+For building lightweight client-only applications connecting to Para, include only the client module:
+```xml
+<dependency>
+  <groupId>com.erudika</groupId>
+  <artifactId>para-client</artifactId>
+  <version>{VERSION}</version>
+</dependency>
+```
+
 ### Javadocs
 
 <a href="/javadocs-core/" class="btn btn-default">para-core</a> &nbsp;

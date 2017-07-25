@@ -5,10 +5,10 @@ category: Persistence
 
 **Moved to [para-search-elasticsearch](https://github.com/erudika/para-search-elasticsearch) plugin, in v1.25.**
 
-When running in `embedded` mode you are actually using the `IndexBasedDAO` implementation which relies on the search
-index as a persistence layer. It uses the search index as a database.
+The `IndexBasedDAO` implementation relies on the search index as a persistence layer. In other words, it uses
+Elasticsearch as a database.
 
-A local Elasticsearch instance is started each time Para starts and is also stopped on `Para.destroy()`.
+A local Elasticsearch instance **must** be started so that Para can connect to it.
 
 See [Elasticsearch](#014-search) for more information.
 

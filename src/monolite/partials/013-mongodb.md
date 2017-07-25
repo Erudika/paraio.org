@@ -28,25 +28,27 @@ There are several configuration properties for MongoDB (these go in your `applic
 	</tbody>
 </table>
 
-To get started, add the project as dependency through Maven and set the following config property, which could be a
-Java system property or part of your `application.conf` file:
+The plugin is on Maven Central. Here's the Maven snippet to include in your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>com.erudika</groupId>
+  <artifactId>para-dao-mongodb</artifactId>
+  <version>{version}</version>
+</dependency>
+```
+
+Alternatively you can [download the JAR](https://github.com/Erudika/para-dao-mongodb/releases) and put it in a
+`lib` folder alongside the server WAR file `para-x.y.z.war`. Para will look for plugins inside `lib` and pick up
+the Elasticsearch plugin.
+
+Finally, set the config property:
 ```
 para.dao = "MongoDBDAO"
 ```
+This could be a Java system property or part of a `application.conf` file on the classpath.
+This tells Para to use the MongoDB Data Access Object (DAO) implementation instead of the default.
 
-This tells Para to switch to the `MongoDBDAO` implementation instead of the default.
-Alternatively you can build the plugin and and unzip the file `target/para-dao-mongodb.zip` into a `lib` folder
-alongside the server WAR file `para-server.war`. Para will look for plugins inside `./lib` and pick up the MongoDB plugin.
-
-Finally, make sure you close the client on exit:
-
-```java
-Para.addDestroyListener(new DestroyListener() {
-    public void onDestroy() {
-        MongoDBUtils.shutdownClient();
-    }
-});
-```
 See [Plugins](#008-plugins) for more information about how you can create your own plugins.
 
 > For more information about using MongoDB, see the [official manual](https://docs.mongodb.org/manual/).

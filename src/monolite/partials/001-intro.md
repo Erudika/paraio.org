@@ -25,6 +25,12 @@ your project. You can still keep the REST API or turn it off completely.
 4. Open the [Para Web Console](https://console.paraio.org) or use one of the provided
 client libraries below to connect to the API.
 
+The root app (the initial Para app) is automatically created. If you want to create multiple apps then you must
+call `Para.newApp()` or make an authenticated request to the API `GET /v1/_setup/{app_name}`.
+
+Users are created either from Java code `new User().create()` or by making an API request to `POST /v1/jwt_auth`. See
+[Sign in](#034-api-jwt-signin) or [] sections for more details.
+
 Configuration properties belong in your `application.conf` file.
 Here's an example configuration for development purposes:
 ```
@@ -113,3 +119,20 @@ pc.me();
 	</div>
 </div>
 
+### Building Para
+
+Para can be compiled with JDK 6 and up, but using JDK 8+ is recommended.
+
+To compile it you'll need Maven. Once you have it, just clone and build:
+
+```sh
+$ git clone https://github.com/erudika/para.git && cd para
+$ mvn install -DskipTests=true
+```
+To generate the executable "uber-war" run `$ mvn package` and it will be in `./para-war/target/para-x.y.z-SNAPSHOT.war`.
+Two WAR files will be generated in total - the fat one is a bit bigger in size.
+
+To run a local instance of Para for development, use:
+```sh
+$ mvn spring-boot:run
+```
