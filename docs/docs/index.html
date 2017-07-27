@@ -2002,8 +2002,9 @@ para.mail.username = <span class="hljs-string">"user@example.com"</span>
 para.mail.password = <span class="hljs-string">"password"</span>
 para.mail.tls = <span class="hljs-literal">true</span>
 para.mail.ssl = <span class="hljs-literal">false</span>
-</code></pre><p>An example email template is located in <code>src/main/resources/emails/notify.html</code>.
-Set <code>para.emailer = &quot;aws&quot;</code> to use the AWS Simple Email Service and comment out the <code>para.mail.*</code>
+</code></pre><p>Email templates can be loaded with <code>Emailer.class.getClassLoader().getResourceAsStream(&quot;emails/template.html&quot;)</code>.
+Para supports basic variable substitutions through Mustache with <code>Utils.compileMustache(data, template)</code>.</p>
+<p>Set <code>para.emailer = &quot;aws&quot;</code> to use the AWS Simple Email Service and comment out the <code>para.mail.*</code>
 properties as they are ignored. Also set <code>para.aws_access_key</code> and <code>para.aws_secret_key</code>.</p>
 
 						</section>
@@ -2085,7 +2086,8 @@ and tries to bind that user. Then, upon successful login, a new <code>User</code
 The user’s profile data (email, name, uid) is read from the LDAP directory. It is important to note that emails are
 <strong>not</strong> validated and are assumed valid.</p>
 <p>Support for LDAP authentication is implemented by the <code>LdapAuthFilter</code>. The default URL for this filter is
-<code>/ldap_auth</code>. The filter takes two query parameters <code>username</code> and <code>password</code> and answers to any HTTP method.</p>
+<code>/ldap_auth</code>. The filter takes two query parameters <code>username</code> and <code>password</code> and answers to any HTTP method.
+Example: <code>GET /ldap_auth?username=bob&amp;password=secret</code></p>
 <p>These are the configuration options for this filter:</p>
 <table class="table table-striped">
     <thead>
@@ -2096,17 +2098,28 @@ The user’s profile data (email, name, uid) is read from the LDAP directory. It
     </thead>
     <tbody>
         <tr><td><code>para.security.ldap.server_url</code></td><td>URL of the LDAP server, including scheme and port, defaults to <code>ldap://localhost:8389/</code>. </td></tr>
-        <tr><td><code>para.security.ldap.ldap.base_dn</code></td><td>The base DN, aka domain (default is <code>dc=springframework,dc=org</code>). </td></tr>
+        <tr><td><code>para.security.ldap.base_dn</code></td><td>The base DN, aka domain (default is <code>dc=springframework,dc=org</code>). </td></tr>
+        <tr><td><code>para.security.ldap.bind_dn</code></td><td>The initial bind DN for a user with search privileges (default is blank). </td></tr>
+        <tr><td><code>para.security.ldap.bind_pass</code></td><td>The password for a user with search privileges (default is blank). </td></tr>
         <tr><td><code>para.security.ldap.user_search_base</code></td><td>Search base for user searches (default is blank).</td></tr>
         <tr><td><code>para.security.ldap.user_search_filter</code></td><td>Search filter for user searches (default is <code>(cn={0})</code>). </td></tr>
         <tr><td><code>para.security.ldap.user_dn_pattern</code></td><td>DN pattern for finding users directly (default is <code>uid={0},ou=people</code>). </td></tr>
         <tr><td><code>para.security.ldap.password_attribute</code></td><td>The password attribute in the directory (default is <code>userPassword</code>). </td></tr>
         <tr><td><code>para.security.ldap.active_directory_domain</code></td><td> The domain name for AD server. (default is blank, AD is disabled). </td></tr>
+        <tr><td><code>para.security.ldap.compare_passwords</code></td><td> If set to any value, will switch to password comparison strategy instead of default “bind” method. (default - not set). </td></tr>
     </tbody>
 </table>
 
 <p><strong>Note:</strong> Active Directory support is enabled when <code>active_directory_domain</code> is set.</p>
-<p>You can configure the URLs for authentication success and failure in the configuration file (see <a href="#005-config">the config</a>)</p>
+<p>You can also configure LDAP through the <a href="#050-api-settings-put">app settings API</a>:</p>
+<pre><code>{
+    <span class="hljs-string">"security.ldap.server_url"</span>: <span class="hljs-string">"ldap://localhost:8389/"</span>,
+    <span class="hljs-string">"security.ldap.base_dn"</span>: <span class="hljs-string">"dc=springframework,dc=org"</span>,
+    <span class="hljs-string">"security.ldap.bind_dn"</span>: <span class="hljs-string">"admin"</span>,
+    <span class="hljs-string">"security.ldap.bind_pass"</span>: <span class="hljs-string">"secret"</span>,
+    ...
+}
+</code></pre><p>You can configure the URLs for authentication success and failure in the configuration file (see <a href="#005-config">the config</a>)</p>
 
 						</section>
 					</article>
@@ -2629,7 +2642,10 @@ using one of the SDKs from Facebook, Google, Twitter, etc.</p>
 <p><strong>Note:</strong> Twitter uses OAuth 1 and gives you a token and a token secret so you must concatenate them first -
 <code>{oauth_token}:{oauth_token_secret}</code>, and then use that as the provider access token.
 Also if you use the <code>password</code> provider, the <code>token</code> parameter must be in the format <code>{email}:{full_name}:{password}</code> or
-<code>{email}::{password}</code> (must be <code>::</code> if name is empty).</p>
+<code>{email}::{password}</code> (must be <code>::</code> if name is empty). For LDAP the token looks similar - <code>{uid}:{password}</code> (single <code>:</code>).</p>
+<p>Also keep in mind that when a new user signs in with a password and unverified email, through <code>/jwt_auth</code>,
+Para will create the user but will return an error <code>400</code> indicating that the user is not active and cannot be authenticated.
+Once the email is verified and the user is set to <code>active: true</code>, subsequent sign in attempts will be successful.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><strong>body</strong> - a JSON object containing <code>appid</code>, <code>provider</code> and <code>token</code> properties (required).</li>
@@ -3816,6 +3832,7 @@ See <a href="#010-userdefined">User-defined classes</a> for more details.</p>
 <li><code>?</code> - use this to enable public (unauthenticated) access to a resource</li>
 <li><code>-</code> - use this to deny all access to a resource</li>
 <li><code>*</code> - wildcard, allow all request to go through</li>
+<li><code>OWN</code> - allow subject to only access objects they created</li>
 </ul>
 <h3 id="request">Request</h3>
 <ul>
@@ -3896,6 +3913,7 @@ only the permissions for that subject.</p>
 <li><code>?</code> - use this to enable public (unauthenticated) access to a resource</li>
 <li><code>-</code> - use this to deny all access to a resource</li>
 <li><code>*</code> - wildcard, allow all request to go through</li>
+<li><code>OWN</code> - allow subject to only access objects they created</li>
 </ul>
 <h3 id="request">Request</h3>
 <ul>
@@ -4211,7 +4229,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>25 July 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>27 July 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>

@@ -12,6 +12,7 @@ There are several methods and flags which control which requests can go through.
 - `?` - use this to enable public (unauthenticated) access to a resource
 - `-` - use this to deny all access to a resource
 - `*` - wildcard, allow all request to go through
+- `OWN` - allow subject to only access objects they created
 
 ### Request
 

@@ -12,7 +12,11 @@ using one of the SDKs from Facebook, Google, Twitter, etc.
 **Note:** Twitter uses OAuth 1 and gives you a token and a token secret so you must concatenate them first -
 `{oauth_token}:{oauth_token_secret}`, and then use that as the provider access token.
 Also if you use the `password` provider, the `token` parameter must be in the format `{email}:{full_name}:{password}` or
-`{email}::{password}` (must be `::` if name is empty).
+`{email}::{password}` (must be `::` if name is empty). For LDAP the token looks similar - `{uid}:{password}` (single `:`).
+
+Also keep in mind that when a new user signs in with a password and unverified email, through `/jwt_auth`,
+Para will create the user but will return an error `400` indicating that the user is not active and cannot be authenticated.
+Once the email is verified and the user is set to `active: true`, subsequent sign in attempts will be successful.
 
 ### Request
 

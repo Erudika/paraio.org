@@ -23,6 +23,8 @@ para.mail.password = "password"
 para.mail.tls = true
 para.mail.ssl = false
 ```
-An example email template is located in `src/main/resources/emails/notify.html`.
+Email templates can be loaded with `Emailer.class.getClassLoader().getResourceAsStream("emails/template.html")`.
+Para supports basic variable substitutions through Mustache with `Utils.compileMustache(data, template)`.
+
 Set `para.emailer = "aws"` to use the AWS Simple Email Service and comment out the `para.mail.*`
 properties as they are ignored. Also set `para.aws_access_key` and `para.aws_secret_key`.
