@@ -1457,9 +1457,9 @@ These methods are:</p>
 					<article class=" img-rounded">
 							<h2>Elasticsearch</h2>
 						<section class="body  img-rounded">
-							<p><strong>Moved to <a href="https://github.com/erudika/para-search-elasticsearch">para-search-elasticsearch</a> plugin, in v1.25.</strong></p>
+							<p><strong>Now part of the <a href="https://github.com/erudika/para-search-elasticsearch">para-search-elasticsearch</a> plugin (v1.25).</strong></p>
 <p>Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v5 and
-uses the TCP <code>TransportClient</code> by default. Support for the REST HTTP client is expected when ES v6 is released.</p>
+uses the TCP <code>TransportClient</code> by default. Support for the high-level REST HTTP client is expected when ES v6 is released.</p>
 <p>The <code>Search</code> interface is implemented in the <code>ElasticSearch</code> class.</p>
 <p>There are several configuration properties for Elasticsearch (these go in your <code>application.conf</code> file):</p>
 <table class="table table-striped">
@@ -1470,14 +1470,10 @@ uses the TCP <code>TransportClient</code> by default. Support for the REST HTTP 
         </tr>
     </thead>
     <tbody>
+        <tr><td><code>para.cluster_name</code></td><td> Elasticsearch cluster name. Default is <code>para-prod</code> when running in production.</td></tr>
         <tr><td><code>para.es.async_enabled</code></td><td> Asynchronous operation when indexing/unindexing. Defaults to <code>false</code>.</td></tr>
-        <tr><td><code>para.es.cors_enabled</code></td><td> Enable CORS for HTTP requests to Elasticsearch. Default is <code>false</code> only if running in production.</td></tr>
-        <tr><td><code>para.es.cors_allow_origin</code></td><td> CORS ‘Allow-Origin’ - which hosts are allowed to make HTTP requests to Elasticsearch. Default is <code>localhost</code> only.</td></tr>
-        <tr><td><code>para.es.discovery_type</code></td><td> Discovery mechanism when running in production. Default is <code>ec2</code>.</td></tr>
-        <tr><td><code>para.es.discovery_group</code></td><td> Security group for cloud discovery of nodes. Default is <code>elasticsearch</code>.</td></tr>
         <tr><td><code>para.es.shards</code></td><td> The number of shards per index. Used when creating an new index. Default is <code>5</code>.</td></tr>
         <tr><td><code>para.es.replicas</code></td><td> The number of copies of an index. Default is <code>0</code>.</td></tr>
-        <tr><td><code>para.es.dir</code></td><td> The directory where Elasticsearch will store data, logs etc. Default is <code>./</code>.</td></tr>
         <tr><td><code>para.es.auto_expand_replicas</code></td><td> Automatically make a replica copy of the index to the number of nodes specified. Default is <code>0-1</code>.</td></tr>
         <tr><td><code>para.es.use_transportclient</code></td><td> Use <code>TransportClient</code> to connect to a remote ES node. If <code>false</code>, the REST client will be used. Default is <code>true</code>.</td></tr>
         <tr><td><code>para.es.transportclient_host</code></td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is <code>localhost</code>.</td></tr>
@@ -4229,7 +4225,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>27 July 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>30 July 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>
