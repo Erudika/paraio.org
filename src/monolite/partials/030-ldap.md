@@ -46,7 +46,9 @@ You can also configure LDAP through the [app settings API](#050-api-settings-put
 	"security.ldap.bind_dn": "admin",
 	"security.ldap.bind_pass": "secret",
 	...
+	"signin_success": "http://success.url",
+	"signin_failure": "http://failure.url"
 }
 ```
 
-You can configure the URLs for authentication success and failure in the configuration file (see [the config](#005-config))
+You can also put all of the settings above in a configuration file (see [the config](#005-config))

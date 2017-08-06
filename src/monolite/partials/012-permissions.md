@@ -13,6 +13,7 @@ There are several methods and flags which control which requests can go through.
 - `?` - use this to enable public (unauthenticated) access to a resource
 - `-` - use this to deny all access to a resource
 - `*` - wildcard, allow all request to go through
+- `OWN` - allow subject to only access objects they created
 
 Let's look at a few example scenarios where we give users permission to access the `_batch`. We have two users - user
 one with `id = 1` and user two with `id = 2`. We'll use the following methods:

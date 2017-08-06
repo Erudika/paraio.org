@@ -55,12 +55,12 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.aws_region`						</td><td>`eu-west-1`</td></tr>
 		<tr><td>The AWS region string.</td><td></td></tr>
 		<tr><td>`para.dao`									</td><td>-</td></tr>
-		<tr><td>Selects the `DAO` implementation at runtime. Can be "elasticsearch" for `IndexBasedDAO`,
-		"dynamodb", "MongoDBDAO" or "CassandraDAO". Each implementation has its own configuration properties.  </td><td></td></tr>
+		<tr><td>Selects the `DAO` implementation at runtime. Can be `AWSDynamoDAO` or	"dynamodb", "MongoDBDAO",
+		"CassandraDAO", etc. Each implementation has its own configuration properties. Defaults to `H2DAO`. </td><td></td></tr>
 		<tr><td>`para.search`								</td><td>-</td></tr>
-		<tr><td>Selects the `Search` implementation at runtime. Defaults to `elasticsearch`.</td><td></td></tr>
+		<tr><td>Selects the `Search` implementation at runtime. Defaults to `LuceneSearch`.</td><td></td></tr>
 		<tr><td>`para.cache`								</td><td>-</td></tr>
-		<tr><td>Selects the `Cache` implementation at runtime. Defaults to `hazelcast`.</td><td></td></tr>
+		<tr><td>Selects the `Cache` implementation at runtime. Use `inmemory` for develompment. Defaults to `hazelcast`.</td><td></td></tr>
 		<tr><td>`para.fb_app_id`						</td><td>-</td></tr>
 		<tr><td>Facebook app id (for OAuth authentication).</td><td></td></tr>
 		<tr><td>`para.fb_secret`						</td><td>-</td></tr>
