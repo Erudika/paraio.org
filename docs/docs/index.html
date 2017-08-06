@@ -255,7 +255,7 @@ client libraries below to connect to the API.</li>
 <p>The root app (the initial Para app) is automatically created. If you want to create multiple apps then you must
 call <code>Para.newApp()</code> or make an authenticated request to the API <code>GET /v1/_setup/{app_name}</code>.</p>
 <p>Users are created either from Java code <code>new User().create()</code> or by making an API request to <code>POST /v1/jwt_auth</code>. See
-<a href="#034-api-jwt-signin">Sign in</a> or [] sections for more details.</p>
+<a href="#034-api-jwt-signin">Sign in</a> or <a href="#033-restauth">Authentication</a> sections for more details.</p>
 <p>Configuration properties belong in your <code>application.conf</code> file.
 Here’s an example configuration for development purposes:</p>
 <pre><code># the name of your app
@@ -1373,7 +1373,7 @@ This tells Para to use the MongoDB Data Access Object (DAO) implementation inste
 					<article class=" img-rounded">
 							<h2>H2 DB</h2>
 						<section class="body  img-rounded">
-							<p>This is the default database for storing object storage since v1.25. It is lightweight and embedded, which speeds up the
+							<p>This is the default database for object storage since v1.25. It is lightweight and embedded, which speeds up the
 startup of the server. All tables are stored inside a <code>./data</code> folder by default. Keep in mind that each app has its
 own table which is created automatically when the app is created.</p>
 <p>There are several configuration properties for H2 (these go in your <code>application.conf</code> file):</p>

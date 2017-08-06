@@ -29,7 +29,7 @@ The root app (the initial Para app) is automatically created. If you want to cre
 call `Para.newApp()` or make an authenticated request to the API `GET /v1/_setup/{app_name}`.
 
 Users are created either from Java code `new User().create()` or by making an API request to `POST /v1/jwt_auth`. See
-[Sign in](#034-api-jwt-signin) or [] sections for more details.
+[Sign in](#034-api-jwt-signin) or [Authentication](#033-restauth) sections for more details.
 
 Configuration properties belong in your `application.conf` file.
 Here's an example configuration for development purposes:
