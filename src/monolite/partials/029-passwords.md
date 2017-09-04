@@ -27,3 +27,22 @@ Here's an example HTML form for initiating password-based authentication:
 	<input type="submit">
 </form>
 ```
+
+### Creating users programmatically
+
+You can create users from your Java code by using a `ParaClient`. By default, users are created with `active = false`,
+i.e. the account is locked until the email address is verified. You can disable email verification with
+`para.security.allow_unverified_emails = true`. Another way to get around this is to "verify" the user manually, like so:
+
+```java
+// user is created but account is locked
+paraClient.signIn("password", "user@example.com:Morgan Freeman:pass123");
+// read identifier first to get the user id
+ParaObject identifier = paraClient.read("user@example.com");
+User user = paraClient.read(identifier.getCreatorid());
+user.setActive(true);
+User updated = paraClient.update(user); // user is now active
+```
+
+After executing the code above, any subsequent calls to `paraClient.signIn()` will be successful and the authenticated
+user object will be returned.

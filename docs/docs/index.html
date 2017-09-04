@@ -254,16 +254,16 @@ client libraries below to connect to the API.</li>
 </ol>
 <p>The root app (the initial Para app) is automatically created. If you want to create multiple apps then you must
 call <code>Para.newApp()</code> or make an authenticated request to the API <code>GET /v1/_setup/{app_name}</code>.</p>
-<p>Users are created either from Java code <code>new User().create()</code> or by making an API request to <code>POST /v1/jwt_auth</code>. See
+<p>Users are created either from Java code <code>paraClient.signIn(...)</code> or by making an API request to <code>POST /v1/jwt_auth</code>. See
 <a href="#034-api-jwt-signin">Sign in</a> or <a href="#033-restauth">Authentication</a> sections for more details.</p>
 <p>Configuration properties belong in your <code>application.conf</code> file.
 Here’s an example configuration for development purposes:</p>
-<pre><code># the name of your app
+<pre><code class="lang-ini"># the name of your app
 para.app_name = &quot;My App&quot;
 # or set it to &#39;production&#39;
 para.env = &quot;embedded&quot;
-# allows clients to register any user with any email
-para.security.allow_unverified_emails = true
+# allow users to be created without verifying their emails
+para.security.allow_unverified_emails = false
 # if hosting multiple apps on Para, set this to false
 para.clients_can_access_root_app = true
 # no need for caching in dev mode
@@ -272,7 +272,8 @@ para.cache_enabled = false
 para.app_secret_key = &quot;b8db69a24a43f2ce134909f164a45263&quot;
 # enable API request signature checking
 para.security.api_security = true
-</code></pre><p>The quickest way to interact with Para is through the <a href="https://github.com/Erudika/para-cli">command-line tool</a> (CLI):</p>
+</code></pre>
+<p>The quickest way to interact with Para is through the <a href="https://github.com/Erudika/para-cli">command-line tool</a> (CLI):</p>
 <pre><code>$ npm install -g para-cli
 $ para-cli ping
 $ echo <span class="hljs-string">"{\"type\":\"todo\", \"name\": \"buy milk\"}"</span> &gt; todo.json
@@ -517,11 +518,12 @@ To load your own configuration you need to set one of the following system prope
 <p>You need to set these properties before calling <code>Para.initialize()</code> or at the startup of your servlet container.
 If you have a file called <code>application.conf</code> or <code>application.json</code> on the classpath, Para will pick it up automatically.</p>
 <p>Here’s a sample <code>application.conf</code> file:</p>
-<pre><code>para.env = <span class="hljs-string">"embedded"</span>
-para.print_logo = <span class="hljs-literal">true</span>
-para.security.api_security = <span class="hljs-literal">true</span>
-para.security.csrf_protection = <span class="hljs-literal">true</span>
-</code></pre><p>The configuration logic is to read system properties first, then environment properties and finally check the config file.
+<pre><code class="lang-ini">para.env = &quot;embedded&quot;
+para.print_logo = true
+para.security.api_security = true
+para.security.csrf_protection = true
+</code></pre>
+<p>The configuration logic is to read system properties first, then environment properties and finally check the config file.
 So the order of precedence is as follows:</p>
 <pre><code>System.getProperty() &gt; System.getenv() &gt; application.conf
 </code></pre><p>Note that environment properties containing <code>.</code> (dots) are invalid and will be replaced with <code>_</code> (underscore).
@@ -2053,6 +2055,20 @@ For apps other than the root app use <code>/password_auth?appid=myapp</code>.</p
     <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
 </code></pre>
+<h3 id="creating-users-programmatically">Creating users programmatically</h3>
+<p>You can create users from your Java code by using a <code>ParaClient</code>. By default, users are created with <code>active = false</code>,
+i.e. the account is locked until the email address is verified. You can disable email verification with
+<code>para.security.allow_unverified_emails = true</code>. Another way to get around this is to “verify” the user manually, like so:</p>
+<pre><code class="lang-java"><span class="hljs-comment">// user is created but account is locked</span>
+paraClient.signIn(<span class="hljs-string">"password"</span>, <span class="hljs-string">"user@example.com:Morgan Freeman:pass123"</span>);
+<span class="hljs-comment">// read identifier first to get the user id</span>
+ParaObject identifier = paraClient.read(<span class="hljs-string">"user@example.com"</span>);
+User user = paraClient.read(identifier.getCreatorid());
+user.setActive(<span class="hljs-keyword">true</span>);
+User updated = paraClient.update(user); <span class="hljs-comment">// user is now active</span>
+</code></pre>
+<p>After executing the code above, any subsequent calls to <code>paraClient.signIn()</code> will be successful and the authenticated
+user object will be returned.</p>
 
 						</section>
 					</article>
@@ -4211,7 +4227,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>06 August 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>04 September 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>

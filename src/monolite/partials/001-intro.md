@@ -28,18 +28,18 @@ client libraries below to connect to the API.
 The root app (the initial Para app) is automatically created. If you want to create multiple apps then you must
 call `Para.newApp()` or make an authenticated request to the API `GET /v1/_setup/{app_name}`.
 
-Users are created either from Java code `new User().create()` or by making an API request to `POST /v1/jwt_auth`. See
+Users are created either from Java code `paraClient.signIn(...)` or by making an API request to `POST /v1/jwt_auth`. See
 [Sign in](#034-api-jwt-signin) or [Authentication](#033-restauth) sections for more details.
 
 Configuration properties belong in your `application.conf` file.
 Here's an example configuration for development purposes:
-```
+```ini
 # the name of your app
 para.app_name = "My App"
 # or set it to 'production'
 para.env = "embedded"
-# allows clients to register any user with any email
-para.security.allow_unverified_emails = true
+# allow users to be created without verifying their emails
+para.security.allow_unverified_emails = false
 # if hosting multiple apps on Para, set this to false
 para.clients_can_access_root_app = true
 # no need for caching in dev mode
