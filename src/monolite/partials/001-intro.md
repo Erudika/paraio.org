@@ -38,7 +38,7 @@ Here's an example configuration for development purposes:
 para.app_name = "My App"
 # or set it to 'production'
 para.env = "embedded"
-# allow users to be created without verifying their emails
+# if true, users can be created without verifying their emails
 para.security.allow_unverified_emails = false
 # if hosting multiple apps on Para, set this to false
 para.clients_can_access_root_app = true

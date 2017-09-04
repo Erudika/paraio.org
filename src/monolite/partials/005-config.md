@@ -180,7 +180,7 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.security.signin_failure`			</td><td> `/signin` </td></tr>
 		<tr><td>The default page to send users to when login fails. </td><td></td></tr>
 		<tr><td>`para.security.allow_unverified_emails`	</td><td> `false` </td></tr>
-		<tr><td>Enable/disable user email verification. When `false` user accounts are disabled until
+		<tr><td>Enable/disable user email verification. When `false` user accounts are locked until
 		the user checks their email and confirms it. </td><td></td></tr>
 		<tr><td>`para.security.admins_have_full_api_access`			</td><td> `true` </td></tr>
 		<tr><td>If set to `false` admin users will be subject to standard resource permissions when accessing the API.
