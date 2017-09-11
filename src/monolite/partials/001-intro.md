@@ -2,16 +2,19 @@
 title: Introduction
 ---
 
-Para is a flexible backend service, created as an open-source project in the year 2013.
+Para is a flexible backend service, created as an open-source project from the very beginning, in 2013.
 It was born out of our need to have a robust system which would allow us to persist objects easily to anything -
 RDBMS, NoSQL and in-memory databases. We needed a simple solution with an API which would scale well and provide a
 solid foundation for our future projects.
 
-Para is a **3-tier backend system** with a REST API in front of it. The first tier is the **database**, the second
-tier is the **search index** and the third is the **cache**. Depending on how you use it, Para can either be a
-standalone backend service or a persistence framework that is part of your code base.
+Para is a **stateless, schemaless, 3-layer backend system** with a REST API in front of it.
+The first layer is the **database**, the second layer is the **search index** and the third -- the **cache**.
+Depending on how you use it, Para can either be a standalone backend service or a persistence
+framework that is part of your code base. Each request to the API is stateless, meaning you can scale out easily.
+The data model requires no schema -- it's based around plain old Java/JSON objects and is optimized for schemaless 
+key-value data stores, but also works with traditional databases.
 
-Para is multitenant, which means you can deploy it as a standalone service on one or more nodes and host one or more
+Para is **multitenant**, which means you can deploy it as a standalone service on one or more nodes and host one or more
 applications on it ("apps"). An app can be a website, mobile app, desktop app or even a command-line tool.
 This is made possible by the REST API which talks JSON to your apps, and with the help of the client libraries below,
 it's easy to get started. If you're building an application on the JVM, you can also add Para as Maven dependency to

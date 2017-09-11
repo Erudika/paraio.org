@@ -232,14 +232,17 @@
 					<article class=" img-rounded">
 							<h2>Introduction</h2>
 						<section class="body  img-rounded">
-							<p>Para is a flexible backend service, created as an open-source project in the year 2013.
+							<p>Para is a flexible backend service, created as an open-source project from the very beginning, in 2013.
 It was born out of our need to have a robust system which would allow us to persist objects easily to anything -
 RDBMS, NoSQL and in-memory databases. We needed a simple solution with an API which would scale well and provide a
 solid foundation for our future projects.</p>
-<p>Para is a <strong>3-tier backend system</strong> with a REST API in front of it. The first tier is the <strong>database</strong>, the second
-tier is the <strong>search index</strong> and the third is the <strong>cache</strong>. Depending on how you use it, Para can either be a
-standalone backend service or a persistence framework that is part of your code base.</p>
-<p>Para is multitenant, which means you can deploy it as a standalone service on one or more nodes and host one or more
+<p>Para is a <strong>stateless, schemaless, 3-layer backend system</strong> with a REST API in front of it.
+The first layer is the <strong>database</strong>, the second layer is the <strong>search index</strong> and the third – the <strong>cache</strong>.
+Depending on how you use it, Para can either be a standalone backend service or a persistence
+framework that is part of your code base. Each request to the API is stateless, meaning you can scale out easily.
+The data model requires no schema – it’s based around plain old Java/JSON objects and is optimized for schemaless 
+key-value data stores, but also works with traditional databases.</p>
+<p>Para is <strong>multitenant</strong>, which means you can deploy it as a standalone service on one or more nodes and host one or more
 applications on it (“apps”). An app can be a website, mobile app, desktop app or even a command-line tool.
 This is made possible by the REST API which talks JSON to your apps, and with the help of the client libraries below,
 it’s easy to get started. If you’re building an application on the JVM, you can also add Para as Maven dependency to
@@ -357,28 +360,23 @@ Two WAR files will be generated in total - the fat one is a bit bigger in size.<
 <p>The WAR contains an embedded Jetty server and bundles together all the necessary libraries. This is the simplest and
 recommended way to run Para.</p>
 <p>Running a standalone server allows you to build a cluster of distributed Para nodes and connect to it
-through the REST API. Here’s a simple diagram of that architecture:</p>
+through the REST API. Here’s a simple diagram of this architecture:</p>
 <pre>
-+----------+ +----------+ +-----------+
-|API Client| |API Client| |API Client |
-+----+-----+ +-----+----+ +----+------+
-     |             |           |
-+----+-------------+-----------+------+
+
++-------------------------------------+
+|  Your app + Para API client library |
++------------------+------------------+
+                   |
++------------------+------------------+
 |        REST API over HTTPS          |
-+----+-------------+-----------+------+
++-------------------------------------+
 |       Cluster Load Balancer         |
-+------+------+------+------+---------+
++------------------+------------------+
                    |
      +------------------ ... ----+
      |             |             |
 +----+----+   +----+----+   +----+----+
-| Your app|   | Your app|   | Your app|
-+---------+   +---------+   +---------+
-| Cache   |   | Cache   |   | Cache   |  \
-+---------+   +---------+   +---------+   \
-| Search  |   | Search  |   | Search  |    } Para
-+---------+   +---------+   +---------+   /
-| Database|   | Database|   | Database|  /
+| Para #1 |   | Para #2 |   | Para #N |
 +---------+   +---------+   +---------+
 
   Node 1        Node 2   ...  Node N
@@ -413,6 +411,35 @@ to <code>ROOT.war</code> before deploying. See <a href="#005-config">the Config<
   <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>{VERSION}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
+<p>By building your JVM app on top of Para, you have full control over persistence, caching and indexing operations, and
+you can also build acluster of distributed Para nodes. Here’s a simple diagram of this architecture:</p>
+<pre>
++----------+ +----------+ +-----------+
+| Web SPA  | |API Client| | Mobile app|
++----+-----+ +-----+----+ +----+------+
+     |             |           |
++----+-------------+-----------+------+
+|        REST API over HTTPS          |
++------------------+------------------+
+|       Cluster Load Balancer         |
++------------------+------------------+
+                   |
+     +------------------ ... ----+
+     |             |             |
++----+----+   +----+----+   +----+----+
+| Your app|   | Your app|   | Your app|
++---------+   +---------+   +---------+
+| Cache   |   | Cache   |   | Cache   |  \
++---------+   +---------+   +---------+   \
+| Search  |   | Search  |   | Search  |    } Para
++---------+   +---------+   +---------+   /
+| Database|   | Database|   | Database|  /
++---------+   +---------+   +---------+
+
+  Node 1        Node 2   ...  Node N
+
+</pre>
+
 <h3 id="javadocs">Javadocs</h3>
 <p><a href="/javadocs-core/" class="btn btn-default">para-core</a> &nbsp;
 <a href="/javadocs-server/" class="btn btn-default">para-server</a> &nbsp;

@@ -22,6 +22,36 @@ For building lightweight client-only applications connecting to Para, include on
 </dependency>
 ```
 
+By building your JVM app on top of Para, you have full control over persistence, caching and indexing operations, and
+you can also build acluster of distributed Para nodes. Here's a simple diagram of this architecture:
+
+<pre>
++----------+ +----------+ +-----------+
+| Web SPA  | |API Client| | Mobile app|
++----+-----+ +-----+----+ +----+------+
+     |             |           |
++----+-------------+-----------+------+
+|        REST API over HTTPS          |
++------------------+------------------+
+|       Cluster Load Balancer         |
++------------------+------------------+
+                   |
+     +------------------ ... ----+
+     |             |             |
++----+----+   +----+----+   +----+----+
+| Your app|   | Your app|   | Your app|
++---------+   +---------+   +---------+
+| Cache   |   | Cache   |   | Cache   |  \
++---------+   +---------+   +---------+   \
+| Search  |   | Search  |   | Search  |    } Para
++---------+   +---------+   +---------+   /
+| Database|   | Database|   | Database|  /
++---------+   +---------+   +---------+
+
+  Node 1        Node 2   ...  Node N
+
+</pre>
+
 ### Javadocs
 
 <a href="/javadocs-core/" class="btn btn-default">para-core</a> &nbsp;

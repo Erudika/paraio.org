@@ -13,29 +13,24 @@ The WAR contains an embedded Jetty server and bundles together all the necessary
 recommended way to run Para.
 
 Running a standalone server allows you to build a cluster of distributed Para nodes and connect to it
-through the REST API. Here's a simple diagram of that architecture:
+through the REST API. Here's a simple diagram of this architecture:
 
 <pre>
-+----------+ +----------+ +-----------+
-|API Client| |API Client| |API Client |
-+----+-----+ +-----+----+ +----+------+
-     |             |           |
-+----+-------------+-----------+------+
+
++-------------------------------------+
+|  Your app + Para API client library |
++------------------+------------------+
+                   |
++------------------+------------------+
 |        REST API over HTTPS          |
-+----+-------------+-----------+------+
++-------------------------------------+
 |       Cluster Load Balancer         |
-+------+------+------+------+---------+
++------------------+------------------+
                    |
      +------------------ ... ----+
      |             |             |
 +----+----+   +----+----+   +----+----+
-| Your app|   | Your app|   | Your app|
-+---------+   +---------+   +---------+
-| Cache   |   | Cache   |   | Cache   |  \
-+---------+   +---------+   +---------+   \
-| Search  |   | Search  |   | Search  |    } Para
-+---------+   +---------+   +---------+   /
-| Database|   | Database|   | Database|  /
+| Para #1 |   | Para #2 |   | Para #N |
 +---------+   +---------+   +---------+
 
   Node 1        Node 2   ...  Node N
