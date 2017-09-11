@@ -22,8 +22,8 @@ For building lightweight client-only applications connecting to Para, include on
 </dependency>
 ```
 
-By building your JVM app on top of Para, you have full control over persistence, caching and indexing operations, and
-you can also build acluster of distributed Para nodes. Here's a simple diagram of this architecture:
+By building your JVM app on top of Para, you have full control over persistence, caching and indexing operations.
+Here's a simple diagram of this architecture:
 
 <pre>
 +----------+ +----------+ +-----------+
