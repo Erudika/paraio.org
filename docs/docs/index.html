@@ -2564,7 +2564,8 @@ para.oa2_secret = <span class="hljs-string">"..."</span>
 store the JWT token in memory. To get an access token from Facebook, use their JavaScript SDK.</p>
 <p>After you call <code>paraClient.signIn()</code> and the request succeeds, the client caches the access token and <strong>all subsequent
 requests</strong> to the API will include that token until <code>paraClient.signOut()</code> is called. This is different from the normal
-operation using access and secret keys. Tokens can only authenticate users.</p>
+operation using access and secret keys. Usually, tokens are used to authenticate users, unless they are “super” tokens,
+which can authenticate apps (see below).</p>
 <p>To get or set access tokens use:</p>
 <pre><code class="lang-java">paraClient.getAccessToken();
 paraClient.setAccessToken(String token);
@@ -2609,13 +2610,13 @@ or your browser might not allow CORS requests. Also check that CORS is enabled i
 							<h2>API methods</h2>
 						<section class="body  img-rounded">
 							<blockquote>
-<p>All API methods below <strong>require authentication</strong> by default unless it’s written otherwise.</p>
+<p>All API methods below <strong>require authentication</strong> by default, unless it’s written otherwise.</p>
 </blockquote>
-<h2 id="limiting-which-fields-are-returned-by-the-api">Limiting which fields are returned by the API</h2>
+<h3 id="limiting-which-fields-are-returned-by-the-api">Limiting which fields are returned by the API</h3>
 <p>Field limiting is supported on all requests by using the query parameter <code>select=xxx,yyy</code>.
 This parameter takes a comma separated list of fields to include. For example:</p>
-<p><code>GET /myobjects?select=id,name,my_field1,my_field2</code></p>
-<p><br><br>
+<pre><code>GET /myobjects?select=id,name,my_field1,my_field2
+</code></pre><p><br><br>
 <a href="#" class="radius collapse-expand-link">&blacktriangledown;&blacktriangle; collapse/expand all</a></p>
 
 						</section>
@@ -4227,7 +4228,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>07 September 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>11 September 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>

@@ -135,7 +135,8 @@ store the JWT token in memory. To get an access token from Facebook, use their J
 
 After you call `paraClient.signIn()` and the request succeeds, the client caches the access token and **all subsequent
 requests** to the API will include that token until `paraClient.signOut()` is called. This is different from the normal
-operation using access and secret keys. Tokens can only authenticate users.
+operation using access and secret keys. Usually, tokens are used to authenticate users, unless they are "super" tokens,
+which can authenticate apps (see below).
 
 To get or set access tokens use:
 
