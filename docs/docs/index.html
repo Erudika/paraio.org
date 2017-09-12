@@ -1067,7 +1067,9 @@ available as a new API resource at <code>/v1/article</code> (and in plural form 
 <p>Initially Para creates a default root app with an <code>id</code> equal to the value of the <code>para.app_name</code>
 configuration parameter. If you need to have only one app then you don’t need to do anything. If you want to create
 multiple apps then you must call <code>Para.newApp()</code> or make an authenticated request to the API <code>GET /v1/_setup/{app_name}</code>.
-You are responsible from creating a search index and database table for apps other than the root app (child apps).</p>
+Alternatively, download the <a href="https://github.com/Erudika/para-cli">Para CLI</a>, configure it and run the command:</p>
+<pre><code class="lang-sh">$ para-cli new-app <span class="hljs-string">"my-app"</span> --name <span class="hljs-string">"My new app"</span>
+</code></pre>
 <p>Currently Para organizes objects in <strong>one table per app</strong> and uses a single shared search index unless that app has
 <code>sharingIndex</code> set to <code>false</code>. If this is the case then a separate search index is created for that app.
 It is possible to make Para use a single database table for all apps by prefixing <code>id</code> fields
