@@ -103,8 +103,8 @@
 										<li class=""><a href="#010-userdefined">User-defined classes</a></li>
 										<li class=""><a href="#011-annotations">Annotations</a></li>
 										<li class=""><a href="#011-apps">Apps</a></li>
+										<li class=""><a href="#011-permissions">Resource permissions</a></li>
 										<li class=""><a href="#011-validations">Validations</a></li>
-										<li class=""><a href="#012-permissions">Resource permissions</a></li>
 							</ul>
 						</li>
 						<li>
@@ -1097,6 +1097,79 @@ require stored OAuth credentials - these are not even checked because we are sup
 
 						</section>
 					</article>
+					<a id="011-permissions" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class=" img-rounded">
+							<h2>Resource permissions</h2>
+						<section class="body  img-rounded">
+							<p>When creating new users, we usually want to specify which resources they can access. This is why we added a few methods
+for adding and removing resource permissions. Each app can have any number of users and each user can have a set of
+permissions for a given resource. Resources are identified by name, for example the <code>_batch</code> resource would represent
+requests going to <code>/v1/_batch</code>.</p>
+<p>There are several methods and flags which control which requests can go through. These are:</p>
+<ul>
+<li><code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code> - use these to allow a certain method explicitly</li>
+<li><code>?</code> - use this to enable public (unauthenticated) access to a resource</li>
+<li><code>-</code> - use this to deny all access to a resource</li>
+<li><code>*</code> - wildcard, allow all request to go through</li>
+<li><code>OWN</code> - allow subject to only access objects they created</li>
+</ul>
+<p>Let’s look at a few example scenarios where we give users permission to access the <code>_batch</code>. We have two users - user
+one with <code>id = 1</code> and user two with <code>id = 2</code>. We’ll use the following methods:</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">grantResourcePermission</span><span class="hljs-params">(String subjectid, String resourcePath, EnumSet&lt;AllowedMethods&gt; permission)</span></span>;
+<span class="hljs-comment">// when not using the Java client - permission is an array of HTTP methods</span>
+<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">grantResourcePermission</span><span class="hljs-params">(String subjectid, String resourcePath, String[] permission)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">revokeResourcePermission</span><span class="hljs-params">(String subjectid, String resourcePath)</span></span>;
+</code></pre>
+<p>These methods allow the use of wildcards <code>*</code> for <code>subjectid</code> and <code>resourcePath</code> arguments.</p>
+<p><strong>Scenario 1:</strong> Give all users permission to <code>READ</code> - this allows them to make <code>GET</code> requests:</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"_batch"</span>, AllowedMethods.READ);
+</code></pre>
+<p><strong>Scenario 2:</strong> Give user <code>1</code> <code>WRITE</code> permissions - allow HTTP methods <code>POST, PUT, PATCH, DELETE</code>:</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"1"</span>, <span class="hljs-string">"_batch"</span>, AllowedMethods.WRITE);
+</code></pre>
+<p>Also you could grant permissions on specific objects like so:</p>
+<pre><code class="lang-java">paraClient.grantResourcePermission(<span class="hljs-string">"user1"</span>, <span class="hljs-string">"posts/123"</span>, AllowedMethods.DELETE);
+</code></pre>
+<p>This will allow <code>user1</code> to delete only the post object with an <code>id</code> of <code>123</code>.</p>
+<p><strong>Scenario 3:</strong> Give user <code>2</code> permission ot only make <code>POST</code> requests:</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"2"</span>, <span class="hljs-string">"_batch"</span>, AllowedMethods.POST);
+</code></pre>
+<p>Note that all users still have the <code>READ</code> permissions because permissions are compounded.
+However, when <code>grantResourcePermission()</code> is called again on the same subject and resource, the new
+permission will overwrite the old one.</p>
+<p><strong>Scenario 4:</strong> Revoke all permissions for user <code>1</code> except <code>READ</code>:</p>
+<pre><code class="lang-java">app.revokeAllResourcePermissions(<span class="hljs-string">"1"</span>);
+</code></pre>
+<p><strong>Scenario 5:</strong> Grant full access or deny all access to everyone:</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"*"</span>, AllowedMethods.ALL);
+</code></pre>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"*"</span>, AllowedMethods.NONE);
+</code></pre>
+<p><strong>Scenario 6:</strong> Grant full access to user <code>1</code> but only to the objects he/she created. In this case user <code>1</code> will be able
+to create, edit, delete and search <code>todo</code> objects but only those which he/she created, i.e. <code>creatorid == 1</code>.</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"1"</span>, <span class="hljs-string">"todo"</span>, [<span class="hljs-string">"*"</span>, <span class="hljs-string">"OWN"</span>]);
+app.grantResourcePermission(<span class="hljs-string">"1"</span>, <span class="hljs-string">"todo/*"</span>, [<span class="hljs-string">"*"</span>, <span class="hljs-string">"OWN"</span>]);
+</code></pre>
+<p>To get all permissions for both users call:</p>
+<pre><code class="lang-java">app.getAllResourcePermissions(<span class="hljs-string">"1"</span>, <span class="hljs-string">"2"</span>);
+</code></pre>
+<p>The default initial policy for all apps is “deny all” which means that new users won’t be able to access any resources,
+except their own object and child objects, unless given explicit permission to do so.</p>
+<p>You can also create “anonymous” permissions to allow unauthenticated users to access certain resources:</p>
+<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"public/resource"</span>, AllowedMethods.READ, <span class="hljs-keyword">true</span>);
+</code></pre>
+<p>This resource is now public but to access it you still need to specify your access key as a parameter:</p>
+<pre><code>GET /v1/public/resource?accessKey=app:myapp
+</code></pre><p>Alternatively, on the client-side, you can set the <code>Authorization</code> header to indicate that the request is anonymous:</p>
+<pre><code>Authorization: Anonymous app:myapp
+</code></pre><p>The special permission method <code>?</code> means that anyone can do a <code>GET</code> request on <code>public/resource</code>.</p>
+<p>To check if user <code>1</code> is allowed to access a particular resource call:</p>
+<pre><code class="lang-java"><span class="hljs-comment">// returns 'false'</span>
+app.isAllowedTo(<span class="hljs-string">"1"</span>, <span class="hljs-string">"admin"</span>, <span class="hljs-string">"GET"</span>);
+</code></pre>
+
+						</section>
+					</article>
 					<a id="011-validations" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
 					<article class=" img-rounded">
 							<h2>Validations</h2>
@@ -1195,79 +1268,6 @@ easily be integrated with other client-side validators.</p>
 <p>A <code>DAO</code> object only deals with storing objects in a database. It is not concerned with relationships between objects or
 constraint validation.</p>
 </blockquote>
-
-						</section>
-					</article>
-					<a id="012-permissions" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
-					<article class=" img-rounded">
-							<h2>Resource permissions</h2>
-						<section class="body  img-rounded">
-							<p>When creating new users, we usually want to specify which resources they can access. This is why we added a few methods
-for adding and removing resource permissions. Each app can have any number of users and each user can have a set of
-permissions for a given resource. Resources are identified by name, for example the <code>_batch</code> resource would represent
-requests going to <code>/v1/_batch</code>.</p>
-<p>There are several methods and flags which control which requests can go through. These are:</p>
-<ul>
-<li><code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code> - use these to allow a certain method explicitly</li>
-<li><code>?</code> - use this to enable public (unauthenticated) access to a resource</li>
-<li><code>-</code> - use this to deny all access to a resource</li>
-<li><code>*</code> - wildcard, allow all request to go through</li>
-<li><code>OWN</code> - allow subject to only access objects they created</li>
-</ul>
-<p>Let’s look at a few example scenarios where we give users permission to access the <code>_batch</code>. We have two users - user
-one with <code>id = 1</code> and user two with <code>id = 2</code>. We’ll use the following methods:</p>
-<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">grantResourcePermission</span><span class="hljs-params">(String subjectid, String resourcePath, EnumSet&lt;AllowedMethods&gt; permission)</span></span>;
-<span class="hljs-comment">// when not using the Java client - permission is an array of HTTP methods</span>
-<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">grantResourcePermission</span><span class="hljs-params">(String subjectid, String resourcePath, String[] permission)</span></span>;
-<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">revokeResourcePermission</span><span class="hljs-params">(String subjectid, String resourcePath)</span></span>;
-</code></pre>
-<p>These methods allow the use of wildcards <code>*</code> for <code>subjectid</code> and <code>resourcePath</code> arguments.</p>
-<p><strong>Scenario 1:</strong> Give all users permission to <code>READ</code> - this allows them to make <code>GET</code> requests:</p>
-<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"_batch"</span>, AllowedMethods.READ);
-</code></pre>
-<p><strong>Scenario 2:</strong> Give user <code>1</code> <code>WRITE</code> permissions - allow HTTP methods <code>POST, PUT, PATCH, DELETE</code>:</p>
-<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"1"</span>, <span class="hljs-string">"_batch"</span>, AllowedMethods.WRITE);
-</code></pre>
-<p>Also you could grant permissions on specific objects like so:</p>
-<pre><code class="lang-java">paraClient.grantResourcePermission(<span class="hljs-string">"user1"</span>, <span class="hljs-string">"posts/123"</span>, AllowedMethods.DELETE);
-</code></pre>
-<p>This will allow <code>user1</code> to delete only the post object with an <code>id</code> of <code>123</code>.</p>
-<p><strong>Scenario 3:</strong> Give user <code>2</code> permission ot only make <code>POST</code> requests:</p>
-<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"2"</span>, <span class="hljs-string">"_batch"</span>, AllowedMethods.POST);
-</code></pre>
-<p>Note that all users still have the <code>READ</code> permissions because permissions are compounded.
-However, when <code>grantResourcePermission()</code> is called again on the same subject and resource, the new
-permission will overwrite the old one.</p>
-<p><strong>Scenario 4:</strong> Revoke all permissions for user <code>1</code> except <code>READ</code>:</p>
-<pre><code class="lang-java">app.revokeAllResourcePermissions(<span class="hljs-string">"1"</span>);
-</code></pre>
-<p><strong>Scenario 5:</strong> Grant full access or deny all access to everyone:</p>
-<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"*"</span>, AllowedMethods.ALL);
-</code></pre>
-<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"*"</span>, AllowedMethods.NONE);
-</code></pre>
-<p><strong>Scenario 6:</strong> Grant full access to user <code>1</code> but only to the objects he/she created. In this case user <code>1</code> will be able
-to create, edit, delete and search <code>todo</code> objects but only those which he/she created, i.e. <code>creatorid == 1</code>.</p>
-<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"1"</span>, <span class="hljs-string">"todo"</span>, [<span class="hljs-string">"*"</span>, <span class="hljs-string">"OWN"</span>]);
-app.grantResourcePermission(<span class="hljs-string">"1"</span>, <span class="hljs-string">"todo/*"</span>, [<span class="hljs-string">"*"</span>, <span class="hljs-string">"OWN"</span>]);
-</code></pre>
-<p>To get all permissions for both users call:</p>
-<pre><code class="lang-java">app.getAllResourcePermissions(<span class="hljs-string">"1"</span>, <span class="hljs-string">"2"</span>);
-</code></pre>
-<p>The default initial policy for all apps is “deny all” which means that new users won’t be able to access any resources,
-except their own object and child objects, unless given explicit permission to do so.</p>
-<p>You can also create “anonymous” permissions to allow unauthenticated users to access certain resources:</p>
-<pre><code class="lang-java">app.grantResourcePermission(<span class="hljs-string">"*"</span>, <span class="hljs-string">"public/resource"</span>, AllowedMethods.READ, <span class="hljs-keyword">true</span>);
-</code></pre>
-<p>This resource is now public but to access it you still need to specify your access key as a parameter:</p>
-<pre><code>GET /v1/public/resource?accessKey=app:myapp
-</code></pre><p>Alternatively, on the client-side, you can set the <code>Authorization</code> header to indicate that the request is anonymous:</p>
-<pre><code>Authorization: Anonymous app:myapp
-</code></pre><p>The special permission method <code>?</code> means that anyone can do a <code>GET</code> request on <code>public/resource</code>.</p>
-<p>To check if user <code>1</code> is allowed to access a particular resource call:</p>
-<pre><code class="lang-java"><span class="hljs-comment">// returns 'false'</span>
-app.isAllowedTo(<span class="hljs-string">"1"</span>, <span class="hljs-string">"admin"</span>, <span class="hljs-string">"GET"</span>);
-</code></pre>
 
 						</section>
 					</article>
@@ -2499,7 +2499,7 @@ dependency. In terms of security, both algorithms are considered very secure so 
 <p>Para offers two ways of authentication - one for apps using API keys and one for insecure clients (mobile, JS) using JWT.
 Apps authenticated with a secret key have full access to the API. Users authenticated with social login are issued JWT
 tokens and have limited access to the API, for example they can’t generate new API keys and they are authorized by
-specific resource permissions (see <a href="#012-permissions">Resource permissions</a>).</p>
+specific resource permissions (see <a href="#011-permissions">Resource permissions</a>).</p>
 <h3 id="full-access-for-apps">Full access for apps</h3>
 <p>In order to make a request to the API you need to have a pair of access and secret keys. Access keys are part of the
 HTTP request and secret keys are used for signing only and must be kept safe.</p>
@@ -4255,7 +4255,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>11 September 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>12 September 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>

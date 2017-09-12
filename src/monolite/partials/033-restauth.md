@@ -10,7 +10,7 @@ dependency. In terms of security, both algorithms are considered very secure so 
 Para offers two ways of authentication - one for apps using API keys and one for insecure clients (mobile, JS) using JWT.
 Apps authenticated with a secret key have full access to the API. Users authenticated with social login are issued JWT
 tokens and have limited access to the API, for example they can't generate new API keys and they are authorized by
-specific resource permissions (see [Resource permissions](#012-permissions)).
+specific resource permissions (see [Resource permissions](#011-permissions)).
 
 ### Full access for apps
 
