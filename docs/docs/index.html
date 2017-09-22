@@ -2033,6 +2033,40 @@ properties as they are ignored. Also set <code>para.aws_access_key</code> and <c
 }
 </code></pre>
 <p>Currently this interface is implemented by the <code>AWSQueue</code> class which relies on the AWS Simple Queue Service.</p>
+<h3 id="awsqueue">AWSQueue</h3>
+<p>The AWS SQS plugin uses Amazon’s SQS as a river by long polling for messages from a given queue.
+This particular implementation was adapted from an earlier project called
+<a href="https://github.com/albogdano/elasticsearch-river-amazonsqs">elasticsearch-river-amazonsqs</a>.</p>
+<p>The code continuously pulls messages from an SQS queue. After a message is processed, it gets deleted from the queue.</p>
+<p>Sample code:</p>
+<pre><code class="lang-java">AWSQueue q = <span class="hljs-keyword">new</span> AWSQueue(<span class="hljs-string">"myQueue"</span>);
+AWSQueueUtils.pushMessages(q.getUrl(), listOfMessages);
+List&lt;String&gt; result = AWSQueueUtils.pullMessages(q.getUrl(), <span class="hljs-number">10</span>);
+</code></pre>
+<h2 id="configuration">Configuration</h2>
+<p>To configure, put this in your <code>application.conf</code>:</p>
+<pre><code class="lang-ini">para.queue.polling_sleep_seconds: 60
+para.queue.polling_interval_seconds: 20
+</code></pre>
+<p>Messages are in the following JSON format:</p>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"id_OR_null"</span>,
+    <span class="hljs-attr">"_appid"</span>: <span class="hljs-string">"para_app_id"</span>,
+    <span class="hljs-attr">"_type"</span>: <span class="hljs-string">"para_data_type"</span>,
+    <span class="hljs-attr">"_data"</span>: { <span class="hljs-attr">"key1"</span>: <span class="hljs-string">"value1"</span> ...}
+}
+</code></pre>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>The fields <code>_id</code> and <code>_type</code> are required.</li>
+<li>If <code>_data</code> is missing the data with this id will be deleted from the index.</li>
+<li>If <code>_data</code> is anything other than JSON object we discard it and treat the messages as a delete request.</li>
+<li>If <code>_index</code> is missing it will fallback to the index that was initially configured,
+otherwise the <code>_index</code> property overrides the default configuration and allows you to dynamically switch between indexes.</li>
+<li>If <code>_id</code> is an integer it will be converted to <code>String</code> because SQS doesn’t convert integers to strings automatically.</li>
+<li>When the queue is empty the river will sleep for <code>sleep</code> seconds before sending a new request for messages to the queue.
+Long polling is done by the Amazon SQS client using the <code>waitTimeSeconds</code> attribute which is set to <code>longpolling_interval</code> <em>(must be between 0 and 20)</em>.</li>
+</ul>
 
 						</section>
 					</article>
@@ -4257,7 +4291,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>12 September 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>23 September 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>
