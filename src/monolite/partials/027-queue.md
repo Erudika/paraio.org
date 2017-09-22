@@ -32,8 +32,6 @@ AWSQueueUtils.pushMessages(q.getUrl(), listOfMessages);
 List<String> result = AWSQueueUtils.pullMessages(q.getUrl(), 10);
 ```
 
-## Configuration
-
 To configure, put this in your `application.conf`:
 
 ```ini

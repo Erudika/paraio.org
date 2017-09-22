@@ -2043,7 +2043,6 @@ This particular implementation was adapted from an earlier project called
 AWSQueueUtils.pushMessages(q.getUrl(), listOfMessages);
 List&lt;String&gt; result = AWSQueueUtils.pullMessages(q.getUrl(), <span class="hljs-number">10</span>);
 </code></pre>
-<h2 id="configuration">Configuration</h2>
 <p>To configure, put this in your <code>application.conf</code>:</p>
 <pre><code class="lang-ini">para.queue.polling_sleep_seconds: 60
 para.queue.polling_interval_seconds: 20
