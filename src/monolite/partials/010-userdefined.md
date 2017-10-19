@@ -7,8 +7,9 @@ Let's say you have a class `Article` in your application that you wish to persis
 interface, then add a few data fields to it. Implementing the interface is trivial as the basic functionality of
 the required methods is already implemented in the `CoreUtils`.
 
-You need to specify which fields you want to be saved by adding the
-`@Stored` annotation.
+You need to specify which fields you want to be saved by adding the `@Stored` annotation. Additionally, you can add
+the `@Locked` annotation to prevent a field from being updated (i.e. it can only be set on `create()`). This is useful
+for fields that contain sensitive data, which should not be modified easily.
 
 ```java
 class Article implements ParaObject {
@@ -27,12 +28,17 @@ You don't have to define common fields like `id` or `name` because they are alre
 Now you can create a new article like so:
 
 ```java
+System.setProperty("para.core_package_name", "com.erudika.paraiochecks.core");
+
 Article a = new Article();
 a.setTitle("Some title");
 a.setText("text...");
 // the article is saved and a new id is generated
 String id = a.create();
 ```
+
+> **Important:** Don't forget to set `para.core_package_name` to point to the package where your `ParaObject` classes are.
+> Para will scan that package and will use those new definitions to serialize and deserialize objects.
 
 Updating and deleting is easy too:
 

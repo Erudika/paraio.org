@@ -734,7 +734,7 @@ For more information about how it works, see the README for it.</p>
 					<article class=" img-rounded">
 							<h2>Modules</h2>
 						<section class="body  img-rounded">
-							<p>These are the core modules defined in Para:</p>
+							<p>In the <code>para-server</code> package, there are several core modules:</p>
 <ul>
 <li><code>PersistenceModule</code> - defines the core persistence class implementation</li>
 <li><code>SearchModule</code> - defines the core search class implementation</li>
@@ -770,6 +770,14 @@ module as its default persistence module.</p>
         binder.bind(Search.class).to(MySearch.class).asEagerSingleton();
     }
 }));
+</code></pre>
+<p>Also, you could start Para with the default modules like this:</p>
+<pre><code class="lang-java"><span class="hljs-comment">// If you're defining your own custom classes, don't forget to set:</span>
+<span class="hljs-comment">// System.setProperty("para.core_package_name", "com.company.myapp.core");</span>
+Para.initialize(ParaServer.getCoreModules());
+
+<span class="hljs-comment">// Finally, destroy all resources:</span>
+Para.destroy();
 </code></pre>
 <blockquote>
 <p>Para uses <a href="https://code.google.com/p/google-guice/">Google Guice</a> as its module manager and DI system.</p>
@@ -973,8 +981,9 @@ no longer vote on that particular object.</p>
 							<p>Let’s say you have a class <code>Article</code> in your application that you wish to persist. You first implement the <code>ParaObject</code>
 interface, then add a few data fields to it. Implementing the interface is trivial as the basic functionality of
 the required methods is already implemented in the <code>CoreUtils</code>.</p>
-<p>You need to specify which fields you want to be saved by adding the
-<code>@Stored</code> annotation.</p>
+<p>You need to specify which fields you want to be saved by adding the <code>@Stored</code> annotation. Additionally, you can add
+the <code>@Locked</code> annotation to prevent a field from being updated (i.e. it can only be set on <code>create()</code>). This is useful
+for fields that contain sensitive data, which should not be modified easily.</p>
 <pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Article</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ParaObject</span> </span>{
     <span class="hljs-meta">@Stored</span> <span class="hljs-keyword">private</span> String title;
     <span class="hljs-meta">@Stored</span> <span class="hljs-keyword">private</span> String text;
@@ -989,12 +998,18 @@ your complex objects, so keep it simple.</p>
 </blockquote>
 <p>You don’t have to define common fields like <code>id</code> or <code>name</code> because they are already defined in the parent class.
 Now you can create a new article like so:</p>
-<pre><code class="lang-java">Article a = <span class="hljs-keyword">new</span> Article();
+<pre><code class="lang-java">System.setProperty(<span class="hljs-string">"para.core_package_name"</span>, <span class="hljs-string">"com.erudika.paraiochecks.core"</span>);
+
+Article a = <span class="hljs-keyword">new</span> Article();
 a.setTitle(<span class="hljs-string">"Some title"</span>);
 a.setText(<span class="hljs-string">"text..."</span>);
 <span class="hljs-comment">// the article is saved and a new id is generated</span>
 String id = a.create();
 </code></pre>
+<blockquote>
+<p><strong>Important:</strong> Don’t forget to set <code>para.core_package_name</code> to point to the package where your <code>ParaObject</code> classes are.
+Para will scan that package and will use those new definitions to serialize and deserialize objects.</p>
+</blockquote>
 <p>Updating and deleting is easy too:</p>
 <pre><code class="lang-java">a.setTitle(<span class="hljs-string">"A new title"</span>);
 a.update();
@@ -2664,7 +2679,18 @@ inside client-side code on the browser is <em>not a smart move</em>. So we pull 
 </code></pre>
 <p>When calling the Para API from JavaScript in the browser, make sure you are running a web server and not as <code>file:///</code>
 or your browser might not allow CORS requests. Also check that CORS is enabled in Para with <code>para.cors_enabled = true</code>.</p>
-
+<h3 id="calling-the-api-from-postman">Calling the API from Postman</h3>
+<p>You can access the protected API from Postman since it has support for the AWS Signature v4 algorithm, used in Para.
+Open up Postman and in the “Authorization” tab choose “AWS Signature”:</p>
+<p><a href="https://files.gitter.im/Erudika/para/5FXQ/Screenshot-from-2017-07-01-00-27-02.png"><img src="https://files.gitter.im/Erudika/para/5FXQ/thumb/Screenshot-from-2017-07-01-00-27-02.png" alt="Screenshot from 2017-07-01 00-27-02.png"></a></p>
+<table class="table table-striped">
+    <tbody>
+        <tr><td>Access Key</td><td> Your Para access key, e.g. <code>app:myapp</code>.</td></tr>
+        <tr><td>Secret Key</td><td> Your Para secret key.</td></tr>
+        <tr><td>Region</td><td> Not used. It should always be <code>us-east-1</code>.</td></tr>
+        <tr><td>Service Name</td><td> This should always be <code>para</code>.</td></tr>
+    </tbody>
+</table>
 						</section>
 					</article>
 					<a id="034-api-intro" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
@@ -4290,7 +4316,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>23 September 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>20 October 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>

@@ -3,7 +3,7 @@ title: Modules
 category: Configuration
 ---
 
-These are the core modules defined in Para:
+In the `para-server` package, there are several core modules:
 
 - `PersistenceModule` - defines the core persistence class implementation
 - `SearchModule` - defines the core search class implementation
@@ -44,6 +44,17 @@ Para.initialize(Modules.override(ParaServer.getCoreModules()).with(new Module() 
 		binder.bind(Search.class).to(MySearch.class).asEagerSingleton();
 	}
 }));
+```
+
+Also, you could start Para with the default modules like this:
+
+```java
+// If you're defining your own custom classes, don't forget to set:
+// System.setProperty("para.core_package_name", "com.company.myapp.core");
+Para.initialize(ParaServer.getCoreModules());
+
+// Finally, destroy all resources:
+Para.destroy();
 ```
 
 > Para uses [Google Guice](https://code.google.com/p/google-guice/) as its module manager and DI system.

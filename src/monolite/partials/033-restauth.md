@@ -188,3 +188,19 @@ Authorization: Bearer eyJhbGciOiVCJ9.eyJzdWIiOi0._MKAH6SGiKSoqgwmqUaxuMyE
 ```
 When calling the Para API from JavaScript in the browser, make sure you are running a web server and not as `file:///`
 or your browser might not allow CORS requests. Also check that CORS is enabled in Para with `para.cors_enabled = true`.
+
+### Calling the API from Postman
+
+You can access the protected API from Postman since it has support for the AWS Signature v4 algorithm, used in Para.
+Open up Postman and in the "Authorization" tab choose "AWS Signature":
+
+[![Screenshot from 2017-07-01 00-27-02.png](https://files.gitter.im/Erudika/para/5FXQ/thumb/Screenshot-from-2017-07-01-00-27-02.png)](https://files.gitter.im/Erudika/para/5FXQ/Screenshot-from-2017-07-01-00-27-02.png)
+
+<table class="table table-striped">
+	<tbody>
+		<tr><td>Access Key</td><td> Your Para access key, e.g. `app:myapp`.</td></tr>
+		<tr><td>Secret Key</td><td> Your Para secret key.</td></tr>
+		<tr><td>Region</td><td> Not used. It should always be `us-east-1`.</td></tr>
+		<tr><td>Service Name</td><td> This should always be `para`.</td></tr>
+	</tbody>
+</table>
