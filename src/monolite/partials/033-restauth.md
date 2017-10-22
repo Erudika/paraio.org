@@ -200,9 +200,9 @@ Open up Postman and in the "Authorization" tab choose "AWS Signature":
 
 <table class="table table-striped">
 	<tbody>
-		<tr><td>Access Key</td><td> Your Para access key, e.g. `app:myapp`.</td></tr>
-		<tr><td>Secret Key</td><td> Your Para secret key.</td></tr>
-		<tr><td>Region</td><td> Not used. It should always be `us-east-1`.</td></tr>
-		<tr><td>Service Name</td><td> This should always be `para`.</td></tr>
+		<tr><td>**Access Key**</td><td> Your Para access key, e.g. `app:myapp`.</td></tr>
+		<tr><td>**Secret Key**</td><td> Your Para secret key.</td></tr>
+		<tr><td>**Region**</td><td> Not used. It should always be `us-east-1`.</td></tr>
+		<tr><td>**Service Name**</td><td> This should always be `para`.</td></tr>
 	</tbody>
 </table>
