@@ -134,8 +134,10 @@ Here's a list of all configuration properties that can be set in the config file
 		Useful for local testing/development or to recover objects that were lost/deleted from the database. </td><td></td></tr>
 		<tr><td>`para.max_items_per_page`		</td><td>`30`</td></tr>
 		<tr><td>The default page size - maximum number of results that will be returned in a search query. </td><td></td></tr>
-		<tr><td>`para.max_pages`						</td><td>`10000`</td></tr>
-		<tr><td>The largest page number that can be specified in a search query. </td><td></td></tr>
+		<tr><td>`para.max_pages`						</td><td>`1000`</td></tr>
+		<tr><td>The maximum value for the `?page` parameter, which can be specified in a search query. </td><td></td></tr>
+		<tr><td>`para.max_page_limit`						</td><td>`256`</td></tr>
+		<tr><td>The maximum value for the `?limit` request parameter, when it is set. </td><td></td></tr>
 		<tr><td>`para.max_datatypes_per_app`</td><td>`256`</td></tr>
 		<tr><td>The maximum number of custom types an app can have. </td><td></td></tr>
 		<tr><td>`para.max_entity_size_bytes`</td><td>`1024 * 1024`</td></tr>
