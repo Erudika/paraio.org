@@ -129,6 +129,7 @@
 							<h4>Cache</h4>
 							<ul>
 										<li class=""><a href="#017-cache">Cache interface</a></li>
+										<li class=""><a href="#018-caffeine">Caffeine</a></li>
 										<li class=""><a href="#018-hazelcast">Hazelcast</a></li>
 							</ul>
 						</li>
@@ -584,7 +585,7 @@ This is important for securing your server because this secret key is used for s
         <tr><td><code>para.search</code>                                </td><td>-</td></tr>
         <tr><td>Selects the <code>Search</code> implementation at runtime. Defaults to <code>LuceneSearch</code>.</td><td></td></tr>
         <tr><td><code>para.cache</code>                                </td><td>-</td></tr>
-        <tr><td>Selects the <code>Cache</code> implementation at runtime. Use <code>inmemory</code> for develompment. Defaults to <code>hazelcast</code>.</td><td></td></tr>
+        <tr><td>Selects the <code>Cache</code> implementation at runtime. Defaults to <code>CaffeineCache</code>.</td><td></td></tr>
         <tr><td><code>para.fb_app_id</code>                        </td><td>-</td></tr>
         <tr><td>Facebook app id (for OAuth authentication).</td><td></td></tr>
         <tr><td><code>para.fb_secret</code>                        </td><td>-</td></tr>
@@ -1510,6 +1511,12 @@ uses the TCP <code>TransportClient</code> by default. Support for the high-level
         <tr><td><code>para.es.use_transportclient</code></td><td> Use <code>TransportClient</code> to connect to a remote ES node. If <code>false</code>, the REST client will be used. Default is <code>true</code>.</td></tr>
         <tr><td><code>para.es.transportclient_host</code></td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is <code>localhost</code>.</td></tr>
         <tr><td><code>para.es.transportclient_port</code></td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is <code>9300</code>.</td></tr>
+
+        <tr><td><code>para.es.proxy_enabled</code></td><td> Enables the Elasticsearch proxy endpoint. Default is <code>false</code>.</td></tr>
+        <tr><td><code>para.es.proxy_path</code></td><td> The path to the proxy endpoint. Default is <code>_elasticsearch</code>.</td></tr>
+        <tr><td><code>para.es.restclient_scheme</code></td><td> Scheme (for low-level REST client). Default is <code>http</code>.</td></tr>
+        <tr><td><code>para.es.restclient_host</code></td><td> ES server host (for low-level REST client). Default is <code>localhost</code>.</td></tr>
+        <tr><td><code>para.es.restclient_port</code></td><td> ES server port (for low-level REST client). Default is <code>9200</code>.</td></tr>
     </tbody>
 </table>
 
@@ -1526,6 +1533,34 @@ WAR file <code>para-x.y.z.war</code>. Para will look for plugins inside <code>li
 <pre><code>para.search = <span class="hljs-string">"ElasticSearch"</span>
 </code></pre><p>This could be a Java system property or part of a <code>application.conf</code> file on the classpath.
 This tells Para to use the Elasticsearch implementation instead of the default (Lucene).</p>
+<h3 id="calling-elasticsearch-through-the-proxy-endpoint">Calling Elasticsearch through the proxy endpoint</h3>
+<p>You can directly call the Elasticsearch API through <code>/v1/_elasticsearch</code>. To enable it set <code>para.es.proxy_enabled = true</code> first.
+Then you must specify the <code>path</code> parameter corresponds to the Elasticsearch API resource path. This is done for every
+<code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>PATCH</code> or <code>DELETE</code> request to Elasticsearch:</p>
+<pre><code>GET /v1/_elasticsearch?path=_search
+DELETE /v1/_elasticsearch/tweet%<span class="hljs-number">2</span>f1
+</code></pre><p><code>ParaClient</code> example:</p>
+<pre><code class="lang-java">Response res = paraClient.invokePost(<span class="hljs-string">"_elasticsearch/_count"</span>,
+                Entity.json(Collections.singletonMap(<span class="hljs-string">"query"</span>,
+                                        Collections.singletonMap(<span class="hljs-string">"term"</span>,
+                                        Collections.singletonMap(<span class="hljs-string">"type"</span>, <span class="hljs-string">"cat"</span>)))));
+</code></pre>
+<p>If the <code>path</code> parameter is omitted, it defaults to <code>_search</code>.
+The endpoint accepts request to either <code>/v1/_elasticsearch</code> or /v1/_elasticsearch/{path}<code>where</code>path<code>is a URL-encoded
+path parameter, which can also be supplied as query string (e.g.</code>/v1/_elasticsearch?path=…`)</p>
+<p><strong>Note:</strong> This endpoint requires authentication and unsigned requests are not allowed. Keep in mind that all requests
+to Elasticsearch are prefixed with the app identifier. For example if the app id is “app:myapp, then Para will proxy
+requests to Elasticsearch at <code>http://eshost:9200/myapp/{path}</code>.</p>
+<h3 id="search-query-pagination">Search query pagination</h3>
+<p>The Elasticsearch plugin supports two modes of pagination for query results. The standard mode works with the
+<code>page</code> parameter:</p>
+<pre><code>GET /v1/users?limit=<span class="hljs-number">30</span>&amp;page=<span class="hljs-number">2</span>
+</code></pre><p>The other mode is “search after” and uses a stateless cursor to scroll through the results.
+To activate “search after”, append the <code>lastKey</code> query parameter to the search request like so:</p>
+<pre><code>GET /v1/users?limit=<span class="hljs-number">10000</span>&amp;lastKey=<span class="hljs-number">835146458100404225</span>
+</code></pre><p>The “search after” method works well for deep pagination or infinite scrolling or search results.
+The <code>lastKey</code> field is returned in the body of the response for each search query. It represents the <code>_docid</code> value
+for a Elasticsearch document - a unique, time-based <code>long</code>. You may have to rebuild your index for “search after” to work.</p>
 <blockquote>
 <p>Read the <a href="https://www.elastic.co/guide/">Elasticsearch</a> docs for more information.</p>
 </blockquote>
@@ -1542,6 +1577,15 @@ deployments. It works great for local development and also in production.</p>
 <p>Keep in mind that each Para app has its own Lucene index, which is automatically created if missing. The path to where
 Lucene files are stored is controlled by <code>para.lucene.dir</code> which defaults to <code>.</code> the current directory. If you set it
 to <code>para.lucene.dir = &quot;/home/user/lucene&quot;</code> index files will be stored in <code>/home/users/lucene/data</code>.</p>
+<h3 id="search-query-pagination">Search query pagination</h3>
+<p>Lucene supports two modes of pagination for query results. The standard mode works with the <code>page</code> parameter:</p>
+<pre><code>GET /v1/users?limit=<span class="hljs-number">30</span>&amp;page=<span class="hljs-number">2</span>
+</code></pre><p>The other mode is “search after” and uses a stateless cursor to scroll through the results.
+To activate “search after”, append the <code>lastKey</code> query parameter to the search request like so:</p>
+<pre><code>GET /v1/users?limit=<span class="hljs-number">10000</span>&amp;lastKey=<span class="hljs-number">835146458100404225</span>
+</code></pre><p>The “search after” method works well for deep pagination or infinite scrolling or search results.
+The <code>lastKey</code> field is returned in the body of the response for each search query. It represents the <code>_docid</code> value
+for a Lucene document - a unique, time-based <code>long</code>. You may have to rebuild your index for “search after” to work.</p>
 <blockquote>
 <p>Read the <a href="http://lucene.apache.org/core/">Lucene</a> docs for more information.</p>
 </blockquote>
@@ -1577,15 +1621,46 @@ to <code>para.lucene.dir = &quot;/home/user/lucene&quot;</code> index files will
 
 						</section>
 					</article>
+					<a id="018-caffeine" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
+					<article class=" img-rounded">
+							<h2>Caffeine</h2>
+						<section class="body  img-rounded">
+							<p>Caffeine is the default cache implementation since v1.26. It’s built on top of the excellent Caffeine library by
+Ben Manes. This cache is supports automatic eviction and TTL for each object.</p>
+<p>There’s one big cache map for all Para apps. Cached objects have keys with a unique prefix for each app. When the reaches
+its maximum size, least recently used objects are evicted.
+with the same name.</p>
+<p>These are the configuration properties for Caffeine:</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>property</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>para.caffeine.cache_size</code></td><td> Maximum size for the cache map. Defaults to <code>10000</code>.</td></tr>
+        <tr><td><code>para.caffeine.evict_after_minutes</code></td><td> Cache eviction policy - objects are evicted after this time. Defaults to <code>10</code> min.</td></tr>
+    </tbody>
+</table>
+
+<blockquote>
+<p>For more information see the <a href="https://github.com/ben-manes/caffeine/wiki">Caffeine wiki</a>.</p>
+</blockquote>
+
+						</section>
+					</article>
 					<a id="018-hazelcast" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
 					<article class=" img-rounded">
 							<h2>Hazelcast</h2>
 						<section class="body  img-rounded">
-							<p>Para uses Hazelcast as the default implementation of the <code>Cache</code> interface. It was chosen because it provides excellent
-support for distributed data structures like maps and sets. It allows us to use a portion of the memory on each node
-for caching without having to manage a separate caching server or cluster.</p>
-<p>Para organizes caches by application name - each application has its own separate distributed map with the same name.</p>
-<p>There are several configuration properties for Hazelcast:</p>
+							<p>Hazelcast allows you to use a portion of the memory on each node for caching without having to manage a separate
+caching server or cluster. Hazelcast was the default implementation of the <code>Cache</code> interface until v1.26, when it
+was decoupled from Para and <a href="https://github.com/Erudika/para-cache-hazelcast">moved to its own repository</a>. We still
+recommend the Hazelcast plugin for production use.</p>
+<p>In Hazelcast, caches are organized by application <code>id</code> - each application has its own separate distributed map
+with the same name.</p>
+<p>These are the configuration properties for Hazelcast:</p>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -2003,11 +2078,38 @@ pager.setLimit(<span class="hljs-number">5</span>);
 pager.setSortby(<span class="hljs-string">"tag"</span>);
 <span class="hljs-comment">// descending order</span>
 pager.setDesc(<span class="hljs-keyword">true</span>);
+<span class="hljs-comment">// last key special field</span>
+pager.setLastKey(<span class="hljs-string">"1234"</span>);
 List&lt;Tag&gt; tags = search.findTags(<span class="hljs-string">"tag1"</span>, pager);
 <span class="hljs-comment">// the total number of tags for the query</span>
 <span class="hljs-keyword">int</span> tagCount = pager.getCount();
 </code></pre>
-<p>Pager objects are used primarily in combination with search queries and allow you to limit the results of a query.</p>
+<p>The <code>Pager</code> class has a special string field <code>lastKey</code> for storing the last <code>id</code> for scrolling pagination queries.
+Usually scrolling is used in NoSQL databases, where in order to get a page of results, you have to provide the
+last key from the previous page.</p>
+<p><strong>Note:</strong> The fields <code>page</code> and <code>limit</code> are constrained by <code>para.max_pages = 1000</code> and <code>para.max_page_limit = 256</code>.
+The first controls the maximum page number, and the second one sets the maximum results per page (i.e. the
+maximum value which the <code>limit</code> parameter can have).</p>
+<p>Pager objects are used primarily in combination with search queries and allow you to limit the results of a query.
+When using <code>ParaClient</code> in combination with <code>Pager</code>, the client will automatically set the <code>pager.lastKey</code>
+property. To use the standard pagination mode, you must explicitly set the <code>pager.page</code> property:</p>
+<pre><code class="lang-java"><span class="hljs-comment">// fetch page 1</span>
+paraClient.findQuery(<span class="hljs-string">"*"</span>, pager);
+pager.setPage(<span class="hljs-number">2</span>);
+
+<span class="hljs-comment">// fetch page 2</span>
+paraClient.findQuery(<span class="hljs-string">"*"</span>, pager);
+pager.setPage(<span class="hljs-number">3</span>);
+<span class="hljs-comment">//  and so on...</span>
+</code></pre>
+<p>For “search after”, or “deep” pagination the <code>page</code> property is omitted:</p>
+<pre><code class="lang-java"><span class="hljs-comment">// fetch page 1</span>
+paraClient.findQuery(<span class="hljs-string">"*"</span>, pager);
+
+<span class="hljs-comment">// fetch page 2</span>
+paraClient.findQuery(<span class="hljs-string">"*"</span>, pager);
+<span class="hljs-comment">//  and so on...</span>
+</code></pre>
 
 						</section>
 					</article>
@@ -4321,7 +4423,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>30 October 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>13 November 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>

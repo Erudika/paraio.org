@@ -14,9 +14,41 @@ pager.setLimit(5);
 pager.setSortby("tag");
 // descending order
 pager.setDesc(true);
+// last key special field
+pager.setLastKey("1234");
 List<Tag> tags = search.findTags("tag1", pager);
 // the total number of tags for the query
 int tagCount = pager.getCount();
 ```
 
+The `Pager` class has a special string field `lastKey` for storing the last `id` for scrolling pagination queries.
+Usually scrolling is used in NoSQL databases, where in order to get a page of results, you have to provide the
+last key from the previous page.
+
+**Note:** The fields `page` and `limit` are constrained by `para.max_pages = 1000` and `para.max_page_limit = 256`.
+The first controls the maximum page number, and the second one sets the maximum results per page (i.e. the
+maximum value which the `limit` parameter can have).
+
 Pager objects are used primarily in combination with search queries and allow you to limit the results of a query.
+When using `ParaClient` in combination with `Pager`, the client will automatically set the `pager.lastKey`
+property. To use the standard pagination mode, you must explicitly set the `pager.page` property:
+```java
+// fetch page 1
+paraClient.findQuery("*", pager);
+pager.setPage(2);
+
+// fetch page 2
+paraClient.findQuery("*", pager);
+pager.setPage(3);
+//  and so on...
+```
+
+For "search after", or "deep" pagination the `page` property is omitted:
+```java
+// fetch page 1
+paraClient.findQuery("*", pager);
+
+// fetch page 2
+paraClient.findQuery("*", pager);
+//  and so on...
+```

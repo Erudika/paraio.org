@@ -28,6 +28,12 @@ There are several configuration properties for Elasticsearch (these go in your `
 		<tr><td>`para.es.use_transportclient`</td><td> Use `TransportClient` to connect to a remote ES node. If `false`, the REST client will be used. Default is `true`.</td></tr>
 		<tr><td>`para.es.transportclient_host`</td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is `localhost`.</td></tr>
 		<tr><td>`para.es.transportclient_port`</td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is `9300`.</td></tr>
+
+		<tr><td>`para.es.proxy_enabled`</td><td> Enables the Elasticsearch proxy endpoint. Default is `false`.</td></tr>
+		<tr><td>`para.es.proxy_path`</td><td> The path to the proxy endpoint. Default is `_elasticsearch`.</td></tr>
+		<tr><td>`para.es.restclient_scheme`</td><td> Scheme (for low-level REST client). Default is `http`.</td></tr>
+		<tr><td>`para.es.restclient_host`</td><td> ES server host (for low-level REST client). Default is `localhost`.</td></tr>
+		<tr><td>`para.es.restclient_port`</td><td> ES server port (for low-level REST client). Default is `9200`.</td></tr>
 	</tbody>
 </table>
 
@@ -49,5 +55,47 @@ para.search = "ElasticSearch"
 ```
 This could be a Java system property or part of a `application.conf` file on the classpath.
 This tells Para to use the Elasticsearch implementation instead of the default (Lucene).
+
+### Calling Elasticsearch through the proxy endpoint
+
+You can directly call the Elasticsearch API through `/v1/_elasticsearch`. To enable it set `para.es.proxy_enabled = true` first.
+Then you must specify the `path` parameter corresponds to the Elasticsearch API resource path. This is done for every
+`GET`, `PUT`, `POST`, `PATCH` or `DELETE` request to Elasticsearch:
+
+```
+GET /v1/_elasticsearch?path=_search
+DELETE /v1/_elasticsearch/tweet%2f1
+```
+`ParaClient` example:
+
+```java
+Response res = paraClient.invokePost("_elasticsearch/_count",
+				Entity.json(Collections.singletonMap("query",
+										Collections.singletonMap("term",
+										Collections.singletonMap("type", "cat")))));
+```
+If the `path` parameter is omitted, it defaults to `_search`.
+The endpoint accepts request to either `/v1/_elasticsearch` or /v1/_elasticsearch/{path}` where `path` is a URL-encoded
+path parameter, which can also be supplied as query string (e.g. `/v1/_elasticsearch?path=...`)
+
+**Note:** This endpoint requires authentication and unsigned requests are not allowed. Keep in mind that all requests
+to Elasticsearch are prefixed with the app identifier. For example if the app id is "app:myapp, then Para will proxy
+requests to Elasticsearch at `http://eshost:9200/myapp/{path}`.
+
+### Search query pagination
+
+The Elasticsearch plugin supports two modes of pagination for query results. The standard mode works with the
+`page` parameter:
+```
+GET /v1/users?limit=30&page=2
+```
+The other mode is "search after" and uses a stateless cursor to scroll through the results.
+To activate "search after", append the `lastKey` query parameter to the search request like so:
+```
+GET /v1/users?limit=10000&lastKey=835146458100404225
+```
+The "search after" method works well for deep pagination or infinite scrolling or search results.
+The `lastKey` field is returned in the body of the response for each search query. It represents the `_docid` value
+for a Elasticsearch document - a unique, time-based `long`. You may have to rebuild your index for "search after" to work.
 
 > Read the [Elasticsearch](https://www.elastic.co/guide/) docs for more information.

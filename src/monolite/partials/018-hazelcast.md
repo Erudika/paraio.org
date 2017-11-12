@@ -3,13 +3,15 @@ title: Hazelcast
 category: Cache
 ---
 
-Para uses Hazelcast as the default implementation of the `Cache` interface. It was chosen because it provides excellent
-support for distributed data structures like maps and sets. It allows us to use a portion of the memory on each node
-for caching without having to manage a separate caching server or cluster.
+Hazelcast allows you to use a portion of the memory on each node for caching without having to manage a separate
+caching server or cluster. Hazelcast was the default implementation of the `Cache` interface until v1.26, when it
+was decoupled from Para and [moved to its own repository](https://github.com/Erudika/para-cache-hazelcast). We still
+recommend the Hazelcast plugin for production use.
 
-Para organizes caches by application name - each application has its own separate distributed map with the same name.
+In Hazelcast, caches are organized by application `id` - each application has its own separate distributed map
+with the same name.
 
-There are several configuration properties for Hazelcast:
+These are the configuration properties for Hazelcast:
 
 <table class="table table-striped">
 	<thead>

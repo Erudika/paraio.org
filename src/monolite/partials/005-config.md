@@ -60,7 +60,7 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.search`								</td><td>-</td></tr>
 		<tr><td>Selects the `Search` implementation at runtime. Defaults to `LuceneSearch`.</td><td></td></tr>
 		<tr><td>`para.cache`								</td><td>-</td></tr>
-		<tr><td>Selects the `Cache` implementation at runtime. Use `inmemory` for develompment. Defaults to `hazelcast`.</td><td></td></tr>
+		<tr><td>Selects the `Cache` implementation at runtime. Defaults to `CaffeineCache`.</td><td></td></tr>
 		<tr><td>`para.fb_app_id`						</td><td>-</td></tr>
 		<tr><td>Facebook app id (for OAuth authentication).</td><td></td></tr>
 		<tr><td>`para.fb_secret`						</td><td>-</td></tr>
