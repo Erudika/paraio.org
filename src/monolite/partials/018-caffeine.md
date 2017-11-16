@@ -4,11 +4,11 @@ category: Cache
 ---
 
 Caffeine is the default cache implementation since v1.26. It's built on top of the excellent Caffeine library by
-Ben Manes. This cache is supports automatic eviction and TTL for each object.
+Ben Manes. This cache supports automatic eviction and TTL for each object.
 
-There's one big cache map for all Para apps. Cached objects have keys with a unique prefix for each app. When the reaches
-its maximum size, least recently used objects are evicted.
-with the same name.
+There's one big cache map, shared by all Para apps. Cached objects have keys with a unique prefix for each app.
+When the cache reaches its maximum size or when objects in the map expire, the least recently used ones are evicted.
+Caffeine is simple and effective, making it excellent for smaller Para clusters or single-node deployments.
 
 These are the configuration properties for Caffeine:
 

@@ -1626,10 +1626,10 @@ for a Lucene document - a unique, time-based <code>long</code>. You may have to 
 							<h2>Caffeine</h2>
 						<section class="body  img-rounded">
 							<p>Caffeine is the default cache implementation since v1.26. It’s built on top of the excellent Caffeine library by
-Ben Manes. This cache is supports automatic eviction and TTL for each object.</p>
-<p>There’s one big cache map for all Para apps. Cached objects have keys with a unique prefix for each app. When the reaches
-its maximum size, least recently used objects are evicted.
-with the same name.</p>
+Ben Manes. This cache supports automatic eviction and TTL for each object.</p>
+<p>There’s one big cache map, shared by all Para apps. Cached objects have keys with a unique prefix for each app.
+When the cache reaches its maximum size or when objects in the map expire, the least recently used ones are evicted.
+Caffeine is simple and effective, making it excellent for smaller Para clusters or single-node deployments.</p>
 <p>These are the configuration properties for Caffeine:</p>
 <table class="table table-striped">
     <thead>
@@ -4423,7 +4423,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>13 November 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>16 November 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>
