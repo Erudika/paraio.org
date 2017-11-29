@@ -23,6 +23,7 @@ This particular implementation was adapted from an earlier project called
 [elasticsearch-river-amazonsqs](https://github.com/albogdano/elasticsearch-river-amazonsqs).
 
 The code continuously pulls messages from an SQS queue. After a message is processed, it gets deleted from the queue.
+To enable this functionality, set `para.queue_link_enabled = true` in the Para configuration file.
 
 Sample code:
 

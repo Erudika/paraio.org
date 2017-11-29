@@ -22,46 +22,52 @@ your project. You can still keep the REST API or turn it off completely.
 
 ### Quick start
 
-1. [Download the WAR](https://github.com/erudika/para/releases)
-2. Run it with `java -jar -Dconfig.file=./application.conf para-*.war`
-3. Call `curl localhost:8080/v1/_setup` to get the access and secret keys
-4. Open the [Para Web Console](https://console.paraio.org) or use one of the provided
-client libraries below to connect to the API.
-
-The root app (the initial Para app) is automatically created. If you want to create multiple apps then you must
-call `Para.newApp()` or make an authenticated request to the API `GET /v1/_setup/{app_name}`.
-
-Users are created either from Java code `paraClient.signIn(...)` or by making an API request to `POST /v1/jwt_auth`. See
-[Sign in](#034-api-jwt-signin) or [Authentication](#033-restauth) sections for more details.
-
-Configuration properties belong in your `application.conf` file.
-Here's an example configuration for development purposes:
+Create a configuration file `application.conf` file in the same directory as the Para package.
+Here's an example default configuration:
 ```ini
 # the name of your app
-para.app_name = "My App"
+para.app_name = "Para"
 # or set it to 'production'
 para.env = "embedded"
 # if true, users can be created without verifying their emails
 para.security.allow_unverified_emails = false
 # if hosting multiple apps on Para, set this to false
 para.clients_can_access_root_app = true
-# no need for caching in dev mode
-para.cache_enabled = false
+# if false caching is disabled
+para.cache_enabled = true
 # change this to a random string
 para.app_secret_key = "b8db69a24a43f2ce134909f164a45263"
 # enable API request signature checking
 para.security.api_security = true
 ```
 
+1. [Download the WAR](https://github.com/erudika/para/releases)
+2. Run it with `java -jar -Dconfig.file=./application.conf para-*.war`
+3. Call `curl localhost:8080/v1/_setup` to get the access and secret keys for the root app (required)
+4. Install `para-cli` tool for easy access `npm install -g para-cli` (optional)
+5. Create a new "child" app for regular use (optional):
+```
+$ para-cli new-app "myapp" --name "My App" --endpoint "http://localhost:8080" --accessKey "app:para" --secretKey "{secret key for root app}"
+```
+6. Open the [Para Web Console](https://console.paraio.org) or use one of the provided
+client libraries below to connect to the API.
+
+The root app (the initial Para app) is always created first. If you want to create multiple apps then you must
+use [Para CLI tool](https://github.com/Erudika/para-cli) as shown above. Alternatively, you can call `Para.newApp()`
+or make an authenticated request to the API `GET /v1/_setup/{app_name}`.
+
 The quickest way to interact with Para is through the [command-line tool](https://github.com/Erudika/para-cli) (CLI):
 ```
 $ npm install -g para-cli
-$ para-cli ping
+$ para-cli ping --accessKey "app:myapp" --secretKey "secret_key" --endpoint "http://localhost:8080"
 $ echo "{\"type\":\"todo\", \"name\": \"buy milk\"}" > todo.json
 $ para-cli create todo.json --id todo1 --encodeId false
 $ para-cli read --id todo1
 $ para-cli search "type:todo"
 ```
+
+Users are created either from Java code `paraClient.signIn(...)` or by making an API request to `POST /v1/jwt_auth`. See
+[Sign in](#034-api-jwt-signin) or [Authentication](#033-restauth) sections for more details.
 
 The Java client for Para is a separate module with these Maven coordinates:
 

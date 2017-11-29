@@ -249,42 +249,46 @@ This is made possible by the REST API which talks JSON to your apps, and with th
 it’s easy to get started. If you’re building an application on the JVM, you can also add Para as Maven dependency to
 your project. You can still keep the REST API or turn it off completely.</p>
 <h3 id="quick-start">Quick start</h3>
-<ol>
-<li><a href="https://github.com/erudika/para/releases">Download the WAR</a></li>
-<li>Run it with <code>java -jar -Dconfig.file=./application.conf para-*.war</code></li>
-<li>Call <code>curl localhost:8080/v1/_setup</code> to get the access and secret keys</li>
-<li>Open the <a href="https://console.paraio.org">Para Web Console</a> or use one of the provided
-client libraries below to connect to the API.</li>
-</ol>
-<p>The root app (the initial Para app) is automatically created. If you want to create multiple apps then you must
-call <code>Para.newApp()</code> or make an authenticated request to the API <code>GET /v1/_setup/{app_name}</code>.</p>
-<p>Users are created either from Java code <code>paraClient.signIn(...)</code> or by making an API request to <code>POST /v1/jwt_auth</code>. See
-<a href="#034-api-jwt-signin">Sign in</a> or <a href="#033-restauth">Authentication</a> sections for more details.</p>
-<p>Configuration properties belong in your <code>application.conf</code> file.
-Here’s an example configuration for development purposes:</p>
+<p>Create a configuration file <code>application.conf</code> file in the same directory as the Para package.
+Here’s an example default configuration:</p>
 <pre><code class="lang-ini"># the name of your app
-para.app_name = &quot;My App&quot;
+para.app_name = &quot;Para&quot;
 # or set it to &#39;production&#39;
 para.env = &quot;embedded&quot;
 # if true, users can be created without verifying their emails
 para.security.allow_unverified_emails = false
 # if hosting multiple apps on Para, set this to false
 para.clients_can_access_root_app = true
-# no need for caching in dev mode
-para.cache_enabled = false
+# if false caching is disabled
+para.cache_enabled = true
 # change this to a random string
 para.app_secret_key = &quot;b8db69a24a43f2ce134909f164a45263&quot;
 # enable API request signature checking
 para.security.api_security = true
 </code></pre>
+<ol>
+<li><a href="https://github.com/erudika/para/releases">Download the WAR</a></li>
+<li>Run it with <code>java -jar -Dconfig.file=./application.conf para-*.war</code></li>
+<li>Call <code>curl localhost:8080/v1/_setup</code> to get the access and secret keys for the root app (required)</li>
+<li>Install <code>para-cli</code> tool for easy access <code>npm install -g para-cli</code> (optional)</li>
+<li>Create a new “child” app for regular use (optional):<pre><code>$ para-cli <span class="hljs-keyword">new</span>-app <span class="hljs-string">"myapp"</span> --name <span class="hljs-string">"My App"</span> --endpoint <span class="hljs-string">"http://localhost:8080"</span> --accessKey <span class="hljs-string">"app:para"</span> --secretKey <span class="hljs-string">"{secret key for root app}"</span>
+</code></pre></li>
+<li>Open the <a href="https://console.paraio.org">Para Web Console</a> or use one of the provided
+client libraries below to connect to the API.</li>
+</ol>
+<p>The root app (the initial Para app) is always created first. If you want to create multiple apps then you must
+use <a href="https://github.com/Erudika/para-cli">Para CLI tool</a> as shown above. Alternatively, you can call <code>Para.newApp()</code>
+or make an authenticated request to the API <code>GET /v1/_setup/{app_name}</code>.</p>
 <p>The quickest way to interact with Para is through the <a href="https://github.com/Erudika/para-cli">command-line tool</a> (CLI):</p>
 <pre><code>$ npm install -g para-cli
-$ para-cli ping
+$ para-cli ping --accessKey <span class="hljs-string">"app:myapp"</span> --secretKey <span class="hljs-string">"secret_key"</span> --endpoint <span class="hljs-string">"http://localhost:8080"</span>
 $ echo <span class="hljs-string">"{\"type\":\"todo\", \"name\": \"buy milk\"}"</span> &gt; todo.json
 $ para-cli create todo.json --id todo1 --encodeId <span class="hljs-literal">false</span>
 $ para-cli read --id todo1
 $ para-cli search <span class="hljs-string">"type:todo"</span>
-</code></pre><p>The Java client for Para is a separate module with these Maven coordinates:</p>
+</code></pre><p>Users are created either from Java code <code>paraClient.signIn(...)</code> or by making an API request to <code>POST /v1/jwt_auth</code>. See
+<a href="#034-api-jwt-signin">Sign in</a> or <a href="#033-restauth">Authentication</a> sections for more details.</p>
+<p>The Java client for Para is a separate module with these Maven coordinates:</p>
 <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>para-client<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
@@ -1536,22 +1540,33 @@ This tells Para to use the Elasticsearch implementation instead of the default (
 <h3 id="calling-elasticsearch-through-the-proxy-endpoint">Calling Elasticsearch through the proxy endpoint</h3>
 <p>You can directly call the Elasticsearch API through <code>/v1/_elasticsearch</code>. To enable it set <code>para.es.proxy_enabled = true</code> first.
 Then you must specify the <code>path</code> parameter corresponds to the Elasticsearch API resource path. This is done for every
-<code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>PATCH</code> or <code>DELETE</code> request to Elasticsearch:</p>
-<pre><code>GET /v1/_elasticsearch?path=_search
+<code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>PATCH</code> or <code>DELETE</code> request to Elasticsearch. The endpoint accepts request to either
+<code>/v1/_elasticsearch</code> or <code>/v1/_elasticsearch/{path}</code> where <code>path</code> is a URL-encoded path parameter.
+<strong>Do not add query parameters to the request path with <code>?</code>, instead, pass them as a parameter map.</strong></p>
+<pre><code>GET /v1/_elasticsearch/_search
+GET /v1/_elasticsearch/mytype%<span class="hljs-number">2</span>f_search
 DELETE /v1/_elasticsearch/tweet%<span class="hljs-number">2</span>f1
 </code></pre><p><code>ParaClient</code> example:</p>
-<pre><code class="lang-java">Response res = paraClient.invokePost(<span class="hljs-string">"_elasticsearch/_count"</span>,
+<pre><code class="lang-java">Response get = paraClient.invokeGet(<span class="hljs-string">"_elasticsearch/"</span> + Utils.urlEncode(<span class="hljs-string">"tweet/_search"</span>), params);
+
+Response post = paraClient.invokePost(<span class="hljs-string">"_elasticsearch/_count"</span>,
                 Entity.json(Collections.singletonMap(<span class="hljs-string">"query"</span>,
                                         Collections.singletonMap(<span class="hljs-string">"term"</span>,
                                         Collections.singletonMap(<span class="hljs-string">"type"</span>, <span class="hljs-string">"cat"</span>)))));
 </code></pre>
-<p>If the <code>path</code> parameter is omitted, it defaults to <code>_search</code>.
-The endpoint accepts request to either <code>/v1/_elasticsearch</code> or /v1/_elasticsearch/{path}<code>where</code>path<code>is a URL-encoded
-path parameter, which can also be supplied as query string (e.g.</code>/v1/_elasticsearch?path=…`)</p>
+<p>If the <code>path</code> parameter is omitted, it defaults to <code>_search</code>.</p>
 <p><strong>Note:</strong> This endpoint requires authentication and unsigned requests are not allowed. Keep in mind that all requests
 to Elasticsearch are prefixed with the app identifier. For example if the app id is “app:myapp, then Para will proxy
 requests to Elasticsearch at <code>http://eshost:9200/myapp/{path}</code>.</p>
-<h3 id="search-query-pagination">Search query pagination</h3>
+<h3 id="rebuilding-indices-through-the-elasticsearch-proxy-endpoint">Rebuilding indices through the Elasticsearch proxy endpoint</h3>
+<p>You can rebuild the whole app index from scratch by calling <code>POST /v1/_elasticsearch/reindex</code>. To enable it set
+<code>para.es.proxy_reindexing_enabled = true</code> first. This operation executes <code>ElasticSearchUtils.rebuildIndex()</code> internally,
+and returns a response indicating the number of reindexed objects and the elapsed time:</p>
+<pre><code>{
+   <span class="hljs-string">"reindexed"</span>: <span class="hljs-number">154</span>,
+   <span class="hljs-string">"tookMillis"</span>: <span class="hljs-number">365</span>
+}
+</code></pre><h3 id="search-query-pagination">Search query pagination</h3>
 <p>The Elasticsearch plugin supports two modes of pagination for query results. The standard mode works with the
 <code>page</code> parameter:</p>
 <pre><code>GET /v1/users?limit=<span class="hljs-number">30</span>&amp;page=<span class="hljs-number">2</span>
@@ -2156,7 +2171,8 @@ properties as they are ignored. Also set <code>para.aws_access_key</code> and <c
 <p>The AWS SQS plugin uses Amazon’s SQS as a river by long polling for messages from a given queue.
 This particular implementation was adapted from an earlier project called
 <a href="https://github.com/albogdano/elasticsearch-river-amazonsqs">elasticsearch-river-amazonsqs</a>.</p>
-<p>The code continuously pulls messages from an SQS queue. After a message is processed, it gets deleted from the queue.</p>
+<p>The code continuously pulls messages from an SQS queue. After a message is processed, it gets deleted from the queue.
+To enable this functionality, set <code>para.queue_link_enabled = true</code> in the Para configuration file.</p>
 <p>Sample code:</p>
 <pre><code class="lang-java">AWSQueue q = <span class="hljs-keyword">new</span> AWSQueue(<span class="hljs-string">"myQueue"</span>);
 AWSQueueUtils.pushMessages(q.getUrl(), listOfMessages);
@@ -4423,7 +4439,7 @@ Make sure you save it and use it for signing future requests.</p>
 			<footer>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<p>Generated on <i>16 November 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						<p>Generated on <i>30 November 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
 							<a href="https://erudika.com">Erudika</a></p>
