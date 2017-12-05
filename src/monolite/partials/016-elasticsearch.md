@@ -98,7 +98,7 @@ and returns a response indicating the number of reindexed objects and the elapse
 }
 ```
 
-### Search query pagination
+### Search query pagination and sorting
 
 The Elasticsearch plugin supports two modes of pagination for query results. The standard mode works with the
 `page` parameter:
@@ -108,10 +108,21 @@ GET /v1/users?limit=30&page=2
 The other mode is "search after" and uses a stateless cursor to scroll through the results.
 To activate "search after", append the `lastKey` query parameter to the search request like so:
 ```
-GET /v1/users?limit=10000&lastKey=835146458100404225
+GET /v1/users?limit=10000&sort=_docid&lastKey=835146458100404225
 ```
+**Important:** For consistent results when doing "search after" scrolling, set `pager.setSortby("_docid")`
+to sort on the `_docid` field.
+
 The "search after" method works well for deep pagination or infinite scrolling or search results.
 The `lastKey` field is returned in the body of the response for each search query. It represents the `_docid` value
 for a Elasticsearch document - a unique, time-based `long`. You may have to rebuild your index for "search after" to work.
+
+Sorting is done on the `timestamp` field by default, in `desc` (descending) order. To sort on a different field, set
+`pager.setSortBy(field)`. Sorting on multiple fields is also possible by separating them with a comma. For example:
+```
+GET /v1/users?sort=name,timestamp
+// or
+pager.setSortBy("name:desc,timestamp:asc");
+```
 
 > Read the [Elasticsearch](https://www.elastic.co/guide/) docs for more information.
