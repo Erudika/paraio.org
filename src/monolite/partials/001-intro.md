@@ -59,7 +59,9 @@ or make an authenticated request to the API `GET /v1/_setup/{app_name}`.
 The quickest way to interact with Para is through the [command-line tool](https://github.com/Erudika/para-cli) (CLI):
 ```
 $ npm install -g para-cli
-$ para-cli ping --accessKey "app:myapp" --secretKey "secret_key" --endpoint "http://localhost:8080"
+# run setup and set endpoint to either 'http://localhost:8080' or 'https://paraio.com'
+$ para-cli setup
+$ para-cli ping
 $ echo "{\"type\":\"todo\", \"name\": \"buy milk\"}" > todo.json
 $ para-cli create todo.json --id todo1 --encodeId false
 $ para-cli read --id todo1
