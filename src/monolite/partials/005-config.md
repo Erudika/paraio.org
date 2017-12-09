@@ -90,7 +90,7 @@ Here's a list of all configuration properties that can be set in the config file
 		user will use to login or a social id in the form of `prefix:social_id`, e.g. `fb:12345`. It is used to assign
 		administrative privileges to the user with that identifier.</td><td></td></tr>
 		<tr><td>`para.worker_id`						</td><td>`1`</td></tr>
-		<tr><td>Node number, 1 to 128. Used for ID generation. Each instance of Para has to have a different worker id. </td><td></td></tr>
+		<tr><td>Node number, 1 to 128. Used for ID generation. Each instance of Para **must** have a different worker id. </td><td></td></tr>
 		<tr><td>`para.app_name`							</td><td>`para`</td></tr>
 		<tr><td>The name of the root app - the main app which is used for initializing Para. </td><td></td></tr>
 		<tr><td>`para.auth_cookie`					</td><td>`[app_name]-auth`</td></tr>

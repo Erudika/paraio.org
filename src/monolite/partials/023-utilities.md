@@ -95,7 +95,7 @@ The `Utils` static class contains a variety of utility methods. These are summar
 		<tr><td>`String[] validateObject(ParaObject content)`</td></tr>
 		<tr><td> Runs the Hibernate Validator against an object. Returns a list of errors or an empty array if that object is valid. </td></tr>
 		<tr><td>`String getNewId()`</td></tr>
-		<tr><td> Generates a new `id`. Based on [Twitter's Snowflake](https://github.com/twitter/snowflake/) algorithm. </td></tr>
+		<tr><td> Generates a new `id`. Based on [Twitter's Snowflake](https://github.com/twitter/snowflake/) algorithm. You *must* set `para.worker_id` to be different on each node. </td></tr>
 		<tr><td>`String type(Class<? extends ParaObject> clazz)`</td></tr>
 	</tbody>
 </table>

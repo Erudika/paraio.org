@@ -7,7 +7,7 @@ type: GET
 
 Utility functions which can be accessed via the REST API include (listed by the method's short name):
 
-- `newid` - calls `Utils.getNewId()`
+- `newid` - calls `Utils.getNewId()`. You *must* set `para.worker_id` to be different on each node.
 - `timestamp` - calls `Utils.timestamp()`
 - `formatdate` - calls `Utils.formatDate(format, locale)`, additional parameters: `format` (e.g. "dd MM yyyy"), `locale`.
 - `formatmessage` - calls `Utils.formatMessage(msg, params)`, additional parameters: `message` (the message to format)
