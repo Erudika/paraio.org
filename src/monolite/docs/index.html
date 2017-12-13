@@ -1,55 +1,182 @@
 ---
 title: Para - Documentation
 ---
-<section id="docs" class="top-section">
-	<div class="container">
-		<div class="col-lg-3 hidden-md hidden-sm hidden-xs">
-			<nav id="sidebar">
-				{{>sidenav}}
-			</nav>
+
+<div class="wrapper">
+	<!-- Sidebar Holder -->
+	<nav id="sidebar">
+		<div class="sidebar-header">
+			<a class="navbar-brand" href="/">
+				<img src="/img/logo.svg" width="171" height="89" alt="logo" class="img-responsive">
+			</a>
+			<!--<h1>Docs</h1>-->
 		</div>
-		<div class="col-lg-9">
-			<section id="content">
-				{{#eachPartial "**/*.md"}}
-					{{#mdpartial partialName partialData}}
-					<a id="{{partialName}}" href="#" class="doc-anchor"><i class="fa fa-link fa-lg"></i></a>
-					<article class="{{type}} img-rounded">
-						{{#if type}}
-							<a href="#">
-								<h2 class="img-rounded">
-									<code>
-										{{#is type "GET"}}
-											<span class="img-rounded label-success">{{type}}</span>
-										{{/is}}
-										{{#is type "PUT"}}
-											<span class="img-rounded label-warning">{{type}}</span>
-										{{/is}}
-										{{#is type "PATCH"}}
-											<span class="img-rounded label-default">{{type}}</span>
-										{{/is}}
-										{{#is type "POST"}}
-											<span class="img-rounded label-info">{{type}}</span>
-										{{/is}}
-										{{#is type "DELETE"}}
-											<span class="img-rounded label-danger">{{type}}</span>
-										{{/is}}
-										<span class="gray">
-											{{path}} {{#if beta}}<span class="label label-danger" title="This might change.">beta</span>{{/if}}
-										</span>
-									</code>
-									<span class="hidden-xs">{{title}}</span>
-								</h2>
-							</a>
-						{{else}}
-							<h2>{{title}}</h2>
-						{{/if}}
-						<section class="body {{#if type}}api-body{{/if}} img-rounded">
-							{{this.content}}
-						</section>
-					</article>
-					{{/mdpartial}}
-				{{/eachPartial}}
-			</section>
-		</div>
+
+		<ul class="list-unstyled components">
+			{{#eachPartial "**/*.md"}}
+				{{#if category}}
+				{{else}}
+					<li><a href="#{{partialName}}">{{title}}</a></li>
+				{{/if}}
+			{{/eachPartial}}
+
+			{{#each partialData.category}}
+				<li>
+					<a href="#{{hyphenate this.value}}" data-toggle="collapse" aria-expanded="false">{{this.value}}</a>
+					<ul id="{{hyphenate this.value}}" class="collapse list-unstyled">
+						{{#each partials}}
+							{{#mdpartial this}}
+								<li class="{{type}}"><a href="#{{partialName}}">{{title}}</a></li>
+							{{/mdpartial}}
+						{{/each}}
+					</ul>
+				</li>
+			{{/each}}
+
+
+<!--			<li class="active">
+				<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
+				<ul class="collapse list-unstyled" id="homeSubmenu">
+					<li><a href="#">Home 1</a></li>
+					<li><a href="#">Home 2</a></li>
+					<li><a href="#">Home 3</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">About</a>
+				<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+				<ul class="collapse list-unstyled" id="pageSubmenu">
+					<li><a href="#">Page 1</a></li>
+					<li><a href="#">Page 2</a></li>
+					<li><a href="#">Page 3</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#">Portfolio</a>
+			</li>
+			<li>
+				<a href="#">Contact</a>
+			</li>-->
+		</ul>
+
+		<ul class="list-unstyled visible-xs-block">
+			<!--  Navigation  -->
+			<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+			<li class="hidden">
+				<a href="/#page-top"></a>
+			</li>
+			<li>
+				<a href="/#download">Download</a>
+			</li>
+			<li>
+				<a href="https://console.paraio.org">Console</a>
+			</li>
+			<li>
+				<a href="/#about">About</a>
+			</li>
+		</ul>
+
+<!--		<ul class="list-unstyled CTAs">
+			<li><a href="#" id="theme-switch-btn" class="btn btn-default">Dark Theme</a></li>
+		</ul>-->
+	</nav>
+
+	<!-- Page Content Holder -->
+	<div id="content">
+
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+
+				<div class="navbar-header">
+					<button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn">
+						<i class="glyphicon glyphicon-menu-hamburger"></i>
+					</button>
+					<p id="docs-title">Para Docs</p>
+
+				</div>
+
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<!--  Navigation  -->
+						<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+						<li class="hidden">
+							<a href="/#page-top"></a>
+						</li>
+						<li>
+							<a href="/docs/"><b>Docs</b></a>
+						</li>
+						<li>
+							<a href="/#download">Download</a>
+						</li>
+						<li>
+							<a href="https://console.paraio.org">Console</a>
+						</li>
+						<li>
+							<a href="/#about">About</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Main Content -->
+		<section id="docs" class="top-section">
+		<!--	<div class="container">
+				<div class="col-lg-3 hidden-md hidden-sm hidden-xs">
+					<nav id="sidebar">
+						{{!>sidenav}}
+					</nav>
+				</div>
+				<div class="col-lg-9">
+					<section id="content">-->
+						{{#eachPartial "**/*.md"}}
+							{{#mdpartial partialName partialData}}
+							<a id="{{partialName}}" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+							<article class="{{type}} img-rounded">
+								{{#if type}}
+									<a href="#">
+										<h2 class="img-rounded">
+											<code>
+												{{#is type "GET"}}
+													<span class="img-rounded label-success">{{type}}</span>
+												{{/is}}
+												{{#is type "PUT"}}
+													<span class="img-rounded label-warning">{{type}}</span>
+												{{/is}}
+												{{#is type "PATCH"}}
+													<span class="img-rounded label-default">{{type}}</span>
+												{{/is}}
+												{{#is type "POST"}}
+													<span class="img-rounded label-info">{{type}}</span>
+												{{/is}}
+												{{#is type "DELETE"}}
+													<span class="img-rounded label-danger">{{type}}</span>
+												{{/is}}
+												<span class="gray">
+													{{path}} {{#if beta}}<span class="label label-danger" title="This might change.">beta</span>{{/if}}
+												</span>
+											</code>
+											<span class="hidden-xs">{{title}}</span>
+										</h2>
+									</a>
+								{{else}}
+									<h2>{{title}}</h2>
+								{{/if}}
+								<section class="body {{#if type}}api-body{{/if}} img-rounded">
+									{{this.content}}
+								</section>
+							</article>
+							{{/mdpartial}}
+						{{/eachPartial}}
+		<!--			</section>
+				</div>
+			</div>
+		-->
+		</section>
+
+		<!-- Footer Content -->
+		{{>footer}}
 	</div>
-</section>
+</div>
+
+

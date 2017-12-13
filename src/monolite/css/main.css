@@ -66,28 +66,40 @@ a:focus {
 }
 
 .navbar {
-	margin-bottom: 1em;
-	/*border-bottom: 1px solid #444444;*/
-	text-transform: uppercase;
-	background-color: white;
+	padding: 15px 10px;
+	background: #fff;
+	border-bottom: 1px solid #CCCCCC;
+	border-radius: 0;
+	/*box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);*/
+}
+
+.navbar-btn {
+	box-shadow: none;
+	outline: none !important;
+	border: none;
 }
 
 .navbar-brand {
 	font-weight: 400;
-	padding: 10px 10px;
+	padding: 5px 5px;
 }
 
 .navbar-brand:focus {
 	outline: 0;
 }
 
-.navbar-custom a {
+.navbar-custom a,
+.navbar-default .navbar-nav>li>a {
 	color: #222222;
 }
-
+.navbar-default .navbar-nav>li>a {
+	color: inherit;
+}
 .navbar-custom .nav li a:hover,
 .navbar-custom .nav li a:focus,
-.navbar-custom .nav li.active {
+.navbar-custom .nav li.active,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
 	outline: 0;
 	color: white;
 	background-color: #66CCFF;
@@ -266,11 +278,6 @@ pre.maven-coords {
 	}
 }
 
-.btn {
-	text-transform: uppercase;
-	/*font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif;*/
-}
-
 .btn-default {
 	border: 1px solid #1D1D1D;
 	color: #FFFFFF;
@@ -344,9 +351,7 @@ pre.maven-coords {
 /*********** DOCS *************/
 
 a.doc-anchor {
-	display: block;
 	position: relative;
-	top: -60px;
 	visibility: hidden;
 }
 
@@ -361,16 +366,28 @@ code {
 }
 
 #filter-form {
-	margin-bottom: 1em;
+	margin: 2em 0.5em;
 }
 
-#sidebar {
+#docs {
+	padding: 0 40px 40px 40px;
+}
+
+#docs-title {
+	display: inline-block;
+	margin: 0 0 0 20px;
+	font-size: 1.5em;
+	vertical-align: middle;
+	font-weight: 300;
+}
+
+/*#sidebar {
 	padding: 10px 1em 160px 0;
-	/*position: fixed;*/
-	/*overflow: auto;*/
-	/*height: 80%;*/
+	position: fixed;
+	overflow: auto;
+	height: 80%;
 	width: 260px;
-	/*background-color: white;*/
+	background-color: white;
 }
 
 #sidebar ul {
@@ -384,18 +401,153 @@ code {
 }
 
 #sidebar ul li {
-  /*padding: 0 0 5px;*/
+  padding: 0 0 5px;
 }
 
 #sidebar h4 {
-	/*margin: 5px 0 10px 0;*/
+	margin: 5px 0 10px 0;
 }
 
 #sidebar h1 {
 	font-family: inherit;
 	font-weight: 300;
 	margin-top: 0;
+}*/
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+#sidebar {
+	width: 250px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	z-index: 999;
+	background: #333;
+	color: #fff;
+	transition: all 0.3s;
 }
+
+#sidebar.active {
+	margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+	padding: 15px;
+	display: inline-block;
+	width: 100%;
+	background-color: white;
+	border-right: 1px solid #CCCCCC;
+}
+
+#sidebar ul.components {
+	padding: 20px 0;
+}
+
+#sidebar ul p {
+	color: #fff;
+	padding: 10px;
+}
+
+#sidebar ul li a {
+	padding: 6px;
+	font-size: 1em;
+	display: block;
+	color: white;
+}
+
+#sidebar ul li a:hover {
+	color: #66CCFF;
+	background: #444;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+	color: #fff;
+	background: #444;
+}
+
+a[data-toggle="collapse"] {
+	position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+	content: '\e259';
+	display: block;
+	position: absolute;
+	right: 20px;
+	font-family: 'Glyphicons Halflings';
+	font-size: 0.6em;
+}
+a[aria-expanded="true"]::before {
+	content: '\e260';
+}
+
+
+ul ul a {
+	font-size: 0.9em !important;
+	padding-left: 30px !important;
+	background: #444;
+}
+
+ul.CTAs {
+	padding: 20px;
+}
+
+ul.CTAs a {
+	text-align: center;
+	font-size: 0.9em !important;
+	display: block;
+	border-radius: 5px;
+	margin-bottom: 5px;
+}
+a.download {
+	background: #fff;
+	color: #7386D5;
+}
+a.article, a.article:hover {
+	background: #6d7fcc !important;
+	color: #fff !important;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+#content {
+	width: calc(100% - 250px);
+	min-height: 100vh;
+	transition: all 0.3s;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+#content.active {
+	width: 100%;
+}
+
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media (max-width: 768px) {
+	#sidebar {
+		margin-left: -250px;
+	}
+	#sidebar.active {
+		margin-left: 0;
+	}
+	#content {
+		width: 100%;
+	}
+	#content.active {
+		width: calc(100% - 250px);
+	}
+	#sidebarCollapse span {
+		display: none;
+	}
+}
+
+/* ---------------------------------------------------*/
 
 #content article a h2 {
   background: #333333;

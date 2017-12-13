@@ -11,7 +11,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>Para - a general-purpose backend framework for the cloud</title>
+		<title>Para - an open-source, general-purpose, backend framework for the cloud.</title>
 		<meta name="description" content="Para is an open source, general-purpose, backend framework for the cloud.">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="google-site-verification" content="YXojLKu08NjIbC9uXuTBV-TmbaEHNGjyqaFcCzVyD-U" />
@@ -26,47 +26,48 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css" rel="stylesheet">
 		<link href="https://cdn.rawgit.com/konpa/devicon/89f2f44ba07ea3fff7e561c2142813b278c2d6c6/devicon.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<link href="/css/main.css" rel="stylesheet">
+		<link href="/css/main.css" rel="stylesheet" id="theme">
 	</head>
 	<body>
-		<!--  Navigation  -->
-		<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header page-scroll">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-						<i class="fa fa-bars"></i>
-					</button>
-					<a class="navbar-brand" href="/">
-						<img src="/img/logo.svg" width="121" height="39" alt="logo"/>
-					</a>
-				</div>
+		<!-- Main Content -->
 		
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-					<ul class="nav navbar-nav">
-						<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-						<li class="hidden">
-							<a href="/#page-top"></a>
-						</li>
-						<li>
-							<a href="/docs/">Docs</a>
-						</li>
-						<li class="page-scroll">
-							<a href="/#download">Download</a>
-						</li>
-						<li class="page-scroll">
-							<a href="https://console.paraio.org">Console</a>
-						</li>
-						<li class="page-scroll">
-							<a href="/#about">About</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>		<!-- Main Content -->
-		
-<section class="intro">
+<!--  Navigation  -->
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header page-scroll">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+				<i class="glyphicon glyphicon-menu-hamburger"></i>
+			</button>
+			<a class="navbar-brand" href="/">
+				<img src="/img/logo.svg" width="121" height="39" alt="logo"/>
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+			<ul class="nav navbar-nav">
+				<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+				<li class="hidden">
+					<a href="/#page-top"></a>
+				</li>
+				<li>
+					<a href="/docs/">Docs</a>
+				</li>
+				<li class="page-scroll">
+					<a href="/#download">Download</a>
+				</li>
+				<li class="page-scroll">
+					<a href="https://console.paraio.org">Console</a>
+				</li>
+				<li class="page-scroll">
+					<a href="/#about">About</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav><section class="intro">
 	<div class="intro-body">
 		<div class="container">
 			<div class="row">
@@ -82,7 +83,7 @@
 					</p>
 					<div class="page-scroll">
 						<a href="https://oss.sonatype.org/service/local/repositories/releases/content/com/erudika/para-war/1.26.2/para-war-1.26.2.war"
-							 class="btn btn-default"><i class="fa fa-download"></i> Download</a>
+							 class="btn btn-default"><i class="glyphicon glyphicon-download"></i> Download</a>
 					</div>
 					<h4 class="intro-cmd">
 						<code>$ java -jar para-*.war</code>
@@ -120,9 +121,9 @@
 				just easier to use than most frameworks out there.</p>
 			<hr/>
 			<ul class="list-inline banner-social-buttons">
-				<li><a href="https://paraio.com" class="btn btn-default btn-lg">Try our hosted service</a></li>
+				<li><a href="https://paraio.com" class="btn btn-default btn-lg"><b>We offer Para hosting</b></a></li>
 			</ul>
-			<p>It's <i>free</i> for developers!</p>
+			<p>It's <i>free</i> to get started!</p>
 		</div>
 	</div>
 </section>
@@ -157,7 +158,7 @@
 		<li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default">Source code (.zip)</a>
 		</li>
 		<li><a href="https://oss.sonatype.org/service/local/repositories/releases/content/com/erudika/para-war/1.26.2/para-war-1.26.2.war"
-					 class="btn btn-default">executable WAR</a>
+					 class="btn btn-default">Executable WAR</a>
 		</li>
 	</ul>
 
@@ -222,16 +223,13 @@
 				check it out at <a href="https://scoold.com">scoold.com</a></p>
 			<ul class="list-inline banner-social-buttons">
 				<li><a href="mailto:para@erudika.com" class="btn btn-default">
-						<i class="fa fa-envelope fa-fw"></i> <span class="network-name">Email</span></a>
+						<span class="network-name">Email</span></a>
 				</li>
 				<li><a href="https://twitter.com/para_io" class="btn btn-default">
-						<i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-				</li>
-				<li><a href="https://github.com/erudika/para" class="btn btn-default">
-						<i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+						<span class="network-name">Twitter</span></a>
 				</li>
 				<li><a href="https://gitter.im/Erudika/para" class="btn btn-default">
-						<i class="fa fa-comment fa-fw"></i> <span class="network-name">Gitter</span></a>
+						<span class="network-name">Gitter</span></a>
 				</li>
 			</ul>
 			<p>&nbsp;</p>
@@ -253,25 +251,27 @@
 	</div>
 </section>
 
-		<!-- Footer Content -->
-		<div class="container footer-section">
-			<p>&nbsp;</p>
-			<footer>
-				<div class="row">
-					<div class="col-lg-12 text-center">
-						<p>Generated on <i>10 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
-							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
-						<p>Some rights reserved <i class="fa fa-creative-commons"></i> 2017
-							<a href="https://erudika.com">Erudika</a></p>
-					</div>
-				</div>
-			</footer>
+<!-- Footer Content -->
+<div class="container footer-section">
+	<p>&nbsp;</p>
+	<footer>
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<p>Generated on <i>13 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
+				<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
+					2017
+					<a href="https://erudika.com">Erudika</a></p>
+			</div>
 		</div>
+	</footer>
+</div>
 
-		<script src="https://code.jquery.com/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/lang-basic.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 		<script src="/js/main.js"></script>
 
 		<script>

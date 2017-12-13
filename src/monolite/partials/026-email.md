@@ -23,7 +23,10 @@ para.mail.password = "password"
 para.mail.tls = true
 para.mail.ssl = false
 ```
-Email templates can be loaded with `Emailer.class.getClassLoader().getResourceAsStream("emails/template.html")`.
+Email templates can be loaded with:
+```java
+Emailer.class.getClassLoader().getResourceAsStream("emails/template.html")
+```
 Para supports basic variable substitutions through Mustache with `Utils.compileMustache(data, template)`.
 
 Set `para.emailer = "aws"` to use the AWS Simple Email Service and comment out the `para.mail.*`

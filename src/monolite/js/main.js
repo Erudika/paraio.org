@@ -1,38 +1,3 @@
-// Case-insensitive contains()
-$.expr[":"].Contains = function (a, i, m) {
-	return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-};
-
-function Filter(form, list) {
-	this.el = list;
-	// Filter input
-	var input = form.find("input[type=text]:first");
-	// Filter function
-	var self = this;
-	$(input).change(function () {
-		var filter = $(this).val();
-		if (filter) {
-			$(self.el).find("a:not(:Contains(" + filter + "))").parent().hide();
-			$(self.el).find("a:Contains(" + filter + ")").parent().show();
-		} else {
-			$(self.el).find("li").show();
-		}
-
-		// Hide titles when group is empty
-		$(self.el).find("ul").each(function () {
-			if (!$(this).find("li:visible").length) {
-				$(this).prev("h4", "h3", "h2", "h1").hide();
-			} else {
-				$(this).prev("h4", "h3", "h2", "h1").show();
-			}
-		});
-		return false;
-	}).keyup(function () {
-		$(this).change();
-	});
-
-	return this;
-}
 
 $(".api-body").hide();
 $("a.collapse-expand-link").click(function () {
@@ -56,15 +21,15 @@ $("#sidebar a").each(function () {
 	var that = $(this);
 	var id = that.attr("href").substring(that.attr("href").indexOf("#") + 1);
 	that.click(function (e) {
-		var header = $("a#" + id);
-		if (header) {
-			$("html, body").animate({scrollTop: header.offset().top}, "fast");
+		if (id) {
+			var header = $("a#" + id);
+			if (header && header.offset()) {
+				$("html, body").animate({scrollTop: header.offset().top}, "fast");
+			}
 		}
 	});
 });
 
-// Making our navigation sticky
-new Filter($("#filter-form"), $("#sidebar > ul"));
 
 /// TEXT ROTATOR
 $.fn.extend({
@@ -102,3 +67,52 @@ $.fn.extend({
 });
 
 $(".intro-text").rotaterator({fadeSpeed: 150, pauseSpeed: 2000});
+
+function saveAuth(obj) {
+	window.localStorage.setItem('para-docs', JSON.stringify(obj));
+};
+function loadAuth() {
+	return JSON.parse(window.localStorage.getItem('para-docs') || '{}');
+};
+function setTheme(t) {
+	var href, logohref, theme;
+	var opts = loadAuth();
+	if (t) {
+		theme = t;
+	} else {
+		theme = opts.theme === 'light' ? 'dark' : 'light';
+	}
+	if (theme === 'light') {
+		href = "css/main.css";
+		logohref = "img/logo.svg";
+		opts.theme = 'light';
+		$('#dark-theme').remove();
+		$("#theme-switch-btn").text("Dark Theme");
+	} else {
+		href = "css/dark.css";
+		logohref = "img/logodark.svg";
+		opts.theme = 'dark';
+		$("#theme-switch-btn").text("Light Theme");
+		$('#theme').after('<link href="/css/dark.css" rel="stylesheet" id="dark-theme">');
+	}
+	saveAuth(opts);
+	$('#logo').src = logohref;
+};
+
+$("#theme-switch-btn").click(function () {
+	setTheme();
+});
+
+setTheme(loadAuth().theme);
+
+$(document).ready(function () {
+	$("#sidebar").mCustomScrollbar({
+		theme: "minimal"
+	});
+
+	$('#sidebarCollapse').on('click', function () {
+		$('#sidebar, #content').toggleClass('active');
+		$('.collapse.in').toggleClass('in');
+		$('a[aria-expanded=true]').attr('aria-expanded', 'false');
+	});
+});
