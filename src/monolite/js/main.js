@@ -84,19 +84,19 @@ function setTheme(t) {
 	}
 	if (theme === 'light') {
 		href = "css/main.css";
-		logohref = "img/logo.svg";
+		logohref = "/img/logo.svg";
 		settings.theme = 'light';
 		$('#dark-theme').remove();
 		$("#theme-switch-btn").text("Dark Theme");
 	} else {
 		href = "css/dark.css";
-		logohref = "img/logodark.svg";
+		logohref = "/img/logodark.svg";
 		settings.theme = 'dark';
 		$("#theme-switch-btn").text("Light Theme");
 		$('#theme').after('<link href="/css/dark.css?v=2" rel="stylesheet" id="dark-theme">');
 	}
 	saveSettings(settings);
-	$('#logo').src = logohref;
+	$('#logo').attr('src', logohref);
 };
 
 $("#theme-switch-btn").click(function () {
@@ -122,6 +122,8 @@ $("a.docs-category").click(function () {
 	}
 	saveSettings(settings);
 });
+
+$(".wrapper").fadeIn(200);
 
 $("#sidebar").mCustomScrollbar({
 	theme: "minimal"

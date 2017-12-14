@@ -65,12 +65,15 @@ a:focus {
 	font-weight: 300;
 }
 
+.wrapper {
+	display: none;
+}
+
 .navbar {
 	padding: 15px 10px;
 	background: #fff;
 	border-bottom: 1px solid #CCCCCC;
 	border-radius: 0;
-	/*box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);*/
 }
 
 .navbar-btn {
@@ -88,16 +91,15 @@ a:focus {
 	outline: 0;
 }
 
-.navbar-custom a,
 .navbar-default .navbar-nav>li>a {
 	color: #222222;
 }
 .navbar-default .navbar-nav>li>a {
 	color: inherit;
 }
-.navbar-custom .nav li a:hover,
-.navbar-custom .nav li a:focus,
-.navbar-custom .nav li.active,
+.navbar-default .nav li a:hover,
+.navbar-default .nav li a:focus,
+.navbar-default .nav li.active,
 .nav>li>a:hover, .nav>li>a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
@@ -387,39 +389,6 @@ code {
 	font-weight: 300;
 }
 
-/*#sidebar {
-	padding: 10px 1em 160px 0;
-	position: fixed;
-	overflow: auto;
-	height: 80%;
-	width: 260px;
-	background-color: white;
-}
-
-#sidebar ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#sidebar ul ul {
-  padding-left: 10px;
-}
-
-#sidebar ul li {
-  padding: 0 0 5px;
-}
-
-#sidebar h4 {
-	margin: 5px 0 10px 0;
-}
-
-#sidebar h1 {
-	font-family: inherit;
-	font-weight: 300;
-	margin-top: 0;
-}*/
-
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -460,7 +429,6 @@ code {
 	padding: 6px 12px;
 	font-size: 1em;
 	display: block;
-	/*color: white;*/
 }
 
 #sidebar ul li a:hover {
