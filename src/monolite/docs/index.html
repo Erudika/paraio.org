@@ -9,21 +9,20 @@ title: Para - Documentation
 			<a class="navbar-brand" href="/">
 				<img src="/img/logo.svg" width="171" height="89" alt="logo" class="img-responsive">
 			</a>
-			<!--<h1>Docs</h1>-->
 		</div>
 
 		<ul class="list-unstyled components">
 			{{#eachPartial "**/*.md"}}
 				{{#if category}}
 				{{else}}
-					<li><a href="#{{partialName}}">{{title}}</a></li>
+					<li><a href="#{{partialName}}" class="docs-category">{{title}}</a></li>
 				{{/if}}
 			{{/eachPartial}}
 
 			{{#each partialData.category}}
 				<li>
-					<a href="#{{hyphenate this.value}}" data-toggle="collapse" aria-expanded="false">{{this.value}}</a>
-					<ul id="{{hyphenate this.value}}" class="collapse list-unstyled">
+					<a href="#{{hyphenate this.value}}" class="docs-category" data-toggle="collapse" aria-expanded="false">{{this.value}}</a>
+					<ul id="{{hyphenate this.value}}" class="docs-category-child collapse list-unstyled">
 						{{#each partials}}
 							{{#mdpartial this}}
 								<li class="{{type}}"><a href="#{{partialName}}">{{title}}</a></li>
@@ -32,31 +31,6 @@ title: Para - Documentation
 					</ul>
 				</li>
 			{{/each}}
-
-
-<!--			<li class="active">
-				<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
-				<ul class="collapse list-unstyled" id="homeSubmenu">
-					<li><a href="#">Home 1</a></li>
-					<li><a href="#">Home 2</a></li>
-					<li><a href="#">Home 3</a></li>
-				</ul>
-			</li>
-			<li>
-				<a href="#">About</a>
-				<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-				<ul class="collapse list-unstyled" id="pageSubmenu">
-					<li><a href="#">Page 1</a></li>
-					<li><a href="#">Page 2</a></li>
-					<li><a href="#">Page 3</a></li>
-				</ul>
-			</li>
-			<li>
-				<a href="#">Portfolio</a>
-			</li>
-			<li>
-				<a href="#">Contact</a>
-			</li>-->
 		</ul>
 
 		<ul class="list-unstyled visible-xs-block">
@@ -121,57 +95,45 @@ title: Para - Documentation
 
 		<!-- Main Content -->
 		<section id="docs" class="top-section">
-		<!--	<div class="container">
-				<div class="col-lg-3 hidden-md hidden-sm hidden-xs">
-					<nav id="sidebar">
-						{{!>sidenav}}
-					</nav>
-				</div>
-				<div class="col-lg-9">
-					<section id="content">-->
-						{{#eachPartial "**/*.md"}}
-							{{#mdpartial partialName partialData}}
-							<a id="{{partialName}}" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-							<article class="{{type}} img-rounded">
-								{{#if type}}
-									<a href="#">
-										<h2 class="img-rounded">
-											<code>
-												{{#is type "GET"}}
-													<span class="img-rounded label-success">{{type}}</span>
-												{{/is}}
-												{{#is type "PUT"}}
-													<span class="img-rounded label-warning">{{type}}</span>
-												{{/is}}
-												{{#is type "PATCH"}}
-													<span class="img-rounded label-default">{{type}}</span>
-												{{/is}}
-												{{#is type "POST"}}
-													<span class="img-rounded label-info">{{type}}</span>
-												{{/is}}
-												{{#is type "DELETE"}}
-													<span class="img-rounded label-danger">{{type}}</span>
-												{{/is}}
-												<span class="gray">
-													{{path}} {{#if beta}}<span class="label label-danger" title="This might change.">beta</span>{{/if}}
-												</span>
-											</code>
-											<span class="hidden-xs">{{title}}</span>
-										</h2>
-									</a>
-								{{else}}
-									<h2>{{title}}</h2>
-								{{/if}}
-								<section class="body {{#if type}}api-body{{/if}} img-rounded">
-									{{this.content}}
-								</section>
-							</article>
-							{{/mdpartial}}
-						{{/eachPartial}}
-		<!--			</section>
-				</div>
-			</div>
-		-->
+			{{#eachPartial "**/*.md"}}
+				{{#mdpartial partialName partialData}}
+				<a id="{{partialName}}" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+				<article class="{{type}} img-rounded">
+					{{#if type}}
+						<a href="#">
+							<h2 class="img-rounded">
+								<code>
+									{{#is type "GET"}}
+										<span class="img-rounded label-success">{{type}}</span>
+									{{/is}}
+									{{#is type "PUT"}}
+										<span class="img-rounded label-warning">{{type}}</span>
+									{{/is}}
+									{{#is type "PATCH"}}
+										<span class="img-rounded label-default">{{type}}</span>
+									{{/is}}
+									{{#is type "POST"}}
+										<span class="img-rounded label-info">{{type}}</span>
+									{{/is}}
+									{{#is type "DELETE"}}
+										<span class="img-rounded label-danger">{{type}}</span>
+									{{/is}}
+									<span class="gray">
+										{{path}} {{#if beta}}<span class="label label-danger" title="This might change.">beta</span>{{/if}}
+									</span>
+								</code>
+								<span class="hidden-xs">{{title}}</span>
+							</h2>
+						</a>
+					{{else}}
+						<h2>{{title}}</h2>
+					{{/if}}
+					<section class="body {{#if type}}api-body{{/if}} img-rounded">
+						{{this.content}}
+					</section>
+				</article>
+				{{/mdpartial}}
+			{{/eachPartial}}
 		</section>
 
 		<!-- Footer Content -->

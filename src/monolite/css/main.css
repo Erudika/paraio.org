@@ -98,11 +98,14 @@ a:focus {
 .navbar-custom .nav li a:hover,
 .navbar-custom .nav li a:focus,
 .navbar-custom .nav li.active,
+.nav>li>a:hover, .nav>li>a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
 	outline: 0;
-	color: white;
-	background-color: #66CCFF;
+	color: inherit;
+	background-color: inherit;
+	border-bottom: 4px solid #66CCFF;
+	padding-bottom: 15px;
 }
 
 .navbar-toggle {
@@ -260,6 +263,9 @@ pre.maven-coords {
 	}
 	body {
 		font-size: 1.4em;
+	}
+	#sidebar .sidebar-header {
+		padding: 11.5px !important;
 	}
 	pre {
 		font-size: 55%;
@@ -451,10 +457,10 @@ code {
 }
 
 #sidebar ul li a {
-	padding: 6px;
+	padding: 6px 12px;
 	font-size: 1em;
 	display: block;
-	color: white;
+	/*color: white;*/
 }
 
 #sidebar ul li a:hover {
@@ -462,12 +468,16 @@ code {
 	background: #444;
 }
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
-	color: #fff;
+a.docs-category[aria-expanded="true"] {
+	color: #66CCFF;
 	background: #444;
 }
 
-a[data-toggle="collapse"] {
+a.docs-category, .docs-category-child a, a[aria-expanded="true"] {
+	color: white;
+}
+
+a.docs-category[data-toggle="collapse"] {
 	position: relative;
 }
 

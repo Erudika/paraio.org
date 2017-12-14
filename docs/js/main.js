@@ -68,34 +68,34 @@ $.fn.extend({
 
 $(".intro-text").rotaterator({fadeSpeed: 150, pauseSpeed: 2000});
 
-function saveAuth(obj) {
+function saveSettings(obj) {
 	window.localStorage.setItem('para-docs', JSON.stringify(obj));
 };
-function loadAuth() {
+function loadSettings() {
 	return JSON.parse(window.localStorage.getItem('para-docs') || '{}');
 };
 function setTheme(t) {
 	var href, logohref, theme;
-	var opts = loadAuth();
+	var settings = loadSettings();
 	if (t) {
 		theme = t;
 	} else {
-		theme = opts.theme === 'light' ? 'dark' : 'light';
+		theme = settings.theme === 'light' ? 'dark' : 'light';
 	}
 	if (theme === 'light') {
 		href = "css/main.css";
 		logohref = "img/logo.svg";
-		opts.theme = 'light';
+		settings.theme = 'light';
 		$('#dark-theme').remove();
 		$("#theme-switch-btn").text("Dark Theme");
 	} else {
 		href = "css/dark.css";
 		logohref = "img/logodark.svg";
-		opts.theme = 'dark';
+		settings.theme = 'dark';
 		$("#theme-switch-btn").text("Light Theme");
 		$('#theme').after('<link href="/css/dark.css" rel="stylesheet" id="dark-theme">');
 	}
-	saveAuth(opts);
+	saveSettings(settings);
 	$('#logo').src = logohref;
 };
 
@@ -103,16 +103,32 @@ $("#theme-switch-btn").click(function () {
 	setTheme();
 });
 
-setTheme(loadAuth().theme);
+var settings = loadSettings();
 
-$(document).ready(function () {
-	$("#sidebar").mCustomScrollbar({
-		theme: "minimal"
-	});
+setTheme(settings.theme);
 
-	$('#sidebarCollapse').on('click', function () {
-		$('#sidebar, #content').toggleClass('active');
-		$('.collapse.in').toggleClass('in');
-		$('a[aria-expanded=true]').attr('aria-expanded', 'false');
-	});
+if (settings.expandedCategories) {
+	$(Object.keys(settings.expandedCategories).join(',')).collapse();
+}
+
+$("a.docs-category").click(function () {
+	if (!settings.expandedCategories) {
+		settings.expandedCategories = {};
+	}
+	if ($(this).attr("aria-expanded") === "false") {
+		settings.expandedCategories[$(this).attr("href")] = 1;
+	} else {
+		delete settings.expandedCategories[$(this).attr("href")];
+	}
+	saveSettings(settings);
+});
+
+$("#sidebar").mCustomScrollbar({
+	theme: "minimal"
+});
+
+$('#sidebarCollapse').on('click', function () {
+	$('#sidebar, #content').toggleClass('active');
+	$('.collapse.in').toggleClass('in');
+	$('a[aria-expanded=true]').attr('aria-expanded', 'false');
 });

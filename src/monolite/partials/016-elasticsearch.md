@@ -111,7 +111,8 @@ To activate "search after", append the `lastKey` query parameter to the search r
 GET /v1/users?limit=10000&sort=_docid&lastKey=835146458100404225
 ```
 **Important:** For consistent results when doing "search after" scrolling, set `pager.setSortby("_docid")`
-to sort on the `_docid` field.
+to sort on the `_docid` field. Additionally, there's a limit to the result window imposed by Elasticsearch
+of maximum 10000 documents. See the [docs for `index.max_result_window`](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings).
 
 The "search after" method works well for deep pagination or infinite scrolling or search results.
 The `lastKey` field is returned in the body of the response for each search query. It represents the `_docid` value
