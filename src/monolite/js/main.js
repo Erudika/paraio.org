@@ -101,6 +101,7 @@ function setTheme(t) {
 
 $("#theme-switch-btn").click(function () {
 	setTheme();
+	return false;
 });
 
 var settings = loadSettings();
@@ -123,7 +124,7 @@ $("a.docs-category").click(function () {
 	saveSettings(settings);
 });
 
-$(".wrapper").fadeIn(200);
+$(".wrapper").fadeIn(100);
 
 $("#sidebar").mCustomScrollbar({
 	theme: "minimal"

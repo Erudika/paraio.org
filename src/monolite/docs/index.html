@@ -2,143 +2,141 @@
 title: Para - Documentation
 ---
 
-<div class="wrapper">
-	<!-- Sidebar Holder -->
-	<nav id="sidebar">
-		<div class="sidebar-header">
-			<a class="navbar-brand" href="/">
-				<img src="/img/logo.svg" id="logo" width="171" height="89" alt="logo" class="img-responsive">
-			</a>
+<!-- Sidebar Holder -->
+<nav id="sidebar">
+	<div class="sidebar-header">
+		<a class="navbar-brand" href="/">
+			<img src="/img/logo.svg" id="logo" width="171" height="89" alt="logo" class="img-responsive">
+		</a>
+	</div>
+
+	<ul class="list-unstyled components">
+		{{#eachPartial "**/*.md"}}
+			{{#if category}}
+			{{else}}
+				<li><a href="#{{partialName}}" class="docs-category">{{title}}</a></li>
+			{{/if}}
+		{{/eachPartial}}
+
+		{{#each partialData.category}}
+			<li>
+				<a href="#{{hyphenate this.value}}" class="docs-category" data-toggle="collapse" aria-expanded="false">{{this.value}}</a>
+				<ul id="{{hyphenate this.value}}" class="docs-category-child collapse list-unstyled">
+					{{#each partials}}
+						{{#mdpartial this}}
+							<li class="{{type}}"><a href="#{{partialName}}">{{title}}</a></li>
+						{{/mdpartial}}
+					{{/each}}
+				</ul>
+			</li>
+		{{/each}}
+	</ul>
+
+	<ul class="list-unstyled visible-xs-block">
+		<!--  Navigation  -->
+		<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+		<li class="hidden">
+			<a href="/#page-top"></a>
+		</li>
+		<li>
+			<a href="/#download">Download</a>
+		</li>
+		<li>
+			<a href="https://console.paraio.org">Console</a>
+		</li>
+		<li>
+			<a href="/#about">About</a>
+		</li>
+	</ul>
+
+	<ul class="list-unstyled CTAs">
+		<li><a href="#" id="theme-switch-btn" class="btn btn-default">Dark Theme</a></li>
+	</ul>
+</nav>
+
+<!-- Page Content Holder -->
+<div id="content">
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+
+			<div class="navbar-header">
+				<button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn">
+					<i class="glyphicon glyphicon-menu-hamburger"></i>
+				</button>
+				<p id="docs-title">Para Docs</p>
+
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<!--  Navigation  -->
+					<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+					<li class="hidden">
+						<a href="/#page-top"></a>
+					</li>
+					<li>
+						<a href="/docs/"><b>Docs</b></a>
+					</li>
+					<li>
+						<a href="/#download">Download</a>
+					</li>
+					<li>
+						<a href="https://console.paraio.org">Console</a>
+					</li>
+					<li>
+						<a href="/#about">About</a>
+					</li>
+				</ul>
+			</div>
 		</div>
-
-		<ul class="list-unstyled components">
-			{{#eachPartial "**/*.md"}}
-				{{#if category}}
-				{{else}}
-					<li><a href="#{{partialName}}" class="docs-category">{{title}}</a></li>
-				{{/if}}
-			{{/eachPartial}}
-
-			{{#each partialData.category}}
-				<li>
-					<a href="#{{hyphenate this.value}}" class="docs-category" data-toggle="collapse" aria-expanded="false">{{this.value}}</a>
-					<ul id="{{hyphenate this.value}}" class="docs-category-child collapse list-unstyled">
-						{{#each partials}}
-							{{#mdpartial this}}
-								<li class="{{type}}"><a href="#{{partialName}}">{{title}}</a></li>
-							{{/mdpartial}}
-						{{/each}}
-					</ul>
-				</li>
-			{{/each}}
-		</ul>
-
-		<ul class="list-unstyled visible-xs-block">
-			<!--  Navigation  -->
-			<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-			<li class="hidden">
-				<a href="/#page-top"></a>
-			</li>
-			<li>
-				<a href="/#download">Download</a>
-			</li>
-			<li>
-				<a href="https://console.paraio.org">Console</a>
-			</li>
-			<li>
-				<a href="/#about">About</a>
-			</li>
-		</ul>
-
-		<ul class="list-unstyled CTAs">
-			<li><a href="#" id="theme-switch-btn" class="btn btn-default">Dark Theme</a></li>
-		</ul>
 	</nav>
 
-	<!-- Page Content Holder -->
-	<div id="content">
+	<!-- Main Content -->
+	<section id="docs" class="top-section">
+		{{#eachPartial "**/*.md"}}
+			{{#mdpartial partialName partialData}}
+			<a id="{{partialName}}" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="{{type}} img-rounded">
+				{{#if type}}
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+								{{#is type "GET"}}
+									<span class="img-rounded label-success">{{type}}</span>
+								{{/is}}
+								{{#is type "PUT"}}
+									<span class="img-rounded label-warning">{{type}}</span>
+								{{/is}}
+								{{#is type "PATCH"}}
+									<span class="img-rounded label-default">{{type}}</span>
+								{{/is}}
+								{{#is type "POST"}}
+									<span class="img-rounded label-info">{{type}}</span>
+								{{/is}}
+								{{#is type "DELETE"}}
+									<span class="img-rounded label-danger">{{type}}</span>
+								{{/is}}
+								<span class="gray">
+									{{path}} {{#if beta}}<span class="label label-danger" title="This might change.">beta</span>{{/if}}
+								</span>
+							</code>
+							<span class="hidden-xs">{{title}}</span>
+						</h2>
+					</a>
+				{{else}}
+					<h2>{{title}}</h2>
+				{{/if}}
+				<section class="body {{#if type}}api-body{{/if}} img-rounded">
+					{{this.content}}
+				</section>
+			</article>
+			{{/mdpartial}}
+		{{/eachPartial}}
+	</section>
 
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-
-				<div class="navbar-header">
-					<button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn">
-						<i class="glyphicon glyphicon-menu-hamburger"></i>
-					</button>
-					<p id="docs-title">Para Docs</p>
-
-				</div>
-
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right">
-						<!--  Navigation  -->
-						<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-						<li class="hidden">
-							<a href="/#page-top"></a>
-						</li>
-						<li>
-							<a href="/docs/"><b>Docs</b></a>
-						</li>
-						<li>
-							<a href="/#download">Download</a>
-						</li>
-						<li>
-							<a href="https://console.paraio.org">Console</a>
-						</li>
-						<li>
-							<a href="/#about">About</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-
-		<!-- Main Content -->
-		<section id="docs" class="top-section">
-			{{#eachPartial "**/*.md"}}
-				{{#mdpartial partialName partialData}}
-				<a id="{{partialName}}" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="{{type}} img-rounded">
-					{{#if type}}
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-									{{#is type "GET"}}
-										<span class="img-rounded label-success">{{type}}</span>
-									{{/is}}
-									{{#is type "PUT"}}
-										<span class="img-rounded label-warning">{{type}}</span>
-									{{/is}}
-									{{#is type "PATCH"}}
-										<span class="img-rounded label-default">{{type}}</span>
-									{{/is}}
-									{{#is type "POST"}}
-										<span class="img-rounded label-info">{{type}}</span>
-									{{/is}}
-									{{#is type "DELETE"}}
-										<span class="img-rounded label-danger">{{type}}</span>
-									{{/is}}
-									<span class="gray">
-										{{path}} {{#if beta}}<span class="label label-danger" title="This might change.">beta</span>{{/if}}
-									</span>
-								</code>
-								<span class="hidden-xs">{{title}}</span>
-							</h2>
-						</a>
-					{{else}}
-						<h2>{{title}}</h2>
-					{{/if}}
-					<section class="body {{#if type}}api-body{{/if}} img-rounded">
-						{{this.content}}
-					</section>
-				</article>
-				{{/mdpartial}}
-			{{/eachPartial}}
-		</section>
-
-		<!-- Footer Content -->
-		{{>footer}}
-	</div>
+	<!-- Footer Content -->
+	{{>footer}}
 </div>
 
 

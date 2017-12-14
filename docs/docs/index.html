@@ -32,234 +32,234 @@
 	</head>
 	<body>
 		<!-- Main Content -->
-		
+		<div class="wrapper">
+			
 
-<div class="wrapper">
-	<!-- Sidebar Holder -->
-	<nav id="sidebar">
-		<div class="sidebar-header">
-			<a class="navbar-brand" href="/">
-				<img src="/img/logo.svg" id="logo" width="171" height="89" alt="logo" class="img-responsive">
-			</a>
+<!-- Sidebar Holder -->
+<nav id="sidebar">
+	<div class="sidebar-header">
+		<a class="navbar-brand" href="/">
+			<img src="/img/logo.svg" id="logo" width="171" height="89" alt="logo" class="img-responsive">
+		</a>
+	</div>
+
+	<ul class="list-unstyled components">
+				<li><a href="#001-intro" class="docs-category">Introduction</a></li>
+
+			<li>
+				<a href="#Getting-Started" class="docs-category" data-toggle="collapse" aria-expanded="false">Getting Started</a>
+				<ul id="Getting-Started" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#002-standalone">Standalone mode</a></li>
+							<li class=""><a href="#003-maven">Maven</a></li>
+							<li class=""><a href="#004-paraobject">The ParaObject interface</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#Configuration" class="docs-category" data-toggle="collapse" aria-expanded="false">Configuration</a>
+				<ul id="Configuration" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#005-config">The Config</a></li>
+							<li class=""><a href="#006-modules">Modules</a></li>
+							<li class=""><a href="#007-env">Environment</a></li>
+							<li class=""><a href="#008-plugins">Plugins</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#Core-classes" class="docs-category" data-toggle="collapse" aria-expanded="false">Core classes</a>
+				<ul id="Core-classes" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#009-core">Core classes</a></li>
+							<li class=""><a href="#010-userdefined">User-defined classes</a></li>
+							<li class=""><a href="#011-annotations">Annotations</a></li>
+							<li class=""><a href="#011-apps">Apps</a></li>
+							<li class=""><a href="#011-permissions">Resource permissions</a></li>
+							<li class=""><a href="#011-validations">Validations</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#Persistence" class="docs-category" data-toggle="collapse" aria-expanded="false">Persistence</a>
+				<ul id="Persistence" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#012-dao">DAO interface</a></li>
+							<li class=""><a href="#013-cassandra">Cassandra</a></li>
+							<li class=""><a href="#013-dynamodb">DynamoDB</a></li>
+							<li class=""><a href="#013-mongodb">MongoDB</a></li>
+							<li class=""><a href="#014-h2">H2 DB</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#Search" class="docs-category" data-toggle="collapse" aria-expanded="false">Search</a>
+				<ul id="Search" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#015-search">Search interface</a></li>
+							<li class=""><a href="#016-elasticsearch">Elasticsearch</a></li>
+							<li class=""><a href="#016-lucene">Lucene</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#Cache" class="docs-category" data-toggle="collapse" aria-expanded="false">Cache</a>
+				<ul id="Cache" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#017-cache">Cache interface</a></li>
+							<li class=""><a href="#018-caffeine">Caffeine</a></li>
+							<li class=""><a href="#018-hazelcast">Hazelcast</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#Linked-objects" class="docs-category" data-toggle="collapse" aria-expanded="false">Linked objects</a>
+				<ul id="Linked-objects" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#019-one-to-many">One-to-many</a></li>
+							<li class=""><a href="#020-many-to-many">Many-to-many</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#IoT" class="docs-category" data-toggle="collapse" aria-expanded="false">IoT</a>
+				<ul id="IoT" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#021-iot-aws">AWS IoT</a></li>
+							<li class=""><a href="#021-iot-azure">Azure IoT</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#I18n" class="docs-category" data-toggle="collapse" aria-expanded="false">I18n</a>
+				<ul id="I18n" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#021-translations">Translations</a></li>
+							<li class=""><a href="#022-languages">Languages</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#Utilities" class="docs-category" data-toggle="collapse" aria-expanded="false">Utilities</a>
+				<ul id="Utilities" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#023-filters">Filters</a></li>
+							<li class=""><a href="#023-utilities">Misc. utilities</a></li>
+							<li class=""><a href="#024-humantime">HumanTime</a></li>
+							<li class=""><a href="#025-pager">Pager</a></li>
+							<li class=""><a href="#026-email">Email</a></li>
+							<li class=""><a href="#027-queue">Queue</a></li>
+							<li class=""><a href="#028-storage">Storage</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#Security" class="docs-category" data-toggle="collapse" aria-expanded="false">Security</a>
+				<ul id="Security" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#029-passwords">Simple authentication</a></li>
+							<li class=""><a href="#030-ldap">LDAP support</a></li>
+							<li class=""><a href="#030-oauth">OAuth 2.0 support</a></li>
+							<li class=""><a href="#030-openid">OpenID support</a></li>
+							<li class=""><a href="#031-facebook">Facebook support</a></li>
+							<li class=""><a href="#031-github">GitHub support</a></li>
+							<li class=""><a href="#031-google">Google support</a></li>
+							<li class=""><a href="#031-linkedin">LinkedIn support</a></li>
+							<li class=""><a href="#031-microsoft">Microsoft support</a></li>
+							<li class=""><a href="#031-twitter">Twitter support</a></li>
+							<li class=""><a href="#032-roles">Groups and roles</a></li>
+							<li class=""><a href="#033-csrf">CSRF protection</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#REST-API" class="docs-category" data-toggle="collapse" aria-expanded="false">REST API</a>
+				<ul id="REST-API" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#033-restauth">Authentication</a></li>
+							<li class=""><a href="#034-api-intro">API methods</a></li>
+							<li class="POST"><a href="#034-api-jwt-signin">Sign in (JWT)</a></li>
+							<li class="GET"><a href="#035-api-jwt-refresh">Token refresh (JWT)</a></li>
+							<li class="DELETE"><a href="#035-api-jwt-revoke">Revoke all tokens (JWT)</a></li>
+							<li class="POST"><a href="#036-api-create">Create object</a></li>
+							<li class="GET"><a href="#037-api-read">Read object</a></li>
+							<li class="PUT"><a href="#038-api-overwrite">Overwrite object</a></li>
+							<li class="PATCH"><a href="#038-api-update">Update object</a></li>
+							<li class="DELETE"><a href="#039-api-delete">Delete object</a></li>
+							<li class="POST"><a href="#040-api-batch-create">Batch create</a></li>
+							<li class="GET"><a href="#041-api-batch-read">Batch read</a></li>
+							<li class="PATCH"><a href="#042-api-batch-update">Batch update</a></li>
+							<li class="DELETE"><a href="#043-api-batch-delete">Batch delete</a></li>
+							<li class="GET"><a href="#044-api-basicsearch">Basic search</a></li>
+							<li class="GET"><a href="#045-api-search">Advanced search</a></li>
+							<li class="GET"><a href="#046-api-links-get">Find linked objects</a></li>
+							<li class="POST"><a href="#047-api-links-link">Link objects</a></li>
+							<li class="DELETE"><a href="#048-api-links-unlink">Unlink objects</a></li>
+							<li class="PUT"><a href="#049-api-constraints-add">Add constraint</a></li>
+							<li class="GET"><a href="#049-api-constraints-get">List constraints</a></li>
+							<li class="DELETE"><a href="#049-api-constraints-rem">Remove constraint</a></li>
+							<li class="GET"><a href="#049-api-id">Read by id</a></li>
+							<li class="GET"><a href="#049-api-me">Me object</a></li>
+							<li class="GET"><a href="#049-api-types-list">List types</a></li>
+							<li class="GET"><a href="#050-api-permissions-check">Check permission</a></li>
+							<li class="GET"><a href="#050-api-permissions-get">List permissions</a></li>
+							<li class="PUT"><a href="#050-api-permissions-grant">Grant permissions</a></li>
+							<li class="DELETE"><a href="#050-api-permissions-revoke">Revoke permissions</a></li>
+							<li class="GET"><a href="#050-api-settings-get">List custom settings</a></li>
+							<li class="PUT"><a href="#050-api-settings-put">Add custom setting</a></li>
+							<li class="DELETE"><a href="#050-api-settings-rem">Remove custom setting</a></li>
+							<li class="GET"><a href="#050-api-setup-child">Child app setup</a></li>
+							<li class="GET"><a href="#050-api-setup">Initial setup</a></li>
+							<li class="POST"><a href="#051-api-newkeys">Reset API keys</a></li>
+							<li class="GET"><a href="#052-api-utils">Utilities</a></li>
+				</ul>
+			</li>
+	</ul>
+
+	<ul class="list-unstyled visible-xs-block">
+		<!--  Navigation  -->
+		<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+		<li class="hidden">
+			<a href="/#page-top"></a>
+		</li>
+		<li>
+			<a href="/#download">Download</a>
+		</li>
+		<li>
+			<a href="https://console.paraio.org">Console</a>
+		</li>
+		<li>
+			<a href="/#about">About</a>
+		</li>
+	</ul>
+
+	<ul class="list-unstyled CTAs">
+		<li><a href="#" id="theme-switch-btn" class="btn btn-default">Dark Theme</a></li>
+	</ul>
+</nav>
+
+<!-- Page Content Holder -->
+<div id="content">
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+
+			<div class="navbar-header">
+				<button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn">
+					<i class="glyphicon glyphicon-menu-hamburger"></i>
+				</button>
+				<p id="docs-title">Para Docs</p>
+
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<!--  Navigation  -->
+					<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+					<li class="hidden">
+						<a href="/#page-top"></a>
+					</li>
+					<li>
+						<a href="/docs/"><b>Docs</b></a>
+					</li>
+					<li>
+						<a href="/#download">Download</a>
+					</li>
+					<li>
+						<a href="https://console.paraio.org">Console</a>
+					</li>
+					<li>
+						<a href="/#about">About</a>
+					</li>
+				</ul>
+			</div>
 		</div>
-
-		<ul class="list-unstyled components">
-					<li><a href="#001-intro" class="docs-category">Introduction</a></li>
-
-				<li>
-					<a href="#Getting-Started" class="docs-category" data-toggle="collapse" aria-expanded="false">Getting Started</a>
-					<ul id="Getting-Started" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#002-standalone">Standalone mode</a></li>
-								<li class=""><a href="#003-maven">Maven</a></li>
-								<li class=""><a href="#004-paraobject">The ParaObject interface</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#Configuration" class="docs-category" data-toggle="collapse" aria-expanded="false">Configuration</a>
-					<ul id="Configuration" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#005-config">The Config</a></li>
-								<li class=""><a href="#006-modules">Modules</a></li>
-								<li class=""><a href="#007-env">Environment</a></li>
-								<li class=""><a href="#008-plugins">Plugins</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#Core-classes" class="docs-category" data-toggle="collapse" aria-expanded="false">Core classes</a>
-					<ul id="Core-classes" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#009-core">Core classes</a></li>
-								<li class=""><a href="#010-userdefined">User-defined classes</a></li>
-								<li class=""><a href="#011-annotations">Annotations</a></li>
-								<li class=""><a href="#011-apps">Apps</a></li>
-								<li class=""><a href="#011-permissions">Resource permissions</a></li>
-								<li class=""><a href="#011-validations">Validations</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#Persistence" class="docs-category" data-toggle="collapse" aria-expanded="false">Persistence</a>
-					<ul id="Persistence" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#012-dao">DAO interface</a></li>
-								<li class=""><a href="#013-cassandra">Cassandra</a></li>
-								<li class=""><a href="#013-dynamodb">DynamoDB</a></li>
-								<li class=""><a href="#013-mongodb">MongoDB</a></li>
-								<li class=""><a href="#014-h2">H2 DB</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#Search" class="docs-category" data-toggle="collapse" aria-expanded="false">Search</a>
-					<ul id="Search" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#015-search">Search interface</a></li>
-								<li class=""><a href="#016-elasticsearch">Elasticsearch</a></li>
-								<li class=""><a href="#016-lucene">Lucene</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#Cache" class="docs-category" data-toggle="collapse" aria-expanded="false">Cache</a>
-					<ul id="Cache" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#017-cache">Cache interface</a></li>
-								<li class=""><a href="#018-caffeine">Caffeine</a></li>
-								<li class=""><a href="#018-hazelcast">Hazelcast</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#Linked-objects" class="docs-category" data-toggle="collapse" aria-expanded="false">Linked objects</a>
-					<ul id="Linked-objects" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#019-one-to-many">One-to-many</a></li>
-								<li class=""><a href="#020-many-to-many">Many-to-many</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#IoT" class="docs-category" data-toggle="collapse" aria-expanded="false">IoT</a>
-					<ul id="IoT" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#021-iot-aws">AWS IoT</a></li>
-								<li class=""><a href="#021-iot-azure">Azure IoT</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#I18n" class="docs-category" data-toggle="collapse" aria-expanded="false">I18n</a>
-					<ul id="I18n" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#021-translations">Translations</a></li>
-								<li class=""><a href="#022-languages">Languages</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#Utilities" class="docs-category" data-toggle="collapse" aria-expanded="false">Utilities</a>
-					<ul id="Utilities" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#023-filters">Filters</a></li>
-								<li class=""><a href="#023-utilities">Misc. utilities</a></li>
-								<li class=""><a href="#024-humantime">HumanTime</a></li>
-								<li class=""><a href="#025-pager">Pager</a></li>
-								<li class=""><a href="#026-email">Email</a></li>
-								<li class=""><a href="#027-queue">Queue</a></li>
-								<li class=""><a href="#028-storage">Storage</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#Security" class="docs-category" data-toggle="collapse" aria-expanded="false">Security</a>
-					<ul id="Security" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#029-passwords">Simple authentication</a></li>
-								<li class=""><a href="#030-ldap">LDAP support</a></li>
-								<li class=""><a href="#030-oauth">OAuth 2.0 support</a></li>
-								<li class=""><a href="#030-openid">OpenID support</a></li>
-								<li class=""><a href="#031-facebook">Facebook support</a></li>
-								<li class=""><a href="#031-github">GitHub support</a></li>
-								<li class=""><a href="#031-google">Google support</a></li>
-								<li class=""><a href="#031-linkedin">LinkedIn support</a></li>
-								<li class=""><a href="#031-microsoft">Microsoft support</a></li>
-								<li class=""><a href="#031-twitter">Twitter support</a></li>
-								<li class=""><a href="#032-roles">Groups and roles</a></li>
-								<li class=""><a href="#033-csrf">CSRF protection</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#REST-API" class="docs-category" data-toggle="collapse" aria-expanded="false">REST API</a>
-					<ul id="REST-API" class="docs-category-child collapse list-unstyled">
-								<li class=""><a href="#033-restauth">Authentication</a></li>
-								<li class=""><a href="#034-api-intro">API methods</a></li>
-								<li class="POST"><a href="#034-api-jwt-signin">Sign in (JWT)</a></li>
-								<li class="GET"><a href="#035-api-jwt-refresh">Token refresh (JWT)</a></li>
-								<li class="DELETE"><a href="#035-api-jwt-revoke">Revoke all tokens (JWT)</a></li>
-								<li class="POST"><a href="#036-api-create">Create object</a></li>
-								<li class="GET"><a href="#037-api-read">Read object</a></li>
-								<li class="PUT"><a href="#038-api-overwrite">Overwrite object</a></li>
-								<li class="PATCH"><a href="#038-api-update">Update object</a></li>
-								<li class="DELETE"><a href="#039-api-delete">Delete object</a></li>
-								<li class="POST"><a href="#040-api-batch-create">Batch create</a></li>
-								<li class="GET"><a href="#041-api-batch-read">Batch read</a></li>
-								<li class="PATCH"><a href="#042-api-batch-update">Batch update</a></li>
-								<li class="DELETE"><a href="#043-api-batch-delete">Batch delete</a></li>
-								<li class="GET"><a href="#044-api-basicsearch">Basic search</a></li>
-								<li class="GET"><a href="#045-api-search">Advanced search</a></li>
-								<li class="GET"><a href="#046-api-links-get">Find linked objects</a></li>
-								<li class="POST"><a href="#047-api-links-link">Link objects</a></li>
-								<li class="DELETE"><a href="#048-api-links-unlink">Unlink objects</a></li>
-								<li class="PUT"><a href="#049-api-constraints-add">Add constraint</a></li>
-								<li class="GET"><a href="#049-api-constraints-get">List constraints</a></li>
-								<li class="DELETE"><a href="#049-api-constraints-rem">Remove constraint</a></li>
-								<li class="GET"><a href="#049-api-id">Read by id</a></li>
-								<li class="GET"><a href="#049-api-me">Me object</a></li>
-								<li class="GET"><a href="#049-api-types-list">List types</a></li>
-								<li class="GET"><a href="#050-api-permissions-check">Check permission</a></li>
-								<li class="GET"><a href="#050-api-permissions-get">List permissions</a></li>
-								<li class="PUT"><a href="#050-api-permissions-grant">Grant permissions</a></li>
-								<li class="DELETE"><a href="#050-api-permissions-revoke">Revoke permissions</a></li>
-								<li class="GET"><a href="#050-api-settings-get">List custom settings</a></li>
-								<li class="PUT"><a href="#050-api-settings-put">Add custom setting</a></li>
-								<li class="DELETE"><a href="#050-api-settings-rem">Remove custom setting</a></li>
-								<li class="GET"><a href="#050-api-setup-child">Child app setup</a></li>
-								<li class="GET"><a href="#050-api-setup">Initial setup</a></li>
-								<li class="POST"><a href="#051-api-newkeys">Reset API keys</a></li>
-								<li class="GET"><a href="#052-api-utils">Utilities</a></li>
-					</ul>
-				</li>
-		</ul>
-
-		<ul class="list-unstyled visible-xs-block">
-			<!--  Navigation  -->
-			<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-			<li class="hidden">
-				<a href="/#page-top"></a>
-			</li>
-			<li>
-				<a href="/#download">Download</a>
-			</li>
-			<li>
-				<a href="https://console.paraio.org">Console</a>
-			</li>
-			<li>
-				<a href="/#about">About</a>
-			</li>
-		</ul>
-
-		<ul class="list-unstyled CTAs">
-			<li><a href="#" id="theme-switch-btn" class="btn btn-default">Dark Theme</a></li>
-		</ul>
 	</nav>
 
-	<!-- Page Content Holder -->
-	<div id="content">
-
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-
-				<div class="navbar-header">
-					<button type="button" id="sidebarCollapse" class="btn btn-default navbar-btn">
-						<i class="glyphicon glyphicon-menu-hamburger"></i>
-					</button>
-					<p id="docs-title">Para Docs</p>
-
-				</div>
-
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right">
-						<!--  Navigation  -->
-						<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-						<li class="hidden">
-							<a href="/#page-top"></a>
-						</li>
-						<li>
-							<a href="/docs/"><b>Docs</b></a>
-						</li>
-						<li>
-							<a href="/#download">Download</a>
-						</li>
-						<li>
-							<a href="https://console.paraio.org">Console</a>
-						</li>
-						<li>
-							<a href="/#about">About</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-
-		<!-- Main Content -->
-		<section id="docs" class="top-section">
-				<a id="001-intro" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Introduction</h2>
-					<section class="body  img-rounded">
-						<p>Para is a flexible backend service, created as an open-source project from the very beginning, in 2013.
+	<!-- Main Content -->
+	<section id="docs" class="top-section">
+			<a id="001-intro" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Introduction</h2>
+				<section class="body  img-rounded">
+					<p>Para is a flexible backend service, created as an open-source project from the very beginning, in 2013.
 It was born out of our need to have a robust system which would allow us to persist objects easily to anything -
 RDBMS, NoSQL and in-memory databases. We needed a simple solution with an API which would scale well and provide a
 solid foundation for our future projects.</p>
@@ -381,13 +381,13 @@ Two WAR files will be generated in total - the fat one is a bit bigger in size.<
 <pre><code class="lang-sh">$ mvn spring-boot:run
 </code></pre>
 
-					</section>
-				</article>
-				<a id="002-standalone" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Standalone mode</h2>
-					<section class="body  img-rounded">
-						<p>There are two ways to run Para as a standalone server. The first one is by downloading the executable WAR file and executing it:</p>
+				</section>
+			</article>
+			<a id="002-standalone" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Standalone mode</h2>
+				<section class="body  img-rounded">
+					<p>There are two ways to run Para as a standalone server. The first one is by downloading the executable WAR file and executing it:</p>
 <pre><code class="lang-bash">java -jar para-X.Y.Z.war
 </code></pre>
 <p>The WAR contains an embedded Jetty server and bundles together all the necessary libraries. This is the simplest and
@@ -424,13 +424,13 @@ to <code>ROOT.war</code> before deploying. See <a href="#005-config">the Config<
 <p>Check the <a href="https://github.com/erudika/para/releases">releases page</a> for the latest WAR package.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="003-maven" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Maven</h2>
-					<section class="body  img-rounded">
-						<p>Para is hosted on Maven Central. To add it to your project just include this into your <code>pom.xml</code>:</p>
+				</section>
+			</article>
+			<a id="003-maven" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Maven</h2>
+				<section class="body  img-rounded">
+					<p>Para is hosted on Maven Central. To add it to your project just include this into your <code>pom.xml</code>:</p>
 <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>para-server<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
@@ -478,13 +478,13 @@ Here’s a simple diagram of this architecture:</p>
 <a href="/javadocs-server/" class="btn btn-default">para-server</a> &nbsp;
 <a href="/javadocs-client/" class="btn btn-default">para-client</a></p>
 
-					</section>
-				</article>
-				<a id="004-paraobject" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>The ParaObject interface</h2>
-					<section class="body  img-rounded">
-						<p>All domain classes in Para implement the <code>ParaObject</code> interface which gives objects basic common properties like
+				</section>
+			</article>
+			<a id="004-paraobject" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>The ParaObject interface</h2>
+				<section class="body  img-rounded">
+					<p>All domain classes in Para implement the <code>ParaObject</code> interface which gives objects basic common properties like
 <code>id</code>, <code>timestamp</code>, <code>name</code>, etc. Let’s say you have a plain old Java object like this:</p>
 <pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>{
     <span class="hljs-keyword">public</span> String name;
@@ -562,13 +562,13 @@ of objects that change very often, for example. Also some objects my be hidden f
 flag. And finally you can turn off persistence completely with <code>stored: false</code> and thus have objects that
 live only in memory (and search index) but are never stored in the database.</p>
 
-					</section>
-				</article>
-				<a id="005-config" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>The Config</h2>
-					<section class="body  img-rounded">
-						<p>Once deployed, Para will initialize itself by loading the default configuration file <code>reference.conf</code>.
+				</section>
+			</article>
+			<a id="005-config" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>The Config</h2>
+				<section class="body  img-rounded">
+					<p>Once deployed, Para will initialize itself by loading the default configuration file <code>reference.conf</code>.
 To load your own configuration you need to set one of the following system properties:</p>
 <ul>
 <li><code>config.resource</code> specifies a resource name - not a basename, i.e. ‘application.conf’ and not ‘application’</li>
@@ -763,13 +763,13 @@ This is important for securing your server because this secret key is used for s
 For more information about how it works, see the README for it.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="006-modules" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Modules</h2>
-					<section class="body  img-rounded">
-						<p>In the <code>para-server</code> package, there are several core modules:</p>
+				</section>
+			</article>
+			<a id="006-modules" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Modules</h2>
+				<section class="body  img-rounded">
+					<p>In the <code>para-server</code> package, there are several core modules:</p>
 <ul>
 <li><code>PersistenceModule</code> - defines the core persistence class implementation</li>
 <li><code>SearchModule</code> - defines the core search class implementation</li>
@@ -818,13 +818,13 @@ Para.destroy();
 <p>Para uses <a href="https://code.google.com/p/google-guice/">Google Guice</a> as its module manager and DI system.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="007-env" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Environment</h2>
-					<section class="body  img-rounded">
-						<p><code>para.env</code> is an important configuration property that turns features on and off. There are three main
+				</section>
+			</article>
+			<a id="007-env" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Environment</h2>
+				<section class="body  img-rounded">
+					<p><code>para.env</code> is an important configuration property that turns features on and off. There are three main
 values for it - <code>embedded</code>, <code>development</code>, <code>production</code>, but you can define more.</p>
 <p>When you are in <code>embedded</code> mode Para will use <strong>H2</strong> as a database and pure <strong>Lucene</strong> as a search engine.
 This is the simplest way to get started with Para as you don’t need to configure anything.</p>
@@ -853,13 +853,13 @@ or run it locally.</p>
 </table>
 
 
-					</section>
-				</article>
-				<a id="008-plugins" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Plugins</h2>
-					<section class="body  img-rounded">
-						<p>Para will look for various plugins like <code>IOListener</code>s, <code>CustomResourceHandler</code>s, <code>DAO</code>s etc, on startup.
+				</section>
+			</article>
+			<a id="008-plugins" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Plugins</h2>
+				<section class="body  img-rounded">
+					<p>Para will look for various plugins like <code>IOListener</code>s, <code>CustomResourceHandler</code>s, <code>DAO</code>s etc, on startup.
 The folder in which plugins JARs should be placed is <code>./lib/</code>, by default, but it can be configured like so:</p>
 <pre><code>para.plugin_folder = <span class="hljs-string">"plugins/"</span>
 </code></pre><h3 id="-dao-search-and-cache-plugins"><code>DAO</code>, <code>Search</code> and <code>Cache</code> plugins</h3>
@@ -970,13 +970,13 @@ of your custom resource handler class. On startup Para will load these and regis
 </code></pre>
 <p>You can use <code>@Inject</code> in your custom handlers to inject any object managed by Para.</p>
 
-					</section>
-				</article>
-				<a id="009-core" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Core classes</h2>
-					<section class="body  img-rounded">
-						<p>In the package <code>com.erudika.para.core</code> there are a number of core domain classes that are used throughout Para.
+				</section>
+			</article>
+			<a id="009-core" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Core classes</h2>
+				<section class="body  img-rounded">
+					<p>In the package <code>com.erudika.para.core</code> there are a number of core domain classes that are used throughout Para.
 These are common classes like <code>User</code> and <code>App</code> which you can use in you application directly or extend them.
 You can use them for your objects but you’re always free to create your own. To do that, simply <code>POST</code> a new object
 with <code>type: mytype</code> through the API and your new type will be automatically registered.</p>
@@ -1007,13 +1007,13 @@ Voting is useful for many application which require sorting by user votes. When 
 <code>Vote</code> is created to store the vote in the database. Users have a configurable time window to amend their vote, they can
 no longer vote on that particular object.</p>
 
-					</section>
-				</article>
-				<a id="010-userdefined" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>User-defined classes</h2>
-					<section class="body  img-rounded">
-						<p>Let’s say you have a class <code>Article</code> in your application that you wish to persist. You first implement the <code>ParaObject</code>
+				</section>
+			</article>
+			<a id="010-userdefined" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>User-defined classes</h2>
+				<section class="body  img-rounded">
+					<p>Let’s say you have a class <code>Article</code> in your application that you wish to persist. You first implement the <code>ParaObject</code>
 interface, then add a few data fields to it. Implementing the interface is trivial as the basic functionality of
 the required methods is already implemented in the <code>CoreUtils</code>.</p>
 <p>You need to specify which fields you want to be saved by adding the <code>@Stored</code> annotation. Additionally, you can add
@@ -1086,13 +1086,13 @@ API, containing the <code>author</code> field we can do a request like this:</p>
 </code></pre><p>Note that we have <code>q=properties.author:...</code> instead of <code>q=author:...</code>. This is due to the fact that custom fields are
 stored in Para using a nested <code>Map</code> called <code>properties</code> (see the <code>Sysprop</code> class).</p>
 
-					</section>
-				</article>
-				<a id="011-annotations" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Annotations</h2>
-					<section class="body  img-rounded">
-						<p>Para uses annotations to mark what attributes of a class need to be saved. There are several annotations that Para uses
+				</section>
+			</article>
+			<a id="011-annotations" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Annotations</h2>
+				<section class="body  img-rounded">
+					<p>Para uses annotations to mark what attributes of a class need to be saved. There are several annotations that Para uses
 but the two main ones are <code>@Stored</code> and <code>@Locked</code>.</p>
 <p><code>@Stored</code> tell Para that an attribute needs to be persisted but
 that field should not be declared as <code>transient</code> otherwise it will be skipped.</p>
@@ -1101,13 +1101,13 @@ attributes that are read-only like <code>type</code> and <code>id</code>. These 
 they will be skipped.</p>
 <p><code>@Cached</code> is used internally by Para for caching and you don’t need to used it in your projects.</p>
 
-					</section>
-				</article>
-				<a id="011-apps" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Apps</h2>
-					<section class="body  img-rounded">
-						<p>Apps allow you to have separate namespaces and data models for different purposes. Each app lives in its own separate
+				</section>
+			</article>
+			<a id="011-apps" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Apps</h2>
+				<section class="body  img-rounded">
+					<p>Apps allow you to have separate namespaces and data models for different purposes. Each app lives in its own separate
 database table and is independent from apps.</p>
 <p>Each app has a unique identifier, like “my-custom-app”. When an object is created, Para will attach the app identifier
 to it automatically. Apps also have a set of data types, as set of permissions and validation constraints.
@@ -1148,13 +1148,13 @@ endpoints <code>/facebook_auth?appid=myapp</code>, <code>/github_auth?appid=myap
 The other way of authenticating users is through the JWT sign in API which requires an OAuth access token and doesn’t
 require stored OAuth credentials - these are not even checked because we are supplied with a ready-to-use token.</p>
 
-					</section>
-				</article>
-				<a id="011-permissions" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Resource permissions</h2>
-					<section class="body  img-rounded">
-						<p>When creating new users, we usually want to specify which resources they can access. This is why we added a few methods
+				</section>
+			</article>
+			<a id="011-permissions" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Resource permissions</h2>
+				<section class="body  img-rounded">
+					<p>When creating new users, we usually want to specify which resources they can access. This is why we added a few methods
 for adding and removing resource permissions. Each app can have any number of users and each user can have a set of
 permissions for a given resource. Resources are identified by name, for example the <code>_batch</code> resource would represent
 requests going to <code>/v1/_batch</code>.</p>
@@ -1221,13 +1221,13 @@ except their own object and child objects, unless given explicit permission to d
 app.isAllowedTo(<span class="hljs-string">"1"</span>, <span class="hljs-string">"admin"</span>, <span class="hljs-string">"GET"</span>);
 </code></pre>
 
-					</section>
-				</article>
-				<a id="011-validations" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Validations</h2>
-					<section class="body  img-rounded">
-						<p>Para supports JSR-303 validation annotations and also allows you to define validation constraints in two different ways.
+				</section>
+			</article>
+			<a id="011-validations" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Validations</h2>
+				<section class="body  img-rounded">
+					<p>Para supports JSR-303 validation annotations and also allows you to define validation constraints in two different ways.
 One way is to attach annotations to fields in Java classes. The other way is by using the constraints API to add
 validation constraints to any object, be it core or user-defined. This method is more flexible as it allows you to
 validate any property of any object.</p>
@@ -1291,13 +1291,13 @@ easily be integrated with other client-side validators.</p>
 <p>Para uses <a href="http://hibernate.org/validator/">Hibernate Validator</a> for data validation.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="012-dao" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>DAO interface</h2>
-					<section class="body  img-rounded">
-						<p>The <code>DAO</code> interface declares the following methods:</p>
+				</section>
+			</article>
+			<a id="012-dao" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>DAO interface</h2>
+				<section class="body  img-rounded">
+					<p>The <code>DAO</code> interface declares the following methods:</p>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -1322,13 +1322,13 @@ easily be integrated with other client-side validators.</p>
 constraint validation.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="013-cassandra" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Cassandra</h2>
-					<section class="body  img-rounded">
-						<p>The Cassandra plugin adds <a href="https://github.com/Erudika/para-dao-cassandra">support for Apache Cassandra</a>.
+				</section>
+			</article>
+			<a id="013-cassandra" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Cassandra</h2>
+				<section class="body  img-rounded">
+					<p>The Cassandra plugin adds <a href="https://github.com/Erudika/para-dao-cassandra">support for Apache Cassandra</a>.
 The class <code>CassandraDAO</code> is a <code>DAO</code> implementation and is responsible for connecting to a <a href="https://cassandra.apache.org/">Cassandra</a>
 cluster and storing/retrieving objects (items) to/from it. All operations are carried out using the latest Cassandra
 Java Driver by DataStax, compatible with Cassandra 3.x.</p>
@@ -1369,13 +1369,13 @@ This tells Para to use the Cassandra Data Access Object (DAO) implementation ins
 <p>For more information about using Cassandra, see the <a href="https://cassandra.apache.org/doc/latest/">official docs</a>.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="013-dynamodb" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>DynamoDB</h2>
-					<section class="body  img-rounded">
-						<p>Para can work with DynamoDB by using the <code>AWSDynamoDAO</code> implementation. That class is responsible for connecting
+				</section>
+			</article>
+			<a id="013-dynamodb" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>DynamoDB</h2>
+				<section class="body  img-rounded">
+					<p>Para can work with DynamoDB by using the <code>AWSDynamoDAO</code> implementation. That class is responsible for connecting
 to <a href="http://aws.amazon.com/dynamodb/">Amazon’s DynamoDB</a> server and storing/retrieving objects (items) to/from it.
 All operations are carried out using the latest AWS Java SDK.</p>
 <p><strong>Note:</strong> DynamoDB doesn’t support batch update requests so <code>AWSDynamoDAO</code> does not batch update requests.
@@ -1401,13 +1401,13 @@ key <code>timestamp</code>, to facilitate queries like <code>dao.readPage()</cod
 <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html">documentation on AWS</a>.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="013-mongodb" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>MongoDB</h2>
-					<section class="body  img-rounded">
-						<p>Since v1.18.0 Para supports plugins and the the first official plugin adds <a href="https://github.com/Erudika/para-dao-mongodb">support for MongoDB</a>.
+				</section>
+			</article>
+			<a id="013-mongodb" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>MongoDB</h2>
+				<section class="body  img-rounded">
+					<p>Since v1.18.0 Para supports plugins and the the first official plugin adds <a href="https://github.com/Erudika/para-dao-mongodb">support for MongoDB</a>.
 The class <code>MongoDBDAO</code> is a <code>DAO</code> implementation and is responsible for connecting to a <a href="https://www.mongodb.org/">MongoDB</a>
 server and storing/retrieving objects (items) to/from it. All operations are carried out using the latest MongoDB
 Java Driver compatible with MongoDB 3.2.</p>
@@ -1449,13 +1449,13 @@ This tells Para to use the MongoDB Data Access Object (DAO) implementation inste
 <p>For more information about using MongoDB, see the <a href="https://docs.mongodb.org/manual/">official manual</a>.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="014-h2" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>H2 DB</h2>
-					<section class="body  img-rounded">
-						<p>This is the default database for object storage since v1.25. It is lightweight and embedded, which speeds up the
+				</section>
+			</article>
+			<a id="014-h2" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>H2 DB</h2>
+				<section class="body  img-rounded">
+					<p>This is the default database for object storage since v1.25. It is lightweight and embedded, which speeds up the
 startup of the server. All tables are stored inside a <code>./data</code> folder by default. Keep in mind that each app has its
 own table which is created automatically when the app is created.</p>
 <p>There are several configuration properties for H2 (these go in your <code>application.conf</code> file):</p>
@@ -1478,13 +1478,13 @@ own table which is created automatically when the app is created.</p>
 <p>This implementation is works well for both development and production environments.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="015-search" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Search interface</h2>
-					<section class="body  img-rounded">
-						<p>Para indexes objects based on their type. For example, a <code>User</code> objects has a <code>type</code> field with the value “user”.
+				</section>
+			</article>
+			<a id="015-search" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Search interface</h2>
+				<section class="body  img-rounded">
+					<p>Para indexes objects based on their type. For example, a <code>User</code> objects has a <code>type</code> field with the value “user”.
 Most of the search methods below ask for a <code>type</code> to search for (i.e. the <code>type</code> field acts as a filter).</p>
 <p>The <code>Search</code> interface defines the following methods used for search:</p>
 <table class="table table-striped">
@@ -1517,13 +1517,13 @@ These methods are:</p>
 <p>You should <em>not</em> index/unindex your objects manually - Para does this for you.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="016-elasticsearch" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Elasticsearch</h2>
-					<section class="body  img-rounded">
-						<p><strong>Now part of the <a href="https://github.com/erudika/para-search-elasticsearch">para-search-elasticsearch</a> plugin (v1.25).</strong></p>
+				</section>
+			</article>
+			<a id="016-elasticsearch" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Elasticsearch</h2>
+				<section class="body  img-rounded">
+					<p><strong>Now part of the <a href="https://github.com/erudika/para-search-elasticsearch">para-search-elasticsearch</a> plugin (v1.25).</strong></p>
 <p>Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v5 and
 uses the TCP <code>TransportClient</code> by default. Support for the high-level REST HTTP client is expected when ES v6 is released.</p>
 <p>The <code>Search</code> interface is implemented in the <code>ElasticSearch</code> class.</p>
@@ -1617,13 +1617,13 @@ pager.setSortBy(<span class="hljs-string">"name:desc,timestamp:asc"</span>);
 <p>Read the <a href="https://www.elastic.co/guide/">Elasticsearch</a> docs for more information.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="016-lucene" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Lucene</h2>
-					<section class="body  img-rounded">
-						<p>Lucene is used as the default search engine in Para. It is a lightweight alternative to Elasticsearch for self-contained
+				</section>
+			</article>
+			<a id="016-lucene" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Lucene</h2>
+				<section class="body  img-rounded">
+					<p>Lucene is used as the default search engine in Para. It is a lightweight alternative to Elasticsearch for self-contained
 deployments. It works great for local development and also in production.</p>
 <p>The <code>Search</code> interface is implemented in the <code>LuceneSearch</code> class.</p>
 <p>Keep in mind that each Para app has its own Lucene index, which is automatically created if missing. The path to where
@@ -1644,13 +1644,13 @@ for a Lucene document - a unique, time-based <code>long</code>. You may have to 
 <p>Read the <a href="http://lucene.apache.org/core/">Lucene</a> docs for more information.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="017-cache" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Cache interface</h2>
-					<section class="body  img-rounded">
-						<p>The <code>Cache</code> interface defines the following methods used for object caching:</p>
+				</section>
+			</article>
+			<a id="017-cache" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Cache interface</h2>
+				<section class="body  img-rounded">
+					<p>The <code>Cache</code> interface defines the following methods used for object caching:</p>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -1673,13 +1673,13 @@ for a Lucene document - a unique, time-based <code>long</code>. You may have to 
 <p>You should avoid calling cache related methods directly - Para does this for you.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="018-caffeine" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Caffeine</h2>
-					<section class="body  img-rounded">
-						<p>Caffeine is the default cache implementation since v1.26. It’s built on top of the excellent Caffeine library by
+				</section>
+			</article>
+			<a id="018-caffeine" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Caffeine</h2>
+				<section class="body  img-rounded">
+					<p>Caffeine is the default cache implementation since v1.26. It’s built on top of the excellent Caffeine library by
 Ben Manes. This cache supports automatic eviction and TTL for each object.</p>
 <p>There’s one big cache map, shared by all Para apps. Cached objects have keys with a unique prefix for each app.
 When the cache reaches its maximum size or when objects in the map expire, the least recently used ones are evicted.
@@ -1702,13 +1702,13 @@ Caffeine is simple and effective, making it excellent for smaller Para clusters 
 <p>For more information see the <a href="https://github.com/ben-manes/caffeine/wiki">Caffeine wiki</a>.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="018-hazelcast" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Hazelcast</h2>
-					<section class="body  img-rounded">
-						<p>Hazelcast allows you to use a portion of the memory on each node for caching without having to manage a separate
+				</section>
+			</article>
+			<a id="018-hazelcast" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Hazelcast</h2>
+				<section class="body  img-rounded">
+					<p>Hazelcast allows you to use a portion of the memory on each node for caching without having to manage a separate
 caching server or cluster. Hazelcast was the default implementation of the <code>Cache</code> interface until v1.26, when it
 was decoupled from Para and <a href="https://github.com/Erudika/para-cache-hazelcast">moved to its own repository</a>. We still
 recommend the Hazelcast plugin for production use.</p>
@@ -1741,13 +1741,13 @@ with the same name.</p>
 <p>For more information see the <a href="http://www.hazelcast.org/docs/latest/manual/html-single">Hazelcast docs</a>.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="019-one-to-many" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>One-to-many</h2>
-					<section class="body  img-rounded">
-						<p>Object relationships are defined by the <code>Linkable</code> interface. All Para objects are linkable, meaning that they can be
+				</section>
+			</article>
+			<a id="019-one-to-many" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>One-to-many</h2>
+				<section class="body  img-rounded">
+					<p>Object relationships are defined by the <code>Linkable</code> interface. All Para objects are linkable, meaning that they can be
 related to other Para objects.</p>
 <p>Para supports one-to-many relationships between objects with the <code>parentid</code> field. It contains the <code>id</code> of the parent
 object. For example a user might be linked to their father like this:</p>
@@ -1772,13 +1772,13 @@ User luke = parent.getChildren(User.class).get(<span class="hljs-number">0</span
 User darth = dao.read(luke.getParentid());
 </code></pre>
 
-					</section>
-				</article>
-				<a id="020-many-to-many" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Many-to-many</h2>
-					<section class="body  img-rounded">
-						<p>Many-to-many relationships are implemented in Para with <code>Linker</code> objects. This object contains information
+				</section>
+			</article>
+			<a id="020-many-to-many" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Many-to-many</h2>
+				<section class="body  img-rounded">
+					<p>Many-to-many relationships are implemented in Para with <code>Linker</code> objects. This object contains information
 about a link between two objects. This is simply the <code>id</code> and <code>type</code> of both objects. Linker objects are just regular
 Para objects - they can be persisted, indexed and cached.</p>
 <pre>
@@ -1813,13 +1813,13 @@ object1.unlinkAll();
 <pre><code class="lang-java">object1.getLinkedObjects(object2.getType(), Pager... pager);
 </code></pre>
 
-					</section>
-				</article>
-				<a id="021-iot-aws" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>AWS IoT</h2>
-					<section class="body  img-rounded">
-						<p>Para is integrated with the AWS IoT cloud which means that you can create <code>Thing</code> objects through the Para API and have
+				</section>
+			</article>
+			<a id="021-iot-aws" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>AWS IoT</h2>
+				<section class="body  img-rounded">
+					<p>Para is integrated with the AWS IoT cloud which means that you can create <code>Thing</code> objects through the Para API and have
 them sync their state with the AWS cloud. When you create a <code>Thing</code> it is also created on the AWS cloud and a
 certificate is generated for it which is saved within the <code>Thing</code> object. The certificate, private and public keys
 and other information about the device are only shown once the <code>Thing</code> is created. Here’s an example create request:</p>
@@ -1876,13 +1876,13 @@ instance it is deployed on.</p>
 <li>Update the <code>deviceState</code> from the Para API and it will be synced with the device shadow on AWS on every <code>PATCH</code> request.</li>
 </ol>
 
-					</section>
-				</article>
-				<a id="021-iot-azure" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Azure IoT</h2>
-					<section class="body  img-rounded">
-						<p>Para is integrated with the Microsoft’s Azure IoT Hub which means that you can create <code>Thing</code> objects through the Para
+				</section>
+			</article>
+			<a id="021-iot-azure" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Azure IoT</h2>
+				<section class="body  img-rounded">
+					<p>Para is integrated with the Microsoft’s Azure IoT Hub which means that you can create <code>Thing</code> objects through the Para
 API and have them sync their state with the Azure cloud. When you create a <code>Thing</code> it is also created as a device on
 the Azure cloud and primary/secondary keys are generated for it which are saved within the <code>Thing</code> object. These keys
 and other information about the device are only shown once the <code>Thing</code> is created. Here’s an example create request:</p>
@@ -1936,25 +1936,25 @@ instance it is deployed on.</p>
 <li>Update the <code>deviceState</code> from the Para API and it will be synced with the device shadow on Azure on every <code>PATCH</code> request.</li>
 </ol>
 
-					</section>
-				</article>
-				<a id="021-translations" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Translations</h2>
-					<section class="body  img-rounded">
-						<p>Translations are Para objects which contain a single translation of a string. For example you can have a language file
+				</section>
+			</article>
+			<a id="021-translations" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Translations</h2>
+				<section class="body  img-rounded">
+					<p>Translations are Para objects which contain a single translation of a string. For example you can have a language file
 in English and for each string you can create a <code>Translation</code> object with the translation of that string.</p>
 <p>Translations have a key and a value. The key is used to identify the string to be translated. Each translation also has
 a specific locale associated with it.</p>
 <p>A translation can be approved which makes it possible to build a crowdsourced system for translation of language packs.</p>
 
-					</section>
-				</article>
-				<a id="022-languages" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Languages</h2>
-					<section class="body  img-rounded">
-						<p>Languages are maps of keys and values. A language file might contain all strings used by an application. Also you can
+				</section>
+			</article>
+			<a id="022-languages" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Languages</h2>
+				<section class="body  img-rounded">
+					<p>Languages are maps of keys and values. A language file might contain all strings used by an application. Also you can
 have the language loaded from a database.</p>
 <p>The language map consists of language strings and each string has a short unique key. For example:</p>
 <pre><code>english.txt
@@ -1969,13 +1969,13 @@ no  = <span class="hljs-string">"No"</span>
 </code></pre><p>The <code>LanguageUtils</code> class deals with the loading of languages and contains methods for working with locales.
 You can set default languages, write languages to a database and load them.</p>
 
-					</section>
-				</article>
-				<a id="023-filters" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Filters</h2>
-					<section class="body  img-rounded">
-						<p>There are several filters you can use to enable different features like Gzip encoding, CORS, etc.</p>
+				</section>
+			</article>
+			<a id="023-filters" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Filters</h2>
+				<section class="body  img-rounded">
+					<p>There are several filters you can use to enable different features like Gzip encoding, CORS, etc.</p>
 <h3 id="cors">CORS</h3>
 <p>The CORS filter enables cross-origin requests for the Para API. It is enabled with the configuration property
 <code>para.cors_enabled</code> set to <code>true</code>. The implementation is based on the open source <code>CORSFilter</code> by Ebay.</p>
@@ -1986,13 +1986,13 @@ as well as, the Para API JSON responses.</p>
 <p>The <code>CachingHttpHeadersFilter</code> is not used by Para but you can use it to enable <code>Cache-Control</code> headers for all static
 resources.</p>
 
-					</section>
-				</article>
-				<a id="023-utilities" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Misc. utilities</h2>
-					<section class="body  img-rounded">
-						<p>The <code>Utils</code> static class contains a variety of utility methods. These are summarized below:</p>
+				</section>
+			</article>
+			<a id="023-utilities" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Misc. utilities</h2>
+				<section class="body  img-rounded">
+					<p>The <code>Utils</code> static class contains a variety of utility methods. These are summarized below:</p>
 <h3 id="hashing">Hashing</h3>
 <table class="table table-striped">
     <tbody>
@@ -2094,13 +2094,13 @@ resources.</p>
     </tbody>
 </table>
 
-					</section>
-				</article>
-				<a id="024-humantime" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>HumanTime</h2>
-					<section class="body  img-rounded">
-						<p>Para includes the class <code>HumanTime</code> written by <a href="http://johannburkard.de">Johann Burkard</a>. This class makes it
+				</section>
+			</article>
+			<a id="024-humantime" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>HumanTime</h2>
+				<section class="body  img-rounded">
+					<p>Para includes the class <code>HumanTime</code> written by <a href="http://johannburkard.de">Johann Burkard</a>. This class makes it
 easy to convert a timestamp to an approximation in the form of “X minutes ago”.</p>
 <p>For example you can do:</p>
 <pre><code class="lang-java">HumanTime ht = Utils.getHumanTime();
@@ -2117,13 +2117,13 @@ System.out.println(<span class="hljs-string">"Event happened "</span> + s2 + <sp
 <p>For more information about HumanTime see <a href="http://johannburkard.de/blog/programming/java/date-formatting-parsing-humans-humantime.html">the docs</a>.</p>
 </blockquote>
 
-					</section>
-				</article>
-				<a id="025-pager" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Pager</h2>
-					<section class="body  img-rounded">
-						<p>The <code>Pager</code> class is used for pagination. It holds data about a page request. For example you can call a search method
+				</section>
+			</article>
+			<a id="025-pager" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Pager</h2>
+				<section class="body  img-rounded">
+					<p>The <code>Pager</code> class is used for pagination. It holds data about a page request. For example you can call a search method
 like this:</p>
 <pre><code class="lang-java">Pager pager = <span class="hljs-keyword">new</span> Pager();
 <span class="hljs-comment">// limit results to 5</span>
@@ -2165,13 +2165,13 @@ paraClient.findQuery(<span class="hljs-string">"*"</span>, pager);
 <span class="hljs-comment">//  and so on...</span>
 </code></pre>
 
-					</section>
-				</article>
-				<a id="026-email" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Email</h2>
-					<section class="body  img-rounded">
-						<p>The <code>Emailer</code> interface has a simple API for sending email messages.</p>
+				</section>
+			</article>
+			<a id="026-email" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Email</h2>
+				<section class="body  img-rounded">
+					<p>The <code>Emailer</code> interface has a simple API for sending email messages.</p>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Emailer</span> </span>{
     <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">sendEmail</span><span class="hljs-params">(List&lt;String&gt; emails, String subject, String body)</span></span>;
 }
@@ -2193,13 +2193,13 @@ para.mail.ssl = <span class="hljs-literal">false</span>
 <p>Set <code>para.emailer = &quot;aws&quot;</code> to use the AWS Simple Email Service and comment out the <code>para.mail.*</code>
 properties as they are ignored. Also set <code>para.aws_access_key</code> and <code>para.aws_secret_key</code>.</p>
 
-					</section>
-				</article>
-				<a id="027-queue" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Queue</h2>
-					<section class="body  img-rounded">
-						<p>The <code>Queue</code> interface is another simple API for pushing and pulling messages to and from a queue.</p>
+				</section>
+			</article>
+			<a id="027-queue" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Queue</h2>
+				<section class="body  img-rounded">
+					<p>The <code>Queue</code> interface is another simple API for pushing and pulling messages to and from a queue.</p>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Queue</span> </span>{
     <span class="hljs-function">String <span class="hljs-title">pull</span><span class="hljs-params">()</span></span>;
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(String task)</span></span>;
@@ -2243,13 +2243,13 @@ otherwise the <code>_index</code> property overrides the default configuration a
 Long polling is done by the Amazon SQS client using the <code>waitTimeSeconds</code> attribute which is set to <code>longpolling_interval</code> <em>(must be between 0 and 20)</em>.</li>
 </ul>
 
-					</section>
-				</article>
-				<a id="028-storage" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Storage</h2>
-					<section class="body  img-rounded">
-						<p>The <code>FileStore</code> interface allows you to have different storage services, like S3 or Google Drive, connected to
+				</section>
+			</article>
+			<a id="028-storage" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Storage</h2>
+				<section class="body  img-rounded">
+					<p>The <code>FileStore</code> interface allows you to have different storage services, like S3 or Google Drive, connected to
 your application. You can save and load files from disk or cloud storage services easily.</p>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FileStore</span> </span>{
     <span class="hljs-function">InputStream <span class="hljs-title">load</span><span class="hljs-params">(String path)</span></span>;
@@ -2269,13 +2269,13 @@ content encoding header to be set. The extension is removed before upload.</p>
 <p>This implementation stores files on the local file system. The folder where files will be stored is set with the
 <code>para.localstorage.folder</code> property. The maximum file size is controlled by <code>para.localstorage.max_filesize_mb</code>.</p>
 
-					</section>
-				</article>
-				<a id="029-passwords" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Simple authentication</h2>
-					<section class="body  img-rounded">
-						<p>Para implements several authentication mechanisms which you can integrate in your application and make it easy to handle
+				</section>
+			</article>
+			<a id="029-passwords" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Simple authentication</h2>
+				<section class="body  img-rounded">
+					<p>Para implements several authentication mechanisms which you can integrate in your application and make it easy to handle
 user registrations and logins.</p>
 <p>The classic way of logging users in is with usernames and passwords. Para implements that mechanism in the
 <code>PasswordAuthFilter</code> class. It takes a username or email and a password and tries to find that user in the database.
@@ -2308,13 +2308,13 @@ User updated = paraClient.update(user); <span class="hljs-comment">// user is no
 <p>After executing the code above, any subsequent calls to <code>paraClient.signIn()</code> will be successful and the authenticated
 user object will be returned.</p>
 
-					</section>
-				</article>
-				<a id="030-ldap" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>LDAP support</h2>
-					<section class="body  img-rounded">
-						<p>Users can be authenticated through an LDAP server, including Active Directory. The implementation uses the UnboundID
+				</section>
+			</article>
+			<a id="030-ldap" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>LDAP support</h2>
+				<section class="body  img-rounded">
+					<p>Users can be authenticated through an LDAP server, including Active Directory. The implementation uses the UnboundID
 SDK in combination with Spring Security. The user supplies a <code>uid</code> and <code>password</code> and Para connects to the LDAP server
 and tries to bind that user. Then, upon successful login, a new <code>User</code> object is created and the user is signed in.
 The user’s profile data (email, name, uid) is read from the LDAP directory. It is important to note that emails are
@@ -2357,13 +2357,13 @@ Example: <code>GET /ldap_auth?username=bob&amp;password=secret</code></p>
 }
 </code></pre><p>You can also put all of the settings above in a configuration file (see <a href="#005-config">the config</a>)</p>
 
-					</section>
-				</article>
-				<a id="030-oauth" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>OAuth 2.0 support</h2>
-					<section class="body  img-rounded">
-						<p>A generic OAuth 2.0 filter is available for situations where you need to use your own authentication server.
+				</section>
+			</article>
+			<a id="030-oauth" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>OAuth 2.0 support</h2>
+				<section class="body  img-rounded">
+					<p>A generic OAuth 2.0 filter is available for situations where you need to use your own authentication server.
 It follows the standard OAuth 2.0 flow and requires that you redirect users to a login page first (on your server).
 Then, upon successful login, the user is redirected back to <code>/oauth2_auth</code> with the access token.
 Finally, the filter tries to get the user’s profile with that token, from a specified server, which could be the same
@@ -2393,13 +2393,13 @@ server used for authentication.</p>
 
 <p>You can configure the URLs for authentication success and failure in the configuration file (see <a href="#005-config">the config</a>)</p>
 
-					</section>
-				</article>
-				<a id="030-openid" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>OpenID support</h2>
-					<section class="body  img-rounded">
-						<p><strong>DEPRECATED</strong></p>
+				</section>
+			</article>
+			<a id="030-openid" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>OpenID support</h2>
+				<section class="body  img-rounded">
+					<p><strong>DEPRECATED</strong></p>
 <p><strong>Note</strong>: OpenID 2.0 is no longer supported by Google, and we recommend using one of the other authentication providers
 or JWT-based authentication.</p>
 <p>Support for OpenID authentication is implemented by the <code>OpenIDAuthFilter</code>. The default URL for this filter is
@@ -2409,13 +2409,13 @@ verification. Once the user’s identity is verified, the provider redirects the
 either logged in or registered.</p>
 <p>You can configure the URLs for authentication success and failure in the configuration file (see <a href="#005-config">the config</a>)</p>
 
-					</section>
-				</article>
-				<a id="031-facebook" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Facebook support</h2>
-					<section class="body  img-rounded">
-						<blockquote>
+				</section>
+			</article>
+			<a id="031-facebook" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Facebook support</h2>
+				<section class="body  img-rounded">
+					<blockquote>
 <p>This describes the web authentication flow with Facebook. You could also login with an existing access token from
 Facebook <a href="#034-api-jwt-signin">through the API</a>. This web flow sets a cookie, the API returns a JWT instead.</p>
 </blockquote>
@@ -2451,13 +2451,13 @@ in order to obtain an access and secret keys.</p>
 });
 </code></pre>
 
-					</section>
-				</article>
-				<a id="031-github" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>GitHub support</h2>
-					<section class="body  img-rounded">
-						<blockquote>
+				</section>
+			</article>
+			<a id="031-github" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>GitHub support</h2>
+				<section class="body  img-rounded">
+					<blockquote>
 <p>This describes the web authentication flow with GitHub. You could also login with an existing access token from
 GitHub <a href="#034-api-jwt-signin">through the API</a>. This web flow sets a cookie, the API returns a JWT instead.</p>
 </blockquote>
@@ -2493,13 +2493,13 @@ in order to obtain an access and secret keys.</p>
 });
 </code></pre>
 
-					</section>
-				</article>
-				<a id="031-google" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Google support</h2>
-					<section class="body  img-rounded">
-						<blockquote>
+				</section>
+			</article>
+			<a id="031-google" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Google support</h2>
+				<section class="body  img-rounded">
+					<blockquote>
 <p>This describes the web authentication flow with Google. You could also login with an existing access token from
 Google <a href="#034-api-jwt-signin">through the API</a>. This web flow sets a cookie, the API returns a JWT instead.</p>
 </blockquote>
@@ -2536,13 +2536,13 @@ in order to obtain an access and secret keys.</p>
 });
 </code></pre>
 
-					</section>
-				</article>
-				<a id="031-linkedin" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>LinkedIn support</h2>
-					<section class="body  img-rounded">
-						<blockquote>
+				</section>
+			</article>
+			<a id="031-linkedin" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>LinkedIn support</h2>
+				<section class="body  img-rounded">
+					<blockquote>
 <p>This describes the web authentication flow with LinkedIn. You could also login with an existing access token from
 LinkedIn <a href="#034-api-jwt-signin">through the API</a>. This web flow sets a cookie, the API returns a JWT instead.</p>
 </blockquote>
@@ -2578,13 +2578,13 @@ in order to obtain an access and secret keys.</p>
 });
 </code></pre>
 
-					</section>
-				</article>
-				<a id="031-microsoft" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Microsoft support</h2>
-					<section class="body  img-rounded">
-						<blockquote>
+				</section>
+			</article>
+			<a id="031-microsoft" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Microsoft support</h2>
+				<section class="body  img-rounded">
+					<blockquote>
 <p>This describes the web authentication flow with Microsoft. You could also login with an existing access token from
 Microsoft <a href="#034-api-jwt-signin">through the API</a>. This web flow sets a cookie, the API returns a JWT instead.</p>
 </blockquote>
@@ -2623,13 +2623,13 @@ in order to obtain an access and secret keys.</p>
 });
 </code></pre>
 
-					</section>
-				</article>
-				<a id="031-twitter" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Twitter support</h2>
-					<section class="body  img-rounded">
-						<blockquote>
+				</section>
+			</article>
+			<a id="031-twitter" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Twitter support</h2>
+				<section class="body  img-rounded">
+					<blockquote>
 <p>This describes the web authentication flow with Twitter. You could also login with an existing access token from
 Twitter <a href="#034-api-jwt-signin">through the API</a>. This web flow sets a cookie, the API returns a JWT instead.</p>
 </blockquote>
@@ -2664,13 +2664,13 @@ The Twitter API does not share users’ emails by default, you have to ask Twitt
 });
 </code></pre>
 
-					</section>
-				</article>
-				<a id="032-roles" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Groups and roles</h2>
-					<section class="body  img-rounded">
-						<p>Para defines three security groups and roles:</p>
+				</section>
+			</article>
+			<a id="032-roles" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Groups and roles</h2>
+				<section class="body  img-rounded">
+					<p>Para defines three security groups and roles:</p>
 <ul>
 <li><code>users</code> group with role <code>user</code> (normal users)</li>
 <li><code>mods</code> group with role <code>mod</code> (moderators)</li>
@@ -2678,13 +2678,13 @@ The Twitter API does not share users’ emails by default, you have to ask Twitt
 </ul>
 <p>There is also a special role <code>app</code> for applications.</p>
 
-					</section>
-				</article>
-				<a id="033-csrf" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>CSRF protection</h2>
-					<section class="body  img-rounded">
-						<p>Cross-Site Request Forgery protection is enabled by default for all <code>POST</code>, <code>PUT</code> and <code>DELETE</code> requests.
+				</section>
+			</article>
+			<a id="033-csrf" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>CSRF protection</h2>
+				<section class="body  img-rounded">
+					<p>Cross-Site Request Forgery protection is enabled by default for all <code>POST</code>, <code>PUT</code> and <code>DELETE</code> requests.
 It works by verifying that incoming requests contain a security token (CSRF token) and it matches the one stored on the
 server. CSRF protection is disabled for API requests.</p>
 <p>To disable the CSRF protection set <code>para.security.csrf_protection</code> to <code>false</code>. You can also tell Para to send a cookie
@@ -2698,13 +2698,13 @@ send the correct CSRF header to Para which is <code>X-CSRF-TOKEN</code> like so:
 <p>In order to get a CSRF token from the server you need to send a <code>POST</code> request to a protected resource
 like <code>POST /protected/ping</code> and the server will return the token as cookie.</p>
 
-					</section>
-				</article>
-				<a id="033-restauth" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>Authentication</h2>
-					<section class="body  img-rounded">
-						<p>Para uses the <strong>AWS Signature Version 4</strong> algorithm for signing API requests. We chose this algorithm instead
+				</section>
+			</article>
+			<a id="033-restauth" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Authentication</h2>
+				<section class="body  img-rounded">
+					<p>Para uses the <strong>AWS Signature Version 4</strong> algorithm for signing API requests. We chose this algorithm instead
 of OAuth because it is less complicated and is already implemented inside the AWS Java SDK, which we have a direct
 dependency. In terms of security, both algorithms are considered very secure so there’s no compromise in that aspect.</p>
 <p>Para offers two ways of authentication - one for apps using API keys and one for insecure clients (mobile, JS) using JWT.
@@ -2855,13 +2855,13 @@ Open up Postman and in the “Authorization” tab choose “AWS Signature”:</
         <tr><td><strong>Service Name</strong></td><td> This should always be <code>para</code>.</td></tr>
     </tbody>
 </table>
-					</section>
-				</article>
-				<a id="034-api-intro" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class=" img-rounded">
-						<h2>API methods</h2>
-					<section class="body  img-rounded">
-						<blockquote>
+				</section>
+			</article>
+			<a id="034-api-intro" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>API methods</h2>
+				<section class="body  img-rounded">
+					<blockquote>
 <p>All API methods below <strong>require authentication</strong> by default, unless it’s written otherwise.</p>
 </blockquote>
 <h3 id="limiting-which-fields-are-returned-by-the-api">Limiting which fields are returned by the API</h3>
@@ -2871,23 +2871,23 @@ This parameter takes a comma separated list of fields to include. For example:</
 </code></pre><p><br><br>
 <a href="#" class="radius collapse-expand-link">&blacktriangledown;&blacktriangle; collapse/expand all</a></p>
 
-					</section>
-				</article>
-				<a id="034-api-jwt-signin" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="POST img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-info">POST</span>
-									<span class="gray">
-										/jwt_auth 
-									</span>
-								</code>
-								<span class="hidden-xs">Sign in (JWT)</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Takes an identity provider access token and fetches the user data from that provider. A new <code>User</code> object is created
+				</section>
+			</article>
+			<a id="034-api-jwt-signin" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="POST img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-info">POST</span>
+								<span class="gray">
+									/jwt_auth 
+								</span>
+							</code>
+							<span class="hidden-xs">Sign in (JWT)</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Takes an identity provider access token and fetches the user data from that provider. A new <code>User</code> object is created
 if that user doesn’t exist and is then returned. Access tokens are returned upon successful authentication
 using one of the SDKs from Facebook, Google, Twitter, etc.</p>
 <p><strong>Note:</strong> Twitter uses OAuth 1 and gives you a token and a token secret so you must concatenate them first -
@@ -2954,23 +2954,23 @@ usually 1 hour after token has been issued.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="035-api-jwt-refresh" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/jwt_auth 
-									</span>
-								</code>
-								<span class="hidden-xs">Token refresh (JWT)</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Refreshes the access token if and only if the provided token is valid and not expired.
+				</section>
+			</article>
+			<a id="035-api-jwt-refresh" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/jwt_auth 
+								</span>
+							</code>
+							<span class="hidden-xs">Token refresh (JWT)</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Refreshes the access token if and only if the provided token is valid and not expired.
 Tokens should be refreshed periodically in order to keep users logged in for longer periods of time.</p>
 <h3 id="request">Request</h3>
 <p>Request should include an <code>Authorization: Bearer {JWT_TOKEN}</code> header containing a valid access token. (required)
@@ -3002,23 +3002,23 @@ As an alternative you could provide the token as query parameter instead of a he
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="035-api-jwt-revoke" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="DELETE img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-danger">DELETE</span>
-									<span class="gray">
-										/jwt_auth 
-									</span>
-								</code>
-								<span class="hidden-xs">Revoke all tokens (JWT)</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Revokes all user tokens for the user that is currently logged in. This would be equivalent to “logout everywhere”.
+				</section>
+			</article>
+			<a id="035-api-jwt-revoke" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="DELETE img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-danger">DELETE</span>
+								<span class="gray">
+									/jwt_auth 
+								</span>
+							</code>
+							<span class="hidden-xs">Revoke all tokens (JWT)</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Revokes all user tokens for the user that is currently logged in. This would be equivalent to “logout everywhere”.
 <strong>Note:</strong> Generating a new API secret on the server will also invalidate all client tokens.</p>
 <h3 id="request">Request</h3>
 <p>Request should include an <code>Authorization: Bearer {JWT_TOKEN}</code> header containing a valid access token. (required)
@@ -3036,23 +3036,23 @@ As an alternative you could provide the token as query parameter instead of a he
 <p>Example response (response is empty):</p>
 <pre><code><span class="hljs-number">200</span> OK
 </code></pre>
-					</section>
-				</article>
-				<a id="036-api-create" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="POST img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-info">POST</span>
-									<span class="gray">
-										/v1/{type} 
-									</span>
-								</code>
-								<span class="hidden-xs">Create object</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Creates a new object of type <code>{type}</code>. You can also create objects with custom types and fields (since v1.4.0).</p>
+				</section>
+			</article>
+			<a id="036-api-create" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="POST img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-info">POST</span>
+								<span class="gray">
+									/v1/{type} 
+								</span>
+							</code>
+							<span class="hidden-xs">Create object</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Creates a new object of type <code>{type}</code>. You can also create objects with custom types and fields (since v1.4.0).</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><strong>body</strong> - the JSON object to create</li>
@@ -3086,23 +3086,23 @@ These are required for mapping types to URLs.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="037-api-read" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/{type}/{id} 
-									</span>
-								</code>
-								<span class="hidden-xs">Read object</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Returns an object of type <code>{type}</code>.</p>
+				</section>
+			</article>
+			<a id="037-api-read" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/{type}/{id} 
+								</span>
+							</code>
+							<span class="hidden-xs">Read object</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Returns an object of type <code>{type}</code>.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{type}</code> - the plural form of the object’s type, e.g. “users”</li>
@@ -3128,23 +3128,23 @@ These are required for mapping types to URLs.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="038-api-overwrite" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="PUT img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-warning">PUT</span>
-									<span class="gray">
-										/v1/{type}/{id} 
-									</span>
-								</code>
-								<span class="hidden-xs">Overwrite object</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Overwrites an object of type <code>{type}</code>. If the object with this <code>{id}</code> doesn’t exist then a new one will be created.</p>
+				</section>
+			</article>
+			<a id="038-api-overwrite" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="PUT img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-warning">PUT</span>
+								<span class="gray">
+									/v1/{type}/{id} 
+								</span>
+							</code>
+							<span class="hidden-xs">Overwrite object</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Overwrites an object of type <code>{type}</code>. If the object with this <code>{id}</code> doesn’t exist then a new one will be created.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><strong>body</strong> - the JSON data to merge with the stored object</li>
@@ -3170,23 +3170,23 @@ These are required for mapping types to URLs.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="038-api-update" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="PATCH img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-default">PATCH</span>
-									<span class="gray">
-										/v1/{type}/{id} 
-									</span>
-								</code>
-								<span class="hidden-xs">Update object</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Updates an existing object of type <code>{type}</code>. Partial objects are supported, meaning that only a few fields could be
+				</section>
+			</article>
+			<a id="038-api-update" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="PATCH img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-default">PATCH</span>
+								<span class="gray">
+									/v1/{type}/{id} 
+								</span>
+							</code>
+							<span class="hidden-xs">Update object</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Updates an existing object of type <code>{type}</code>. Partial objects are supported, meaning that only a few fields could be
 updated, without having to send the whole object.</p>
 <p><strong>Vote requests</strong>: these are a special kind of <code>PATCH</code> request, which has a body like <code>{&quot;_voteup&quot;: &quot;user123&quot;}</code> or
 <code>{&quot;_votedown&quot;: &quot;user123&quot;}</code>. Here <code>user123</code> is the <code>id</code> of the voter. A successful vote request either increments or
@@ -3216,23 +3216,23 @@ decrements the <code>votes</code> field by 1.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="039-api-delete" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="DELETE img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-danger">DELETE</span>
-									<span class="gray">
-										/v1/{type}/{id} 
-									</span>
-								</code>
-								<span class="hidden-xs">Delete object</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Deletes an existing object of type <code>{type}</code>. Returns code <code>200</code> regardless of the success of the request.</p>
+				</section>
+			</article>
+			<a id="039-api-delete" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="DELETE img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-danger">DELETE</span>
+								<span class="gray">
+									/v1/{type}/{id} 
+								</span>
+							</code>
+							<span class="hidden-xs">Delete object</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Deletes an existing object of type <code>{type}</code>. Returns code <code>200</code> regardless of the success of the request.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{type}</code> - the plural form of the object’s type, e.g. “users”</li>
@@ -3244,23 +3244,23 @@ decrements the <code>votes</code> field by 1.</p>
 </ul>
 <p>No content.</p>
 
-					</section>
-				</article>
-				<a id="040-api-batch-create" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="POST img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-info">POST</span>
-									<span class="gray">
-										/v1/_batch 
-									</span>
-								</code>
-								<span class="hidden-xs">Batch create</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Creates multiple objects with a single request. <code>PUT</code> requests to this resource are equivalent to <code>POST</code>.</p>
+				</section>
+			</article>
+			<a id="040-api-batch-create" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="POST img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-info">POST</span>
+								<span class="gray">
+									/v1/_batch 
+								</span>
+							</code>
+							<span class="hidden-xs">Batch create</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Creates multiple objects with a single request. <code>PUT</code> requests to this resource are equivalent to <code>POST</code>.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><strong>body</strong> - a JSON array of objects to create (required).</li>
@@ -3274,23 +3274,23 @@ decrements the <code>votes</code> field by 1.</p>
 <pre><code class="lang-js">[ { <span class="hljs-string">"id"</span>:<span class="hljs-string">"id1"</span>, ... }, { <span class="hljs-string">"id"</span>:<span class="hljs-string">"id2"</span>, ... }, { <span class="hljs-string">"id"</span>:<span class="hljs-string">"id3"</span>, ... } ]
 </code></pre>
 
-					</section>
-				</article>
-				<a id="041-api-batch-read" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/_batch 
-									</span>
-								</code>
-								<span class="hidden-xs">Batch read</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Returns a list of objects given their <code>id</code> fields.</p>
+				</section>
+			</article>
+			<a id="041-api-batch-read" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_batch 
+								</span>
+							</code>
+							<span class="hidden-xs">Batch read</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Returns a list of objects given their <code>id</code> fields.</p>
 <h3 id="parameters">Parameters</h3>
 <ul>
 <li><code>ids</code> - a list of <code>id</code>s of existing objects (required).</li>
@@ -3304,23 +3304,23 @@ decrements the <code>votes</code> field by 1.</p>
 <pre><code class="lang-js">[ { <span class="hljs-string">"id"</span>:<span class="hljs-string">"id1"</span>, ... }, { <span class="hljs-string">"id"</span>:<span class="hljs-string">"id2"</span>, ... }, { <span class="hljs-string">"id"</span>:<span class="hljs-string">"id3"</span>, ... } ]
 </code></pre>
 
-					</section>
-				</article>
-				<a id="042-api-batch-update" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="PATCH img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-default">PATCH</span>
-									<span class="gray">
-										/v1/_batch 
-									</span>
-								</code>
-								<span class="hidden-xs">Batch update</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Updates multiple objects with a single request. Partial objects are supported.
+				</section>
+			</article>
+			<a id="042-api-batch-update" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="PATCH img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-default">PATCH</span>
+								<span class="gray">
+									/v1/_batch 
+								</span>
+							</code>
+							<span class="hidden-xs">Batch update</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Updates multiple objects with a single request. Partial objects are supported.
 <strong>Note:</strong> These objects will not be validated as this would require us to read them first and validate them one by one.</p>
 <h3 id="request">Request</h3>
 <ul>
@@ -3347,23 +3347,23 @@ decrements the <code>votes</code> field by 1.</p>
 } ]
 </code></pre>
 
-					</section>
-				</article>
-				<a id="043-api-batch-delete" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="DELETE img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-danger">DELETE</span>
-									<span class="gray">
-										/v1/_batch 
-									</span>
-								</code>
-								<span class="hidden-xs">Batch delete</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Deletes multiple objects with a single request.</p>
+				</section>
+			</article>
+			<a id="043-api-batch-delete" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="DELETE img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-danger">DELETE</span>
+								<span class="gray">
+									/v1/_batch 
+								</span>
+							</code>
+							<span class="hidden-xs">Batch delete</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Deletes multiple objects with a single request.</p>
 <h3 id="parameters">Parameters</h3>
 <ul>
 <li><code>ids</code> - a list of <code>id</code>s of existing objects (required).</li>
@@ -3375,23 +3375,23 @@ decrements the <code>votes</code> field by 1.</p>
 </ul>
 <p>No content.</p>
 
-					</section>
-				</article>
-				<a id="044-api-basicsearch" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/{type} 
-									</span>
-								</code>
-								<span class="hidden-xs">Basic search</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Searches for objects of type <code>{type}</code>.</p>
+				</section>
+			</article>
+			<a id="044-api-basicsearch" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/{type} 
+								</span>
+							</code>
+							<span class="hidden-xs">Basic search</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Searches for objects of type <code>{type}</code>.</p>
 <p><strong>Note:</strong> Requests to this path and <code>/v1/{type}/search/{querytype}</code> are handled identically. Also, note that
 custom fields must be used in search queries as <code>properties.myfield</code>.</p>
 <p>For detailed syntax of the query string see
@@ -3454,23 +3454,23 @@ custom fields must be used in search queries as <code>properties.myfield</code>.
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="045-api-search" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/search/{querytype} 
-									</span>
-								</code>
-								<span class="hidden-xs">Advanced search</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Executes a search query.</p>
+				</section>
+			</article>
+			<a id="045-api-search" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/search/{querytype} 
+								</span>
+							</code>
+							<span class="hidden-xs">Advanced search</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Executes a search query.</p>
 <p><strong>Note:</strong> custom fields must be used in search queries as <code>properties.myfield</code>.</p>
 <h3 id="request">Request</h3>
 <ul>
@@ -3600,23 +3600,23 @@ This executes the method <code>getCount()</code> with <strong>no parameters</str
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="046-api-links-get" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/{type}/{id}/links/{type2}/{id2} 
-									</span>
-								</code>
-								<span class="hidden-xs">Find linked objects</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Call this method to search for objects that linked to the object with the given <code>{id}</code>.</p>
+				</section>
+			</article>
+			<a id="046-api-links-get" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/{type}/{id}/links/{type2}/{id2} 
+								</span>
+							</code>
+							<span class="hidden-xs">Find linked objects</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Call this method to search for objects that linked to the object with the given <code>{id}</code>.</p>
 <p><strong>Note:</strong> When called with the parameter <code>?childrenonly</code>, the request is treated as a “one-to-many” search request.
 It will do asearch for child objects directly connected to their parent by the <code>parentid</code> field. Without <code>?childrenonly</code>
 the request is treated as a “many-to-many” search request.</p>
@@ -3660,23 +3660,23 @@ the data inside a <code>Linker</code> is.</li>
 </code></pre>
 <p>Response if <code>id</code> is specified: <code>true</code> or <code>false</code></p>
 
-					</section>
-				</article>
-				<a id="047-api-links-link" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="POST img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-info">POST</span>
-									<span class="gray">
-										/v1/{type}/{id}/links/{id2} 
-									</span>
-								</code>
-								<span class="hidden-xs">Link objects</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>This will link the object with <code>{id}</code> to another object with the specified id in the <code>id</code> parameter.
+				</section>
+			</article>
+			<a id="047-api-links-link" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="POST img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-info">POST</span>
+								<span class="gray">
+									/v1/{type}/{id}/links/{id2} 
+								</span>
+							</code>
+							<span class="hidden-xs">Link objects</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>This will link the object with <code>{id}</code> to another object with the specified id in the <code>id</code> parameter.
 The created link represents a many-to-many relationship (see also <a href="#019-one-to-many">one-to-many relationships</a>).</p>
 <p>Don’t use this method for “one-to-many” links. Creating one-to-many links is trivial - just set the <code>parentid</code>
 of an object (child) to be equal to the <code>id</code> field of another object (parent).</p>
@@ -3696,23 +3696,23 @@ of an object (child) to be equal to the <code>id</code> field of another object 
 <pre><code class="lang-js"><span class="hljs-string">"type1:id1:type2:id2"</span>
 </code></pre>
 
-					</section>
-				</article>
-				<a id="048-api-links-unlink" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="DELETE img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-danger">DELETE</span>
-									<span class="gray">
-										/v1/{type}/{id}/links/{type2}/{id2} 
-									</span>
-								</code>
-								<span class="hidden-xs">Unlink objects</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Unlinks or deletes the objects linked to the object with the specified <code>{id}</code>.</p>
+				</section>
+			</article>
+			<a id="048-api-links-unlink" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="DELETE img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-danger">DELETE</span>
+								<span class="gray">
+									/v1/{type}/{id}/links/{type2}/{id2} 
+								</span>
+							</code>
+							<span class="hidden-xs">Unlink objects</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Unlinks or deletes the objects linked to the object with the specified <code>{id}</code>.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{type}</code> - the type of the first object, e.g. “users”</li>
@@ -3738,23 +3738,23 @@ of an object (child) to be equal to the <code>id</code> field of another object 
 </ul>
 <p>No content.</p>
 
-					</section>
-				</article>
-				<a id="049-api-constraints-add" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="PUT img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-warning">PUT</span>
-									<span class="gray">
-										/v1/_constraints/{type}/{field}/{cname} 
-									</span>
-								</code>
-								<span class="hidden-xs">Add constraint</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Adds a new validation constraint to the list of constraints for the given field and type.</p>
+				</section>
+			</article>
+			<a id="049-api-constraints-add" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="PUT img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-warning">PUT</span>
+								<span class="gray">
+									/v1/_constraints/{type}/{field}/{cname} 
+								</span>
+							</code>
+							<span class="hidden-xs">Add constraint</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Adds a new validation constraint to the list of constraints for the given field and type.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><strong>body</strong> - the JSON payload of the constraint (see the table below)</li>
@@ -3841,23 +3841,23 @@ of an object (child) to be equal to the <code>id</code> field of another object 
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="049-api-constraints-get" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/_constraints/{type} 
-									</span>
-								</code>
-								<span class="hidden-xs">List constraints</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Returns an object containing all validation constraints for all defined types in the current app.
+				</section>
+			</article>
+			<a id="049-api-constraints-get" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_constraints/{type} 
+								</span>
+							</code>
+							<span class="hidden-xs">List constraints</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Returns an object containing all validation constraints for all defined types in the current app.
 This information can be used to power client-side validation libraries like
 <a href="https://github.com/netceteragroup/valdr">valdr</a>.</p>
 <h3 id="request">Request</h3>
@@ -3897,23 +3897,23 @@ key that can be used to retrieve a localized message.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="049-api-constraints-rem" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="DELETE img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-danger">DELETE</span>
-									<span class="gray">
-										/v1/_constraints/{type}/{field}/{cname} 
-									</span>
-								</code>
-								<span class="hidden-xs">Remove constraint</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Removes a validation constraint from the list of constraints for the given field and type.</p>
+				</section>
+			</article>
+			<a id="049-api-constraints-rem" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="DELETE img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-danger">DELETE</span>
+								<span class="gray">
+									/v1/_constraints/{type}/{field}/{cname} 
+								</span>
+							</code>
+							<span class="hidden-xs">Remove constraint</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Removes a validation constraint from the list of constraints for the given field and type.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{type}</code> - the object type to which the constraint applies (required)</li>
@@ -3951,23 +3951,23 @@ key that can be used to retrieve a localized message.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="049-api-id" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/_id/{id} 
-									</span>
-								</code>
-								<span class="hidden-xs">Read by id</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Returns the object for the given <code>{id}</code>.</p>
+				</section>
+			</article>
+			<a id="049-api-id" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_id/{id} 
+								</span>
+							</code>
+							<span class="hidden-xs">Read by id</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Returns the object for the given <code>{id}</code>.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{id}</code> - the <code>id</code></li>
@@ -3987,23 +3987,23 @@ key that can be used to retrieve a localized message.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="049-api-me" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/_me 
-									</span>
-								</code>
-								<span class="hidden-xs">Me object</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Returns the currently authenticated <code>User</code> or <code>App</code> object. If the request is unauthenticated 401 error is returned.</p>
+				</section>
+			</article>
+			<a id="049-api-me" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_me 
+								</span>
+							</code>
+							<span class="hidden-xs">Me object</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Returns the currently authenticated <code>User</code> or <code>App</code> object. If the request is unauthenticated 401 error is returned.</p>
 <h3 id="request">Request</h3>
 <p><strong>No parameters</strong>.</p>
 <h3 id="response">Response</h3>
@@ -4021,23 +4021,23 @@ key that can be used to retrieve a localized message.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="049-api-types-list" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/_types 
-									</span>
-								</code>
-								<span class="hidden-xs">List types</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Returns a list of all known types for this application, including core types and user-defined types.
+				</section>
+			</article>
+			<a id="049-api-types-list" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_types 
+								</span>
+							</code>
+							<span class="hidden-xs">List types</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Returns a list of all known types for this application, including core types and user-defined types.
 User-defined types are custom types which can be defined through the REST API and allow the users to call
 the standard CRUD methods on them as if they were defined as regular Para objects.
 See <a href="#010-userdefined">User-defined classes</a> for more details.</p>
@@ -4060,23 +4060,23 @@ See <a href="#010-userdefined">User-defined classes</a> for more details.</p>
 ]
 </code></pre>
 
-					</section>
-				</article>
-				<a id="050-api-permissions-check" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/_permissions/{subjectid}/{resource}/{method} 
-									</span>
-								</code>
-								<span class="hidden-xs">Check permission</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>This checks if a subject is allowed to execute a specific type of request on a resource.</p>
+				</section>
+			</article>
+			<a id="050-api-permissions-check" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_permissions/{subjectid}/{resource}/{method} 
+								</span>
+							</code>
+							<span class="hidden-xs">Check permission</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>This checks if a subject is allowed to execute a specific type of request on a resource.</p>
 <p>There are several methods and flags which control which requests can go through. These are:</p>
 <ul>
 <li><code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code> - use these to allow a certain method explicitly</li>
@@ -4099,23 +4099,23 @@ See <a href="#010-userdefined">User-defined classes</a> for more details.</p>
 <p>Example response:</p>
 <pre><code><span class="hljs-literal">true</span>
 </code></pre>
-					</section>
-				</article>
-				<a id="050-api-permissions-get" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/_permissions/{subjectid} 
-									</span>
-								</code>
-								<span class="hidden-xs">List permissions</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Returns a permissions objects containing all permissions. If <code>{subjectid}</code> is provided, the returned object contains
+				</section>
+			</article>
+			<a id="050-api-permissions-get" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_permissions/{subjectid} 
+								</span>
+							</code>
+							<span class="hidden-xs">List permissions</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Returns a permissions objects containing all permissions. If <code>{subjectid}</code> is provided, the returned object contains
 only the permissions for that subject.</p>
 <h3 id="request">Request</h3>
 <ul>
@@ -4141,23 +4141,23 @@ only the permissions for that subject.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="050-api-permissions-grant" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="PUT img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-warning">PUT</span>
-									<span class="gray">
-										/v1/_permissions/{subjectid}/{resource} 
-									</span>
-								</code>
-								<span class="hidden-xs">Grant permissions</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Grants a set of permissions (allowed HTTP methods) to a subject for a given resource.</p>
+				</section>
+			</article>
+			<a id="050-api-permissions-grant" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="PUT img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-warning">PUT</span>
+								<span class="gray">
+									/v1/_permissions/{subjectid}/{resource} 
+								</span>
+							</code>
+							<span class="hidden-xs">Grant permissions</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Grants a set of permissions (allowed HTTP methods) to a subject for a given resource.</p>
 <p>There are several methods and flags which control which requests can go through. These are:</p>
 <ul>
 <li><code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code> - use these to allow a certain method explicitly</li>
@@ -4186,23 +4186,23 @@ only the permissions for that subject.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="050-api-permissions-revoke" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="DELETE img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-danger">DELETE</span>
-									<span class="gray">
-										/v1/_permissions/{subjectid}/{resource} 
-									</span>
-								</code>
-								<span class="hidden-xs">Revoke permissions</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Revokes all permissions for a given subject and resource. If <code>{resource}</code> is not specified, revokes every permission
+				</section>
+			</article>
+			<a id="050-api-permissions-revoke" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="DELETE img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-danger">DELETE</span>
+								<span class="gray">
+									/v1/_permissions/{subjectid}/{resource} 
+								</span>
+							</code>
+							<span class="hidden-xs">Revoke permissions</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Revokes all permissions for a given subject and resource. If <code>{resource}</code> is not specified, revokes every permission
 that has been granted to that subject.</p>
 <h3 id="request">Request</h3>
 <ul>
@@ -4221,23 +4221,23 @@ that has been granted to that subject.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="050-api-settings-get" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/_settings 
-									</span>
-								</code>
-								<span class="hidden-xs">List custom settings</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Lists all custom app settings. These can be user-defined key-value pairs and are stored withing the app object.</p>
+				</section>
+			</article>
+			<a id="050-api-settings-get" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_settings 
+								</span>
+							</code>
+							<span class="hidden-xs">List custom settings</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Lists all custom app settings. These can be user-defined key-value pairs and are stored withing the app object.</p>
 <h3 id="request">Request</h3>
 <p><strong>No parameters</strong>.</p>
 <h3 id="response">Response</h3>
@@ -4254,23 +4254,23 @@ that has been granted to that subject.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="050-api-settings-put" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="PUT img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-warning">PUT</span>
-									<span class="gray">
-										/v1/_settings/{key} 
-									</span>
-								</code>
-								<span class="hidden-xs">Add custom setting</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Adds a new custom app setting or overwrites an existing one. To overwrite all app settings, make a <code>PUT</code> request without
+				</section>
+			</article>
+			<a id="050-api-settings-put" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="PUT img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-warning">PUT</span>
+								<span class="gray">
+									/v1/_settings/{key} 
+								</span>
+							</code>
+							<span class="hidden-xs">Add custom setting</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Adds a new custom app setting or overwrites an existing one. To overwrite all app settings, make a <code>PUT</code> request without
 providing the <code>key</code> parameter, like so:</p>
 <pre><code>PUT /v1/_settings
 {
@@ -4293,23 +4293,23 @@ the JSON in the body of the request.</li>
 <li><strong>status codes</strong> - <code>200</code></li>
 </ul>
 
-					</section>
-				</article>
-				<a id="050-api-settings-rem" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="DELETE img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-danger">DELETE</span>
-									<span class="gray">
-										/v1/_settings/{key} 
-									</span>
-								</code>
-								<span class="hidden-xs">Remove custom setting</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Removes a custom app setting by the given key.</p>
+				</section>
+			</article>
+			<a id="050-api-settings-rem" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="DELETE img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-danger">DELETE</span>
+								<span class="gray">
+									/v1/_settings/{key} 
+								</span>
+							</code>
+							<span class="hidden-xs">Remove custom setting</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Removes a custom app setting by the given key.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{key}</code> - a key from the settings map</li>
@@ -4320,23 +4320,23 @@ the JSON in the body of the request.</li>
 <li><strong>status codes</strong> - <code>200</code></li>
 </ul>
 
-					</section>
-				</article>
-				<a id="050-api-setup-child" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/_setup/{app_name} 
-									</span>
-								</code>
-								<span class="hidden-xs">Child app setup</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p><strong>Requires authentication with the root app access/secret keys</strong></p>
+				</section>
+			</article>
+			<a id="050-api-setup-child" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_setup/{app_name} 
+								</span>
+							</code>
+							<span class="hidden-xs">Child app setup</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p><strong>Requires authentication with the root app access/secret keys</strong></p>
 <p>Creates a new child app and generates the first pair of API keys. You are responsible for creating the database table
 and index for the new app. Equivalent to calling <code>Para.newApp()</code> from your Java code.</p>
 <h3 id="request">Request</h3>
@@ -4354,23 +4354,23 @@ and index for the new app. Equivalent to calling <code>Para.newApp()</code> from
 <li><strong>status codes</strong> - <code>200</code>, <code>403</code></li>
 </ul>
 
-					</section>
-				</article>
-				<a id="050-api-setup" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/_setup 
-									</span>
-								</code>
-								<span class="hidden-xs">Initial setup</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Creates the root application and generates the first pair of API keys. Calling this method will enable you to access
+				</section>
+			</article>
+			<a id="050-api-setup" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_setup 
+								</span>
+							</code>
+							<span class="hidden-xs">Initial setup</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Creates the root application and generates the first pair of API keys. Calling this method will enable you to access
 the REST API.</p>
 <h3 id="request">Request</h3>
 <p><strong>No parameters</strong>.</p>
@@ -4393,23 +4393,23 @@ the REST API.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="051-api-newkeys" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="POST img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-info">POST</span>
-									<span class="gray">
-										/v1/_newkeys 
-									</span>
-								</code>
-								<span class="hidden-xs">Reset API keys</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>This will reset your API secret key by generating a new one.
+				</section>
+			</article>
+			<a id="051-api-newkeys" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="POST img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-info">POST</span>
+								<span class="gray">
+									/v1/_newkeys 
+								</span>
+							</code>
+							<span class="hidden-xs">Reset API keys</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>This will reset your API secret key by generating a new one.
 Make sure you save it and use it for signing future requests.</p>
 <h3 id="request">Request</h3>
 <p><strong>No parameters</strong>.</p>
@@ -4426,23 +4426,23 @@ Make sure you save it and use it for signing future requests.</p>
 }
 </code></pre>
 
-					</section>
-				</article>
-				<a id="052-api-utils" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-				<article class="GET img-rounded">
-						<a href="#">
-							<h2 class="img-rounded">
-								<code>
-										<span class="img-rounded label-success">GET</span>
-									<span class="gray">
-										/v1/utils/{method} 
-									</span>
-								</code>
-								<span class="hidden-xs">Utilities</span>
-							</h2>
-						</a>
-					<section class="body api-body img-rounded">
-						<p>Utility functions which can be accessed via the REST API include (listed by the method’s short name):</p>
+				</section>
+			</article>
+			<a id="052-api-utils" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/utils/{method} 
+								</span>
+							</code>
+							<span class="hidden-xs">Utilities</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Utility functions which can be accessed via the REST API include (listed by the method’s short name):</p>
 <ul>
 <li><code>newid</code> - calls <code>Utils.getNewId()</code>. You <em>must</em> set <code>para.worker_id</code> to be different on each node.</li>
 <li><code>timestamp</code> - calls <code>Utils.timestamp()</code></li>
@@ -4467,37 +4467,37 @@ Make sure you save it and use it for signing future requests.</p>
 <pre><code class="lang-js"><span class="hljs-string">"result"</span>
 </code></pre>
 
-					</section>
-				</article>
-		</section>
+				</section>
+			</article>
+	</section>
 
-		<!-- Footer Content -->
-		<div class="container footer-section">
-			<p>&nbsp;</p>
-			<footer>
-				<div class="row">
-					<div class="col-lg-12 text-center">
-						<p>Generated on <i>14 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
-							and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
-						<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
-							2017
-							<a href="https://erudika.com">Erudika</a></p>
-					</div>
+	<!-- Footer Content -->
+	<div class="container footer-section">
+		<p>&nbsp;</p>
+		<footer>
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<p>Generated on <i>15 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
+					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
+						2017
+						<a href="https://erudika.com">Erudika</a></p>
 				</div>
-			</footer>
-		</div>
+			</div>
+		</footer>
 	</div>
 </div>
 
 
 
+		</div>
 
 		<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/lang-basic.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-		<script src="/js/main.js?v=3"></script>
+		<script src="/js/main.js?v=4"></script>
 
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
