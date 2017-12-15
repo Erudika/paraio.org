@@ -577,11 +577,10 @@ a.article, a.article:hover {
 
 @media(max-width:767px) {
 	#content h2 code {
-		font-size: 0.5em;
-		/*line-height: 0.5em;*/
+		font-size: 0.7em;
 	}
 	#content article a h2 {
-		padding: 0 0 10px 0;
+		padding: 4px 0 7px 0;
 	}
 }
 
