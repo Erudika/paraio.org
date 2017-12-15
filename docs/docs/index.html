@@ -1722,21 +1722,32 @@ with the same name.</p>
     <thead>
         <tr>
             <th>property</th>
-            <th>description</th>
+            <th>default value</th>
         </tr>
     </thead>
     <tbody>
-        <tr><td><code>para.hc.async_enabled</code></td><td> Asynchronous operation when putting objects in cache. Defaults to <code>false</code>.</td></tr>
-        <tr><td><code>para.hc.eviction_policy</code></td><td> Cache eviction policy - <code>LRU</code> or <code>LFU</code>. Defaults to <code>LRU</code>.</td></tr>
-        <tr><td><code>para.hc.eviction_percentage</code></td><td> Cache eviction percentage. Defaults to <code>25</code> percent.</td></tr>
-        <tr><td><code>para.hc.ttl_seconds</code></td><td> ‘Time To Live’ for cached objects. Defaults to <code>3600</code> seconds.</td></tr>
-        <tr><td><code>para.hc.max_size</code></td><td> Cache size as a percentage of used heap. Defaults to <code>25</code> percent.</td></tr>
-        <tr><td><code>para.hc.jmx_enabled</code></td><td> JMX reporting. Default is <code>true</code>. </td></tr>
-        <tr><td><code>para.hc.ec2_discovery_enabled</code></td><td> Enables AWS EC2 auto discovery. Default is <code>true</code>.</td></tr>
-        <tr><td><code>para.hc.discovery_group</code></td><td> Security group for cloud discovery of nodes. Default is <code>hazelcast</code>.</td></tr>
-        <tr><td><code>para.hc.password</code></td><td> The Hazelcast cluster password. Default is <code>hcpasswd</code>.</td></tr>
-        <tr><td><code>para.hc.mancenter_enabled</code></td><td> Enables the Hazelcast Management Center. Default is <code>!IN_PRODUCTION</code>.</td></tr>
-        <tr><td><code>para.hc.mancenter_url</code></td><td> The URL for the Management Center server. Default is <code>http://localhost:8001/mancenter</code>.</td></tr>
+        <tr><td><code>para.hc.async_enabled</code></td><td><code>false</code></td></tr>
+        <tr><td>Asynchronous operation when putting objects in cache.</td></tr>
+        <tr><td><code>para.hc.eviction_policy</code></td><td><code>LRU</code></td></tr>
+        <tr><td>Cache eviction policy - <code>LRU</code> or <code>LFU</code>. </td></tr>
+        <tr><td><code>para.hc.eviction_percentage</code></td><td><code>25</code></td></tr>
+        <tr><td>Cache eviction percentage. </td></tr>
+        <tr><td><code>para.hc.ttl_seconds</code></td><td><code>3600</code></td></tr>
+        <tr><td>‘Time To Live’ for cached objects in seconds. </td></tr>
+        <tr><td><code>para.hc.max_size</code></td><td><code>25</code></td></tr>
+        <tr><td>Cache size as a percentage of used heap. </td></tr>
+        <tr><td><code>para.hc.jmx_enabled</code></td><td><code>true</code></td></tr>
+        <tr><td>Enables JMX reporting. </td></tr>
+        <tr><td><code>para.hc.ec2_discovery_enabled</code></td><td><code>true</code></td></tr>
+        <tr><td>Enables AWS EC2 auto discovery. </td></tr>
+        <tr><td><code>para.hc.discovery_group</code></td><td><code>hazelcast</code></td></tr>
+        <tr><td>Security group for cloud discovery of nodes. </td></tr>
+        <tr><td><code>para.hc.password</code></td><td><code>hcpasswd</code></td></tr>
+        <tr><td>The Hazelcast cluster password. </td></tr>
+        <tr><td><code>para.hc.mancenter_enabled</code></td><td><code>!IN_PRODUCTION</code></td></tr>
+        <tr><td>Enables the Hazelcast Management Center. </td></tr>
+        <tr><td><code>para.hc.mancenter_url</code></td><td><code>http://localhost:8001/mancenter</code></td></tr>
+        <tr><td>The URL for the Management Center server. </td></tr>
     </tbody>
 </table>
 
@@ -2330,20 +2341,30 @@ Example: <code>GET /ldap_auth?username=bob&amp;password=secret</code></p>
     <thead>
         <tr>
             <th>property</th>
-            <th>description</th>
+            <th>default value</th>
         </tr>
     </thead>
     <tbody>
-        <tr><td><code>para.security.ldap.server_url</code></td><td>URL of the LDAP server, including scheme and port, defaults to <code>ldap://localhost:8389/</code>. </td></tr>
-        <tr><td><code>para.security.ldap.base_dn</code></td><td>The base DN, aka domain (default is <code>dc=springframework,dc=org</code>). </td></tr>
-        <tr><td><code>para.security.ldap.bind_dn</code></td><td>The initial bind DN for a user with search privileges (default is blank). </td></tr>
-        <tr><td><code>para.security.ldap.bind_pass</code></td><td>The password for a user with search privileges (default is blank). </td></tr>
-        <tr><td><code>para.security.ldap.user_search_base</code></td><td>Search base for user searches (default is blank).</td></tr>
-        <tr><td><code>para.security.ldap.user_search_filter</code></td><td>Search filter for user searches (default is <code>(cn={0})</code>). </td></tr>
-        <tr><td><code>para.security.ldap.user_dn_pattern</code></td><td>DN pattern for finding users directly (default is <code>uid={0},ou=people</code>). </td></tr>
-        <tr><td><code>para.security.ldap.password_attribute</code></td><td>The password attribute in the directory (default is <code>userPassword</code>). </td></tr>
-        <tr><td><code>para.security.ldap.active_directory_domain</code></td><td> The domain name for AD server. (default is blank, AD is disabled). </td></tr>
-        <tr><td><code>para.security.ldap.compare_passwords</code></td><td> If set to any value, will switch to password comparison strategy instead of default “bind” method. (default - not set). </td></tr>
+        <tr><td><code>para.security.ldap.server_url</code></td><td><code>ldap://localhost:8389/</code></td></tr>
+        <tr><td>URL of the LDAP server, including scheme and port.</td></tr>
+        <tr><td><code>para.security.ldap.base_dn</code></td><td><code>dc=springframework,dc=org</code></td></tr>
+        <tr><td>The base DN, aka domain.</td></tr>
+        <tr><td><code>para.security.ldap.bind_dn</code></td><td>-</td></tr>
+        <tr><td>The initial bind DN for a user with search privileges.</td></tr>
+        <tr><td><code>para.security.ldap.bind_pass</code></td><td>-</td></tr>
+        <tr><td>The password for a user with search privileges.</td></tr>
+        <tr><td><code>para.security.ldap.user_search_base</code></td><td>-</td></tr>
+        <tr><td>Search base for user searches.</td></tr>
+        <tr><td><code>para.security.ldap.user_search_filter</code></td><td><code>(cn={0})</code></td></tr>
+        <tr><td>Search filter for user searches.</td></tr>
+        <tr><td><code>para.security.ldap.user_dn_pattern</code></td><td><code>uid={0},ou=people</code></td></tr>
+        <tr><td>DN pattern for finding users directly</td></tr>
+        <tr><td><code>para.security.ldap.password_attribute</code></td><td><code>userPassword</code></td></tr>
+        <tr><td>The password attribute in the directory</td></tr>
+        <tr><td><code>para.security.ldap.active_directory_domain</code></td><td>-</td></tr>
+        <tr><td>The domain name for AD server. If blank (defaut) AD is disabled.</td></tr>
+        <tr><td><code>para.security.ldap.compare_passwords</code></td><td>-</td></tr>
+        <tr><td>If set to any value, will switch to password comparison strategy instead of default “bind” method.</td></tr>
     </tbody>
 </table>
 

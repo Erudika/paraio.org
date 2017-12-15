@@ -17,21 +17,32 @@ These are the configuration properties for Hazelcast:
 	<thead>
 		<tr>
 			<th>property</th>
-			<th>description</th>
+			<th>default value</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>`para.hc.async_enabled`</td><td> Asynchronous operation when putting objects in cache. Defaults to `false`.</td></tr>
-		<tr><td>`para.hc.eviction_policy`</td><td> Cache eviction policy - `LRU` or `LFU`. Defaults to `LRU`.</td></tr>
-		<tr><td>`para.hc.eviction_percentage`</td><td> Cache eviction percentage. Defaults to `25` percent.</td></tr>
-		<tr><td>`para.hc.ttl_seconds`</td><td> 'Time To Live' for cached objects. Defaults to `3600` seconds.</td></tr>
-		<tr><td>`para.hc.max_size`</td><td> Cache size as a percentage of used heap. Defaults to `25` percent.</td></tr>
-		<tr><td>`para.hc.jmx_enabled`</td><td> JMX reporting. Default is `true`. </td></tr>
-		<tr><td>`para.hc.ec2_discovery_enabled`</td><td> Enables AWS EC2 auto discovery. Default is `true`.</td></tr>
-		<tr><td>`para.hc.discovery_group`</td><td> Security group for cloud discovery of nodes. Default is `hazelcast`.</td></tr>
-		<tr><td>`para.hc.password`</td><td> The Hazelcast cluster password. Default is `hcpasswd`.</td></tr>
-		<tr><td>`para.hc.mancenter_enabled`</td><td> Enables the Hazelcast Management Center. Default is `!IN_PRODUCTION`.</td></tr>
-		<tr><td>`para.hc.mancenter_url`</td><td> The URL for the Management Center server. Default is `http://localhost:8001/mancenter`.</td></tr>
+		<tr><td>`para.hc.async_enabled`</td><td>`false`</td></tr>
+		<tr><td>Asynchronous operation when putting objects in cache.</td></tr>
+		<tr><td>`para.hc.eviction_policy`</td><td>`LRU`</td></tr>
+		<tr><td>Cache eviction policy - `LRU` or `LFU`. </td></tr>
+		<tr><td>`para.hc.eviction_percentage`</td><td>`25`</td></tr>
+		<tr><td>Cache eviction percentage. </td></tr>
+		<tr><td>`para.hc.ttl_seconds`</td><td>`3600`</td></tr>
+		<tr><td>'Time To Live' for cached objects in seconds. </td></tr>
+		<tr><td>`para.hc.max_size`</td><td>`25`</td></tr>
+		<tr><td>Cache size as a percentage of used heap. </td></tr>
+		<tr><td>`para.hc.jmx_enabled`</td><td>`true`</td></tr>
+		<tr><td>Enables JMX reporting. </td></tr>
+		<tr><td>`para.hc.ec2_discovery_enabled`</td><td>`true`</td></tr>
+		<tr><td>Enables AWS EC2 auto discovery. </td></tr>
+		<tr><td>`para.hc.discovery_group`</td><td>`hazelcast`</td></tr>
+		<tr><td>Security group for cloud discovery of nodes. </td></tr>
+		<tr><td>`para.hc.password`</td><td>`hcpasswd`</td></tr>
+		<tr><td>The Hazelcast cluster password. </td></tr>
+		<tr><td>`para.hc.mancenter_enabled`</td><td>`!IN_PRODUCTION`</td></tr>
+		<tr><td>Enables the Hazelcast Management Center. </td></tr>
+		<tr><td>`para.hc.mancenter_url`</td><td>`http://localhost:8001/mancenter`</td></tr>
+		<tr><td>The URL for the Management Center server. </td></tr>
 	</tbody>
 </table>
 

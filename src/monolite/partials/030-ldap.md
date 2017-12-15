@@ -19,20 +19,30 @@ These are the configuration options for this filter:
 	<thead>
 		<tr>
 			<th>property</th>
-			<th>description</th>
+			<th>default value</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>`para.security.ldap.server_url`</td><td>URL of the LDAP server, including scheme and port, defaults to `ldap://localhost:8389/`. </td></tr>
-		<tr><td>`para.security.ldap.base_dn`</td><td>The base DN, aka domain (default is `dc=springframework,dc=org`). </td></tr>
-		<tr><td>`para.security.ldap.bind_dn`</td><td>The initial bind DN for a user with search privileges (default is blank). </td></tr>
-		<tr><td>`para.security.ldap.bind_pass`</td><td>The password for a user with search privileges (default is blank). </td></tr>
-		<tr><td>`para.security.ldap.user_search_base`</td><td>Search base for user searches (default is blank).</td></tr>
-		<tr><td>`para.security.ldap.user_search_filter`</td><td>Search filter for user searches (default is `(cn={0})`). </td></tr>
-		<tr><td>`para.security.ldap.user_dn_pattern`</td><td>DN pattern for finding users directly (default is `uid={0},ou=people`). </td></tr>
-		<tr><td>`para.security.ldap.password_attribute`</td><td>The password attribute in the directory (default is `userPassword`). </td></tr>
-		<tr><td>`para.security.ldap.active_directory_domain`</td><td> The domain name for AD server. (default is blank, AD is disabled). </td></tr>
-		<tr><td>`para.security.ldap.compare_passwords`</td><td> If set to any value, will switch to password comparison strategy instead of default "bind" method. (default - not set). </td></tr>
+		<tr><td>`para.security.ldap.server_url`</td><td>`ldap://localhost:8389/`</td></tr>
+		<tr><td>URL of the LDAP server, including scheme and port.</td></tr>
+		<tr><td>`para.security.ldap.base_dn`</td><td>`dc=springframework,dc=org`</td></tr>
+		<tr><td>The base DN, aka domain.</td></tr>
+		<tr><td>`para.security.ldap.bind_dn`</td><td>-</td></tr>
+		<tr><td>The initial bind DN for a user with search privileges.</td></tr>
+		<tr><td>`para.security.ldap.bind_pass`</td><td>-</td></tr>
+		<tr><td>The password for a user with search privileges.</td></tr>
+		<tr><td>`para.security.ldap.user_search_base`</td><td>-</td></tr>
+		<tr><td>Search base for user searches.</td></tr>
+		<tr><td>`para.security.ldap.user_search_filter`</td><td>`(cn={0})`</td></tr>
+		<tr><td>Search filter for user searches.</td></tr>
+		<tr><td>`para.security.ldap.user_dn_pattern`</td><td>`uid={0},ou=people`</td></tr>
+		<tr><td>DN pattern for finding users directly</td></tr>
+		<tr><td>`para.security.ldap.password_attribute`</td><td>`userPassword`</td></tr>
+		<tr><td>The password attribute in the directory</td></tr>
+		<tr><td>`para.security.ldap.active_directory_domain`</td><td>-</td></tr>
+		<tr><td>The domain name for AD server. If blank (defaut) AD is disabled.</td></tr>
+		<tr><td>`para.security.ldap.compare_passwords`</td><td>-</td></tr>
+		<tr><td>If set to any value, will switch to password comparison strategy instead of default "bind" method.</td></tr>
 	</tbody>
 </table>
 
