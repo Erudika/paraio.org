@@ -93,7 +93,7 @@ function setTheme(t) {
 		logohref = "/img/logodark.svg";
 		settings.theme = 'dark';
 		$("#theme-switch-btn").text("Light Theme");
-		$('#theme').after('<link href="/css/dark.css?v=4" rel="stylesheet" id="dark-theme">');
+		$('#theme').after('<link href="/css/dark.css?v=5" rel="stylesheet" id="dark-theme">');
 	}
 	saveSettings(settings);
 	$('#logo').attr('src', logohref);

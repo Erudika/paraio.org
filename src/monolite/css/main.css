@@ -397,7 +397,7 @@ code {
 	position: fixed;
 	top: 0;
 	left: 0;
-	height: 100vh;
+	height: 100%;
 	z-index: 999;
 	background: #333;
 	color: #fff;
@@ -524,7 +524,6 @@ a.article, a.article:hover {
 	#sidebar {
 		min-width: 250px;
 		max-width: 250px;
-		height: 100vh;
 		position: fixed;
 		top: 0;
 		left: 0;
