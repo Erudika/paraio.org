@@ -32,3 +32,6 @@ code, #content pre, .intro-cmd code {
 .about-section {
 	background-color: #666;
 }
+#dismiss {
+	color: white;
+}

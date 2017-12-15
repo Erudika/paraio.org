@@ -13,7 +13,7 @@ body {
 	font-size: 1.7em;
 	color: #222222;
 	background-color: white;
-	margin-top: 60px;
+	margin-top: 50px;
 }
 body ::selection {
   background-color: #66CCFF;
@@ -503,11 +503,44 @@ a.article, a.article:hover {
 	width: 100%;
 }
 
+#dismiss {
+	display: none;
+}
 
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
 @media (max-width: 768px) {
+
+	.navbar {
+    position: fixed;
+		top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+		padding: 0 0 0 7px;
+	}
+
+	#sidebar {
+		min-width: 250px;
+		max-width: 250px;
+		height: 100vh;
+		position: fixed;
+		top: 0;
+		left: 0;
+		/* top layer */
+		z-index: 9999;
+		background: #333;
+		color: #fff;
+	}
+
+	#dismiss {
+		float: right;
+		padding: 0 3px;
+		color: #333;
+		display: inline;
+	}
+
 	#sidebar {
 		margin-left: -250px;
 	}
@@ -517,9 +550,9 @@ a.article, a.article:hover {
 	#content {
 		width: 100%;
 	}
-	#content.active {
+/*	#content.active {
 		width: calc(100% - 250px);
-	}
+	}*/
 	#sidebarCollapse span {
 		display: none;
 	}

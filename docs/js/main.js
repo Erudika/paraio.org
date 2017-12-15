@@ -93,7 +93,7 @@ function setTheme(t) {
 		logohref = "/img/logodark.svg";
 		settings.theme = 'dark';
 		$("#theme-switch-btn").text("Light Theme");
-		$('#theme').after('<link href="/css/dark.css?v=3" rel="stylesheet" id="dark-theme">');
+		$('#theme').after('<link href="/css/dark.css?v=4" rel="stylesheet" id="dark-theme">');
 	}
 	saveSettings(settings);
 	$('#logo').attr('src', logohref);
@@ -124,14 +124,21 @@ $("a.docs-category").click(function () {
 	saveSettings(settings);
 });
 
+$(".docs-category-child a").click(function () {
+	if (window.matchMedia('(max-width: 767px)').matches) {
+		$('#dismiss').click();
+	}
+});
+
 $(".wrapper").fadeIn(100);
 
 $("#sidebar").mCustomScrollbar({
 	theme: "minimal"
 });
 
-$('#sidebarCollapse').on('click', function () {
+$('#sidebarCollapse, #dismiss').on('click', function () {
 	$('#sidebar, #content').toggleClass('active');
-	$('.collapse.in').toggleClass('in');
-	$('a[aria-expanded=true]').attr('aria-expanded', 'false');
+//	$('.collapse.in').toggleClass('in');
+//	$('a[aria-expanded=true]').attr('aria-expanded', 'false');
+	return false;
 });
