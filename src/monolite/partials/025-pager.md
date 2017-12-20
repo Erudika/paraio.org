@@ -52,3 +52,14 @@ paraClient.findQuery("*", pager);
 paraClient.findQuery("*", pager);
 //  and so on...
 ```
+
+And here's an example for reading all object of type "cat" using deep pagination ("search after"):
+```java
+Pager pager = new Pager(1, "_docid", false, 10_000);
+List<Cat> cats = new LinkedList<>();
+List<Cat> catsPage;
+do {
+	catsPage = Para.getSearch().findQuery("cat", "*", pager);
+	cats.addAll(catsPage);
+} while (!catsPage.isEmpty());
+```

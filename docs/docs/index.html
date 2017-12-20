@@ -111,6 +111,12 @@
 				</ul>
 			</li>
 			<li>
+				<a href="#Metrics" class="docs-category" data-toggle="collapse" aria-expanded="false">Metrics</a>
+				<ul id="Metrics" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#020-metrics">Timers</a></li>
+				</ul>
+			</li>
+			<li>
 				<a href="#IoT" class="docs-category" data-toggle="collapse" aria-expanded="false">IoT</a>
 				<ul id="IoT" class="docs-category-child collapse list-unstyled">
 							<li class=""><a href="#021-iot-aws">AWS IoT</a></li>
@@ -175,6 +181,9 @@
 							<li class="GET"><a href="#046-api-links-get">Find linked objects</a></li>
 							<li class="POST"><a href="#047-api-links-link">Link objects</a></li>
 							<li class="DELETE"><a href="#048-api-links-unlink">Unlink objects</a></li>
+							<li class="GET"><a href="#048-api-metrics-app">App metrics</a></li>
+							<li class="GET"><a href="#048-api-metrics-apps">System metrics</a></li>
+							<li class="GET"><a href="#048-api-metrics-system">System metrics</a></li>
 							<li class="PUT"><a href="#049-api-constraints-add">Add constraint</a></li>
 							<li class="GET"><a href="#049-api-constraints-get">List constraints</a></li>
 							<li class="DELETE"><a href="#049-api-constraints-rem">Remove constraint</a></li>
@@ -757,6 +766,12 @@ This is important for securing your server because this secret key is used for s
         <tr><td><code>para.localstorage.max_filesize_mb</code>    </td><td> 10 </td></tr>
         <tr><td>Max filesize for files stored locally, in megabytes. </td><td></td></tr>
 
+        <tr><td><code>para.metrics_enabled</code>    </td><td> <code>true</code> </td></tr>
+        <tr><td>Enable/disable all metrics. </td><td></td></tr>
+        <tr><td><code>para.metrics.logging_rate</code>    </td><td> 60 </td></tr>
+        <tr><td>The rate at which the metrics logger will write to file, in seconds. </td><td></td></tr>
+        <tr><td><code>para.metrics.jmx_enabled</code>    </td><td> <code>false</code> </td></tr>
+        <tr><td>Enable/disable JMX reporting for all metrics. </td><td></td></tr>
     </tbody>
 </table>
 
@@ -1587,7 +1602,21 @@ Response post = paraClient.invokePost(<span class="hljs-string">"_elasticsearch/
                                         Collections.singletonMap(<span class="hljs-string">"type"</span>, <span class="hljs-string">"cat"</span>)))));
 </code></pre>
 <p>If the <code>path</code> parameter is omitted, it defaults to <code>_search</code>.</p>
-<p><strong>Note:</strong> This endpoint requires authentication and unsigned requests are not allowed. Keep in mind that all requests
+<p>The response object will be transformed to be compatible with Para clients an looks like this:</p>
+<pre><code class="lang-js">{
+    <span class="hljs-string">"page"</span>:<span class="hljs-number">0</span>,
+    <span class="hljs-string">"totalHits"</span>:<span class="hljs-number">3</span>,
+    <span class="hljs-string">"items"</span>:[{...}]
+}
+</code></pre>
+<p>If you wish to get the raw query response from Elasticsearch, add the parameter <code>getRawResponse=true</code> to the requst
+path and also URL-encode it:</p>
+<pre><code>GET /v1/_elasticsearch/mytype%<span class="hljs-number">2</span>f_search%<span class="hljs-number">3</span>FgetRawResponse%<span class="hljs-number">3</span>Dtrue
+</code></pre><p>Equivalently, the same can be done by adding the query parameter using <code>ParaClient</code>:</p>
+<pre><code>MultivaluedHashMap&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt; params = <span class="hljs-keyword">new</span> MultivaluedHashMap&lt;&gt;();
+params.putSingle(<span class="hljs-string">"getRawRequest"</span>, <span class="hljs-string">"true"</span>);
+paraClient.invokeGet(<span class="hljs-string">"_elasticsearch/"</span> + Utils.urlEncode(<span class="hljs-string">"mytype/_search"</span>), params);
+</code></pre><p><strong>Note:</strong> This endpoint requires authentication and unsigned requests are not allowed. Keep in mind that all requests
 to Elasticsearch are prefixed with the app identifier. For example if the app id is “app:myapp, then Para will proxy
 requests to Elasticsearch at <code>http://eshost:9200/myapp/{path}</code>.</p>
 <h3 id="rebuilding-indices-through-the-elasticsearch-proxy-endpoint">Rebuilding indices through the Elasticsearch proxy endpoint</h3>
@@ -1826,6 +1855,39 @@ object1.unlinkAll();
 <p>Finally, to read all objects that are linked to <code>object1</code>, use:</p>
 <pre><code class="lang-java">object1.getLinkedObjects(object2.getType(), Pager... pager);
 </code></pre>
+
+				</section>
+			</article>
+			<a id="020-metrics" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Timers</h2>
+				<section class="body  img-rounded">
+					<p>With version 1.27, a number of metrics are implemented on top of DropWizard. By default, DropWizard metrics are
+captured for every application, as well as the overall system across all applications. The DropWizard <code>Timer</code> is used
+to record metrics, which gives count and latency measurements. There are timers implemented on all of the following
+components:</p>
+<ul>
+<li>All methods on the <code>DAO</code> interface</li>
+<li>All methods on the <code>Search</code> interface</li>
+<li>All methods on the <code>Cache</code> interface</li>
+<li>All REST endpoints for CRUD operations (both single and batch)</li>
+<li>All REST endpoints for Search operations</li>
+<li>All REST endpoints for Link operations</li>
+<li>All REST endpoints for classes implementing the <code>CustomResourceHandler</code> interface</li>
+</ul>
+<p>All of the above metrics are initialized at startup for the overall system, as well as any existing applications.
+A new log file output was added to print the names of the applications found during initialization, and to indicate
+which one is the root app. If a new app is created, metrics are automatically initialized for this app as well.</p>
+<p>Metrics are retrievable in two ways. First, a new log file called <code>para-metrics.log</code> is created by default. The system
+metrics are written to this file at a rate of every 60 seconds by default. There is a user configurable parameter
+<code>para.metrics.logging_rate</code> which will override the logging rate of the log file. If the logging rate is set to zero,
+no metrics are saved to the log file.</p>
+<p>The other alternative for retrieving metrics is using a new REST API at <code>/v1/_metrics</code>. A signed request to
+<code>/v1/_metrics</code> will return the instantaneous metrics data in JSON format for the application that made the request.
+A request path parameter <code>pretty</code> will format the response in a more human-readable format. The root application also
+has an additional endpoint at <code>/v1/_metrics/_system</code> to get metrics data for the overall system (the same data that is
+reported to the log file).</p>
+<p>Additionally, JMX reporting can be enabled by setting <code>para.metrics.jmx_enabled = true</code>.</p>
 
 				</section>
 			</article>
@@ -2177,6 +2239,15 @@ paraClient.findQuery(<span class="hljs-string">"*"</span>, pager);
 <span class="hljs-comment">// fetch page 2</span>
 paraClient.findQuery(<span class="hljs-string">"*"</span>, pager);
 <span class="hljs-comment">//  and so on...</span>
+</code></pre>
+<p>And here’s an example for reading all object of type “cat” using deep pagination (“search after”):</p>
+<pre><code class="lang-java">Pager pager = <span class="hljs-keyword">new</span> Pager(<span class="hljs-number">1</span>, <span class="hljs-string">"_docid"</span>, <span class="hljs-keyword">false</span>, <span class="hljs-number">10_000</span>);
+List&lt;Cat&gt; cats = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+List&lt;Cat&gt; catsPage;
+<span class="hljs-keyword">do</span> {
+    catsPage = Para.getSearch().findQuery(<span class="hljs-string">"cat"</span>, <span class="hljs-string">"*"</span>, pager);
+    cats.addAll(catsPage);
+} <span class="hljs-keyword">while</span> (!catsPage.isEmpty());
 </code></pre>
 
 				</section>
@@ -3764,6 +3835,92 @@ of an object (child) to be equal to the <code>id</code> field of another object 
 
 				</section>
 			</article>
+			<a id="048-api-metrics-app" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_metrics 
+								</span>
+							</code>
+							<span class="hidden-xs">App metrics</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Displays the metrics for the app that’s currently authenticated.</p>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li><code>pretty</code> - setting this will enable pretty printing</li>
+</ul>
+<h3 id="response">Response</h3>
+<ul>
+<li><strong>status codes</strong> - <code>200</code></li>
+</ul>
+<p>No content.</p>
+
+				</section>
+			</article>
+			<a id="048-api-metrics-apps" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_metrics/{appid} 
+								</span>
+							</code>
+							<span class="hidden-xs">System metrics</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Allows the root app to access the metrics of other apps. This endpoint is only accessible with the root app’s credentials.
+If a normal app calls this endpoint it will return the metrics for that app, exactly like <code>GET /v1/_metrics</code>.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><code>{appid}</code> - the <code>id</code> of an app</li>
+</ul>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li><code>pretty</code> - setting this will enable pretty printing</li>
+</ul>
+<h3 id="response">Response</h3>
+<ul>
+<li><strong>status codes</strong> - <code>200</code></li>
+</ul>
+<p>No content.</p>
+
+				</section>
+			</article>
+			<a id="048-api-metrics-system" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_metrics/_system 
+								</span>
+							</code>
+							<span class="hidden-xs">System metrics</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Displays the metrics for the whole system.</p>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li><code>pretty</code> - setting this will enable pretty printing</li>
+</ul>
+<h3 id="response">Response</h3>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>403</code></li>
+</ul>
+<p>No content.</p>
+
+				</section>
+			</article>
 			<a id="049-api-constraints-add" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
 			<article class="PUT img-rounded">
 					<a href="#">
@@ -4501,7 +4658,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>15 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>21 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2017

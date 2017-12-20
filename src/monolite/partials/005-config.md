@@ -197,6 +197,12 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>`para.localstorage.max_filesize_mb`	</td><td> 10 </td></tr>
 		<tr><td>Max filesize for files stored locally, in megabytes. </td><td></td></tr>
 
+		<tr><td>`para.metrics_enabled`	</td><td> `true` </td></tr>
+		<tr><td>Enable/disable all metrics. </td><td></td></tr>
+		<tr><td>`para.metrics.logging_rate`	</td><td> 60 </td></tr>
+		<tr><td>The rate at which the metrics logger will write to file, in seconds. </td><td></td></tr>
+		<tr><td>`para.metrics.jmx_enabled`	</td><td> `false` </td></tr>
+		<tr><td>Enable/disable JMX reporting for all metrics. </td><td></td></tr>
 	</tbody>
 </table>
 

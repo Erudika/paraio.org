@@ -4,6 +4,7 @@ com.erudika.para.cache
 com.erudika.para.email
 com.erudika.para.i18n
 com.erudika.para.iot
+com.erudika.para.metrics
 com.erudika.para.persistence
 com.erudika.para.queue
 com.erudika.para.rest
