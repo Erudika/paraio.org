@@ -131,6 +131,12 @@
 				</ul>
 			</li>
 			<li>
+				<a href="#Logging" class="docs-category" data-toggle="collapse" aria-expanded="false">Logging</a>
+				<ul id="Logging" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#022-logging">Logging</a></li>
+				</ul>
+			</li>
+			<li>
 				<a href="#Utilities" class="docs-category" data-toggle="collapse" aria-expanded="false">Utilities</a>
 				<ul id="Utilities" class="docs-category-child collapse list-unstyled">
 							<li class=""><a href="#023-filters">Filters</a></li>
@@ -615,14 +621,7 @@ This is important for securing your server because this secret key is used for s
     <tbody>
         <tr><td><code>para.env</code>                                    </td><td>    <code>embedded</code></td></tr>
         <tr><td>Enables/disables certain features, depending on the environment. Can be “production”, “development”, “embedded”.  </td><td></td></tr>
-        <tr><td><code>para.print_logo</code>                        </td><td><code>true</code></td></tr>
-        <tr><td>If <code>true</code>, the Para ASCII logo and version will be displayed on startup.</td><td></td></tr>
-        <tr><td><code>para.aws_access_key</code>                </td><td>-</td></tr>
-        <tr><td>AWS access key for connecting Para to AWS.</td><td></td></tr>
-        <tr><td><code>para.aws_secret_key</code>                </td><td>-</td></tr>
-        <tr><td>AWS secret. Make sure the config file with the secret is in your <code>.gitignore</code>.</td><td></td></tr>
-        <tr><td><code>para.aws_region</code>                        </td><td><code>eu-west-1</code></td></tr>
-        <tr><td>The AWS region string.</td><td></td></tr>
+
         <tr><td><code>para.dao</code>                                    </td><td>-</td></tr>
         <tr><td>Selects the <code>DAO</code> implementation at runtime. Can be <code>AWSDynamoDAO</code> or    “dynamodb”, “MongoDBDAO”,
         “CassandraDAO”, etc. Each implementation has its own configuration properties. Defaults to <code>H2DAO</code>. </td><td></td></tr>
@@ -630,6 +629,36 @@ This is important for securing your server because this secret key is used for s
         <tr><td>Selects the <code>Search</code> implementation at runtime. Defaults to <code>LuceneSearch</code>.</td><td></td></tr>
         <tr><td><code>para.cache</code>                                </td><td>-</td></tr>
         <tr><td>Selects the <code>Cache</code> implementation at runtime. Defaults to <code>CaffeineCache</code>.</td><td></td></tr>
+
+        <tr><td><code>para.worker_id</code>                        </td><td><code>1</code></td></tr>
+        <tr><td>Node number, 1 to 128. Used for ID generation. Each instance of Para <strong>must</strong> have a different worker id. </td><td></td></tr>
+        <tr><td><code>para.app_name</code>                            </td><td><code>para</code></td></tr>
+        <tr><td>The name of the root app - the main app which is used for initializing Para. </td><td></td></tr>
+        <tr><td><code>para.app_secret_key</code>                </td><td>md5(‘paraseckey’)</td></tr>
+        <tr><td>Para secret key. Set this to a long secure random string. Used for salting other secrets and tokens. </td><td></td></tr>
+        <tr><td><code>para.core_package_name</code>        </td><td>-</td></tr>
+        <tr><td>The name of the Java package which contains your domain (core) classes. </td><td></td></tr>
+
+        <tr><td><code>para.max_items_per_page</code>        </td><td><code>30</code></td></tr>
+        <tr><td>The default page size - maximum number of results that will be returned in a search query. </td><td></td></tr>
+        <tr><td><code>para.max_pages</code>                        </td><td><code>1000</code></td></tr>
+        <tr><td>The maximum value for the <code>?page</code> parameter, which can be specified in a search query. </td><td></td></tr>
+        <tr><td><code>para.max_page_limit</code>                        </td><td><code>256</code></td></tr>
+        <tr><td>The maximum value for the <code>?limit</code> request parameter, when it is set. </td><td></td></tr>
+        <tr><td><code>para.max_datatypes_per_app</code></td><td><code>256</code></td></tr>
+        <tr><td>The maximum number of custom types an app can have. </td><td></td></tr>
+        <tr><td><code>para.max_entity_size_bytes</code></td><td><code>1024 * 1024</code></td></tr>
+        <tr><td>The size of the request payload. Requests with payloads larger than this will be denied. </td><td></td></tr>
+        <tr><td><code>para.min_password_length</code>    </td><td><code>6</code></td></tr>
+        <tr><td>The minimum length of passwords. </td><td></td></tr>
+
+        <tr><td><code>para.aws_access_key</code>                </td><td>-</td></tr>
+        <tr><td>AWS access key for connecting Para to AWS.</td><td></td></tr>
+        <tr><td><code>para.aws_secret_key</code>                </td><td>-</td></tr>
+        <tr><td>AWS secret. Make sure the config file with the secret is in your <code>.gitignore</code>.</td><td></td></tr>
+        <tr><td><code>para.aws_region</code>                        </td><td><code>eu-west-1</code></td></tr>
+        <tr><td>The AWS region string.</td><td></td></tr>
+
         <tr><td><code>para.fb_app_id</code>                        </td><td>-</td></tr>
         <tr><td>Facebook app id (for OAuth authentication).</td><td></td></tr>
         <tr><td><code>para.fb_secret</code>                        </td><td>-</td></tr>
@@ -654,30 +683,27 @@ This is important for securing your server because this secret key is used for s
         <tr><td>Microsoft app id (for OAuth authentication). </td><td></td></tr>
         <tr><td><code>para.ms_secret</code>                        </td><td>-</td></tr>
         <tr><td>Microsoft app secret. </td><td></td></tr>
+
         <tr><td><code>para.admin_ident</code>                    </td><td>-</td></tr>
         <tr><td>This is the identifier that will be used by the first admin user. It can be the email which the admin
         user will use to login or a social id in the form of <code>prefix:social_id</code>, e.g. <code>fb:12345</code>. It is used to assign
         administrative privileges to the user with that identifier.</td><td></td></tr>
-        <tr><td><code>para.worker_id</code>                        </td><td><code>1</code></td></tr>
-        <tr><td>Node number, 1 to 128. Used for ID generation. Each instance of Para <strong>must</strong> have a different worker id. </td><td></td></tr>
-        <tr><td><code>para.app_name</code>                            </td><td><code>para</code></td></tr>
-        <tr><td>The name of the root app - the main app which is used for initializing Para. </td><td></td></tr>
+        <tr><td><code>para.print_logo</code>                        </td><td><code>true</code></td></tr>
+        <tr><td>If <code>true</code>, the Para ASCII logo and version will be displayed on startup.</td><td></td></tr>
         <tr><td><code>para.auth_cookie</code>                    </td><td><code>[app_name]-auth</code></td></tr>
         <tr><td>The name of the authorization cookie. Changes depending on the app name.</td><td></td></tr>
         <tr><td><code>para.returnto_cookie</code>            </td><td><code>[app_name]-returnto</code></td></tr>
         <tr><td>The name of the cookie used to remember which URL the user requested and will be redirected to after login. </td><td></td></tr>
         <tr><td><code>para.support_email</code>                </td><td><code>support@myapp.co</code></td></tr>
         <tr><td>The email of the webmaster/support team. Para will send emails to this email.</td><td></td></tr>
-        <tr><td><code>para.app_secret_key</code>                </td><td>md5(‘paraseckey’)</td></tr>
-        <tr><td>Para secret key. Set this to a long secure random string. Used for salting other secrets and tokens. </td><td></td></tr>
-        <tr><td><code>para.core_package_name</code>        </td><td>-</td></tr>
-        <tr><td>The name of the Java package which contains your domain (core) classes. </td><td></td></tr>
+
         <tr><td><code>para.session_timeout</code>            </td><td><code>24 * 60 * 60</code> sec.</td></tr>
         <tr><td>The lifetime of the login session, in seconds. </td><td></td></tr>
         <tr><td><code>para.jwt_expires_after</code>        </td><td><code>7 * 24 * 60 * 60</code> sec.</td></tr>
         <tr><td>JWT token validity period, in seconds. </td><td></td></tr>
         <tr><td><code>para.jwt_refresh_interval</code>    </td><td><code>60 * 60</code> sec.</td></tr>
         <tr><td>JWT refresh interval, after which a new token is issued. </td><td></td></tr>
+
         <tr><td><code>para.request_expires_after</code></td><td><code>15 * 60</code> sec.</td></tr>
         <tr><td>Expiration of signed API request, in seconds. </td><td></td></tr>
         <tr><td><code>para.vote_expires_after</code>        </td><td><code>30 * 24 * 60 * 60</code> sec.</td></tr>
@@ -686,12 +712,15 @@ This is important for securing your server because this secret key is used for s
         <tr><td>Vote locking mechanism - locks vote change after X seconds.  </td><td></td></tr>
         <tr><td><code>para.pass_reset_timeout</code>        </td><td><code>30 * 60</code> sec.</td></tr>
         <tr><td>The time window in which passwords can be reset, in seconds. After that the token in the email expires. </td><td></td></tr>
+
+        <tr><td><code>para.api_enabled</code>                    </td><td><code>true</code></td></tr>
+        <tr><td>Enable/disable the REST API. </td><td></td></tr>
         <tr><td><code>para.cache_enabled</code>                </td><td><code>false</code> || <code>para.env == production</code></td></tr>
         <tr><td>Enable/disable object caching in Para. </td><td></td></tr>
         <tr><td><code>para.search_enabled</code>                </td><td><code>true</code></td></tr>
         <tr><td>Enable/disable object indexing in Para. </td><td></td></tr>
-        <tr><td><code>para.api_enabled</code>                    </td><td><code>true</code></td></tr>
-        <tr><td>Enable/disable the REST API. </td><td></td></tr>
+        <tr><td><code>para.metrics_enabled</code>    </td><td> <code>true</code> </td></tr>
+        <tr><td>Enable/disable all metrics. </td><td></td></tr>
         <tr><td><code>para.cors_enabled</code>                    </td><td><code>true</code></td></tr>
         <tr><td>Enable/disable the CORS filter. It adds CORS headers to API responses.</td><td></td></tr>
         <tr><td><code>para.gzip_enabled</code>                    </td><td><code>true</code></td></tr>
@@ -701,29 +730,20 @@ This is important for securing your server because this secret key is used for s
         <tr><td><code>para.read_from_index</code>            </td><td><code>true</code></td></tr>
         <tr><td>Enable/disable reading objects from index instead of the database. This will bypass the database.
         Useful for local testing/development or to recover objects that were lost/deleted from the database. </td><td></td></tr>
-        <tr><td><code>para.max_items_per_page</code>        </td><td><code>30</code></td></tr>
-        <tr><td>The default page size - maximum number of results that will be returned in a search query. </td><td></td></tr>
-        <tr><td><code>para.max_pages</code>                        </td><td><code>1000</code></td></tr>
-        <tr><td>The maximum value for the <code>?page</code> parameter, which can be specified in a search query. </td><td></td></tr>
-        <tr><td><code>para.max_page_limit</code>                        </td><td><code>256</code></td></tr>
-        <tr><td>The maximum value for the <code>?limit</code> request parameter, when it is set. </td><td></td></tr>
-        <tr><td><code>para.max_datatypes_per_app</code></td><td><code>256</code></td></tr>
-        <tr><td>The maximum number of custom types an app can have. </td><td></td></tr>
-        <tr><td><code>para.max_entity_size_bytes</code></td><td><code>1024 * 1024</code></td></tr>
-        <tr><td>The size of the request payload. Requests with payloads larger than this will be denied. </td><td></td></tr>
-        <tr><td><code>para.min_password_length</code>    </td><td><code>6</code></td></tr>
-        <tr><td>The minimum length of passwords. </td><td></td></tr>
-        <tr><td><code>para.default_queue_name</code>        </td><td><code>para-default</code></td></tr>
-        <tr><td>The default queue name (optional). </td><td></td></tr>
         <tr><td><code>para.queue_link_enabled</code>        </td><td><code>false</code></td></tr>
         <tr><td>Enable/disable polling the default queue for objects to be imported into Para. </td><td></td></tr>
+
+        <tr><td><code>para.default_queue_name</code>        </td><td><code>para-default</code></td></tr>
+        <tr><td>The default queue name (optional). </td><td></td></tr>
         <tr><td><code>para.shared_table_name</code>        </td><td><code>0</code></td></tr>
         <tr><td>The name of the table which is shared by apps with <code>isSharingTable</code> set to <code>true</code>. </td><td></td></tr>
         <tr><td><code>para.prepend_shared_appids_with_space</code>        </td><td><code>false</code></td></tr>
-        <tr><td>Enable/disable table sharing functionality by prepending the <code>appid</code> with a space. <code>DAO</code> implementations can detect that and switch tables based on it. </td><td></td></tr>
+        <tr><td>Enable/disable table sharing functionality by prepending the <code>appid</code> with a space. <code>DAO</code> implementations
+        can detect that and switch tables based on it. </td><td></td></tr>
 
         <tr><td><code>para.security.api_security</code>                </td><td> <code>true</code> </td></tr>
-        <tr><td>Enable/disable the API security mechanism. If <code>false</code>, the API endpoint will <strong>not</strong> check request signatures and all requests will go through. <strong>For development only</strong>.</td><td></td></tr>
+        <tr><td>Enable/disable the API security mechanism. If <code>false</code>, the API endpoint will <strong>not</strong> check request
+        signatures and all requests will go through. <strong>For development only</strong>.</td><td></td></tr>
         <tr><td><code>para.security.csrf_protection</code>            </td><td> <code>true</code> </td></tr>
         <tr><td>Enable/disable CSRF protection which checks for valid CSRF tokens in write requests. </td><td></td></tr>
         <tr><td><code>para.security.csrf_cookie</code>                    </td><td> <code>para-csrf-token</code> </td></tr>
@@ -766,12 +786,17 @@ This is important for securing your server because this secret key is used for s
         <tr><td><code>para.localstorage.max_filesize_mb</code>    </td><td> 10 </td></tr>
         <tr><td>Max filesize for files stored locally, in megabytes. </td><td></td></tr>
 
-        <tr><td><code>para.metrics_enabled</code>    </td><td> <code>true</code> </td></tr>
-        <tr><td>Enable/disable all metrics. </td><td></td></tr>
+        <tr><td><code>para.logs_dir</code>    </td><td> <code>.</code> </td></tr>
+        <tr><td>The directory where Para logs will be stored. If not specified, logs are stored in the current directory. </td><td></td></tr>
         <tr><td><code>para.metrics.logging_rate</code>    </td><td> 60 </td></tr>
         <tr><td>The rate at which the metrics logger will write to file, in seconds. </td><td></td></tr>
         <tr><td><code>para.metrics.jmx_enabled</code>    </td><td> <code>false</code> </td></tr>
         <tr><td>Enable/disable JMX reporting for all metrics. </td><td></td></tr>
+
+        <tr><td><code>para.reindex_batch_size</code>    </td><td> <code>pager.getLimit()</code> </td></tr>
+        <tr><td>Controls the number of documents to reindex in a single batch. By default is equal to page size for
+        reading the docs from DB.</td><td></td></tr>
+
     </tbody>
 </table>
 
@@ -2045,6 +2070,44 @@ no  = <span class="hljs-string">"No"</span>
 </code></pre><p>The <code>LanguageUtils</code> class deals with the loading of languages and contains methods for working with locales.
 You can set default languages, write languages to a database and load them.</p>
 
+				</section>
+			</article>
+			<a id="022-logging" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Logging</h2>
+				<section class="body  img-rounded">
+					<p>Para uses SLF4J as a logging abstraction framework, meaning you can plug in any logging implementation like Logback,
+Log4j2, etc. By default Para uses Logback. To use another implementation, exclude all Lockback packages from <code>pom.xml</code>
+like this:</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;com.erudika&lt;/groupId&gt;
+  &lt;artifactId&gt;para-core&lt;/artifactId&gt;
+  &lt;version&gt;${para.version}&lt;/version&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+      &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+      &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+      &lt;artifactId&gt;logback-access&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
+&lt;/dependency&gt;
+</code></pre><p>Logs are stored in 3 files, located in the same directory from which Para is started:</p>
+<ul>
+<li><code>para.log</code> - main log file, also written to syslog</li>
+<li><code>para-metrics.log</code> - contains all the metrics</li>
+<li><code>para-access.log</code> - contains a history of requests</li>
+</ul>
+<p>To change the directory where logs are stored, set the system property <code>para.logs_dir</code> to a folder of your choice
+(should not end with “/“):</p>
+<pre><code>$ java -jar -Dpara.logs_dir=<span class="hljs-regexp">/var/</span>logs/para para.war
+</code></pre>
 				</section>
 			</article>
 			<a id="023-filters" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
@@ -4658,7 +4721,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>21 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>22 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2017
