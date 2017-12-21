@@ -113,7 +113,8 @@
 			<li>
 				<a href="#Metrics" class="docs-category" data-toggle="collapse" aria-expanded="false">Metrics</a>
 				<ul id="Metrics" class="docs-category-child collapse list-unstyled">
-							<li class=""><a href="#020-metrics">Timers</a></li>
+							<li class=""><a href="#020-metrics-logging">Logging</a></li>
+							<li class=""><a href="#020-metrics-timers">Timers</a></li>
 				</ul>
 			</li>
 			<li>
@@ -128,12 +129,6 @@
 				<ul id="I18n" class="docs-category-child collapse list-unstyled">
 							<li class=""><a href="#021-translations">Translations</a></li>
 							<li class=""><a href="#022-languages">Languages</a></li>
-				</ul>
-			</li>
-			<li>
-				<a href="#Logging" class="docs-category" data-toggle="collapse" aria-expanded="false">Logging</a>
-				<ul id="Logging" class="docs-category-child collapse list-unstyled">
-							<li class=""><a href="#022-logging">Logging</a></li>
 				</ul>
 			</li>
 			<li>
@@ -1883,7 +1878,45 @@ object1.unlinkAll();
 
 				</section>
 			</article>
-			<a id="020-metrics" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<a id="020-metrics-logging" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Logging</h2>
+				<section class="body  img-rounded">
+					<p>Para uses SLF4J as a logging abstraction framework, meaning you can plug in any logging implementation like Logback,
+Log4j2, etc. By default Para uses Logback. To use another implementation, exclude all Lockback packages from <code>pom.xml</code>
+like this:</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;com.erudika&lt;/groupId&gt;
+  &lt;artifactId&gt;para-core&lt;/artifactId&gt;
+  &lt;version&gt;${para.version}&lt;/version&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+      &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+      &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+      &lt;artifactId&gt;logback-access&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
+&lt;/dependency&gt;
+</code></pre><p>Logs are stored in 3 files, located in the same directory from which Para is started:</p>
+<ul>
+<li><code>para.log</code> - main log file, also written to syslog</li>
+<li><code>para-metrics.log</code> - contains all the metrics</li>
+<li><code>para-access.log</code> - contains a history of requests</li>
+</ul>
+<p>To change the directory where logs are stored, set the system property <code>para.logs_dir</code> to a folder of your choice
+(should not end with “/“):</p>
+<pre><code>$ java -jar -Dpara.logs_dir=<span class="hljs-regexp">/var/</span>logs/para para.war
+</code></pre>
+				</section>
+			</article>
+			<a id="020-metrics-timers" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
 			<article class=" img-rounded">
 					<h2>Timers</h2>
 				<section class="body  img-rounded">
@@ -2070,44 +2103,6 @@ no  = <span class="hljs-string">"No"</span>
 </code></pre><p>The <code>LanguageUtils</code> class deals with the loading of languages and contains methods for working with locales.
 You can set default languages, write languages to a database and load them.</p>
 
-				</section>
-			</article>
-			<a id="022-logging" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-			<article class=" img-rounded">
-					<h2>Logging</h2>
-				<section class="body  img-rounded">
-					<p>Para uses SLF4J as a logging abstraction framework, meaning you can plug in any logging implementation like Logback,
-Log4j2, etc. By default Para uses Logback. To use another implementation, exclude all Lockback packages from <code>pom.xml</code>
-like this:</p>
-<pre><code>&lt;dependency&gt;
-  &lt;groupId&gt;com.erudika&lt;/groupId&gt;
-  &lt;artifactId&gt;para-core&lt;/artifactId&gt;
-  &lt;version&gt;${para.version}&lt;/version&gt;
-  &lt;exclusions&gt;
-    &lt;exclusion&gt;
-      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-      &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
-    &lt;/exclusion&gt;
-    &lt;exclusion&gt;
-      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-      &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
-    &lt;/exclusion&gt;
-    &lt;exclusion&gt;
-      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-      &lt;artifactId&gt;logback-access&lt;/artifactId&gt;
-    &lt;/exclusion&gt;
-  &lt;/exclusions&gt;
-&lt;/dependency&gt;
-</code></pre><p>Logs are stored in 3 files, located in the same directory from which Para is started:</p>
-<ul>
-<li><code>para.log</code> - main log file, also written to syslog</li>
-<li><code>para-metrics.log</code> - contains all the metrics</li>
-<li><code>para-access.log</code> - contains a history of requests</li>
-</ul>
-<p>To change the directory where logs are stored, set the system property <code>para.logs_dir</code> to a folder of your choice
-(should not end with “/“):</p>
-<pre><code>$ java -jar -Dpara.logs_dir=<span class="hljs-regexp">/var/</span>logs/para para.war
-</code></pre>
 				</section>
 			</article>
 			<a id="023-filters" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>

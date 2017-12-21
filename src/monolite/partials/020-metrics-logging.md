@@ -1,6 +1,6 @@
 ---
 title: Logging
-category: Logging
+category: Metrics
 ---
 
 Para uses SLF4J as a logging abstraction framework, meaning you can plug in any logging implementation like Logback,
