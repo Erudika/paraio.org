@@ -1883,7 +1883,7 @@ object1.unlinkAll();
 					<h2>Logging</h2>
 				<section class="body  img-rounded">
 					<p>Para uses SLF4J as a logging abstraction framework, meaning you can plug in any logging implementation like Logback,
-Log4j2, etc. By default Para uses Logback. To use another implementation, exclude all Lockback packages from <code>pom.xml</code>
+Log4j2, etc. By default Para uses Logback. To use another implementation, exclude all Logback packages from <code>pom.xml</code>
 like this:</p>
 <pre><code>&lt;dependency&gt;
   &lt;groupId&gt;com.erudika&lt;/groupId&gt;
@@ -1944,7 +1944,10 @@ no metrics are saved to the log file.</p>
 <code>/v1/_metrics</code> will return the instantaneous metrics data in JSON format for the application that made the request.
 A request path parameter <code>pretty</code> will format the response in a more human-readable format. The root application also
 has an additional endpoint at <code>/v1/_metrics/_system</code> to get metrics data for the overall system (the same data that is
-reported to the log file).</p>
+reported to the log file). Calling the metrics endpoint from <code>ParaClient</code> is easy, even though there isn’t a dedicated
+method for that:</p>
+<pre><code class="lang-java">Map&lt;String, Object&gt; metricsMap = paraClient.getEntity(paraClient.invokeGet(<span class="hljs-string">"_metrics"</span>, <span class="hljs-keyword">null</span>), Map.class);
+</code></pre>
 <p>Additionally, JMX reporting can be enabled by setting <code>para.metrics.jmx_enabled = true</code>.</p>
 
 				</section>

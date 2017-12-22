@@ -4,7 +4,7 @@ category: Metrics
 ---
 
 Para uses SLF4J as a logging abstraction framework, meaning you can plug in any logging implementation like Logback,
-Log4j2, etc. By default Para uses Logback. To use another implementation, exclude all Lockback packages from `pom.xml`
+Log4j2, etc. By default Para uses Logback. To use another implementation, exclude all Logback packages from `pom.xml`
 like this:
 ```
 <dependency>

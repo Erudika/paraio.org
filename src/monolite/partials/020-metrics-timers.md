@@ -29,6 +29,11 @@ The other alternative for retrieving metrics is using a new REST API at `/v1/_me
 `/v1/_metrics` will return the instantaneous metrics data in JSON format for the application that made the request.
 A request path parameter `pretty` will format the response in a more human-readable format. The root application also
 has an additional endpoint at `/v1/_metrics/_system` to get metrics data for the overall system (the same data that is
-reported to the log file).
+reported to the log file). Calling the metrics endpoint from `ParaClient` is easy, even though there isn't a dedicated
+method for that:
+
+```java
+Map<String, Object> metricsMap = paraClient.getEntity(paraClient.invokeGet("_metrics", null), Map.class);
+```
 
 Additionally, JMX reporting can be enabled by setting `para.metrics.jmx_enabled = true`.
