@@ -15,4 +15,30 @@ Displays the metrics for the whole system.
 
 - **status codes** - `200`, `403`
 
-No content.
+Example response:
+```
+{
+  "metrics": {
+    "H2DAO.createAll": {
+      "oneMinuteRate": 0,
+      "fiveMinuteRate": 0,
+      "meanRate": 0,
+      "fifteenMinuteRate": 0,
+      "count": 0,
+      "snapshot": {
+        "values": [],
+        "min": 0,
+        "mean": 0,
+        "stdDev": 0,
+        "max": 0,
+        "median": 0,
+        "75thPercentile": 0,
+        "95thPercentile": 0,
+        "98thPercentile": 0,
+        "99thPercentile": 0,
+        "999thPercentile": 0
+      }
+    }, ...
+  }
+}
+```

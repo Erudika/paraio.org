@@ -146,6 +146,8 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>Enable/disable object indexing in Para. </td><td></td></tr>
 		<tr><td>`para.metrics_enabled`	</td><td> `true` </td></tr>
 		<tr><td>Enable/disable all metrics. </td><td></td></tr>
+		<tr><td>`para.health_check_enabled`	</td><td> `true` </td></tr>
+		<tr><td>Enable/disable regular health checks. </td><td></td></tr>
 		<tr><td>`para.cors_enabled`					</td><td>`true`</td></tr>
 		<tr><td>Enable/disable the CORS filter. It adds CORS headers to API responses.</td><td></td></tr>
 		<tr><td>`para.gzip_enabled`					</td><td>`true`</td></tr>
@@ -217,6 +219,8 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>The rate at which the metrics logger will write to file, in seconds. </td><td></td></tr>
 		<tr><td>`para.metrics.jmx_enabled`	</td><td> `false` </td></tr>
 		<tr><td>Enable/disable JMX reporting for all metrics. </td><td></td></tr>
+		<tr><td>`para.health.check_interval`	</td><td> 60 </td></tr>
+		<tr><td>Health check inverval, in seconds. </td><td></td></tr>
 
 		<tr><td>`para.reindex_batch_size`	</td><td> `pager.getLimit()` </td></tr>
 		<tr><td>Controls the number of documents to reindex in a single batch. By default is equal to page size for

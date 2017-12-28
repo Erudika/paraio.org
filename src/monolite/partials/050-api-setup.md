@@ -1,9 +1,11 @@
 ---
-title: Initial setup
+title: Initial setup (public)
 category: REST API
 path: /v1/_setup
 type: GET
 ---
+
+**This resource is publicly accessible without authentication.**
 
 Creates the root application and generates the first pair of API keys. Calling this method will enable you to access
 the REST API.

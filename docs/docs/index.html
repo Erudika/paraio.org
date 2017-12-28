@@ -113,6 +113,7 @@
 			<li>
 				<a href="#Metrics" class="docs-category" data-toggle="collapse" aria-expanded="false">Metrics</a>
 				<ul id="Metrics" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#020-metrics-health">Health check</a></li>
 							<li class=""><a href="#020-metrics-logging">Logging</a></li>
 							<li class=""><a href="#020-metrics-timers">Timers</a></li>
 				</ul>
@@ -188,6 +189,7 @@
 							<li class="PUT"><a href="#049-api-constraints-add">Add constraint</a></li>
 							<li class="GET"><a href="#049-api-constraints-get">List constraints</a></li>
 							<li class="DELETE"><a href="#049-api-constraints-rem">Remove constraint</a></li>
+							<li class="GET"><a href="#049-api-health">Health check (public)</a></li>
 							<li class="GET"><a href="#049-api-id">Read by id</a></li>
 							<li class="GET"><a href="#049-api-me">Me object</a></li>
 							<li class="GET"><a href="#049-api-types-list">List types</a></li>
@@ -199,7 +201,7 @@
 							<li class="PUT"><a href="#050-api-settings-put">Add custom setting</a></li>
 							<li class="DELETE"><a href="#050-api-settings-rem">Remove custom setting</a></li>
 							<li class="GET"><a href="#050-api-setup-child">Child app setup</a></li>
-							<li class="GET"><a href="#050-api-setup">Initial setup</a></li>
+							<li class="GET"><a href="#050-api-setup">Initial setup (public)</a></li>
 							<li class="POST"><a href="#051-api-newkeys">Reset API keys</a></li>
 							<li class="GET"><a href="#052-api-utils">Utilities</a></li>
 				</ul>
@@ -716,6 +718,8 @@ This is important for securing your server because this secret key is used for s
         <tr><td>Enable/disable object indexing in Para. </td><td></td></tr>
         <tr><td><code>para.metrics_enabled</code>    </td><td> <code>true</code> </td></tr>
         <tr><td>Enable/disable all metrics. </td><td></td></tr>
+        <tr><td><code>para.health_check_enabled</code>    </td><td> <code>true</code> </td></tr>
+        <tr><td>Enable/disable regular health checks. </td><td></td></tr>
         <tr><td><code>para.cors_enabled</code>                    </td><td><code>true</code></td></tr>
         <tr><td>Enable/disable the CORS filter. It adds CORS headers to API responses.</td><td></td></tr>
         <tr><td><code>para.gzip_enabled</code>                    </td><td><code>true</code></td></tr>
@@ -787,6 +791,8 @@ This is important for securing your server because this secret key is used for s
         <tr><td>The rate at which the metrics logger will write to file, in seconds. </td><td></td></tr>
         <tr><td><code>para.metrics.jmx_enabled</code>    </td><td> <code>false</code> </td></tr>
         <tr><td>Enable/disable JMX reporting for all metrics. </td><td></td></tr>
+        <tr><td><code>para.health.check_interval</code>    </td><td> 60 </td></tr>
+        <tr><td>Health check inverval, in seconds. </td><td></td></tr>
 
         <tr><td><code>para.reindex_batch_size</code>    </td><td> <code>pager.getLimit()</code> </td></tr>
         <tr><td>Controls the number of documents to reindex in a single batch. By default is equal to page size for
@@ -1874,6 +1880,28 @@ object1.unlinkAll();
 </code></pre>
 <p>Finally, to read all objects that are linked to <code>object1</code>, use:</p>
 <pre><code class="lang-java">object1.getLinkedObjects(object2.getType(), Pager... pager);
+</code></pre>
+
+				</section>
+			</article>
+			<a id="020-metrics-health" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Health check</h2>
+				<section class="body  img-rounded">
+					<p>A simple health check is mapped to <code>/v1/_health</code> which returns <code>200 OK</code> if the server is
+“healthy”, and <code>500</code> if it’s “unhealthy”. The health check is configured to simply read the
+root app object from the <code>DAO</code>, <code>Search</code> and <code>Cache</code> to ensure there are active connections with each resource.
+The implementation is done in a class called <code>HealthUtils</code> in the “utils” package of <code>para-server</code>.</p>
+<p>The health check endpoint is publicly accessible so it can be easily called by any application or a load balancer.
+To prevent excessive calls to the health check end point, the health check method is only allowed to run at a fixed
+interval (defaults to once per minute, but can be configured using <code>para.health.check_interval</code>).</p>
+<p>An initial health check is done on startup and a warning is printed if Para is not initialized,
+which is actually just an assumption at this point. The only way to distinguish between “not initialized” and
+“unhealthy” is to check for connection errors in the logs. Para starts as unhealthy, but once the root app is created,
+i.e. <code>/v1/_setup</code> is called, the status is updated to “healthy”.</p>
+<p>Here’s how to programmatically check the health of the system:</p>
+<pre><code class="lang-java">HealthUtils.getInstance().performHealthCheck();
+<span class="hljs-keyword">boolean</span> isHealthy = HealthUtils.getInstance().isHealty();
 </code></pre>
 
 				</section>
@@ -3951,8 +3979,34 @@ If a normal app calls this endpoint it will return the metrics for that app, exa
 <ul>
 <li><strong>status codes</strong> - <code>200</code></li>
 </ul>
-<p>No content.</p>
-
+<p>Example response:</p>
+<pre><code>{
+  <span class="hljs-string">"metrics"</span>: {
+    <span class="hljs-string">"H2DAO.create"</span>: {
+      <span class="hljs-string">"oneMinuteRate"</span>: <span class="hljs-number">0.000029158291421501796</span>,
+      <span class="hljs-string">"fiveMinuteRate"</span>: <span class="hljs-number">0.03418034256030498</span>,
+      <span class="hljs-string">"meanRate"</span>: <span class="hljs-number">0.0018675416405972923</span>,
+      <span class="hljs-string">"fifteenMinuteRate"</span>: <span class="hljs-number">0.11098870924877408</span>,
+      <span class="hljs-string">"count"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">"snapshot"</span>: {
+        <span class="hljs-string">"values"</span>: [
+            <span class="hljs-number">97835393</span>
+        ],
+        <span class="hljs-string">"min"</span>: <span class="hljs-number">97835393</span>,
+        <span class="hljs-string">"mean"</span>: <span class="hljs-number">97835393</span>,
+        <span class="hljs-string">"stdDev"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">"max"</span>: <span class="hljs-number">97835393</span>,
+        <span class="hljs-string">"median"</span>: <span class="hljs-number">97835393</span>,
+        <span class="hljs-string">"75thPercentile"</span>: <span class="hljs-number">97835393</span>,
+        <span class="hljs-string">"95thPercentile"</span>: <span class="hljs-number">97835393</span>,
+        <span class="hljs-string">"98thPercentile"</span>: <span class="hljs-number">97835393</span>,
+        <span class="hljs-string">"99thPercentile"</span>: <span class="hljs-number">97835393</span>,
+        <span class="hljs-string">"999thPercentile"</span>: <span class="hljs-number">97835393</span>
+      }
+    }, ...
+  }
+}
+</code></pre>
 				</section>
 			</article>
 			<a id="048-api-metrics-system" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
@@ -3978,8 +4032,32 @@ If a normal app calls this endpoint it will return the metrics for that app, exa
 <ul>
 <li><strong>status codes</strong> - <code>200</code>, <code>403</code></li>
 </ul>
-<p>No content.</p>
-
+<p>Example response:</p>
+<pre><code>{
+  <span class="hljs-string">"metrics"</span>: {
+    <span class="hljs-string">"H2DAO.createAll"</span>: {
+      <span class="hljs-string">"oneMinuteRate"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">"fiveMinuteRate"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">"meanRate"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">"fifteenMinuteRate"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">"count"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">"snapshot"</span>: {
+        <span class="hljs-string">"values"</span>: [],
+        <span class="hljs-string">"min"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">"mean"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">"stdDev"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">"max"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">"median"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">"75thPercentile"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">"95thPercentile"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">"98thPercentile"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">"99thPercentile"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-string">"999thPercentile"</span>: <span class="hljs-number">0</span>
+      }
+    }, ...
+  }
+}
+</code></pre>
 				</section>
 			</article>
 			<a id="049-api-constraints-add" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
@@ -4193,6 +4271,39 @@ key that can be used to retrieve a localized message.</p>
 }
 </code></pre>
 
+				</section>
+			</article>
+			<a id="049-api-health" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_health 
+								</span>
+							</code>
+							<span class="hidden-xs">Health check (public)</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p><strong>This resource is publicly accessible without authentication.</strong></p>
+<p>Displays the health status of the server. Status is updated about once every minute.</p>
+<h3 id="request">Request</h3>
+<p><strong>No parameters</strong>.</p>
+<h3 id="response">Response</h3>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>500</code></li>
+</ul>
+<p>Example responses:</p>
+<pre><code>{
+  <span class="hljs-string">"message"</span> : <span class="hljs-string">"healthy"</span>
+}
+</code></pre><pre><code>{
+    <span class="hljs-string">"code"</span>: <span class="hljs-number">500</span>,
+  <span class="hljs-string">"message"</span> : <span class="hljs-string">"unhealthy"</span>
+}
+</code></pre>
 				</section>
 			</article>
 			<a id="049-api-id" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
@@ -4608,11 +4719,12 @@ and index for the new app. Equivalent to calling <code>Para.newApp()</code> from
 									/v1/_setup 
 								</span>
 							</code>
-							<span class="hidden-xs">Initial setup</span>
+							<span class="hidden-xs">Initial setup (public)</span>
 						</h2>
 					</a>
 				<section class="body api-body img-rounded">
-					<p>Creates the root application and generates the first pair of API keys. Calling this method will enable you to access
+					<p><strong>This resource is publicly accessible without authentication.</strong></p>
+<p>Creates the root application and generates the first pair of API keys. Calling this method will enable you to access
 the REST API.</p>
 <h3 id="request">Request</h3>
 <p><strong>No parameters</strong>.</p>
@@ -4719,7 +4831,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>22 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>28 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2017
