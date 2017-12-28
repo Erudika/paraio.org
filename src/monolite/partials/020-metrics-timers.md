@@ -25,15 +25,29 @@ metrics are written to this file at a rate of every 60 seconds by default. There
 `para.metrics.logging_rate` which will override the logging rate of the log file. If the logging rate is set to zero,
 no metrics are saved to the log file.
 
-The other alternative for retrieving metrics is using a new REST API at `/v1/_metrics`. A signed request to
-`/v1/_metrics` will return the instantaneous metrics data in JSON format for the application that made the request.
-A request path parameter `pretty` will format the response in a more human-readable format. The root application also
-has an additional endpoint at `/v1/_metrics/_system` to get metrics data for the overall system (the same data that is
-reported to the log file). Calling the metrics endpoint from `ParaClient` is easy, even though there isn't a dedicated
-method for that:
+The other alternative for retrieving metrics is by configuring Para to push them to a metrics server like Graphite.
+This method is preferred over pulling metrics from the API, because in a distributed environment with multiple Para nodes,
+it becomes hard to aggregate the metrics from all nodes.
 
-```java
-Map<String, Object> metricsMap = paraClient.getEntity(paraClient.invokeGet("_metrics", null), Map.class);
+There are several config settings that control the behavior of metrics pushing:
+```ini
+# The URL of the host to push metrics to
+para.metrics.graphite.host: "localhost"
+# The port number of the Graphite server
+para.metrics.graphite.port: 2003
+# The prefix for applying to metric names, e.g. com.erudika.para.${INSTANCE_ID}
+para.metrics.graphite.prefix: "com.erudika.para.${WORKER_ID}"
+# The period for how often to push system metrics in seconds (0 to disable)
+para.metrics.graphite.period: 0
 ```
+To run a local Graphite server start a docker container like [hopsoft/docker-graphite-statsd](https://github.com/hopsoft/docker-graphite-statsd)
+and then run a local Grafana server using the instructions at http://docs.grafana.org/installation/docker/.
+
+Here is an example Docker command:
+```
+$ docker run -d -p 3000:3000 -e GF_SECURITY_ADMIN_USER=admin -e \
+  GF_SECURITY_ADMIN_PASSWORD=password -e GF_METRICS_GRAPHITE_ADDRESS=localhost:2003 grafana/grafana
+```
+Then you can login using admin/password at the login screen.
 
 Additionally, JMX reporting can be enabled by setting `para.metrics.jmx_enabled = true`.

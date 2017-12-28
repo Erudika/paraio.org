@@ -183,9 +183,6 @@
 							<li class="GET"><a href="#046-api-links-get">Find linked objects</a></li>
 							<li class="POST"><a href="#047-api-links-link">Link objects</a></li>
 							<li class="DELETE"><a href="#048-api-links-unlink">Unlink objects</a></li>
-							<li class="GET"><a href="#048-api-metrics-app">App metrics</a></li>
-							<li class="GET"><a href="#048-api-metrics-apps">System metrics</a></li>
-							<li class="GET"><a href="#048-api-metrics-system">System metrics</a></li>
 							<li class="PUT"><a href="#049-api-constraints-add">Add constraint</a></li>
 							<li class="GET"><a href="#049-api-constraints-get">List constraints</a></li>
 							<li class="DELETE"><a href="#049-api-constraints-rem">Remove constraint</a></li>
@@ -1968,14 +1965,25 @@ which one is the root app. If a new app is created, metrics are automatically in
 metrics are written to this file at a rate of every 60 seconds by default. There is a user configurable parameter
 <code>para.metrics.logging_rate</code> which will override the logging rate of the log file. If the logging rate is set to zero,
 no metrics are saved to the log file.</p>
-<p>The other alternative for retrieving metrics is using a new REST API at <code>/v1/_metrics</code>. A signed request to
-<code>/v1/_metrics</code> will return the instantaneous metrics data in JSON format for the application that made the request.
-A request path parameter <code>pretty</code> will format the response in a more human-readable format. The root application also
-has an additional endpoint at <code>/v1/_metrics/_system</code> to get metrics data for the overall system (the same data that is
-reported to the log file). Calling the metrics endpoint from <code>ParaClient</code> is easy, even though there isn’t a dedicated
-method for that:</p>
-<pre><code class="lang-java">Map&lt;String, Object&gt; metricsMap = paraClient.getEntity(paraClient.invokeGet(<span class="hljs-string">"_metrics"</span>, <span class="hljs-keyword">null</span>), Map.class);
+<p>The other alternative for retrieving metrics is by configuring Para to push them to a metrics server like Graphite.
+This method is preferred over pulling metrics from the API, because in a distributed environment with multiple Para nodes,
+it becomes hard to aggregate the metrics from all nodes.</p>
+<p>There are several config settings that control the behavior of metrics pushing:</p>
+<pre><code class="lang-ini"># The URL of the host to push metrics to
+para.metrics.graphite.host: &quot;localhost&quot;
+# The port number of the Graphite server
+para.metrics.graphite.port: 2003
+# The prefix for applying to metric names, e.g. com.erudika.para.${INSTANCE_ID}
+para.metrics.graphite.prefix: &quot;com.erudika.para.${WORKER_ID}&quot;
+# The period for how often to push system metrics in seconds (0 to disable)
+para.metrics.graphite.period: 0
 </code></pre>
+<p>To run a local Graphite server start a docker container like <a href="https://github.com/hopsoft/docker-graphite-statsd">hopsoft/docker-graphite-statsd</a>
+and then run a local Grafana server using the instructions at <a href="http://docs.grafana.org/installation/docker/">http://docs.grafana.org/installation/docker/</a>.</p>
+<p>Here is an example Docker command:</p>
+<pre><code>$ docker run -d -p <span class="hljs-number">3000</span>:<span class="hljs-number">3000</span> -e GF_SECURITY_ADMIN_USER=admin -e \
+  GF_SECURITY_ADMIN_PASSWORD=password -e GF_METRICS_GRAPHITE_ADDRESS=localhost:<span class="hljs-number">2003</span> grafana/grafana
+</code></pre><p>Then you can login using admin/password at the login screen.</p>
 <p>Additionally, JMX reporting can be enabled by setting <code>para.metrics.jmx_enabled = true</code>.</p>
 
 				</section>
@@ -3922,142 +3930,6 @@ of an object (child) to be equal to the <code>id</code> field of another object 
 </ul>
 <p>No content.</p>
 
-				</section>
-			</article>
-			<a id="048-api-metrics-app" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-			<article class="GET img-rounded">
-					<a href="#">
-						<h2 class="img-rounded">
-							<code>
-									<span class="img-rounded label-success">GET</span>
-								<span class="gray">
-									/v1/_metrics 
-								</span>
-							</code>
-							<span class="hidden-xs">App metrics</span>
-						</h2>
-					</a>
-				<section class="body api-body img-rounded">
-					<p>Displays the metrics for the app that’s currently authenticated.</p>
-<h4 id="parameters">Parameters</h4>
-<ul>
-<li><code>pretty</code> - setting this will enable pretty printing</li>
-</ul>
-<h3 id="response">Response</h3>
-<ul>
-<li><strong>status codes</strong> - <code>200</code></li>
-</ul>
-<p>No content.</p>
-
-				</section>
-			</article>
-			<a id="048-api-metrics-apps" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-			<article class="GET img-rounded">
-					<a href="#">
-						<h2 class="img-rounded">
-							<code>
-									<span class="img-rounded label-success">GET</span>
-								<span class="gray">
-									/v1/_metrics/{appid} 
-								</span>
-							</code>
-							<span class="hidden-xs">System metrics</span>
-						</h2>
-					</a>
-				<section class="body api-body img-rounded">
-					<p>Allows the root app to access the metrics of other apps. This endpoint is only accessible with the root app’s credentials.
-If a normal app calls this endpoint it will return the metrics for that app, exactly like <code>GET /v1/_metrics</code>.</p>
-<h3 id="request">Request</h3>
-<ul>
-<li><code>{appid}</code> - the <code>id</code> of an app</li>
-</ul>
-<h4 id="parameters">Parameters</h4>
-<ul>
-<li><code>pretty</code> - setting this will enable pretty printing</li>
-</ul>
-<h3 id="response">Response</h3>
-<ul>
-<li><strong>status codes</strong> - <code>200</code></li>
-</ul>
-<p>Example response:</p>
-<pre><code>{
-  <span class="hljs-string">"metrics"</span>: {
-    <span class="hljs-string">"H2DAO.create"</span>: {
-      <span class="hljs-string">"oneMinuteRate"</span>: <span class="hljs-number">0.000029158291421501796</span>,
-      <span class="hljs-string">"fiveMinuteRate"</span>: <span class="hljs-number">0.03418034256030498</span>,
-      <span class="hljs-string">"meanRate"</span>: <span class="hljs-number">0.0018675416405972923</span>,
-      <span class="hljs-string">"fifteenMinuteRate"</span>: <span class="hljs-number">0.11098870924877408</span>,
-      <span class="hljs-string">"count"</span>: <span class="hljs-number">1</span>,
-      <span class="hljs-string">"snapshot"</span>: {
-        <span class="hljs-string">"values"</span>: [
-            <span class="hljs-number">97835393</span>
-        ],
-        <span class="hljs-string">"min"</span>: <span class="hljs-number">97835393</span>,
-        <span class="hljs-string">"mean"</span>: <span class="hljs-number">97835393</span>,
-        <span class="hljs-string">"stdDev"</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-string">"max"</span>: <span class="hljs-number">97835393</span>,
-        <span class="hljs-string">"median"</span>: <span class="hljs-number">97835393</span>,
-        <span class="hljs-string">"75thPercentile"</span>: <span class="hljs-number">97835393</span>,
-        <span class="hljs-string">"95thPercentile"</span>: <span class="hljs-number">97835393</span>,
-        <span class="hljs-string">"98thPercentile"</span>: <span class="hljs-number">97835393</span>,
-        <span class="hljs-string">"99thPercentile"</span>: <span class="hljs-number">97835393</span>,
-        <span class="hljs-string">"999thPercentile"</span>: <span class="hljs-number">97835393</span>
-      }
-    }, ...
-  }
-}
-</code></pre>
-				</section>
-			</article>
-			<a id="048-api-metrics-system" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-			<article class="GET img-rounded">
-					<a href="#">
-						<h2 class="img-rounded">
-							<code>
-									<span class="img-rounded label-success">GET</span>
-								<span class="gray">
-									/v1/_metrics/_system 
-								</span>
-							</code>
-							<span class="hidden-xs">System metrics</span>
-						</h2>
-					</a>
-				<section class="body api-body img-rounded">
-					<p>Displays the metrics for the whole system.</p>
-<h4 id="parameters">Parameters</h4>
-<ul>
-<li><code>pretty</code> - setting this will enable pretty printing</li>
-</ul>
-<h3 id="response">Response</h3>
-<ul>
-<li><strong>status codes</strong> - <code>200</code>, <code>403</code></li>
-</ul>
-<p>Example response:</p>
-<pre><code>{
-  <span class="hljs-string">"metrics"</span>: {
-    <span class="hljs-string">"H2DAO.createAll"</span>: {
-      <span class="hljs-string">"oneMinuteRate"</span>: <span class="hljs-number">0</span>,
-      <span class="hljs-string">"fiveMinuteRate"</span>: <span class="hljs-number">0</span>,
-      <span class="hljs-string">"meanRate"</span>: <span class="hljs-number">0</span>,
-      <span class="hljs-string">"fifteenMinuteRate"</span>: <span class="hljs-number">0</span>,
-      <span class="hljs-string">"count"</span>: <span class="hljs-number">0</span>,
-      <span class="hljs-string">"snapshot"</span>: {
-        <span class="hljs-string">"values"</span>: [],
-        <span class="hljs-string">"min"</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-string">"mean"</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-string">"stdDev"</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-string">"max"</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-string">"median"</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-string">"75thPercentile"</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-string">"95thPercentile"</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-string">"98thPercentile"</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-string">"99thPercentile"</span>: <span class="hljs-number">0</span>,
-        <span class="hljs-string">"999thPercentile"</span>: <span class="hljs-number">0</span>
-      }
-    }, ...
-  }
-}
-</code></pre>
 				</section>
 			</article>
 			<a id="049-api-constraints-add" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
