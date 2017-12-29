@@ -26,8 +26,8 @@ metrics are written to this file at a rate of every 60 seconds by default. There
 no metrics are saved to the log file.
 
 The other alternative for retrieving metrics is by configuring Para to push them to a metrics server like Graphite.
-This method is preferred over pulling metrics from the API, because in a distributed environment with multiple Para nodes,
-it becomes hard to aggregate the metrics from all nodes.
+This method is preferred over pulling metrics from the API, because in a distributed environment with multiple Para nodes
+and load balancers it becomes cumbersome to aggregate the metrics from all nodes.
 
 There are several config settings that control the behavior of metrics pushing:
 ```ini

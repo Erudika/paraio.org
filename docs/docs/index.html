@@ -1966,8 +1966,8 @@ metrics are written to this file at a rate of every 60 seconds by default. There
 <code>para.metrics.logging_rate</code> which will override the logging rate of the log file. If the logging rate is set to zero,
 no metrics are saved to the log file.</p>
 <p>The other alternative for retrieving metrics is by configuring Para to push them to a metrics server like Graphite.
-This method is preferred over pulling metrics from the API, because in a distributed environment with multiple Para nodes,
-it becomes hard to aggregate the metrics from all nodes.</p>
+This method is preferred over pulling metrics from the API, because in a distributed environment with multiple Para nodes
+and load balancers it becomes cumbersome to aggregate the metrics from all nodes.</p>
 <p>There are several config settings that control the behavior of metrics pushing:</p>
 <pre><code class="lang-ini"># The URL of the host to push metrics to
 para.metrics.graphite.host: &quot;localhost&quot;
@@ -4703,7 +4703,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>28 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>29 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2017
