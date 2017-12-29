@@ -34,6 +34,7 @@ There are several configuration properties for Elasticsearch (these go in your `
 		<tr><td>`para.es.restclient_scheme`</td><td> Scheme (for low-level REST client). Default is `http`.</td></tr>
 		<tr><td>`para.es.restclient_host`</td><td> ES server host (for low-level REST client). Default is `localhost`.</td></tr>
 		<tr><td>`para.es.restclient_port`</td><td> ES server port (for low-level REST client). Default is `9200`.</td></tr>
+		<tr><td>`para.es.root_index_sharing_enabled`</td><td> Enable/disable root index sharing by child apps with `isSharingIndex` set to `true`. Default is `false`.</td></tr>
 	</tbody>
 </table>
 
