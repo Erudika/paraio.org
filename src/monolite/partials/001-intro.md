@@ -25,7 +25,7 @@ your project. You can still keep the REST API or turn it off completely.
 Create a configuration file `application.conf` file in the same directory as the Para package.
 Here's an example default configuration:
 ```ini
-# the name of your app
+# the name of the root app
 para.app_name = "Para"
 # or set it to 'production'
 para.env = "embedded"
@@ -35,10 +35,12 @@ para.security.allow_unverified_emails = false
 para.clients_can_access_root_app = true
 # if false caching is disabled
 para.cache_enabled = true
-# change this to a random string
+# root app secret, used for token generation, should be a random string
 para.app_secret_key = "b8db69a24a43f2ce134909f164a45263"
-# enable API request signature checking
+# enable API request signature verification
 para.security.api_security = true
+# the node number from 1 to 1024, used for distributed ID generation
+para.worker_id = 1
 ```
 
 1. [Download the WAR](https://github.com/erudika/para/releases)
