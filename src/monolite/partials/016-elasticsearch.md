@@ -149,4 +149,13 @@ GET /v1/users?sort=name,timestamp
 pager.setSortBy("name:desc,timestamp:asc");
 ```
 
+### Shared indices with alias routing
+
+The plugin also supports index sharing, whereby the root app index is shared with other apps which are created with the
+flag `app.isSharingIndex = true`. This feature is enabled with `para.es.root_index_sharing_enabled = true` and it is off
+by default. When the root index is created with sharing enabled, a special alias is created for it that contains a
+routing field which sends all documents of a child app to a particular shard, while providing total isolation between
+apps. This is useful when there are lots of smaller apps with just a few hundred documents each and we want to avoid the
+overhead of one index per app.
+
 > Read the [Elasticsearch](https://www.elastic.co/guide/) docs for more information.

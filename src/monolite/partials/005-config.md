@@ -15,7 +15,7 @@ If you have a file called `application.conf` or `application.json` on the classp
 
 Here's a sample `application.conf` file:
 
-```ini
+```bash
 para.env = "embedded"
 para.print_logo = true
 para.security.api_security = true

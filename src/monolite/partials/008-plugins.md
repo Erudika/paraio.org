@@ -94,10 +94,29 @@ App.addAppCreatedListener(new AppCreatedListener() {
 		}
 	}
 });
+
 App.addAppDeletedListener(new AppDeletedListener() {
 	public void onAppDeleted(App app) {
 		if (app != null) {
 			deleteTable(app.getAppIdentifier());
+		}
+	}
+});
+```
+Additionally, you can listen for changes to the custom app settings with these two event listeners:
+```
+App.addAppSettingAddedListener(new AppSettingAddedListener() {
+	public void onSettingAdded(App app, String settingKey, Object settingValue) {
+		if (app != null) {
+			// trigger something
+		}
+	}
+});
+
+App.addAppSettingRemovedListener(new AppSettingRemovedListener() {
+	public void onSettingRemoved(App app, String settingKey) {
+		if (app != null) {
+			// trigger something else
 		}
 	}
 });

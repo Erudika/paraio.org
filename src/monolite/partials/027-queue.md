@@ -35,7 +35,7 @@ List<String> result = AWSQueueUtils.pullMessages(q.getUrl(), 10);
 
 To configure, put this in your `application.conf`:
 
-```ini
+```bash
 para.queue.polling_sleep_seconds: 60
 para.queue.polling_interval_seconds: 20
 ```

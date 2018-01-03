@@ -23,3 +23,5 @@ Here's how to programmatically check the health of the system:
 HealthUtils.getInstance().performHealthCheck();
 boolean isHealthy = HealthUtils.getInstance().isHealty();
 ```
+
+To disable health checking, set `para.health_check_enabled = false`.

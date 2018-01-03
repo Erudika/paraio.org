@@ -113,9 +113,9 @@
 			<li>
 				<a href="#Metrics" class="docs-category" data-toggle="collapse" aria-expanded="false">Metrics</a>
 				<ul id="Metrics" class="docs-category-child collapse list-unstyled">
+							<li class=""><a href="#020-metrics-basics">Collecting metrics</a></li>
 							<li class=""><a href="#020-metrics-health">Health check</a></li>
 							<li class=""><a href="#020-metrics-logging">Logging</a></li>
-							<li class=""><a href="#020-metrics-timers">Timers</a></li>
 				</ul>
 			</li>
 			<li>
@@ -289,21 +289,21 @@ your project. You can still keep the REST API or turn it off completely.</p>
 <h3 id="quick-start">Quick start</h3>
 <p>Create a configuration file <code>application.conf</code> file in the same directory as the Para package.
 Here’s an example default configuration:</p>
-<pre><code class="lang-ini"># the name of the root app
-para.app_name = &quot;Para&quot;
-# or set it to &#39;production&#39;
-para.env = &quot;embedded&quot;
-# if true, users can be created without verifying their emails
-para.security.allow_unverified_emails = false
-# if hosting multiple apps on Para, set this to false
-para.clients_can_access_root_app = true
-# if false caching is disabled
-para.cache_enabled = true
-# root app secret, used for token generation, should be a random string
-para.app_secret_key = &quot;b8db69a24a43f2ce134909f164a45263&quot;
-# enable API request signature verification
-para.security.api_security = true
-# the node number from 1 to 1024, used for distributed ID generation
+<pre><code class="lang-bash"><span class="hljs-comment"># the name of the root app</span>
+para.app_name = <span class="hljs-string">"Para"</span>
+<span class="hljs-comment"># or set it to 'production'</span>
+para.env = <span class="hljs-string">"embedded"</span>
+<span class="hljs-comment"># if true, users can be created without verifying their emails</span>
+para.security.allow_unverified_emails = <span class="hljs-literal">false</span>
+<span class="hljs-comment"># if hosting multiple apps on Para, set this to false</span>
+para.clients_can_access_root_app = <span class="hljs-literal">true</span>
+<span class="hljs-comment"># if false caching is disabled</span>
+para.cache_enabled = <span class="hljs-literal">true</span>
+<span class="hljs-comment"># root app secret, used for token generation, should be a random string</span>
+para.app_secret_key = <span class="hljs-string">"b8db69a24a43f2ce134909f164a45263"</span>
+<span class="hljs-comment"># enable API request signature verification</span>
+para.security.api_security = <span class="hljs-literal">true</span>
+<span class="hljs-comment"># the node number from 1 to 1024, used for distributed ID generation</span>
 para.worker_id = 1
 </code></pre>
 <ol>
@@ -311,8 +311,9 @@ para.worker_id = 1
 <li>Run it with <code>java -jar -Dconfig.file=./application.conf para-*.war</code></li>
 <li>Call <code>curl localhost:8080/v1/_setup</code> to get the access and secret keys for the root app (required)</li>
 <li>Install <code>para-cli</code> tool for easy access <code>npm install -g para-cli</code> (optional)</li>
-<li>Create a new “child” app for regular use (optional):<pre><code>$ para-cli <span class="hljs-keyword">new</span>-app <span class="hljs-string">"myapp"</span> --name <span class="hljs-string">"My App"</span> --endpoint <span class="hljs-string">"http://localhost:8080"</span> --accessKey <span class="hljs-string">"app:para"</span> --secretKey <span class="hljs-string">"{secret key for root app}"</span>
-</code></pre></li>
+<li>Create a new “child” app for regular use (optional):<pre><code class="lang-bash">$ para-cli new-app <span class="hljs-string">"myapp"</span> --name <span class="hljs-string">"My App"</span> --endpoint <span class="hljs-string">"http://localhost:8080"</span> --accessKey <span class="hljs-string">"app:para"</span> --secretKey <span class="hljs-string">"{secret key for root app}"</span>
+</code></pre>
+</li>
 <li>Open the <a href="https://console.paraio.org">Para Web Console</a> or use one of the provided
 client libraries below to connect to the API.</li>
 </ol>
@@ -339,7 +340,7 @@ $ para-cli search "type:todo"
 </code></pre>
 <p>In your own project you can create a new <code>ParaClient</code> instance like so:</p>
 <pre><code class="lang-java">ParaClient pc = <span class="hljs-keyword">new</span> ParaClient(accessKey, secretKey);
-<span class="hljs-comment">// for development the default endpoint is http://localhost:8080</span>
+<span class="hljs-comment">// Para endpoint - http://localhost:8080 or https://paraio.com</span>
 pc.setEndpoint(paraServerURL);
 <span class="hljs-comment">// send a test request - this should return a JSON object of type 'app'</span>
 pc.me();
@@ -384,7 +385,7 @@ pc.me();
 </div>
 
 <h3 id="building-para">Building Para</h3>
-<p>Para can be compiled with JDK 6 and up, but using JDK 8+ is recommended.</p>
+<p>Para can be compiled with JDK 8 and up.</p>
 <p>To compile it you’ll need Maven. Once you have it, just clone and build:</p>
 <pre><code class="lang-sh">$ git <span class="hljs-built_in">clone</span> https://github.com/erudika/para.git &amp;&amp; <span class="hljs-built_in">cd</span> para
 $ mvn install -DskipTests=<span class="hljs-literal">true</span>
@@ -592,10 +593,10 @@ To load your own configuration you need to set one of the following system prope
 <p>You need to set these properties before calling <code>Para.initialize()</code> or at the startup of your servlet container.
 If you have a file called <code>application.conf</code> or <code>application.json</code> on the classpath, Para will pick it up automatically.</p>
 <p>Here’s a sample <code>application.conf</code> file:</p>
-<pre><code class="lang-ini">para.env = &quot;embedded&quot;
-para.print_logo = true
-para.security.api_security = true
-para.security.csrf_protection = true
+<pre><code class="lang-bash">para.env = <span class="hljs-string">"embedded"</span>
+para.print_logo = <span class="hljs-literal">true</span>
+para.security.api_security = <span class="hljs-literal">true</span>
+para.security.csrf_protection = <span class="hljs-literal">true</span>
 </code></pre>
 <p>The configuration logic is to read system properties first, then environment properties and finally check the config file.
 So the order of precedence is as follows:</p>
@@ -976,6 +977,7 @@ those after the app is deleted. Example:</p>
         }
     }
 });
+
 App.addAppDeletedListener(<span class="hljs-keyword">new</span> AppDeletedListener() {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAppDeleted</span><span class="hljs-params">(App app)</span> </span>{
         <span class="hljs-keyword">if</span> (app != <span class="hljs-keyword">null</span>) {
@@ -984,7 +986,23 @@ App.addAppDeletedListener(<span class="hljs-keyword">new</span> AppDeletedListen
     }
 });
 </code></pre>
-<h3 id="custom-context-initializers">Custom context initializers</h3>
+<p>Additionally, you can listen for changes to the custom app settings with these two event listeners:</p>
+<pre><code>App.addAppSettingAddedListener(<span class="hljs-keyword">new</span> AppSettingAddedListener() {
+    public <span class="hljs-keyword">void</span> onSettingAdded(App app, <span class="hljs-built_in">String</span> settingKey, <span class="hljs-built_in">Object</span> settingValue) {
+        <span class="hljs-keyword">if</span> (app != <span class="hljs-literal">null</span>) {
+            <span class="hljs-comment">// trigger something</span>
+        }
+    }
+});
+
+App.addAppSettingRemovedListener(<span class="hljs-keyword">new</span> AppSettingRemovedListener() {
+    public <span class="hljs-keyword">void</span> onSettingRemoved(App app, <span class="hljs-built_in">String</span> settingKey) {
+        <span class="hljs-keyword">if</span> (app != <span class="hljs-literal">null</span>) {
+            <span class="hljs-comment">// trigger something else</span>
+        }
+    }
+});
+</code></pre><h3 id="custom-context-initializers">Custom context initializers</h3>
 <p>Para will automatically pick up your classes which extend the <code>Para</code> class. They should be annotated
 with <code>@Configuration</code>, <code>@EnableAutoConfiguration</code> and <code>@ComponentScan</code>. The <code>Para</code> class implements Spring Boot’s
 <code>WebApplicationInitializer</code> which creates the root application context.</p>
@@ -1671,7 +1689,14 @@ for a Elasticsearch document - a unique, time-based <code>long</code>. You may h
 <pre><code>GET /v1/users?sort=name,timestamp
 <span class="hljs-comment">// or</span>
 pager.setSortBy(<span class="hljs-string">"name:desc,timestamp:asc"</span>);
-</code></pre><blockquote>
+</code></pre><h3 id="shared-indices-with-alias-routing">Shared indices with alias routing</h3>
+<p>The plugin also supports index sharing, whereby the root app index is shared with other apps which are created with the
+flag <code>app.isSharingIndex = true</code>. This feature is enabled with <code>para.es.root_index_sharing_enabled = true</code> and it is off
+by default. When the root index is created with sharing enabled, a special alias is created for it that contains a
+routing field which sends all documents of a child app to a particular shard, while providing total isolation between
+apps. This is useful when there are lots of smaller apps with just a few hundred documents each and we want to avoid the
+overhead of one index per app.</p>
+<blockquote>
 <p>Read the <a href="https://www.elastic.co/guide/">Elasticsearch</a> docs for more information.</p>
 </blockquote>
 
@@ -1884,6 +1909,103 @@ object1.unlinkAll();
 
 				</section>
 			</article>
+			<a id="020-metrics-basics" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Collecting metrics</h2>
+				<section class="body  img-rounded">
+					<p>With version 1.27, a number of metrics are implemented on top of DropWizard. By default, DropWizard metrics are
+captured for every application, as well as the overall system across all applications. The DropWizard <code>Timer</code> is used
+to record metrics, which gives count and latency measurements. There are timers implemented on all of the following
+components:</p>
+<ul>
+<li>All methods on the <code>DAO</code> interface</li>
+<li>All methods on the <code>Search</code> interface</li>
+<li>All methods on the <code>Cache</code> interface</li>
+<li>All REST endpoints for CRUD operations (both single and batch)</li>
+<li>All REST endpoints for Search operations</li>
+<li>All REST endpoints for Link operations</li>
+<li>All REST endpoints for classes implementing the <code>CustomResourceHandler</code> interface</li>
+</ul>
+<p>All of the above metrics are initialized at startup for the overall system, as well as any existing applications.
+A new log file output was added to print the names of the applications found during initialization, and to indicate
+which one is the root app. If a new app is created, metrics are automatically initialized for this app as well.</p>
+<p>Metrics are retrievable in two ways. First, a new log file called <code>para-metrics.log</code> is created by default. The system
+metrics are written to this file at a rate of every 60 seconds by default. There is a user configurable parameter
+<code>para.metrics.logging_rate</code> which will override the logging rate of the log file. If the logging rate is set to zero,
+no metrics are saved to the log file.</p>
+<p>The other alternative for retrieving metrics is by configuring Para to push them to a metrics server like Graphite.
+This method is preferred over pulling metrics from the API, because in a distributed environment with multiple Para nodes
+and load balancers it becomes cumbersome to aggregate the metrics from all nodes.</p>
+<p>There are several configuration settings for metrics in Para:</p>
+<pre><code class="lang-bash"><span class="hljs-comment"># enable/disable the collection of metrics (default: true)</span>
+para.metrics_enabled = <span class="hljs-literal">false</span>
+<span class="hljs-comment"># enable/disable JMX reporting (default: false)</span>
+para.metrics.jmx_enabled = <span class="hljs-literal">false</span>
+<span class="hljs-comment"># The URL of the host to push metrics to (default: blank)</span>
+para.metrics.graphite.host = <span class="hljs-string">"localhost"</span>
+<span class="hljs-comment"># The port number of the Graphite server</span>
+para.metrics.graphite.port = 2003
+<span class="hljs-comment"># The prefixes for applying to metric names (default: blank)</span>
+para.metrics.graphite.prefix_system = <span class="hljs-string">"com.erudika.para.{{INSTANCE_ID}}"</span>
+para.metrics.graphite.prefix_apps = <span class="hljs-string">"com.erudika.para.{{INSTANCE_ID}}.{{APP_ID}}"</span>
+<span class="hljs-comment"># The period for how often to push system metrics in seconds (default: 0, disabled)</span>
+para.metrics.graphite.period = 0
+</code></pre>
+<p>The variable <code>para.metrics.graphite.period</code> controls how often (in seconds) metrics data is pushed to the Graphite server.
+This field controls the frequency of metrics reporting for both the system-wide metrics as well as any app-specific
+metrics that are pushed to Graphite. The default value is <code>0</code>, which disables all push to Graphite. Settings this
+value to a positive number (i.e. <code>60</code>) will allow for system metrics to be pushed to a Graphite server, as well as
+application metrics.</p>
+<p>System-wide metrics are only reported to a Graphite server if <code>para.metrics.graphite.host</code> is not blank
+(it defaults to null). This field specifies the host of the Graphite server to push only system metrics to and
+<code>para.metrics.graphite.port</code> is the corresponding port number to the host (usually <code>2003</code> for Graphite).</p>
+<p>Graphite metrics are often prefixed by some path to distinguish application metrics from other applications pushing
+to the same Graphite server. For example, you may want to prefix your Para application metrics with “com.erudika.para”.
+There are two fields for configuring a prefix for pushing metrics to Graphite. First, <code>para.metrics.graphite.prefix_apps</code>
+indicates the prefix that should be applied when pushing the system-wide metrics. Second,
+<code>para.metrics.graphite.prefix_apps</code> indicates the template prefix that should be applied when pushing a specific
+application’s metrics to Graphite.</p>
+<p>It’s common practice in a distributed environment to include the instance ID in the prefix for pushing metrics data.
+That makes it possible to view metrics for each node in your cluster, and perform an aggregation across all nodes.
+This is supported by defining the instance ID for your system in an environment variable called <code>para.instance_id</code>.
+If you define <code>para.instance_id</code>, you can reference it in the <code>para.metrics.graphite.prefix_system</code> and
+<code>para.metrics.graphite.prefix_apps</code> variables. To include the instance ID, simply add <code>{{INSTANCE_ID}}</code> in your
+prefix variables and Para will replace it with the contents of <code>para.instance_id</code>. For example, a system prefix
+variable may be configured as follows in your application config file:</p>
+<pre><code>para.instance_id = <span class="hljs-string">"1234abcd"</span>
+para.metrics.graphite.prefix_system = <span class="hljs-string">"com.erudika.para.{{INSTANCE_ID}}.system"</span>
+</code></pre><p>In <code>para.metrics.graphite.prefix_apps</code> you can use both the <code>` placeholder as well as the
+application&#39;s identifier placeholder -</code>{{APP_ID}}`. This allows application-specific metrics to contain
+the application’s ID in the prefix path. For example, an application prefix variable may be configured as
+follows in your application config file:</p>
+<pre><code>para.metrics.graphite.prefix_apps = <span class="hljs-string">"com.erudika.para.{{INSTANCE_ID}}.{{APP_ID}}"</span>
+</code></pre><p>Configuring the Graphite host settings for a specific application can be done by adding a setting to the application
+(see <a href="#050-api-settings-get">app settings API</a>). Para will look for an application setting by the name
+“metricsGraphiteReporter” to detect application-specific Graphite settings. This setting is configured in the
+form of a map with two fields: <code>host</code> (String) and <code>port</code> (int). For example, to add application-specific metrics
+make a signed request to Para as follows:</p>
+<pre><code>PUT /v1/_settings/metricsGraphiteReporter
+{
+  <span class="hljs-string">"value"</span>: {
+    <span class="hljs-string">"host"</span>: <span class="hljs-string">"localhost"</span>,
+    <span class="hljs-string">"port"</span>: <span class="hljs-number">2003</span>
+  }
+}
+</code></pre><h3 id="running-graphite-and-grafana-locally">Running Graphite and Grafana locally</h3>
+<p>To run a local Graphite server start a docker container like <a href="https://github.com/hopsoft/docker-graphite-statsd">hopsoft/docker-graphite-statsd</a>
+and then run a local Grafana server using the instructions at <a href="http://docs.grafana.org/installation/docker/">http://docs.grafana.org/installation/docker/</a>.</p>
+<p>Here’s how to run Graphite with a Docker command:</p>
+<pre><code class="lang-bash">$ docker run <span class="hljs-_">-d</span> --name graphite --restart=always -p 80:80 -p 2003-2004:2003-2004 -p 2023-2024:2023-2024 \
+  -p 8125:8125/udp -p 8126:8126 hopsoft/graphite-statsd
+</code></pre>
+<p>Then point you browser to <code>http://localhost/</code>. Then run Grafana locally with:</p>
+<pre><code class="lang-bash">$ docker run <span class="hljs-_">-d</span> -p 3000:3000 <span class="hljs-_">-e</span> GF_SECURITY_ADMIN_USER=admin <span class="hljs-_">-e</span> GF_SECURITY_ADMIN_PASSWORD=password \
+  <span class="hljs-_">-e</span> GF_METRICS_GRAPHITE_ADDRESS=localhost:2003 grafana/grafana
+</code></pre>
+<p>Then you can login using admin/password at the login screen.</p>
+
+				</section>
+			</article>
 			<a id="020-metrics-health" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
 			<article class=" img-rounded">
 					<h2>Health check</h2>
@@ -1903,6 +2025,7 @@ i.e. <code>/v1/_setup</code> is called, the status is updated to “healthy”.<
 <pre><code class="lang-java">HealthUtils.getInstance().performHealthCheck();
 <span class="hljs-keyword">boolean</span> isHealthy = HealthUtils.getInstance().isHealty();
 </code></pre>
+<p>To disable health checking, set <code>para.health_check_enabled = false</code>.</p>
 
 				</section>
 			</article>
@@ -1942,53 +2065,6 @@ like this:</p>
 (should not end with “/“):</p>
 <pre><code>$ java -jar -Dpara.logs_dir=<span class="hljs-regexp">/var/</span>logs/para para.war
 </code></pre>
-				</section>
-			</article>
-			<a id="020-metrics-timers" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-			<article class=" img-rounded">
-					<h2>Timers</h2>
-				<section class="body  img-rounded">
-					<p>With version 1.27, a number of metrics are implemented on top of DropWizard. By default, DropWizard metrics are
-captured for every application, as well as the overall system across all applications. The DropWizard <code>Timer</code> is used
-to record metrics, which gives count and latency measurements. There are timers implemented on all of the following
-components:</p>
-<ul>
-<li>All methods on the <code>DAO</code> interface</li>
-<li>All methods on the <code>Search</code> interface</li>
-<li>All methods on the <code>Cache</code> interface</li>
-<li>All REST endpoints for CRUD operations (both single and batch)</li>
-<li>All REST endpoints for Search operations</li>
-<li>All REST endpoints for Link operations</li>
-<li>All REST endpoints for classes implementing the <code>CustomResourceHandler</code> interface</li>
-</ul>
-<p>All of the above metrics are initialized at startup for the overall system, as well as any existing applications.
-A new log file output was added to print the names of the applications found during initialization, and to indicate
-which one is the root app. If a new app is created, metrics are automatically initialized for this app as well.</p>
-<p>Metrics are retrievable in two ways. First, a new log file called <code>para-metrics.log</code> is created by default. The system
-metrics are written to this file at a rate of every 60 seconds by default. There is a user configurable parameter
-<code>para.metrics.logging_rate</code> which will override the logging rate of the log file. If the logging rate is set to zero,
-no metrics are saved to the log file.</p>
-<p>The other alternative for retrieving metrics is by configuring Para to push them to a metrics server like Graphite.
-This method is preferred over pulling metrics from the API, because in a distributed environment with multiple Para nodes
-and load balancers it becomes cumbersome to aggregate the metrics from all nodes.</p>
-<p>There are several config settings that control the behavior of metrics pushing:</p>
-<pre><code class="lang-ini"># The URL of the host to push metrics to
-para.metrics.graphite.host: &quot;localhost&quot;
-# The port number of the Graphite server
-para.metrics.graphite.port: 2003
-# The prefix for applying to metric names, e.g. com.erudika.para.${INSTANCE_ID}
-para.metrics.graphite.prefix: &quot;com.erudika.para.${WORKER_ID}&quot;
-# The period for how often to push system metrics in seconds (0 to disable)
-para.metrics.graphite.period: 0
-</code></pre>
-<p>To run a local Graphite server start a docker container like <a href="https://github.com/hopsoft/docker-graphite-statsd">hopsoft/docker-graphite-statsd</a>
-and then run a local Grafana server using the instructions at <a href="http://docs.grafana.org/installation/docker/">http://docs.grafana.org/installation/docker/</a>.</p>
-<p>Here is an example Docker command:</p>
-<pre><code>$ docker run -d -p <span class="hljs-number">3000</span>:<span class="hljs-number">3000</span> -e GF_SECURITY_ADMIN_USER=admin -e \
-  GF_SECURITY_ADMIN_PASSWORD=password -e GF_METRICS_GRAPHITE_ADDRESS=localhost:<span class="hljs-number">2003</span> grafana/grafana
-</code></pre><p>Then you can login using admin/password at the login screen.</p>
-<p>Additionally, JMX reporting can be enabled by setting <code>para.metrics.jmx_enabled = true</code>.</p>
-
 				</section>
 			</article>
 			<a id="021-iot-aws" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
@@ -2405,7 +2481,7 @@ AWSQueueUtils.pushMessages(q.getUrl(), listOfMessages);
 List&lt;String&gt; result = AWSQueueUtils.pullMessages(q.getUrl(), <span class="hljs-number">10</span>);
 </code></pre>
 <p>To configure, put this in your <code>application.conf</code>:</p>
-<pre><code class="lang-ini">para.queue.polling_sleep_seconds: 60
+<pre><code class="lang-bash">para.queue.polling_sleep_seconds: 60
 para.queue.polling_interval_seconds: 20
 </code></pre>
 <p>Messages are in the following JSON format:</p>
@@ -4706,10 +4782,10 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>30 December 2017</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>03 January 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
-						2017
+						2018
 						<a href="https://erudika.com">Erudika</a></p>
 				</div>
 			</div>

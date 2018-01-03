@@ -24,7 +24,7 @@ your project. You can still keep the REST API or turn it off completely.
 
 Create a configuration file `application.conf` file in the same directory as the Para package.
 Here's an example default configuration:
-```ini
+```bash
 # the name of the root app
 para.app_name = "Para"
 # or set it to 'production'
@@ -48,7 +48,7 @@ para.worker_id = 1
 3. Call `curl localhost:8080/v1/_setup` to get the access and secret keys for the root app (required)
 4. Install `para-cli` tool for easy access `npm install -g para-cli` (optional)
 5. Create a new "child" app for regular use (optional):
-```
+```bash
 $ para-cli new-app "myapp" --name "My App" --endpoint "http://localhost:8080" --accessKey "app:para" --secretKey "{secret key for root app}"
 ```
 6. Open the [Para Web Console](https://console.paraio.org) or use one of the provided
@@ -87,7 +87,7 @@ In your own project you can create a new `ParaClient` instance like so:
 
 ```java
 ParaClient pc = new ParaClient(accessKey, secretKey);
-// for development the default endpoint is http://localhost:8080
+// Para endpoint - http://localhost:8080 or https://paraio.com
 pc.setEndpoint(paraServerURL);
 // send a test request - this should return a JSON object of type 'app'
 pc.me();
@@ -134,7 +134,7 @@ pc.me();
 
 ### Building Para
 
-Para can be compiled with JDK 6 and up, but using JDK 8+ is recommended.
+Para can be compiled with JDK 8 and up.
 
 To compile it you'll need Maven. Once you have it, just clone and build:
 
