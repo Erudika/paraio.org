@@ -1974,8 +1974,8 @@ prefix variables and Para will replace it with the contents of <code>para.instan
 variable may be configured as follows in your application config file:</p>
 <pre><code>para.instance_id = <span class="hljs-string">"1234abcd"</span>
 para.metrics.graphite.prefix_system = <span class="hljs-string">"com.erudika.para.{{INSTANCE_ID}}.system"</span>
-</code></pre><p>In <code>para.metrics.graphite.prefix_apps</code> you can use both the <code>` placeholder as well as the
-application&#39;s identifier placeholder -</code>{{APP_ID}}`. This allows application-specific metrics to contain
+</code></pre><p>In <code>para.metrics.graphite.prefix_apps</code> you can use both the <code>{{INSTANCE_ID}}</code> placeholder as well as the
+application’s identifier placeholder - <code>{{APP_ID}}</code>. This allows application-specific metrics to contain
 the application’s ID in the prefix path. For example, an application prefix variable may be configured as
 follows in your application config file:</p>
 <pre><code>para.metrics.graphite.prefix_apps = <span class="hljs-string">"com.erudika.para.{{INSTANCE_ID}}.{{APP_ID}}"</span>

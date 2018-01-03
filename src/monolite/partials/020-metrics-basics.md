@@ -77,7 +77,7 @@ para.instance_id = "1234abcd"
 para.metrics.graphite.prefix_system = "com.erudika.para.\{{INSTANCE_ID}}.system"
 ```
 
-In `para.metrics.graphite.prefix_apps` you can use both the `{{INSTANCE_ID}}` placeholder as well as the
+In `para.metrics.graphite.prefix_apps` you can use both the `\{{INSTANCE_ID}}` placeholder as well as the
 application's identifier placeholder - `\{{APP_ID}}`. This allows application-specific metrics to contain
 the application's ID in the prefix path. For example, an application prefix variable may be configured as
 follows in your application config file:
