@@ -716,6 +716,8 @@ This is important for securing your server because this secret key is used for s
         <tr><td>Enable/disable object caching in Para. </td><td></td></tr>
         <tr><td><code>para.search_enabled</code>                </td><td><code>true</code></td></tr>
         <tr><td>Enable/disable object indexing in Para. </td><td></td></tr>
+        <tr><td><code>para.iot_enabled</code>                    </td><td><code>false</code></td></tr>
+        <tr><td>Enable/disable the IoT functionality around <code>Thing</code> objects. </td><td></td></tr>
         <tr><td><code>para.metrics_enabled</code>    </td><td> <code>true</code> </td></tr>
         <tr><td>Enable/disable all metrics. </td><td></td></tr>
         <tr><td><code>para.health_check_enabled</code>    </td><td> <code>true</code> </td></tr>
@@ -1174,22 +1176,25 @@ database table and is independent from apps.</p>
 to it automatically. Apps also have a set of data types, as set of permissions and validation constraints.
 Data types can be created on-the-fly, for example you can create a type called “article” and it will have be
 available as a new API resource at <code>/v1/article</code> (and in plural form <code>/v1/articles</code>).</p>
-<h3 id="creating-apps">Creating apps</h3>
+<h3 id="creating-and-deleting-apps">Creating and deleting apps</h3>
 <p>Initially Para creates a default root app with an <code>id</code> equal to the value of the <code>para.app_name</code>
 configuration parameter. If you need to have only one app then you don’t need to do anything. If you want to create
 multiple apps then you must call <code>Para.newApp()</code> or make an authenticated request to the API <code>GET /v1/_setup/{app_name}</code>.
+This is a special API request and it <strong>must</strong> be signed with the keys of the <em>root app</em>.
 Alternatively, download the <a href="https://github.com/Erudika/para-cli">Para CLI</a> and run:</p>
 <pre><code class="lang-sh">$ para-cli setup
 $ para-cli new-app <span class="hljs-string">"my-app"</span> --name <span class="hljs-string">"My new app"</span>
 </code></pre>
+<p>Every app can delete itself through the API with <code>DELETE /v1/app/myapp</code>. Another way to do this is by programmatically
+calling <code>app.delete()</code> from your code.</p>
 <p>Currently Para organizes objects in <strong>one table per app</strong> and uses a single shared search index unless that app has
 <code>sharingIndex</code> set to <code>false</code>. If this is the case then a separate search index is created for that app.
 It is possible to make Para use a single database table for all apps by prefixing <code>id</code> fields
 (e.g. <code>app1_id1</code>: <code>{data}</code>) but this is not yet implemented.</p>
-<p>You can set custom settings to each app through the settings API <code>/v1/_settings</code> using <code>GET</code>, <code>PUT</code> and <code>DELETE</code>.
+<p>You can also set custom settings for each app through the settings API <code>/v1/_settings</code> using <code>GET</code>, <code>PUT</code> and <code>DELETE</code>.
 These can be OAuth credentials for social apps or other configuration details that are specific for the app.</p>
 <h3 id="social-sign-in-for-apps">Social sign-in for apps</h3>
-<p>In v1.19 apps can have their own separate credentials for social sign-in, like an OAuth <code>app_id</code> and <code>secret</code>. These
+<p>Apps can have their own separate credentials for social sign-in, like an OAuth <code>app_id</code> and <code>secret</code>. These
 are stored within the app object and can be used to create/login users to the app that has these credentials.
 For example, we can send a request to <code>/facebook_auth?appid=myapp</code> where <code>myapp</code> is not the root app. This will tell
 Para to look for Facebook keys inside that app. This allows for each Para app to have a corresponding Facebook app
@@ -2111,7 +2116,7 @@ state with the state that is stored in the cloud. If the <code>Thing</code> obje
 shadow is updated accordingly so the two are in sync again. Finally, deleting the <code>Thing</code> object also deletes it from
 AWS along with the certificate and policy attached to it.</p>
 <p>In order to use the IoT integration feature, Para needs to get your AWS credentials from the config file or from the
-instance it is deployed on.</p>
+instance it is deployed on. Also you have to enable IoT features in Para with <code>para.iot_enabled = true</code>.</p>
 <h3 id="getting-started-with-para-and-aws-iot">Getting started with Para and AWS IoT</h3>
 <ol>
 <li>Get an account from AWS and create a user with permissions to call the IoT API</li>
@@ -2170,7 +2175,7 @@ state with the state that is stored in the cloud. If the <code>Thing</code> obje
 device is updated accordingly so the two are in sync again. Finally, deleting the <code>Thing</code> object also deletes it from
 the Azure IoT Hub.</p>
 <p>In order to use the IoT integration feature, Para needs to get your AWS credentials from the config file or from the
-instance it is deployed on.</p>
+instance it is deployed on. Also you have to enable IoT features in Para with <code>para.iot_enabled = true</code>.</p>
 <h3 id="getting-started-with-para-and-azure-iot">Getting started with Para and Azure IoT</h3>
 <ol>
 <li>Get an account from Azure and create an IoT hub</li>
@@ -2263,7 +2268,7 @@ resources.</p>
         <tr><td><code>String stripHtml(String html)</code></td></tr>
         <tr><td> Strips all HTML tags from a string leaving only the text. </td></tr>
         <tr><td><code>String markdownToHtml(String markdownString)</code></td></tr>
-        <tr><td> Convert a Markdown string to HTML. Based on <a href="https://github.com/rjeschke/txtmark">Txtmark</a>.</td></tr>
+        <tr><td> Convert a Markdown string to HTML. Based on <a href="https://github.com/rjeschke/txtmark">Txtmark</a>. Supports GFM syntax, tables, task lists, striketrough and emojis.</td></tr>
         <tr><td><code>String compileMustache(Map&lt;String, Object&gt; scope, String template)</code></td></tr>
         <tr><td> Compile a Mustache template string to HTML. Based on <a href="https://github.com/spullara/mustache.java">Mustache.java</a>.</td></tr>
         <tr><td><code>String abbreviate(String str, int max)</code></td></tr>
@@ -4782,7 +4787,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>03 January 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>06 January 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2018

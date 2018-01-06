@@ -25,7 +25,7 @@ The `Utils` static class contains a variety of utility methods. These are summar
 		<tr><td>`String stripHtml(String html)`</td></tr>
 		<tr><td> Strips all HTML tags from a string leaving only the text. </td></tr>
 		<tr><td>`String markdownToHtml(String markdownString)`</td></tr>
-		<tr><td> Convert a Markdown string to HTML. Based on [Txtmark](https://github.com/rjeschke/txtmark).</td></tr>
+		<tr><td> Convert a Markdown string to HTML. Based on [Txtmark](https://github.com/rjeschke/txtmark). Supports GFM syntax, tables, task lists, striketrough and emojis.</td></tr>
 		<tr><td>`String compileMustache(Map<String, Object> scope, String template)`</td></tr>
 		<tr><td> Compile a Mustache template string to HTML. Based on [Mustache.java](https://github.com/spullara/mustache.java).</td></tr>
 		<tr><td>`String abbreviate(String str, int max)`</td></tr>

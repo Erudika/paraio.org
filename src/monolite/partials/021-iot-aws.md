@@ -51,7 +51,7 @@ shadow is updated accordingly so the two are in sync again. Finally, deleting th
 AWS along with the certificate and policy attached to it.
 
 In order to use the IoT integration feature, Para needs to get your AWS credentials from the config file or from the
-instance it is deployed on.
+instance it is deployed on. Also you have to enable IoT features in Para with `para.iot_enabled = true`.
 
 ### Getting started with Para and AWS IoT
 

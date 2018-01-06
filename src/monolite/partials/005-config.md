@@ -144,6 +144,8 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>Enable/disable object caching in Para. </td><td></td></tr>
 		<tr><td>`para.search_enabled`				</td><td>`true`</td></tr>
 		<tr><td>Enable/disable object indexing in Para. </td><td></td></tr>
+		<tr><td>`para.iot_enabled`					</td><td>`false`</td></tr>
+		<tr><td>Enable/disable the IoT functionality around `Thing` objects. </td><td></td></tr>
 		<tr><td>`para.metrics_enabled`	</td><td> `true` </td></tr>
 		<tr><td>Enable/disable all metrics. </td><td></td></tr>
 		<tr><td>`para.health_check_enabled`	</td><td> `true` </td></tr>
