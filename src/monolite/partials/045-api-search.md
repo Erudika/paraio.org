@@ -104,7 +104,7 @@ use the `>, <, >=, <=` operators by appending them to the keys of the terms map.
 <hr>
 
 #### `wildcard` query
-A wildcard query like "example*".
+A wildcard query like "example\*".
 This executes the method `findWildcard()` with these **parameters**:
 - `field` - the field to search on
 
@@ -112,7 +112,7 @@ This executes the method `findWildcard()` with these **parameters**:
 
 #### `count` query
 Returns the total number of results that would be returned by a query.
-This executes the method `getCount()` with **no parameters**.
+This executes the method `getCount()` and has **no additional parameters**.
 
 
 ### Request parameters

@@ -21,6 +21,7 @@ There are several configuration properties for Elasticsearch (these go in your `
 	</thead>
 	<tbody>
 		<tr><td>`para.cluster_name`</td><td> Elasticsearch cluster name. Default is `para-prod` when running in production.</td></tr>
+		<tr><td>`para.es.use_nested_custom_fields`</td><td> Switches between "normal" and "nested" indexing modes. Defaults to `false`.</td></tr>
 		<tr><td>`para.es.async_enabled`</td><td> Asynchronous operation when indexing/unindexing. Defaults to `false`.</td></tr>
 		<tr><td>`para.es.shards`</td><td> The number of shards per index. Used when creating an new index. Default is `5`.</td></tr>
 		<tr><td>`para.es.replicas`</td><td> The number of copies of an index. Default is `0`.</td></tr>
@@ -57,9 +58,42 @@ para.search = "ElasticSearch"
 This could be a Java system property or part of a `application.conf` file on the classpath.
 This tells Para to use the Elasticsearch implementation instead of the default (Lucene).
 
+### Indexing modes
+
+This plugin has two indexing modes: **normal** and **nested**. The nested mode was added after v1.28 to protect against
+a possible [mapping explosion](https://discuss.elastic.co/t/can-nested-fields-prevent-mapping-explosion/95464) which
+happens when there are lots of objects with lots of different custom properties in them. This overloads the Elasticsearch
+index metadata and can crash the whole cluster. This indexing mode affects only custom properties in `Sysprop` objects.
+
+The old "normal" mode is suitable for most Para deployments, with just a few tenants or a single tenant
+(one app per server). In this mode, Para objects are indexed without modification (all data types are preserved)
+but this could lead to a mapping explosion.
+
+The nested data structure for these two indexing modes is shown below:
+```
+// NORMAL MODE                   // NESTED MODE
+{                                {
+  "id": "123",                     "id": "123",
+  "appid": "para",                 "appid": "para",
+  "type": "custom",                "type": "custom",
+  "properties": {                  "properties": [
+    "key1": "value1",                {"k": "key1",         "v": "value1"},
+    "key2": {                        {"k": "key2-subkey1", "v": "subValue1"},
+      "subkey1": "subValue1"         {"k": "numericKey3",  "vn": 5}
+    },                             ],
+    "numericKey3": 5               "_properties": "{\"key1\":\"value1\"}..."
+  }                              }
+}
+```
+
+Switching to the new nested indexing mode is done with the configuration property:
+```
+para.es.es.use_nested_custom_fields = true`
+```
+
 ### Calling Elasticsearch through the proxy endpoint
 
-You can directly call the Elasticsearch API through `/v1/_elasticsearch`. To enable it set `para.es.proxy_enabled = true` first.
+You can directly call the Elasticsearch API through `/v1/_elasticsearch`. To enable it, set `para.es.proxy_enabled = true`.
 Then you must specify the `path` parameter corresponds to the Elasticsearch API resource path. This is done for every
 `GET`, `PUT`, `POST`, `PATCH` or `DELETE` request to Elasticsearch. The endpoint accepts request to either
 `/v1/_elasticsearch` or `/v1/_elasticsearch/{path}` where `path` is a URL-encoded path parameter.

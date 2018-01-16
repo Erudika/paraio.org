@@ -1603,6 +1603,7 @@ uses the TCP <code>TransportClient</code> by default. Support for the high-level
     </thead>
     <tbody>
         <tr><td><code>para.cluster_name</code></td><td> Elasticsearch cluster name. Default is <code>para-prod</code> when running in production.</td></tr>
+        <tr><td><code>para.es.use_nested_custom_fields</code></td><td> Switches between “normal” and “nested” indexing modes. Defaults to <code>false</code>.</td></tr>
         <tr><td><code>para.es.async_enabled</code></td><td> Asynchronous operation when indexing/unindexing. Defaults to <code>false</code>.</td></tr>
         <tr><td><code>para.es.shards</code></td><td> The number of shards per index. Used when creating an new index. Default is <code>5</code>.</td></tr>
         <tr><td><code>para.es.replicas</code></td><td> The number of copies of an index. Default is <code>0</code>.</td></tr>
@@ -1633,8 +1634,32 @@ WAR file <code>para-x.y.z.war</code>. Para will look for plugins inside <code>li
 <pre><code>para.search = <span class="hljs-string">"ElasticSearch"</span>
 </code></pre><p>This could be a Java system property or part of a <code>application.conf</code> file on the classpath.
 This tells Para to use the Elasticsearch implementation instead of the default (Lucene).</p>
-<h3 id="calling-elasticsearch-through-the-proxy-endpoint">Calling Elasticsearch through the proxy endpoint</h3>
-<p>You can directly call the Elasticsearch API through <code>/v1/_elasticsearch</code>. To enable it set <code>para.es.proxy_enabled = true</code> first.
+<h3 id="indexing-modes">Indexing modes</h3>
+<p>This plugin has two indexing modes: <strong>normal</strong> and <strong>nested</strong>. The nested mode was added after v1.28 to protect against
+a possible <a href="https://discuss.elastic.co/t/can-nested-fields-prevent-mapping-explosion/95464">mapping explosion</a> which
+happens when there are lots of objects with lots of different custom properties in them. This overloads the Elasticsearch
+index metadata and can crash the whole cluster. This indexing mode affects only custom properties in <code>Sysprop</code> objects.</p>
+<p>The old “normal” mode is suitable for most Para deployments, with just a few tenants or a single tenant
+(one app per server). In this mode, Para objects are indexed without modification (all data types are preserved)
+but this could lead to a mapping explosion.</p>
+<p>The nested data structure for these two indexing modes is shown below:</p>
+<pre><code><span class="hljs-comment">// NORMAL MODE                   // NESTED MODE</span>
+{                                {
+  <span class="hljs-string">"id"</span>: <span class="hljs-string">"123"</span>,                     <span class="hljs-string">"id"</span>: <span class="hljs-string">"123"</span>,
+  <span class="hljs-string">"appid"</span>: <span class="hljs-string">"para"</span>,                 <span class="hljs-string">"appid"</span>: <span class="hljs-string">"para"</span>,
+  <span class="hljs-string">"type"</span>: <span class="hljs-string">"custom"</span>,                <span class="hljs-string">"type"</span>: <span class="hljs-string">"custom"</span>,
+  <span class="hljs-string">"properties"</span>: {                  <span class="hljs-string">"properties"</span>: [
+    <span class="hljs-string">"key1"</span>: <span class="hljs-string">"value1"</span>,                {<span class="hljs-string">"k"</span>: <span class="hljs-string">"key1"</span>,         <span class="hljs-string">"v"</span>: <span class="hljs-string">"value1"</span>},
+    <span class="hljs-string">"key2"</span>: {                        {<span class="hljs-string">"k"</span>: <span class="hljs-string">"key2-subkey1"</span>, <span class="hljs-string">"v"</span>: <span class="hljs-string">"subValue1"</span>},
+      <span class="hljs-string">"subkey1"</span>: <span class="hljs-string">"subValue1"</span>         {<span class="hljs-string">"k"</span>: <span class="hljs-string">"numericKey3"</span>,  <span class="hljs-string">"vn"</span>: <span class="hljs-number">5</span>}
+    },                             ],
+    <span class="hljs-string">"numericKey3"</span>: <span class="hljs-number">5</span>               <span class="hljs-string">"_properties"</span>: <span class="hljs-string">"{\"key1\":\"value1\"}..."</span>
+  }                              }
+}
+</code></pre><p>Switching to the new nested indexing mode is done with the configuration property:</p>
+<pre><code>para.es.es.use_nested_custom_fields = <span class="hljs-literal">true</span><span class="hljs-string">`</span>
+</code></pre><h3 id="calling-elasticsearch-through-the-proxy-endpoint">Calling Elasticsearch through the proxy endpoint</h3>
+<p>You can directly call the Elasticsearch API through <code>/v1/_elasticsearch</code>. To enable it, set <code>para.es.proxy_enabled = true</code>.
 Then you must specify the <code>path</code> parameter corresponds to the Elasticsearch API resource path. This is done for every
 <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>PATCH</code> or <code>DELETE</code> request to Elasticsearch. The endpoint accepts request to either
 <code>/v1/_elasticsearch</code> or <code>/v1/_elasticsearch/{path}</code> where <code>path</code> is a URL-encoded path parameter.
@@ -3843,8 +3868,8 @@ use the <code>&gt;, &lt;, &gt;=, &lt;=</code> operators by appending them to the
 <hr>
 
 <h4 id="-wildcard-query"><code>wildcard</code> query</h4>
-<p>A wildcard query like “example<em>“.
-This executes the method <code>findWildcard()</code> with these <em>*parameters</em></em>:</p>
+<p>A wildcard query like “example*“.
+This executes the method <code>findWildcard()</code> with these <strong>parameters</strong>:</p>
 <ul>
 <li><code>field</code> - the field to search on</li>
 </ul>
@@ -3852,7 +3877,7 @@ This executes the method <code>findWildcard()</code> with these <em>*parameters<
 
 <h4 id="-count-query"><code>count</code> query</h4>
 <p>Returns the total number of results that would be returned by a query.
-This executes the method <code>getCount()</code> with <strong>no parameters</strong>.</p>
+This executes the method <code>getCount()</code> and has <strong>no additional parameters</strong>.</p>
 <h3 id="request-parameters">Request parameters</h3>
 <ul>
 <li><code>q</code> - a search query string (optional). Defaults to <code>*</code> (all).</li>
@@ -4787,7 +4812,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>10 January 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>17 January 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2018
