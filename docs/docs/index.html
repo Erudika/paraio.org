@@ -1657,7 +1657,7 @@ but this could lead to a mapping explosion.</p>
   }                              }
 }
 </code></pre><p>Switching to the new nested indexing mode is done with the configuration property:</p>
-<pre><code>para.es.es.use_nested_custom_fields = <span class="hljs-literal">true</span><span class="hljs-string">`</span>
+<pre><code>para.es.es.use_nested_custom_fields = <span class="hljs-literal">true</span>
 </code></pre><h3 id="calling-elasticsearch-through-the-proxy-endpoint">Calling Elasticsearch through the proxy endpoint</h3>
 <p>You can directly call the Elasticsearch API through <code>/v1/_elasticsearch</code>. To enable it, set <code>para.es.proxy_enabled = true</code>.
 Then you must specify the <code>path</code> parameter corresponds to the Elasticsearch API resource path. This is done for every
@@ -2025,12 +2025,12 @@ make a signed request to Para as follows:</p>
 <p>To run a local Graphite server start a docker container like <a href="https://github.com/hopsoft/docker-graphite-statsd">hopsoft/docker-graphite-statsd</a>
 and then run a local Grafana server using the instructions at <a href="http://docs.grafana.org/installation/docker/">http://docs.grafana.org/installation/docker/</a>.</p>
 <p>Here’s how to run Graphite with a Docker command:</p>
-<pre><code class="lang-bash">$ docker run <span class="hljs-_">-d</span> --name graphite --restart=always -p 80:80 -p 2003-2004:2003-2004 -p 2023-2024:2023-2024 \
+<pre><code class="lang-bash">$ docker run -d --name graphite --restart=always -p 80:80 -p 2003-2004:2003-2004 -p 2023-2024:2023-2024 \
   -p 8125:8125/udp -p 8126:8126 hopsoft/graphite-statsd
 </code></pre>
 <p>Then point you browser to <code>http://localhost/</code>. Then run Grafana locally with:</p>
-<pre><code class="lang-bash">$ docker run <span class="hljs-_">-d</span> -p 3000:3000 <span class="hljs-_">-e</span> GF_SECURITY_ADMIN_USER=admin <span class="hljs-_">-e</span> GF_SECURITY_ADMIN_PASSWORD=password \
-  <span class="hljs-_">-e</span> GF_METRICS_GRAPHITE_ADDRESS=localhost:2003 grafana/grafana
+<pre><code class="lang-bash">$ docker run -d -p 3000:3000 -e GF_SECURITY_ADMIN_USER=admin -e GF_SECURITY_ADMIN_PASSWORD=password \
+  -e GF_METRICS_GRAPHITE_ADDRESS=localhost:2003 grafana/grafana
 </code></pre>
 <p>Then you can login using admin/password at the login screen.</p>
 

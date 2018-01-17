@@ -88,7 +88,7 @@ The nested data structure for these two indexing modes is shown below:
 
 Switching to the new nested indexing mode is done with the configuration property:
 ```
-para.es.es.use_nested_custom_fields = true`
+para.es.es.use_nested_custom_fields = true
 ```
 
 ### Calling Elasticsearch through the proxy endpoint
