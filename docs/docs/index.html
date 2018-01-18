@@ -1658,6 +1658,14 @@ but this could lead to a mapping explosion.</p>
 }
 </code></pre><p>Switching to the new nested indexing mode is done with the configuration property:</p>
 <pre><code>para.es.es.use_nested_custom_fields = <span class="hljs-literal">true</span>
+</code></pre><p>Another benefit, when using the “nested” mode, is the support for nested queries in query strings.
+This is a really useful feature which, at the time of writing this, has not yet been implemented in Elasticsearch
+(issue <a href="https://github.com/elastic/elasticsearch/issues/11322">elastic/elasticsearch#11322</a>). Even better, you can
+query objects within nested arrays with pinpoint precision, e.g. <code>?q=properties.nestedArray[2].key:value</code>.
+A nested query string query is detected if it contains a field with prefix <code>properties.*</code>.
+Examples of query string queries:</p>
+<pre><code>/v1/search?q=term AND properties.owner.age:[* TO <span class="hljs-number">34</span>]
+/v1/search?q=properties.owner.name:alice OR properties.owner.pets[<span class="hljs-number">1</span>].name=whiskers
 </code></pre><h3 id="calling-elasticsearch-through-the-proxy-endpoint">Calling Elasticsearch through the proxy endpoint</h3>
 <p>You can directly call the Elasticsearch API through <code>/v1/_elasticsearch</code>. To enable it, set <code>para.es.proxy_enabled = true</code>.
 Then you must specify the <code>path</code> parameter corresponds to the Elasticsearch API resource path. This is done for every
@@ -4812,7 +4820,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>17 January 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>18 January 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2018
