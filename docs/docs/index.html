@@ -84,6 +84,7 @@
 							<li class=""><a href="#013-cassandra">Cassandra</a></li>
 							<li class=""><a href="#013-dynamodb">DynamoDB</a></li>
 							<li class=""><a href="#013-mongodb">MongoDB</a></li>
+							<li class=""><a href="#013-sql">Generic SQL</a></li>
 							<li class=""><a href="#014-h2">H2 DB</a></li>
 				</ul>
 			</li>
@@ -1505,7 +1506,7 @@ Java Driver compatible with MongoDB 3.2.</p>
 </code></pre>
 <p>Alternatively you can <a href="https://github.com/Erudika/para-dao-mongodb/releases">download the JAR</a> and put it in a
 <code>lib</code> folder alongside the server WAR file <code>para-x.y.z.war</code>. Para will look for plugins inside <code>lib</code> and pick up
-the Elasticsearch plugin.</p>
+the plugin.</p>
 <p>Finally, set the config property:</p>
 <pre><code>para.dao = <span class="hljs-string">"MongoDBDAO"</span>
 </code></pre><p>This could be a Java system property or part of a <code>application.conf</code> file on the classpath.
@@ -1514,6 +1515,48 @@ This tells Para to use the MongoDB Data Access Object (DAO) implementation inste
 <blockquote>
 <p>For more information about using MongoDB, see the <a href="https://docs.mongodb.org/manual/">official manual</a>.</p>
 </blockquote>
+
+				</section>
+			</article>
+			<a id="013-sql" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Generic SQL</h2>
+				<section class="body  img-rounded">
+					<p>Besides the default H2 implementation, there’s a <a href="https://github.com/Erudika/para-dao-sql">generic SQL</a> <code>DAO</code> plugin
+which adds support for all the major RDBMS - MySQL/MariaDB, PostgreSQL and Microsoft SQL Server.
+The class <code>SqlDAO</code> implements the <code>DAO</code> interface is responsible for connecting to an SQL server at a given URL.
+All database connections are managed by <a href="https://github.com/brettwooldridge/HikariCP">HikariCP</a> - a lightweight,
+production-ready, JDBC connection pool.</p>
+<p>There are several configuration properties for this plugin (these go in your <code>application.conf</code> file):</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>property</th>
+            <th>description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>para.sql.driver</code></td><td> The fully-qualified class name for your SQL driver. Defaults to <code>com.mysql.jdbc.Driver</code>.</td></tr>
+        <tr><td><code>para.sql.url</code></td><td> The server URL to connect to. Defaults to <code>mysql://localhost:3306</code>.</td></tr>
+        <tr><td><code>para.sql.user</code></td><td> The username with access to the database. Defaults to <code>user</code>.</td></tr>
+        <tr><td><code>para.sql.password</code></td><td> The DB password. Defaults to <code>secret</code>.</td></tr>
+    </tbody>
+</table>
+
+<p>The plugin is on Maven Central. Here’s the Maven snippet to include in your <code>pom.xml</code>:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>para-dao-sql<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>{version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<p>Alternatively you can <a href="https://github.com/Erudika/para-dao-sql/releases">download the JAR</a> and put it in a
+<code>lib</code> folder alongside the server WAR file <code>para-x.y.z.war</code>. Para will look for plugins inside <code>lib</code> and pick up
+the plugin.</p>
+<p>Finally, set the config property:</p>
+<pre><code>para.dao = <span class="hljs-string">"SqlDAO"</span>
+</code></pre><p>This could be a Java system property or part of a <code>application.conf</code> file on the classpath.
+This tells Para to use the SQL DAO implementation instead of the default.</p>
 
 				</section>
 			</article>
