@@ -1527,6 +1527,9 @@ which adds support for all the major RDBMS - MySQL/MariaDB, PostgreSQL and Micro
 The class <code>SqlDAO</code> implements the <code>DAO</code> interface is responsible for connecting to an SQL server at a given URL.
 All database connections are managed by <a href="https://github.com/brettwooldridge/HikariCP">HikariCP</a> - a lightweight,
 production-ready, JDBC connection pool.</p>
+<p>Before you can use this plugin, you need to find an download the right driver for your database. This is a small package
+which must be loaded from the classpath along with the plugin and the HikariCP library. You also have to specify the
+class name of the loaded driver in the main Para configuration file.</p>
 <p>There are several configuration properties for this plugin (these go in your <code>application.conf</code> file):</p>
 <table class="table table-striped">
     <thead>
@@ -1536,8 +1539,8 @@ production-ready, JDBC connection pool.</p>
         </tr>
     </thead>
     <tbody>
-        <tr><td><code>para.sql.driver</code></td><td> The fully-qualified class name for your SQL driver. Defaults to <code>com.mysql.jdbc.Driver</code>.</td></tr>
-        <tr><td><code>para.sql.url</code></td><td> The server URL to connect to. Defaults to <code>mysql://localhost:3306</code>.</td></tr>
+        <tr><td><code>para.sql.driver</code></td><td> The fully-qualified class name for your SQL driver. Defaults to <code>null</code>.</td></tr>
+        <tr><td><code>para.sql.url</code></td><td> The server URL to connect to. Defaults to <code>null</code>.</td></tr>
         <tr><td><code>para.sql.user</code></td><td> The username with access to the database. Defaults to <code>user</code>.</td></tr>
         <tr><td><code>para.sql.password</code></td><td> The DB password. Defaults to <code>secret</code>.</td></tr>
     </tbody>
