@@ -19,16 +19,14 @@ class Article implements ParaObject {
 }
 ```
 
-> **Caution:** when defining your custom properties try to stick to basic Java types like `List`, `Map`,
-> `String`, `boolean`, etc. Complex property objects are **not supported**. This is due to the fact that
-> Para uses `BeanUtils` to set property values and it has no clue how to deserialize
-> your complex objects, so keep it simple.
+When defining your custom properties (fields) you can either declare they as Java types like `List`, `Map`,
+`String`, `boolean`, or use your own custom types.
 
 You don't have to define common fields like `id` or `name` because they are already defined in the parent class.
 Now you can create a new article like so:
 
 ```java
-System.setProperty("para.core_package_name", "com.erudika.paraiochecks.core");
+System.setProperty("para.core_package_name", "com.erudika.para.core");
 
 Article a = new Article();
 a.setTitle("Some title");
