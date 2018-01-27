@@ -54,4 +54,3 @@ that field should not be declared as `transient` otherwise it will be skipped.
 attributes that are read-only like `type` and `id`. These are created once and never change so when calling `update()`
 they will be skipped.
 
-`@Cached` is used internally by Para for caching and you don't need to used it in your projects.
