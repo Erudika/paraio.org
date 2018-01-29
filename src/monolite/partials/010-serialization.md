@@ -18,11 +18,6 @@ public class MyCustomClass extends Sysprop {
 	@Stored private Cat cat;
 }
 
-SimpleModule module = new SimpleModule();
-module.addSerializer(Cat.class, new CatSerializer());
-module.addDeserializer(Cat.class, new CatDeserializer());
-ParaObjectUtils.getJsonMapper().registerModule(module);
-
 Map<String, Object> properties = ParaObjectUtils.getAnnotatedFields(customClass, false);
 MyCustomClass deserialized = ParaObjectUtils.setAnnotatedFields(properties);
 ```
@@ -39,8 +34,10 @@ There are absolutely no restrictions for this, as long as the data comes back as
 
 It's important to mention that serialization/deserialization can happen in both the server and the client.
 The Para clients will read your custom classes and serialize them to JSON before sending them to the Para server.
-When you define your custom types on the clientside, the server doesn't know about them - they are simply converted to
-`Sysprop` (a container class) objects when received from the client.
+When you define your custom classes on the clientside, the server doesn't know about them - they are simply converted to
+`Sysprop` (a container class) objects when received from the client. This, however, is only done for practical reasons
+on the serverside. It does not mean that on the clientside, the objects returned from the server will be
+deserialized to `Sysprop`, on the contrary, they will be deserialized to your custom classes.
 
 ### Annotations
 

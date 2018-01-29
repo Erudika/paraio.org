@@ -1089,11 +1089,6 @@ deserializers with Para. For example:</p>
     <span class="hljs-meta">@Stored</span> <span class="hljs-keyword">private</span> Cat cat;
 }
 
-SimpleModule <span class="hljs-keyword">module</span> = <span class="hljs-keyword">new</span> SimpleModule();
-<span class="hljs-keyword">module</span>.addSerializer(Cat.class, <span class="hljs-keyword">new</span> CatSerializer());
-<span class="hljs-keyword">module</span>.addDeserializer(Cat.class, <span class="hljs-keyword">new</span> CatDeserializer());
-ParaObjectUtils.getJsonMapper().registerModule(<span class="hljs-keyword">module</span>);
-
 Map&lt;String, Object&gt; properties = ParaObjectUtils.getAnnotatedFields(customClass, <span class="hljs-keyword">false</span>);
 MyCustomClass deserialized = ParaObjectUtils.setAnnotatedFields(properties);
 </code></pre>
@@ -1107,8 +1102,10 @@ When you’re implementing your own <code>DAO</code> classes, it’s entirely up
 There are absolutely no restrictions for this, as long as the data comes back as a <code>Map</code> at the point of retrieval.</p>
 <p>It’s important to mention that serialization/deserialization can happen in both the server and the client.
 The Para clients will read your custom classes and serialize them to JSON before sending them to the Para server.
-When you define your custom types on the clientside, the server doesn’t know about them - they are simply converted to
-<code>Sysprop</code> (a container class) objects when received from the client.</p>
+When you define your custom classes on the clientside, the server doesn’t know about them - they are simply converted to
+<code>Sysprop</code> (a container class) objects when received from the client. This, however, is only done for practical reasons
+on the serverside. It does not mean that on the clientside, the objects returned from the server will be
+deserialized to <code>Sysprop</code>, on the contrary, they will be deserialized to your custom classes.</p>
 <h3 id="annotations">Annotations</h3>
 <p>Para uses annotations to mark what attributes of a class need to be saved. There are several annotations that Para uses
 but the two main ones are <code>@Stored</code> and <code>@Locked</code>.</p>
@@ -4894,7 +4891,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>28 January 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>29 January 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2018
