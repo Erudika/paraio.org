@@ -8,8 +8,8 @@ The process happens in the `ParaObjectUtils` class, and more precisely inside tw
 `setAnnotatedFields()` and `getAnnotatedFields()`.
 
 When defining your custom classes and fields, you're free to use any Java type, primitive or your own custom classes.
-Basically, any type compatible with Jackson will work with Para as well. You can also register custom serializers and
-deserializers with Para. For example:
+Basically, any type compatible with Jackson will work with Para as well. You can also use Jackson annotations on your
+fields. A common example is declaring custom serializers and deserializers:
 
 ```java
 public class MyCustomClass extends Sysprop {
