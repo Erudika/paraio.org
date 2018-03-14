@@ -5,8 +5,10 @@ category: Search
 
 **Now part of the [para-search-elasticsearch](https://github.com/erudika/para-search-elasticsearch) plugin (v1.25).**
 
-Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v5 and
-uses the TCP `TransportClient` by default. Support for the high-level REST HTTP client is expected when ES v6 is released.
+Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v6+ and
+uses either the TCP `TransportClient` or the high level REST client (default).
+
+> Use of the transport client is no longer recommended as it will be deprecated in Elasticsearch 7.x.
 
 The `Search` interface is implemented in the `ElasticSearch` class.
 
@@ -26,15 +28,17 @@ There are several configuration properties for Elasticsearch (these go in your `
 		<tr><td>`para.es.shards`</td><td> The number of shards per index. Used when creating an new index. Default is `5`.</td></tr>
 		<tr><td>`para.es.replicas`</td><td> The number of copies of an index. Default is `0`.</td></tr>
 		<tr><td>`para.es.auto_expand_replicas`</td><td> Automatically make a replica copy of the index to the number of nodes specified. Default is `0-1`.</td></tr>
-		<tr><td>`para.es.use_transportclient`</td><td> Use `TransportClient` to connect to a remote ES node. If `false`, the REST client will be used. Default is `true`.</td></tr>
+		<tr><td>`para.es.use_transportclient`</td><td> Use `TransportClient` to connect to a remote ES node. If `false`, the REST client will be used. Default is `false`.</td></tr>
+		<tr><td>`para.es.restclient_scheme`</td><td> Scheme (for REST client). Default is `https` in production, `http` otherwise.</td></tr>
+		<tr><td>`para.es.restclient_host`</td><td> ES server host (for REST client). Default is `localhost`.</td></tr>
+		<tr><td>`para.es.restclient_port`</td><td> ES server port (for REST client). Default is `9200`.</td></tr>
 		<tr><td>`para.es.transportclient_host`</td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is `localhost`.</td></tr>
 		<tr><td>`para.es.transportclient_port`</td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is `9300`.</td></tr>
 
+		<tr><td>`para.es.sign_requests_to_aws`</td><td> If enabled, requests will be signed using the AWS V4 algorithm. Default is `false`.</td></tr>
+		<tr><td>`para.es.aws_region`</td><td> Used only for the purposes of signing requests to AWS. Default is `null`.</td></tr>
 		<tr><td>`para.es.proxy_enabled`</td><td> Enables the Elasticsearch proxy endpoint. Default is `false`.</td></tr>
 		<tr><td>`para.es.proxy_path`</td><td> The path to the proxy endpoint. Default is `_elasticsearch`.</td></tr>
-		<tr><td>`para.es.restclient_scheme`</td><td> Scheme (for low-level REST client). Default is `http`.</td></tr>
-		<tr><td>`para.es.restclient_host`</td><td> ES server host (for low-level REST client). Default is `localhost`.</td></tr>
-		<tr><td>`para.es.restclient_port`</td><td> ES server port (for low-level REST client). Default is `9200`.</td></tr>
 		<tr><td>`para.es.root_index_sharing_enabled`</td><td> Enable/disable root index sharing by child apps with `isSharingIndex` set to `true`. Default is `false`.</td></tr>
 	</tbody>
 </table>

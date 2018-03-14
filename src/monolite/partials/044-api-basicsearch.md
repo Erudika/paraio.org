@@ -28,7 +28,7 @@ For detailed syntax of the query string see
 
 ### Response
 
-- **status codes** - `200`
+- **status codes** - `200`, `400` if query string syntax is invalid
 
 Example response for querying all tags `GET /v1/tags?q=*&limit=3`:
 ```js

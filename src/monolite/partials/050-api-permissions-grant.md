@@ -17,8 +17,8 @@ There are several methods and flags which control which requests can go through.
 ### Request
 
 - **body** - a JSON array of permitted HTTP methods/flags, listed above (required).
-- `{subjectid}` - the subject/user `id` to grant permissions to (required)
-- `{resource}` - the resource path or object type (URL encoded), for example
+- `{subjectid}` - the subject/user `id` to grant permissions to, or wildcard `*` (required)
+- `{resource}` - the resource path or object type (URL encoded), or wildcard `*`. For example
 `posts` corresponds to `/v1/posts`, `posts%2F123` corresponds to `/v1/posts/123` (required)
 
 ### Response

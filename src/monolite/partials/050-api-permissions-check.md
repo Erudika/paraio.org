@@ -16,8 +16,8 @@ There are several methods and flags which control which requests can go through.
 
 ### Request
 
-- `{subjectid}` - the subject/user `id` to grant permissions to. (required)
-- `{resource}` - the resource path or object type (URL encoded). (required)
+- `{subjectid}` - the subject/user `id` to grant permissions to, or wildcard `*`. (required)
+- `{resource}` - the resource path or object type (URL encoded), or wildcard `*`. (required)
 - `{method}` - an HTTP method or flag, listed above. (required)
 
 ### Response

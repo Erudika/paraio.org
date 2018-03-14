@@ -651,10 +651,10 @@ This is important for securing your server because this secret key is used for s
         <tr><td>The minimum length of passwords. </td><td></td></tr>
 
         <tr><td><code>para.aws_access_key</code>                </td><td>-</td></tr>
-        <tr><td>AWS access key for connecting Para to AWS.</td><td></td></tr>
+        <tr><td><strong>Deprecated.</strong> Use credential profiles.</td><td></td></tr>
         <tr><td><code>para.aws_secret_key</code>                </td><td>-</td></tr>
-        <tr><td>AWS secret. Make sure the config file with the secret is in your <code>.gitignore</code>.</td><td></td></tr>
-        <tr><td><code>para.aws_region</code>                        </td><td><code>eu-west-1</code></td></tr>
+        <tr><td><strong>Deprecated.</strong> Use credential profiles.</td><td></td></tr>
+        <tr><td><code>para.aws_region</code>                        </td><td>-</td></tr>
         <tr><td>The AWS region string.</td><td></td></tr>
 
         <tr><td><code>para.fb_app_id</code>                        </td><td>-</td></tr>
@@ -734,6 +734,8 @@ This is important for securing your server because this secret key is used for s
         Useful for local testing/development or to recover objects that were lost/deleted from the database. </td><td></td></tr>
         <tr><td><code>para.queue_link_enabled</code>        </td><td><code>false</code></td></tr>
         <tr><td>Enable/disable polling the default queue for objects to be imported into Para. </td><td></td></tr>
+        <tr><td><code>para.optimistic_locking_enabled</code>        </td><td><code>false</code></td></tr>
+        <tr><td>Enable/disable optimistic locking support on <code>update()</code>, <em>only if the <code>DAO</code> implements it</em>. </td><td></td></tr>
 
         <tr><td><code>para.default_queue_name</code>        </td><td><code>para-default</code></td></tr>
         <tr><td>The default queue name (optional). </td><td></td></tr>
@@ -1413,6 +1415,17 @@ easily be integrated with other client-side validators.</p>
 <p>A <code>DAO</code> object only deals with storing objects in a database. It is not concerned with relationships between objects or
 constraint validation.</p>
 </blockquote>
+<h3 id="optimistic-locking">Optimistic locking</h3>
+<p>Each <code>DAO</code> implementation is responsible for supporting optimistic locking if the underlying database is capable of
+performing conditional write operations natively. The <code>ParaObject</code> interface contains a <code>version</code> field which can be
+used to store information about the current version of each object and it’s value should be incremented by the database,
+if an update operation succeeds. The locking mechanism is simple - the database checks if the supplied object version
+matches the one stored in the database. If the two versions match, the update operation is executed, otherwise it fails.
+A <code>version</code> value of <code>-1</code> indicates a failed update and it’s the responsibility of the API clients to handle such failures.
+If the <code>version</code> value is positive, the update has been successful, and <code>0</code> means the field is unused or the object
+has not been persisted yet.</p>
+<p>Optimistic locking is enabled with <code>para.optimistic_locking_enabled = true</code> and this flag should be respected
+in the <code>DAO</code> code.</p>
 
 				</section>
 			</article>
@@ -1474,6 +1487,7 @@ All operations are carried out using the latest AWS Java SDK.</p>
 It simply executes all update requests in a sequence.</p>
 <p>The implementation adds a default prefix <code>para-</code> to DynamoDB tables, so if you have an app called “myapp” your table for
 that will be called <code>para-myapp</code>.</p>
+<p>This <code>DAO</code> implementation <strong>supports optimistic locking</strong> through conditional update expressions in DynamoDB.</p>
 <h3 id="table-sharing">Table sharing</h3>
 <p>In v1.21, we added new functionality to <code>AWSDynamoDAO</code> which enables apps to share the same table. This is useful
 for certain deployment scenarios where you have a large number of apps (and tables) which are rarely accessed and have
@@ -1595,6 +1609,7 @@ This tells Para to use the SQL DAO implementation instead of the default.</p>
 					<p>This is the default database for object storage since v1.25. It is lightweight and embedded, which speeds up the
 startup of the server. All tables are stored inside a <code>./data</code> folder by default. Keep in mind that each app has its
 own table which is created automatically when the app is created.</p>
+<p>The implementing class <code>H2DAO</code> is part of the <a href="https://github.com/Erudika/para-dao-sql">para-dao-sql</a> plugin.</p>
 <p>There are several configuration properties for H2 (these go in your <code>application.conf</code> file):</p>
 <table class="table table-striped">
     <thead>
@@ -1661,8 +1676,11 @@ These methods are:</p>
 					<h2>Elasticsearch</h2>
 				<section class="body  img-rounded">
 					<p><strong>Now part of the <a href="https://github.com/erudika/para-search-elasticsearch">para-search-elasticsearch</a> plugin (v1.25).</strong></p>
-<p>Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v5 and
-uses the TCP <code>TransportClient</code> by default. Support for the high-level REST HTTP client is expected when ES v6 is released.</p>
+<p>Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v6+ and
+uses either the TCP <code>TransportClient</code> or the high level REST client (default).</p>
+<blockquote>
+<p>Use of the transport client is no longer recommended as it will be deprecated in Elasticsearch 7.x.</p>
+</blockquote>
 <p>The <code>Search</code> interface is implemented in the <code>ElasticSearch</code> class.</p>
 <p>There are several configuration properties for Elasticsearch (these go in your <code>application.conf</code> file):</p>
 <table class="table table-striped">
@@ -1679,15 +1697,17 @@ uses the TCP <code>TransportClient</code> by default. Support for the high-level
         <tr><td><code>para.es.shards</code></td><td> The number of shards per index. Used when creating an new index. Default is <code>5</code>.</td></tr>
         <tr><td><code>para.es.replicas</code></td><td> The number of copies of an index. Default is <code>0</code>.</td></tr>
         <tr><td><code>para.es.auto_expand_replicas</code></td><td> Automatically make a replica copy of the index to the number of nodes specified. Default is <code>0-1</code>.</td></tr>
-        <tr><td><code>para.es.use_transportclient</code></td><td> Use <code>TransportClient</code> to connect to a remote ES node. If <code>false</code>, the REST client will be used. Default is <code>true</code>.</td></tr>
+        <tr><td><code>para.es.use_transportclient</code></td><td> Use <code>TransportClient</code> to connect to a remote ES node. If <code>false</code>, the REST client will be used. Default is <code>false</code>.</td></tr>
+        <tr><td><code>para.es.restclient_scheme</code></td><td> Scheme (for REST client). Default is <code>https</code> in production, <code>http</code> otherwise.</td></tr>
+        <tr><td><code>para.es.restclient_host</code></td><td> ES server host (for REST client). Default is <code>localhost</code>.</td></tr>
+        <tr><td><code>para.es.restclient_port</code></td><td> ES server port (for REST client). Default is <code>9200</code>.</td></tr>
         <tr><td><code>para.es.transportclient_host</code></td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is <code>localhost</code>.</td></tr>
         <tr><td><code>para.es.transportclient_port</code></td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is <code>9300</code>.</td></tr>
 
+        <tr><td><code>para.es.sign_requests_to_aws</code></td><td> If enabled, requests will be signed using the AWS V4 algorithm. Default is <code>false</code>.</td></tr>
+        <tr><td><code>para.es.aws_region</code></td><td> Used only for the purposes of signing requests to AWS. Default is <code>null</code>.</td></tr>
         <tr><td><code>para.es.proxy_enabled</code></td><td> Enables the Elasticsearch proxy endpoint. Default is <code>false</code>.</td></tr>
         <tr><td><code>para.es.proxy_path</code></td><td> The path to the proxy endpoint. Default is <code>_elasticsearch</code>.</td></tr>
-        <tr><td><code>para.es.restclient_scheme</code></td><td> Scheme (for low-level REST client). Default is <code>http</code>.</td></tr>
-        <tr><td><code>para.es.restclient_host</code></td><td> ES server host (for low-level REST client). Default is <code>localhost</code>.</td></tr>
-        <tr><td><code>para.es.restclient_port</code></td><td> ES server port (for low-level REST client). Default is <code>9200</code>.</td></tr>
         <tr><td><code>para.es.root_index_sharing_enabled</code></td><td> Enable/disable root index sharing by child apps with <code>isSharingIndex</code> set to <code>true</code>. Default is <code>false</code>.</td></tr>
     </tbody>
 </table>
@@ -1817,7 +1837,8 @@ overhead of one index per app.</p>
 				<section class="body  img-rounded">
 					<p>Lucene is used as the default search engine in Para. It is a lightweight alternative to Elasticsearch for self-contained
 deployments. It works great for local development and also in production.</p>
-<p>The <code>Search</code> interface is implemented in the <code>LuceneSearch</code> class.</p>
+<p>The <code>Search</code> interface is implemented in the <code>LuceneSearch</code> class and is part of the
+<a href="https://github.com/Erudika/para-search-lucene">para-search-lucene</a> plugin.</p>
 <p>Keep in mind that each Para app has its own Lucene index, which is automatically created if missing. The path to where
 Lucene files are stored is controlled by <code>para.lucene.dir</code> which defaults to <code>.</code> the current directory. If you set it
 to <code>para.lucene.dir = &quot;/home/user/lucene&quot;</code> index files will be stored in <code>/home/users/lucene/data</code>.</p>
@@ -1940,6 +1961,8 @@ with the same name.</p>
     </tbody>
 </table>
 
+<p>In case you have enabled EC2 auto discovery, you must set <code>para.aws_access_key</code>,
+<code>para.aws_secret_key</code> and <code>para.aws_region</code> accordingly.</p>
 <blockquote>
 <p>For more information see the <a href="http://www.hazelcast.org/docs/latest/manual/html-single">Hazelcast docs</a>.</p>
 </blockquote>
@@ -3791,7 +3814,7 @@ custom fields must be used in search queries as <code>properties.myfield</code>.
 </ul>
 <h3 id="response">Response</h3>
 <ul>
-<li><strong>status codes</strong> - <code>200</code></li>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code> if query string syntax is invalid</li>
 </ul>
 <p>Example response for querying all tags <code>GET /v1/tags?q=*&amp;limit=3</code>:</p>
 <pre><code class="lang-js">{
@@ -3969,7 +3992,7 @@ This executes the method <code>getCount()</code> and has <strong>no additional p
 </ul>
 <h3 id="response">Response</h3>
 <ul>
-<li><strong>status codes</strong> - <code>200</code></li>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code> if query string syntax is invalid</li>
 </ul>
 <p>Example response for counting all objects (just three for this example):</p>
 <pre><code class="lang-js">{
@@ -4500,8 +4523,8 @@ See <a href="#010-userdefined">User-defined classes</a> for more details.</p>
 </ul>
 <h3 id="request">Request</h3>
 <ul>
-<li><code>{subjectid}</code> - the subject/user <code>id</code> to grant permissions to. (required)</li>
-<li><code>{resource}</code> - the resource path or object type (URL encoded). (required)</li>
+<li><code>{subjectid}</code> - the subject/user <code>id</code> to grant permissions to, or wildcard <code>*</code>. (required)</li>
+<li><code>{resource}</code> - the resource path or object type (URL encoded), or wildcard <code>*</code>. (required)</li>
 <li><code>{method}</code> - an HTTP method or flag, listed above. (required)</li>
 </ul>
 <h3 id="response">Response</h3>
@@ -4582,8 +4605,8 @@ only the permissions for that subject.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><strong>body</strong> - a JSON array of permitted HTTP methods/flags, listed above (required).</li>
-<li><code>{subjectid}</code> - the subject/user <code>id</code> to grant permissions to (required)</li>
-<li><code>{resource}</code> - the resource path or object type (URL encoded), for example
+<li><code>{subjectid}</code> - the subject/user <code>id</code> to grant permissions to, or wildcard <code>*</code> (required)</li>
+<li><code>{resource}</code> - the resource path or object type (URL encoded), or wildcard <code>*</code>. For example
 <code>posts</code> corresponds to <code>/v1/posts</code>, <code>posts%2F123</code> corresponds to <code>/v1/posts/123</code> (required)</li>
 </ul>
 <h3 id="response">Response</h3>
@@ -4891,7 +4914,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>05 February 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>15 March 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2018

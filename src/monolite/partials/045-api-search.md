@@ -127,7 +127,7 @@ This executes the method `getCount()` and has **no additional parameters**.
 
 ### Response
 
-- **status codes** - `200`
+- **status codes** - `200`, `400` if query string syntax is invalid
 
 Example response for counting all objects (just three for this example):
 ```js

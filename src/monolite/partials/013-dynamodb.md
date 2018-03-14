@@ -13,6 +13,8 @@ It simply executes all update requests in a sequence.
 The implementation adds a default prefix `para-` to DynamoDB tables, so if you have an app called "myapp" your table for
 that will be called `para-myapp`.
 
+This `DAO` implementation **supports optimistic locking** through conditional update expressions in DynamoDB.
+
 ### Table sharing
 
 In v1.21, we added new functionality to `AWSDynamoDAO` which enables apps to share the same table. This is useful

@@ -78,10 +78,10 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>The minimum length of passwords. </td><td></td></tr>
 
 		<tr><td>`para.aws_access_key`				</td><td>-</td></tr>
-		<tr><td>AWS access key for connecting Para to AWS.</td><td></td></tr>
+		<tr><td>**Deprecated.** Use credential profiles.</td><td></td></tr>
 		<tr><td>`para.aws_secret_key`				</td><td>-</td></tr>
-		<tr><td>AWS secret. Make sure the config file with the secret is in your `.gitignore`.</td><td></td></tr>
-		<tr><td>`para.aws_region`						</td><td>`eu-west-1`</td></tr>
+		<tr><td>**Deprecated.** Use credential profiles.</td><td></td></tr>
+		<tr><td>`para.aws_region`						</td><td>-</td></tr>
 		<tr><td>The AWS region string.</td><td></td></tr>
 
 		<tr><td>`para.fb_app_id`						</td><td>-</td></tr>
@@ -161,6 +161,8 @@ Here's a list of all configuration properties that can be set in the config file
 		Useful for local testing/development or to recover objects that were lost/deleted from the database. </td><td></td></tr>
 		<tr><td>`para.queue_link_enabled`		</td><td>`false`</td></tr>
 		<tr><td>Enable/disable polling the default queue for objects to be imported into Para. </td><td></td></tr>
+		<tr><td>`para.optimistic_locking_enabled`		</td><td>`false`</td></tr>
+		<tr><td>Enable/disable optimistic locking support on `update()`, *only if the `DAO` implements it*. </td><td></td></tr>
 
 		<tr><td>`para.default_queue_name`		</td><td>`para-default`</td></tr>
 		<tr><td>The default queue name (optional). </td><td></td></tr>

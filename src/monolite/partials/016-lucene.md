@@ -6,7 +6,8 @@ category: Search
 Lucene is used as the default search engine in Para. It is a lightweight alternative to Elasticsearch for self-contained
 deployments. It works great for local development and also in production.
 
-The `Search` interface is implemented in the `LuceneSearch` class.
+The `Search` interface is implemented in the `LuceneSearch` class and is part of the
+[para-search-lucene](https://github.com/Erudika/para-search-lucene) plugin.
 
 Keep in mind that each Para app has its own Lucene index, which is automatically created if missing. The path to where
 Lucene files are stored is controlled by `para.lucene.dir` which defaults to `.` the current directory. If you set it
