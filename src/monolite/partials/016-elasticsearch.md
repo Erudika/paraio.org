@@ -52,6 +52,20 @@ The plugin is on Maven Central. Here's the Maven snippet to include in your `pom
   <version>{version}</version>
 </dependency>
 ```
+
+**Note:** There's a fork of the plugin which is compatible only with the Elasticsearch 5.x branch and it's missing
+some of the latest features like AWS Elasticsearch support and it uses only the legacy transport client.
+The project's repository is at [Erudika/para-search-elasticsearch-v5](https://github.com/erudika/para-search-elasticsearch-v5).
+The Maven coordinates for the legacy plugin are:
+
+```xml
+<dependency>
+  <groupId>com.erudika</groupId>
+  <artifactId>para-search-elasticsearch-v5</artifactId>
+  <version>{version}</version>
+</dependency>
+```
+
 Alternatively you can download the JAR from the "Releases" tab above put it in a `lib` folder alongside the server
 WAR file `para-x.y.z.war`. Para will look for plugins inside `lib` and pick up the Elasticsearch plugin.
 
