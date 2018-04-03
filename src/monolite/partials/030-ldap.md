@@ -61,4 +61,5 @@ You can also configure LDAP through the [app settings API](#050-api-settings-put
 }
 ```
 
-You can also put all of the settings above in a configuration file (see [the config](#005-config))
+You can also put all of the settings above in a configuration file, but this *only works* if your app is the
+**root app** (see [the config](#005-config)).
