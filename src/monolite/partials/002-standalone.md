@@ -51,7 +51,6 @@ In a self-hosted environment where you want to manage your own SSL certificates,
 reverse-proxy server like NGINX in front of Para. As an alternative you can use Apache or Lighttpd.
 
 <details><summary><b>Example configuration for NGINX</b></summary>
-
 <pre><code>
 server_tokens off;
 add_header X-XSS-Protection "1; mode=block";
@@ -103,7 +102,7 @@ server {
 	}
 
 	location / {
-		proxy_pass http://localhost:8000;
+		proxy_pass http://localhost:8080;
 		proxy_set_header X-Real-IP $remote_addr;
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 		proxy_set_header Host $http_host;

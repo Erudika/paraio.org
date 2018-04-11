@@ -441,7 +441,6 @@ and should “just work” by setting the execution command to <code>java -jar p
 <p>In a self-hosted environment where you want to manage your own SSL certificates, it is recommended to run a
 reverse-proxy server like NGINX in front of Para. As an alternative you can use Apache or Lighttpd.</p>
 <details><summary><b>Example configuration for NGINX</b></summary>
-
 <pre><code>
 server_tokens off;
 add_header X-XSS-Protection “1; mode=block”;
@@ -493,7 +492,7 @@ server {
     }
 
     location / {
-        proxy_pass <a href="http://localhost:8000">http://localhost:8000</a>;
+        proxy_pass <a href="http://localhost:8080">http://localhost:8080</a>;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
