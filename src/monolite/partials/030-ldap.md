@@ -46,7 +46,9 @@ These are the configuration options for this filter:
 	</tbody>
 </table>
 
-**Note:** Active Directory support is enabled when `active_directory_domain` is set.
+**Note:** Active Directory support is enabled when `active_directory_domain` is set. For AD LDAP, the search filter
+defaults to `(&(objectClass=user)(userPrincipalName={0}))`. The syntax for this allows either `{0}`
+(replaced with `username@domain`) or `{1}` (replaced with `username` only).
 
 You can also configure LDAP through the [app settings API](#050-api-settings-put):
 ```

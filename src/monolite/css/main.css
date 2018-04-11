@@ -43,6 +43,10 @@ h1, .h1, h2, .h2, h3, .h3 {
   margin-bottom: 20px;
 }
 
+details {
+	cursor: pointer;
+}
+
 img::selection {
 	background: 0 0;
 }

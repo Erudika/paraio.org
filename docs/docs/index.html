@@ -432,13 +432,82 @@ through the REST API. Here’s a simple diagram of this architecture:</p>
 
 </pre>
 
-<h2 id="deploying-to-a-servlet-container">Deploying to a servlet container</h2>
+<h2 id="deploying-to-a-servlet-container-or-a-self-hosted-environment">Deploying to a servlet container or a self-hosted environment</h2>
 <p>Another option is to deploy the WAR file to a servlet container like Tomcat or GlassFish, for example.</p>
 <p><strong>Note:</strong> We recommend deploying the Para at the root context <code>/</code>. You can do this by renaming the WAR file
 to <code>ROOT.war</code> before deploying. See <a href="#005-config">the Config</a> for more details about configuring your deployment.</p>
+<p>Para can also be deployed easily to a PaaS environment like Heroku or AWS Elastic Beanstalk. The WAR file is executable
+and should “just work” by setting the execution command to <code>java -jar para-X.Y.Z.war</code>.</p>
+<p>In a self-hosted environment where you want to manage your own SSL certificates, it is recommended to run a
+reverse-proxy server like NGINX in front of Scoold. As an alternative you can use Apache or Lighttpd.</p>
+<details><summary><b>Example configuration for NGINX</b></summary>
+
+    server_tokens off;
+    add_header X-XSS-Protection “1; mode=block”;
+    add_header X-Content-Type-Options nosniff;
+
+    server {
+      listen 80 default_server;
+      listen [::]:80 default_server;
+      server_name www.domain.com domain.com;
+
+      # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
+      return 301 <a href="https://$host$request_uri">https://$host$request_uri</a>;
+    }
+
+    server {
+      listen 443 ssl http2;
+      listen [::]:443 ssl http2;
+      server_name www.domain.com domain.com;
+
+      # certs sent to the client in SERVER HELLO are concatenated in ssl_certificate
+      ssl_certificate /path/to/signed_cert_plus_intermediates;
+      ssl_certificate_key /path/to/private_key;
+      ssl_session_timeout 1d;
+      ssl_session_cache shared:SSL:50m;
+      ssl_session_tickets off;
+
+      # modern configuration. tweak to your needs.
+      ssl_protocols TLSv1.2;
+      ssl_ciphers ‘ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256’;
+      ssl_prefer_server_ciphers on;
+
+      # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
+      add_header Strict-Transport-Security max-age=15768000;
+
+      # OCSP Stapling - fetch OCSP records from URL in ssl_certificate and cache them
+      ssl_stapling on;
+      ssl_stapling_verify on;
+
+      # Verify chain of trust of OCSP response using Root CA and Intermediate certs
+      ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;
+
+      # Cloudflare DNS
+      resolver 1.1.1.1;
+
+      # Required for LE certificate enrollment using certbot
+      location ‘/.well-known/acme-challenge’ {
+        default_type “text/plain”;
+        root /var/www/html;
+      }
+
+      location / {
+        proxy_pass <a href="http://localhost:8000">http://localhost:8000</a>;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+      }
+    }
+</details>
+
 <blockquote>
 <p>Check the <a href="https://github.com/erudika/para/releases">releases page</a> for the latest WAR package.</p>
 </blockquote>
+<h2 id="hosted-service">Hosted service</h2>
+<p>Don’t want to deal with servers and performance issues? We offer hosting and premium support at
+<a href="https://paraio.com">ParaIO.com</a> where you can try Para online with a <strong>free developer account</strong>.
+Browse and manage your users and objects, do backups and edit permissions with a few clicks in the web console.
+By upgrading to a premium account you will be able to scale you projects up and down in seconds and manage multiple apps.</p>
 
 				</section>
 			</article>
@@ -2757,7 +2826,9 @@ Example: <code>GET /ldap_auth?username=bob&amp;password=secret</code></p>
     </tbody>
 </table>
 
-<p><strong>Note:</strong> Active Directory support is enabled when <code>active_directory_domain</code> is set.</p>
+<p><strong>Note:</strong> Active Directory support is enabled when <code>active_directory_domain</code> is set. For AD LDAP, the search filter
+defaults to <code>(&amp;(objectClass=user)(userPrincipalName={0}))</code>. The syntax for this allows either <code>{0}</code>
+(replaced with <code>username@domain</code>) or <code>{1}</code> (replaced with <code>username</code> only).</p>
 <p>You can also configure LDAP through the <a href="#050-api-settings-put">app settings API</a>:</p>
 <pre><code>{
     <span class="hljs-string">"security.ldap.server_url"</span>: <span class="hljs-string">"ldap://localhost:8389/"</span>,
@@ -4925,7 +4996,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>04 April 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>11 April 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2018
