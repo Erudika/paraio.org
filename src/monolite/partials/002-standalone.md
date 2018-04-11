@@ -52,7 +52,7 @@ reverse-proxy server like NGINX in front of Para. As an alternative you can use 
 
 <details><summary><b>Example configuration for NGINX</b></summary>
 
-```
+<pre><code>
 server_tokens off;
 add_header X-XSS-Protection "1; mode=block";
 add_header X-Content-Type-Options nosniff;
@@ -109,10 +109,10 @@ server {
 		proxy_set_header Host $http_host;
 	}
 }
-```
+</pre></code>
 </details>
 
-
+<br>
 
 > Visit the [releases page](https://github.com/erudika/para/releases) for the latest WAR package.
 
