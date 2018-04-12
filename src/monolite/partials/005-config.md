@@ -161,8 +161,6 @@ Here's a list of all configuration properties that can be set in the config file
 		Useful for local testing/development or to recover objects that were lost/deleted from the database. </td><td></td></tr>
 		<tr><td>`para.queue_link_enabled`		</td><td>`false`</td></tr>
 		<tr><td>Enable/disable polling the default queue for objects to be imported into Para. </td><td></td></tr>
-		<tr><td>`para.optimistic_locking_enabled`		</td><td>`false`</td></tr>
-		<tr><td>Enable/disable optimistic locking support on `update()`, *only if the `DAO` implements it*. </td><td></td></tr>
 
 		<tr><td>`para.default_queue_name`		</td><td>`para-default`</td></tr>
 		<tr><td>The default queue name (optional). </td><td></td></tr>
