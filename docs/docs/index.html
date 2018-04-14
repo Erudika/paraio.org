@@ -3684,8 +3684,10 @@ decrements the <code>votes</code> field by 1.</p>
 </ul>
 <h3 id="response">Response</h3>
 <ul>
-<li><strong>status codes</strong> - <code>200</code>, <code>400</code>, <code>404</code>, <code>500</code>, vote requests return <code>true</code> or <code>false</code></li>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code>, <code>404</code>, <code>412</code>, <code>500</code>, vote requests return <code>true</code> or <code>false</code></li>
 </ul>
+<p>If optimistic locking is enabled and the <code>DAO</code> implementation supports it, failed updates will result in
+<code>412 Precondition Failed</code>.</p>
 <p>Example response for a <code>Tag</code> with updated <code>count</code>:</p>
 <pre><code class="lang-js">{
     <span class="hljs-string">"id"</span>:<span class="hljs-string">"tag:tag1"</span>,
@@ -3814,8 +3816,10 @@ decrements the <code>votes</code> field by 1.</p>
 <p><strong>Maximum request size is 1 megabyte.</strong></p>
 <h3 id="response">Response</h3>
 <ul>
-<li><strong>status codes</strong> - <code>200</code>, <code>400</code></li>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code>, <code>412</code></li>
 </ul>
+<p>If optimistic locking is enabled and the <code>DAO</code> implementation supports it, failed updates will be ignored and
+omitted from the response array. Error <code>412</code> is returned only if all object failed to update due to version locking.</p>
 <p>Example response for updating 3 objects (returns a list of the updated objects):</p>
 <pre><code class="lang-js">[ {
     <span class="hljs-string">"id"</span>:<span class="hljs-string">"id1"</span>,
@@ -4996,7 +5000,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>13 April 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>15 April 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2018

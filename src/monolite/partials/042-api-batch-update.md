@@ -16,7 +16,10 @@ Updates multiple objects with a single request. Partial objects are supported.
 
 ### Response
 
-- **status codes** - `200`, `400`
+- **status codes** - `200`, `400`, `412`
+
+If optimistic locking is enabled and the `DAO` implementation supports it, failed updates will be ignored and
+omitted from the response array. Error `412` is returned only if all object failed to update due to version locking.
 
 Example response for updating 3 objects (returns a list of the updated objects):
 

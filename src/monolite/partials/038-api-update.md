@@ -20,7 +20,10 @@ decrements the `votes` field by 1.
 
 ### Response
 
-- **status codes** - `200`, `400`, `404`, `500`, vote requests return `true` or `false`
+- **status codes** - `200`, `400`, `404`, `412`, `500`, vote requests return `true` or `false`
+
+If optimistic locking is enabled and the `DAO` implementation supports it, failed updates will result in
+`412 Precondition Failed`.
 
 Example response for a `Tag` with updated `count`:
 
