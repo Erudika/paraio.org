@@ -4,7 +4,7 @@ category: REST API
 ---
 
 Para uses the **AWS Signature Version 4** algorithm for signing API requests. We chose this algorithm instead
-of OAuth because it is less complicated and is already implemented inside the AWS Java SDK, which we have a direct
+of OAuth because it is less complicated and is already implemented inside the core AWS Java SDK, which we have as direct
 dependency. In terms of security, both algorithms are considered very secure so there's no compromise in that aspect.
 
 Para offers two ways of authentication - one for apps using API keys and one for insecure clients (mobile, JS) using JWT.
