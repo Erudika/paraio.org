@@ -51,3 +51,6 @@ that field should not be declared as `transient` otherwise it will be skipped.
 attributes that are read-only like `type` and `id`. These are created once and never change so when calling `update()`
 they will be skipped.
 
+**Note:** All of the annotations above are **ignored** on the clientside and not supported by `ParaClient`, yet. By default
+all fields declared on the clientside or through the API will be stored and **not** locked, i.e. they can be updated.
+
