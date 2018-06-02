@@ -73,6 +73,33 @@ $ para-cli search "type:todo"
 Users are created either from Java code `paraClient.signIn(...)` or by making an API request to `POST /v1/jwt_auth`. See
 [Sign in](#034-api-jwt-signin) or [Authentication](#033-restauth) sections for more details.
 
+### Docker
+
+Tagged Docker images for Scoold are located at `erudikaltd/scoold` on Docker Hub.
+First, create an `application.conf` file in a directory and run this command:
+
+```
+$ docker run -ti -p 8080:8080 --rm -v $(pwd)/application.conf:/para/application.conf \
+  -e JAVA_OPTS="-Dconfig.file=/para/application.conf" erudikaltd/scoold
+```
+
+**Environment variables**
+
+`JAVA_OPTS` - Java system properties, e.g. `-Dpara.port=8000`
+`BOOT_SLEEP` - Startup delay, in seconds
+
+**Plugins**
+
+To use plugins, create a new `Dockerfile-plugins` which does a multi-stage build like so:
+```
+# change X.Y.Z with latest tag
+FROM erudikaltd/para:X.Y.Z-base
+
+FROM erudikaltd/para-dao-mongodb:X.Y.Z
+```
+
+### Maven
+
 The Java client for Para is a separate module with these Maven coordinates:
 
 ```xml
@@ -89,6 +116,8 @@ In your own project you can create a new `ParaClient` instance like so:
 ParaClient pc = new ParaClient(accessKey, secretKey);
 // Para endpoint - http://localhost:8080 or https://paraio.com
 pc.setEndpoint(paraServerURL);
+// Set this to true if you want ParaClient to throw exceptions on HTTP errors
+pc.throwExceptionOnHTTPError(false);
 // send a test request - this should return a JSON object of type 'app'
 pc.me();
 ```
