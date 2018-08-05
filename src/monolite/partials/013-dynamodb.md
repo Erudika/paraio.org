@@ -15,6 +15,13 @@ that will be called `para-myapp`.
 
 This `DAO` implementation **supports optimistic locking** through conditional update expressions in DynamoDB.
 
+It also supports server-side encryption (SSE, encryption-at-rest). This is turned off by default. To turn it on, set:
+```
+para.dynamodb.sse_enabled = true
+```
+**Note:** SSE will work for newly created tables only. Currently, you can't enable encryption at rest on an existing table.
+After encryption at rest is enabled, it **can't** be disabled.
+
 ### Table sharing
 
 In v1.21, we added new functionality to `AWSDynamoDAO` which enables apps to share the same table. This is useful

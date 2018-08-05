@@ -37,7 +37,7 @@ module as its default persistence module.
 You can also override modules programmatically like this:
 
 ```java
-Para.initialize(Modules.override(ParaServer.getCoreModules()).with(new Module() {
+ParaServer.initialize(Modules.override(ParaServer.getCoreModules()).with(new Module() {
 	public void configure(Binder binder) {
 		binder.bind(DAO.class).to(MyDAO.class).asEagerSingleton();
 		binder.bind(Cache.class).to(MyCache.class).asEagerSingleton();
@@ -49,12 +49,27 @@ Para.initialize(Modules.override(ParaServer.getCoreModules()).with(new Module() 
 Also, you could start Para with the default modules like this:
 
 ```java
-// If you're defining your own custom classes, don't forget to set:
-// System.setProperty("para.core_package_name", "com.company.myapp.core");
-Para.initialize(ParaServer.getCoreModules());
+// Initialize Para and call each `listener.onInitialize()`
+ParaServer.initialize();
 
-// Finally, destroy all resources:
-Para.destroy();
+// Finally, destroy all resources by calling each `listener.onDestroy()`
+ParaServer.destroy();
 ```
 
-> Para uses [Google Guice](https://code.google.com/p/google-guice/) as its module manager and DI system.
+If you're defining your own custom classes, don't forget to set:
+```
+System.setProperty("para.core_package_name", "com.company.myapp.core");
+```
+
+There are two additional methods `Para.initialize()` and `Para.destroy()` which are now part of `para-core`. The
+difference between these and the ones above is:
+
+- `Para.initialize()` - invokes all registered `InitializeListener` instances and prints out logo to console;
+- `ParaServer.initialize() - loads all Guice modules, binds them and injects concrete types into each
+`InitializeListener`, then calls `Para.initialize()`;
+
+- `Para.destroy()` - invokes all registered `DestroyListener` instances and prints out a log message;
+- `ParaServer.destroy()` - injects concrete types into each `DestroyListener` and calls `Para.destroy()`.
+
+
+> Para uses [Google Guice](https://github.com/google/guice) as its module manager and DI system.

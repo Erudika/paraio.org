@@ -3,13 +3,13 @@ title: Standalone mode
 category: Getting Started
 ---
 
-There are two ways to run Para as a standalone server. The first one is by downloading the executable WAR file and executing it:
+There are two ways to run Para as a standalone server. The first one is by downloading the executable JAR file and executing it:
 
 ```bash
-java -jar para-X.Y.Z.war
+java -jar para-X.Y.Z.jar
 ```
 
-The WAR contains an embedded Jetty server and bundles together all the necessary libraries. This is the simplest and
+The JAR contains an embedded Jetty server and bundles together all the necessary libraries. This is the simplest and
 recommended way to run Para.
 
 Running a standalone server allows you to build a cluster of distributed Para nodes and connect to it
@@ -39,13 +39,13 @@ through the REST API. Here's a simple diagram of this architecture:
 
 ## Deploying to a servlet container or a self-hosted environment
 
-Another option is to deploy the WAR file to a servlet container like Tomcat or GlassFish, for example.
+Another option is to build and deploy the WAR file to a servlet container like Tomcat or GlassFish, for example.
 
 **Note:** We recommend deploying the Para at the root context `/`. You can do this by renaming the WAR file
 to `ROOT.war` before deploying. See [the Config](#005-config) for more details about configuring your deployment.
 
-Para can also be deployed easily to a PaaS environment like Heroku or AWS Elastic Beanstalk. The WAR file is executable
-and should "just work" by setting the execution command to `java -jar para-X.Y.Z.war`.
+Para can also be deployed easily to a PaaS environment like Heroku or AWS Elastic Beanstalk. The JAR file is executable
+and should "just work" by setting the execution command to `java -jar para-X.Y.Z.jar`.
 
 In a self-hosted environment where you want to manage your own SSL certificates, it is recommended to run a
 reverse-proxy server like NGINX in front of Para. As an alternative you can use Apache or Lighttpd.
@@ -113,7 +113,7 @@ server {
 
 <br>
 
-> Visit the [releases page](https://github.com/erudika/para/releases) for the latest WAR package.
+> Visit the [releases page](https://github.com/erudika/para/releases) for the latest package.
 
 ## Hosted service
 

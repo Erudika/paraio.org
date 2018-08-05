@@ -43,8 +43,8 @@ para.security.api_security = true
 para.worker_id = 1
 ```
 
-1. [Download the WAR](https://github.com/erudika/para/releases)
-2. Run it with `java -jar -Dconfig.file=./application.conf para-*.war`
+1. [Download the JAR](https://github.com/erudika/para/releases)
+2. Run it with `java -jar -Dconfig.file=./application.conf para-*.jar`
 3. Call `curl localhost:8080/v1/_setup` to get the access and secret keys for the root app (required)
 4. Install `para-cli` tool for easy access `npm install -g para-cli` (optional)
 5. Create a new "child" app for regular use (optional):
@@ -75,12 +75,12 @@ Users are created either from Java code `paraClient.signIn(...)` or by making an
 
 ### Docker
 
-Tagged Docker images for Scoold are located at `erudikaltd/scoold` on Docker Hub.
+Tagged Docker images for Para are located at `erudikaltd/para` on Docker Hub.
 First, create an `application.conf` file in a directory and run this command:
 
 ```
 $ docker run -ti -p 8080:8080 --rm -v $(pwd)/application.conf:/para/application.conf \
-  -e JAVA_OPTS="-Dconfig.file=/para/application.conf" erudikaltd/scoold
+  -e JAVA_OPTS="-Dconfig.file=/para/application.conf" erudikaltd/para
 ```
 
 **Environment variables**
@@ -173,10 +173,14 @@ To compile it you'll need Maven. Once you have it, just clone and build:
 $ git clone https://github.com/erudika/para.git && cd para
 $ mvn install -DskipTests=true
 ```
-To generate the executable "uber-war" run `$ mvn package` and it will be in `./para-war/target/para-x.y.z-SNAPSHOT.war`.
-Two WAR files will be generated in total - the fat one is a bit bigger in size.
+To generate the executable "uber-jar" run `$ mvn package` and it will be in `./para-jar/target/para-x.y.z-SNAPSHOT.jar`.
+Two JAR files will be generated in total - the fat one is a bit bigger in size.
 
 To run a local instance of Para for development, use:
 ```sh
 $ mvn spring-boot:run
+```
+Alternatively, you can build a WAR file and deploy it to your favorite servlet container:
+```
+$ cd para-war && mvn package
 ```

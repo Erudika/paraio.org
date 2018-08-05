@@ -34,6 +34,15 @@ There are several configuration properties for Elasticsearch (these go in your `
 		<tr><td>`para.es.restclient_port`</td><td> ES server port (for REST client). Default is `9200`.</td></tr>
 		<tr><td>`para.es.transportclient_host`</td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is `localhost`.</td></tr>
 		<tr><td>`para.es.transportclient_port`</td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is `9300`.</td></tr>
+		<tr><td>`para.es.fail_on_indexing_errors`</td><td> If enabled, throws an exception if an error occurs during indexing operations. This will cascade back to clients as HTTP `500`. Default is `false`.</td></tr>
+
+		<tr><td>`para.es.bulk.size_limit_mb`</td><td> `BulkProcessor` flush threshold in terms of megabytes. Default is `5`.</td></tr>
+		<tr><td>`para.es.bulk.action_limit`</td><td> `BulkProcessor` flush threshold in terms of batch size. Default is `1000`.</td></tr>
+		<tr><td>`para.es.bulk.concurrent_requests`</td><td> `BulkProcessor` concurrent requests (`0` means synchronous execution). Default is `1`.</td></tr>
+		<tr><td>`para.es.bulk.flush_interval_ms`</td><td> `BulkProcessor` flush interval in milliseconds. Default is `5000`.</td></tr>
+		<tr><td>`para.es.bulk.backoff_initial_delay_ms`</td><td> `BulkProcessor` inital backoff delay in milliseconds. Default is `50`.</td></tr>
+		<tr><td>`para.es.bulk.max_num_retries`</td><td> `BulkProcessor` number of retries. Default is `8`.</td></tr>
+		<tr><td>`para.es.bulk.flush_immediately`</td><td> If set to `true`, `BulkProcessor` will flush immediately on each request, concurrently (in another thread). Default is `true`.</td></tr>
 
 		<tr><td>`para.es.sign_requests_to_aws`</td><td> If enabled, requests will be signed using the AWS V4 algorithm. Default is `false`.</td></tr>
 		<tr><td>`para.es.aws_region`</td><td> Used only for the purposes of signing requests to AWS. Default is `null`.</td></tr>
@@ -67,7 +76,7 @@ The Maven coordinates for the legacy plugin are:
 ```
 
 Alternatively you can download the JAR from the "Releases" tab above put it in a `lib` folder alongside the server
-WAR file `para-x.y.z.war`. Para will look for plugins inside `lib` and pick up the Elasticsearch plugin.
+JAR file `para-x.y.z.jar`. Para will look for plugins inside `lib` and pick up the Elasticsearch plugin.
 
 Finally, set the config property:
 ```
@@ -75,6 +84,35 @@ para.search = "ElasticSearch"
 ```
 This could be a Java system property or part of a `application.conf` file on the classpath.
 This tells Para to use the Elasticsearch implementation instead of the default (Lucene).
+
+### Synchronous versus Asynchronous Indexing
+
+The Elasticsearch plugin supports both synchronous (default) and asynchronous indexing modes.
+For synchronous indexing, the Elasticsearch plugin will make a single, blocking request through the client
+and wait for a response. This means each document operation (index, reindex, or delete) invokes
+a new client request. For certain applications, this can induce heavy load on the Elasticsearch cluster.
+The advantage of synchronous indexing, however, is the result of the request can be communicated back
+to the client application. If the setting `para.es.fail_on_indexing_errors` is set to `true`, synchronous
+requests that result in an error will propagate back to the client application with an HTTP error code.
+
+The asynchronous indexing mode uses the Elasticsearch BulkProcessor for batching all requests to the Elasticsearch
+cluster. If the asynchronous mode is enabled, all document requests will be fed into the BulkProcessor, which
+will flush the requests to the cluster on occasion. There are several configurable parameters to control the
+flush frequency based on document count, total document size (MB), and total duration (ms). Since Elasticsearch
+is designed as a near real-time search engine, the asynchronous mode is highly recommended. Making occasional,
+larger batches of document requests will help reduce the load on the Elasticsearch cluster.
+
+The asynchronous indexing mode also offers an appealing feature to automatically retry failed indexing requests. If
+your Elasticsearch cluster is under heavy load, it's possible a request to index new documents may be rejected. With
+synchronous indexing, the burden falls on the client application to try the indexing request again. The Elasticsearch
+BulkProcessor, however, offers a useful feature to automatically retry indexing requests with exponential
+backoff between retries. If the index request fails with a `EsRejectedExecutionException`, the request
+will be retried up to `para.es.bulk.max_num_retries` times. Even if your use case demands a high degree
+of confidence with respect to data consistency between your DAO and Search, it's still recommended to use
+asynchronous indexing with retries enabled. If you'd prefer to use asynchronous indexing but have the BulkProcessor
+flushed upon every invocation of index/unindex/indexAll/unindexAll, simply enabled `para.es.bulk.flush_immediately`.
+When this option is enabled, the BulkProcessor's flush method will be called immediately after adding the documents
+in the request. This option is also useful for writing unit tests where you want ensure the documents flush promptly.
 
 ### Indexing modes
 
@@ -182,6 +220,11 @@ and returns a response indicating the number of reindexed objects and the elapse
    "reindexed": 154,
    "tookMillis": 365
 }
+```
+
+Additionally, you can specify the destination index to reindex into, which must have been created beforehand:
+```
+POST /v1/_elasticsearch/reindex?destinationIndex=yourCustomIndex
 ```
 
 ### Search query pagination and sorting

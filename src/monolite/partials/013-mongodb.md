@@ -39,7 +39,7 @@ The plugin is on Maven Central. Here's the Maven snippet to include in your `pom
 ```
 
 Alternatively you can [download the JAR](https://github.com/Erudika/para-dao-mongodb/releases) and put it in a
-`lib` folder alongside the server WAR file `para-x.y.z.war`. Para will look for plugins inside `lib` and pick up
+`lib` folder alongside the server JAR file `para-x.y.z.jar`. Para will look for plugins inside `lib` and pick up
 the plugin.
 
 Finally, set the config property:

@@ -110,7 +110,7 @@ and then run a local Grafana server using the instructions at http://docs.grafan
 Here's how to run Graphite with a Docker command:
 ```bash
 $ docker run -d --name graphite --restart=always -p 80:80 -p 2003-2004:2003-2004 -p 2023-2024:2023-2024 \
-  -p 8125:8125/udp -p 8126:8126 hopsoft/graphite-statsd
+  -p 8125:8125/udp -p 8126:8126 graphiteapp/graphite-statsd
 ```
 Then point you browser to `http://localhost/`. Then run Grafana locally with:
 ```bash
@@ -118,5 +118,18 @@ $ docker run -d -p 3000:3000 -e GF_SECURITY_ADMIN_USER=admin -e GF_SECURITY_ADMI
   -e GF_METRICS_GRAPHITE_ADDRESS=localhost:2003 grafana/grafana
 ```
 
-Then you can login using admin/password at the login screen.
+Then open Grafana at `http://localhost:3000` and login using admin/password at the login screen. Finally, add Graphite
+as a data source to Grafana by specifying the Graphite server location at `http://localhost` using "Browser" access.
 
+### Instrumenting Para plugins
+
+You can easily measure any aspect of a Para plugin using the static methods `Metrics.counter()` and `Metrics.time()`:
+```java
+// call this from a method to increment a counter each time it's called
+Metrics.counter(appid, getClass(), "searchQueryCalled").inc();
+
+// use this to time execution of a block of code
+try (Metrics.Context ctx = Metrics.time(appid, getClass(), "timedBlock")) {
+	// do stuff...
+}
+```

@@ -202,6 +202,7 @@
 							<li class="GET"><a href="#050-api-setup">Initial setup (public)</a></li>
 							<li class="POST"><a href="#051-api-newkeys">Reset API keys</a></li>
 							<li class="GET"><a href="#052-api-utils">Utilities</a></li>
+							<li class="POST"><a href="#053-api-reindex">Rebuild index</a></li>
 				</ul>
 			</li>
 	</ul>
@@ -308,8 +309,8 @@ para.security.api_security = <span class="hljs-literal">true</span>
 para.worker_id = 1
 </code></pre>
 <ol>
-<li><a href="https://github.com/erudika/para/releases">Download the WAR</a></li>
-<li>Run it with <code>java -jar -Dconfig.file=./application.conf para-*.war</code></li>
+<li><a href="https://github.com/erudika/para/releases">Download the JAR</a></li>
+<li>Run it with <code>java -jar -Dconfig.file=./application.conf para-*.jar</code></li>
 <li>Call <code>curl localhost:8080/v1/_setup</code> to get the access and secret keys for the root app (required)</li>
 <li>Install <code>para-cli</code> tool for easy access <code>npm install -g para-cli</code> (optional)</li>
 <li>Create a new “child” app for regular use (optional):<pre><code class="lang-bash">$ para-cli new-app <span class="hljs-string">"myapp"</span> --name <span class="hljs-string">"My App"</span> --endpoint <span class="hljs-string">"http://localhost:8080"</span> --accessKey <span class="hljs-string">"app:para"</span> --secretKey <span class="hljs-string">"{secret key for root app}"</span>
@@ -333,10 +334,10 @@ $ para-cli search "type:todo"
 </code></pre><p>Users are created either from Java code <code>paraClient.signIn(...)</code> or by making an API request to <code>POST /v1/jwt_auth</code>. See
 <a href="#034-api-jwt-signin">Sign in</a> or <a href="#033-restauth">Authentication</a> sections for more details.</p>
 <h3 id="docker">Docker</h3>
-<p>Tagged Docker images for Scoold are located at <code>erudikaltd/scoold</code> on Docker Hub.
+<p>Tagged Docker images for Para are located at <code>erudikaltd/para</code> on Docker Hub.
 First, create an <code>application.conf</code> file in a directory and run this command:</p>
 <pre><code>$ docker run -ti -p <span class="hljs-number">8080</span>:<span class="hljs-number">8080</span> --rm -v $(pwd)/application.conf:<span class="hljs-regexp">/para/</span>application.conf \
-  -e JAVA_OPTS=<span class="hljs-string">"-Dconfig.file=/para/application.conf"</span> erudikaltd/scoold
+  -e JAVA_OPTS=<span class="hljs-string">"-Dconfig.file=/para/application.conf"</span> erudikaltd/para
 </code></pre><p><strong>Environment variables</strong></p>
 <p><code>JAVA_OPTS</code> - Java system properties, e.g. <code>-Dpara.port=8000</code>
 <code>BOOT_SLEEP</code> - Startup delay, in seconds</p>
@@ -409,22 +410,24 @@ pc.me();
 <pre><code class="lang-sh">$ git <span class="hljs-built_in">clone</span> https://github.com/erudika/para.git &amp;&amp; <span class="hljs-built_in">cd</span> para
 $ mvn install -DskipTests=<span class="hljs-literal">true</span>
 </code></pre>
-<p>To generate the executable “uber-war” run <code>$ mvn package</code> and it will be in <code>./para-war/target/para-x.y.z-SNAPSHOT.war</code>.
-Two WAR files will be generated in total - the fat one is a bit bigger in size.</p>
+<p>To generate the executable “uber-jar” run <code>$ mvn package</code> and it will be in <code>./para-jar/target/para-x.y.z-SNAPSHOT.jar</code>.
+Two JAR files will be generated in total - the fat one is a bit bigger in size.</p>
 <p>To run a local instance of Para for development, use:</p>
 <pre><code class="lang-sh">$ mvn spring-boot:run
 </code></pre>
-
+<p>Alternatively, you can build a WAR file and deploy it to your favorite servlet container:</p>
+<pre><code>$ cd para-war &amp;&amp; mvn package
+</code></pre>
 				</section>
 			</article>
 			<a id="002-standalone" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
 			<article class=" img-rounded">
 					<h2>Standalone mode</h2>
 				<section class="body  img-rounded">
-					<p>There are two ways to run Para as a standalone server. The first one is by downloading the executable WAR file and executing it:</p>
-<pre><code class="lang-bash">java -jar para-X.Y.Z.war
+					<p>There are two ways to run Para as a standalone server. The first one is by downloading the executable JAR file and executing it:</p>
+<pre><code class="lang-bash">java -jar para-X.Y.Z.jar
 </code></pre>
-<p>The WAR contains an embedded Jetty server and bundles together all the necessary libraries. This is the simplest and
+<p>The JAR contains an embedded Jetty server and bundles together all the necessary libraries. This is the simplest and
 recommended way to run Para.</p>
 <p>Running a standalone server allows you to build a cluster of distributed Para nodes and connect to it
 through the REST API. Here’s a simple diagram of this architecture:</p>
@@ -451,11 +454,11 @@ through the REST API. Here’s a simple diagram of this architecture:</p>
 </pre>
 
 <h2 id="deploying-to-a-servlet-container-or-a-self-hosted-environment">Deploying to a servlet container or a self-hosted environment</h2>
-<p>Another option is to deploy the WAR file to a servlet container like Tomcat or GlassFish, for example.</p>
+<p>Another option is to build and deploy the WAR file to a servlet container like Tomcat or GlassFish, for example.</p>
 <p><strong>Note:</strong> We recommend deploying the Para at the root context <code>/</code>. You can do this by renaming the WAR file
 to <code>ROOT.war</code> before deploying. See <a href="#005-config">the Config</a> for more details about configuring your deployment.</p>
-<p>Para can also be deployed easily to a PaaS environment like Heroku or AWS Elastic Beanstalk. The WAR file is executable
-and should “just work” by setting the execution command to <code>java -jar para-X.Y.Z.war</code>.</p>
+<p>Para can also be deployed easily to a PaaS environment like Heroku or AWS Elastic Beanstalk. The JAR file is executable
+and should “just work” by setting the execution command to <code>java -jar para-X.Y.Z.jar</code>.</p>
 <p>In a self-hosted environment where you want to manage your own SSL certificates, it is recommended to run a
 reverse-proxy server like NGINX in front of Para. As an alternative you can use Apache or Lighttpd.</p>
 <details><summary><b>Example configuration for NGINX</b></summary>
@@ -521,7 +524,7 @@ server {
 
 <p><br></p>
 <blockquote>
-<p>Visit the <a href="https://github.com/erudika/para/releases">releases page</a> for the latest WAR package.</p>
+<p>Visit the <a href="https://github.com/erudika/para/releases">releases page</a> for the latest package.</p>
 </blockquote>
 <h2 id="hosted-service">Hosted service</h2>
 <p>Don’t want to deal with servers and performance issues? We offer hosting and premium support at
@@ -934,7 +937,7 @@ You can define it like so:</p>
 Finally write the full class name <code>com.company.MySqlModule</code> to the file <code>com.google.inject.Module</code> and Para will use this
 module as its default persistence module.</p>
 <p>You can also override modules programmatically like this:</p>
-<pre><code class="lang-java">Para.initialize(Modules.override(ParaServer.getCoreModules()).with(<span class="hljs-keyword">new</span> Module() {
+<pre><code class="lang-java">ParaServer.initialize(Modules.override(ParaServer.getCoreModules()).with(<span class="hljs-keyword">new</span> Module() {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span><span class="hljs-params">(Binder binder)</span> </span>{
         binder.bind(DAO.class).to(MyDAO.class).asEagerSingleton();
         binder.bind(Cache.class).to(MyCache.class).asEagerSingleton();
@@ -943,15 +946,26 @@ module as its default persistence module.</p>
 }));
 </code></pre>
 <p>Also, you could start Para with the default modules like this:</p>
-<pre><code class="lang-java"><span class="hljs-comment">// If you're defining your own custom classes, don't forget to set:</span>
-<span class="hljs-comment">// System.setProperty("para.core_package_name", "com.company.myapp.core");</span>
-Para.initialize(ParaServer.getCoreModules());
+<pre><code class="lang-java"><span class="hljs-comment">// Initialize Para and call each `listener.onInitialize()`</span>
+ParaServer.initialize();
 
-<span class="hljs-comment">// Finally, destroy all resources:</span>
-Para.destroy();
+<span class="hljs-comment">// Finally, destroy all resources by calling each `listener.onDestroy()`</span>
+ParaServer.destroy();
 </code></pre>
+<p>If you’re defining your own custom classes, don’t forget to set:</p>
+<pre><code>System.setProperty(<span class="hljs-string">"para.core_package_name"</span>, <span class="hljs-string">"com.company.myapp.core"</span>);
+</code></pre><p>There are two additional methods <code>Para.initialize()</code> and <code>Para.destroy()</code> which are now part of <code>para-core</code>. The
+difference between these and the ones above is:</p>
+<ul>
+<li><code>Para.initialize()</code> - invokes all registered <code>InitializeListener</code> instances and prints out logo to console;</li>
+<li><p><code>ParaServer.initialize() - loads all Guice modules, binds them and injects concrete types into each</code>InitializeListener<code>, then calls</code>Para.initialize()`;</p>
+</li>
+<li><p><code>Para.destroy()</code> - invokes all registered <code>DestroyListener</code> instances and prints out a log message;</p>
+</li>
+<li><code>ParaServer.destroy()</code> - injects concrete types into each <code>DestroyListener</code> and calls <code>Para.destroy()</code>.</li>
+</ul>
 <blockquote>
-<p>Para uses <a href="https://code.google.com/p/google-guice/">Google Guice</a> as its module manager and DI system.</p>
+<p>Para uses <a href="https://github.com/google/guice">Google Guice</a> as its module manager and DI system.</p>
 </blockquote>
 
 				</section>
@@ -1028,19 +1042,22 @@ as the Para server or include the plugin through Maven,</li>
 (use the simple class name here)</li>
 <li>Start the Para server and the new plugin should be loaded</li>
 </ol>
+<p><strong>Important:</strong> Each plugin must implement and register a <code>DestroyListener</code> on initialization where all resources
+(connections, streams, pools) should be properly released and closed. Using <code>Runtime.getRuntime().addShutdownHook()</code> is
+<strong>not</strong> recommended because in some cases that method is not executed.</p>
 <h3 id="custom-event-listeners">Custom event listeners</h3>
-<p>You can also register your own <code>InitializeListener</code>s and <code>DestroyListener</code>s which will execute when Para is initialized
-and destroyed, respectively.</p>
+<p>To register your own <code>InitializeListener</code>s and <code>DestroyListener</code>s add the following code to one of your constructors
+or inside a static block in one of your classes:</p>
 <pre><code class="lang-java"><span class="hljs-comment">// this has to be registered before Para.initialize() is called</span>
 Para.addInitListener(<span class="hljs-keyword">new</span> InitializeListener() {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onInitialize</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-comment">// init code...</span>
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> do stuff on initialization...</span>
     }
 });
 
 Para.addDestroyListener(<span class="hljs-keyword">new</span> DestroyListener() {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-comment">// shutdown code...</span>
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> release resources...</span>
     }
 });
 </code></pre>
@@ -1515,6 +1532,17 @@ different than 0. To disable, set the <code>version</code> field back to 0.</p>
 <p>A <code>DAO</code> object only deals with storing objects in a database. It is not concerned with relationships between objects or
 constraint validation or any other operations like caching, indexing, etc.</p>
 </blockquote>
+<h3 id="data-consistency-and-resilience">Data consistency and resilience</h3>
+<p>Para is designed to store data in more than one place - a database and a search index. Both the database and index may
+be configured to have multiple replicas of the same data to ensure resilience to data loss. If the database loses its
+data, we could still recover it from the search index with <code>para.read_from_index = true</code>. If the index is corrupted, we
+can simply rebuild it with the request <code>POST /v1/_reindex</code>.</p>
+<p>Para makes an effort to keep the database and index in sync at all times but there might be occasional failures in
+either of the two layers and we end up with inconsistent data. So when an object is indexed but does not appear in the
+database, Para will print out a warning log message. If an object is persisted to DB but an error occurs during indexing,
+you have the option to set <code>para.es.fail_on_indexing_errors</code> (Elasticsearch only). This will cascade an exception back to
+the client and it can decide whether to revert the operation or try again. Additionally, if an update operation fails due
+to a version mismatch (see optimistic locking above), Para automatically prevents the indexing and caching of that object.</p>
 
 				</section>
 			</article>
@@ -1553,7 +1581,7 @@ Java Driver by DataStax, compatible with Cassandra 3.x.</p>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
 <p>Alternatively you can download the JAR from the “Releases” tab above put it in a <code>lib</code> folder alongside the server
-WAR file <code>para-x.y.z.war</code>. Para will look for plugins inside <code>lib</code> and pick up the Cassandra plugin.</p>
+JAR file <code>para-x.y.z.jar</code>. Para will look for plugins inside <code>lib</code> and pick up the Cassandra plugin.</p>
 <p>Finally, set the config property:</p>
 <pre><code>para.dao = <span class="hljs-string">"CassandraDAO"</span>
 </code></pre><p>This could be a Java system property or part of a <code>application.conf</code> file on the classpath.
@@ -1577,6 +1605,10 @@ It simply executes all update requests in a sequence.</p>
 <p>The implementation adds a default prefix <code>para-</code> to DynamoDB tables, so if you have an app called “myapp” your table for
 that will be called <code>para-myapp</code>.</p>
 <p>This <code>DAO</code> implementation <strong>supports optimistic locking</strong> through conditional update expressions in DynamoDB.</p>
+<p>It also supports server-side encryption (SSE, encryption-at-rest). This is turned off by default. To turn it on, set:</p>
+<pre><code>para.dynamodb.sse_enabled = <span class="hljs-literal">true</span>
+</code></pre><p><strong>Note:</strong> SSE will work for newly created tables only. Currently, you can’t enable encryption at rest on an existing table.
+After encryption at rest is enabled, it <strong>can’t</strong> be disabled.</p>
 <h3 id="table-sharing">Table sharing</h3>
 <p>In v1.21, we added new functionality to <code>AWSDynamoDAO</code> which enables apps to share the same table. This is useful
 for certain deployment scenarios where you have a large number of apps (and tables) which are rarely accessed and have
@@ -1633,7 +1665,7 @@ Java Driver compatible with MongoDB 3.2.</p>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
 <p>Alternatively you can <a href="https://github.com/Erudika/para-dao-mongodb/releases">download the JAR</a> and put it in a
-<code>lib</code> folder alongside the server WAR file <code>para-x.y.z.war</code>. Para will look for plugins inside <code>lib</code> and pick up
+<code>lib</code> folder alongside the server JAR file <code>para-x.y.z.jar</code>. Para will look for plugins inside <code>lib</code> and pick up
 the plugin.</p>
 <p>Finally, set the config property:</p>
 <pre><code>para.dao = <span class="hljs-string">"MongoDBDAO"</span>
@@ -1682,12 +1714,35 @@ class name of the loaded driver in the main Para configuration file.</p>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
 <p>Alternatively you can <a href="https://github.com/Erudika/para-dao-sql/releases">download the JAR</a> and put it in a
-<code>lib</code> folder alongside the server WAR file <code>para-x.y.z.war</code>. Para will look for plugins inside <code>lib</code> and pick up
+<code>lib</code> folder alongside the server JAR file <code>para-x.y.z.jar</code>. Para will look for plugins inside <code>lib</code> and pick up
 the plugin.</p>
-<p>Finally, set the config property:</p>
+<p><strong>Important:</strong> You must download the appropriate JDBC driver package for your database and put it in the <code>lib/</code> folder.
+Then you have to set the <code>loader.path=lib</code> system property in order to make the Spring Boot launcher add that folder
+to the classpath. For example:</p>
+<pre><code>java -jar -Dconfig.file=./application.conf -Dloader.path=lib  para.jar
+</code></pre><p>Finally, set the config property:</p>
 <pre><code>para.dao = <span class="hljs-string">"SqlDAO"</span>
 </code></pre><p>This could be a Java system property or part of a <code>application.conf</code> file on the classpath.
 This tells Para to use the SQL DAO implementation instead of the default.</p>
+<h3 id="schema">Schema</h3>
+<p><strong>BREAKING CHANGE:</strong> The schema has changed in v1.30.0 - columns <code>timestamp</code> and <code>updated</code> were removed,
+column <code>json_updates</code> was added. <code>H2DAO</code> attempts to apply these changes automatically or error, but <code>SqlDAO</code> does not.
+<strong>Execute the following statements one after another before switching to the new version:</strong></p>
+<pre><code class="lang-sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> {app_identifier} <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">COLUMN</span> <span class="hljs-keyword">timestamp</span>, <span class="hljs-keyword">updated</span>;
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> {app_identifier} <span class="hljs-keyword">ADD</span> json_updates <span class="hljs-keyword">NVARCHAR</span>;
+</code></pre>
+<p>This is not required for tables created after v1.30.0.</p>
+<p>Here’s the schema for each table created by Para:</p>
+<pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> {app_identifier} (
+    <span class="hljs-keyword">id</span>                        <span class="hljs-keyword">NVARCHAR</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+    <span class="hljs-keyword">type</span>                    <span class="hljs-keyword">NVARCHAR</span>,
+    <span class="hljs-keyword">name</span>                    <span class="hljs-keyword">NVARCHAR</span>,
+    parentid            <span class="hljs-keyword">NVARCHAR</span>,
+    creatorid            <span class="hljs-keyword">NVARCHAR</span>,
+    <span class="hljs-keyword">json</span>                    <span class="hljs-keyword">NVARCHAR</span>,
+    json_updates    <span class="hljs-keyword">NVARCHAR</span>
+)
+</code></pre>
 
 				</section>
 			</article>
@@ -1709,9 +1764,10 @@ own table which is created automatically when the app is created.</p>
     </thead>
     <tbody>
         <tr><td><code>para.db.dir</code></td><td> The data directory for storing DB files. Defaults to <code>./data</code>.</td></tr>
+        <tr><td><code>para.db.hostname</code></td><td> The hostname of the server. Setting this will enable H2 “server mode”. Defaults to blank.</td></tr>
         <tr><td><code>para.db.user</code></td><td> The username with access to the database. Defaults to <code>para</code>.</td></tr>
         <tr><td><code>para.db.password</code></td><td> The password. Defaults to <code>secret</code>.</td></tr>
-        <tr><td><code>para.db.tcpServer</code></td><td> Parameters for the H2 TCP server. Defaults to <code>-baseDir ./data</code>.</td></tr>
+        <tr><td><code>para.db.tcpServer</code></td><td> Parameters for the H2 TCP server. Defaults to blank.</td></tr>
     </tbody>
 </table>
 
@@ -1792,6 +1848,15 @@ uses either the TCP <code>TransportClient</code> or the high level REST client (
         <tr><td><code>para.es.restclient_port</code></td><td> ES server port (for REST client). Default is <code>9200</code>.</td></tr>
         <tr><td><code>para.es.transportclient_host</code></td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is <code>localhost</code>.</td></tr>
         <tr><td><code>para.es.transportclient_port</code></td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is <code>9300</code>.</td></tr>
+        <tr><td><code>para.es.fail_on_indexing_errors</code></td><td> If enabled, throws an exception if an error occurs during indexing operations. This will cascade back to clients as HTTP <code>500</code>. Default is <code>false</code>.</td></tr>
+
+        <tr><td><code>para.es.bulk.size_limit_mb</code></td><td> <code>BulkProcessor</code> flush threshold in terms of megabytes. Default is <code>5</code>.</td></tr>
+        <tr><td><code>para.es.bulk.action_limit</code></td><td> <code>BulkProcessor</code> flush threshold in terms of batch size. Default is <code>1000</code>.</td></tr>
+        <tr><td><code>para.es.bulk.concurrent_requests</code></td><td> <code>BulkProcessor</code> concurrent requests (<code>0</code> means synchronous execution). Default is <code>1</code>.</td></tr>
+        <tr><td><code>para.es.bulk.flush_interval_ms</code></td><td> <code>BulkProcessor</code> flush interval in milliseconds. Default is <code>5000</code>.</td></tr>
+        <tr><td><code>para.es.bulk.backoff_initial_delay_ms</code></td><td> <code>BulkProcessor</code> inital backoff delay in milliseconds. Default is <code>50</code>.</td></tr>
+        <tr><td><code>para.es.bulk.max_num_retries</code></td><td> <code>BulkProcessor</code> number of retries. Default is <code>8</code>.</td></tr>
+        <tr><td><code>para.es.bulk.flush_immediately</code></td><td> If set to <code>true</code>, <code>BulkProcessor</code> will flush immediately on each request, concurrently (in another thread). Default is <code>true</code>.</td></tr>
 
         <tr><td><code>para.es.sign_requests_to_aws</code></td><td> If enabled, requests will be signed using the AWS V4 algorithm. Default is <code>false</code>.</td></tr>
         <tr><td><code>para.es.aws_region</code></td><td> Used only for the purposes of signing requests to AWS. Default is <code>null</code>.</td></tr>
@@ -1819,11 +1884,36 @@ The Maven coordinates for the legacy plugin are:</p>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
 <p>Alternatively you can download the JAR from the “Releases” tab above put it in a <code>lib</code> folder alongside the server
-WAR file <code>para-x.y.z.war</code>. Para will look for plugins inside <code>lib</code> and pick up the Elasticsearch plugin.</p>
+JAR file <code>para-x.y.z.jar</code>. Para will look for plugins inside <code>lib</code> and pick up the Elasticsearch plugin.</p>
 <p>Finally, set the config property:</p>
 <pre><code>para.search = <span class="hljs-string">"ElasticSearch"</span>
 </code></pre><p>This could be a Java system property or part of a <code>application.conf</code> file on the classpath.
 This tells Para to use the Elasticsearch implementation instead of the default (Lucene).</p>
+<h3 id="synchronous-versus-asynchronous-indexing">Synchronous versus Asynchronous Indexing</h3>
+<p>The Elasticsearch plugin supports both synchronous (default) and asynchronous indexing modes.
+For synchronous indexing, the Elasticsearch plugin will make a single, blocking request through the client
+and wait for a response. This means each document operation (index, reindex, or delete) invokes
+a new client request. For certain applications, this can induce heavy load on the Elasticsearch cluster.
+The advantage of synchronous indexing, however, is the result of the request can be communicated back
+to the client application. If the setting <code>para.es.fail_on_indexing_errors</code> is set to <code>true</code>, synchronous
+requests that result in an error will propagate back to the client application with an HTTP error code.</p>
+<p>The asynchronous indexing mode uses the Elasticsearch BulkProcessor for batching all requests to the Elasticsearch
+cluster. If the asynchronous mode is enabled, all document requests will be fed into the BulkProcessor, which
+will flush the requests to the cluster on occasion. There are several configurable parameters to control the
+flush frequency based on document count, total document size (MB), and total duration (ms). Since Elasticsearch
+is designed as a near real-time search engine, the asynchronous mode is highly recommended. Making occasional,
+larger batches of document requests will help reduce the load on the Elasticsearch cluster.</p>
+<p>The asynchronous indexing mode also offers an appealing feature to automatically retry failed indexing requests. If
+your Elasticsearch cluster is under heavy load, it’s possible a request to index new documents may be rejected. With
+synchronous indexing, the burden falls on the client application to try the indexing request again. The Elasticsearch
+BulkProcessor, however, offers a useful feature to automatically retry indexing requests with exponential
+backoff between retries. If the index request fails with a <code>EsRejectedExecutionException</code>, the request
+will be retried up to <code>para.es.bulk.max_num_retries</code> times. Even if your use case demands a high degree
+of confidence with respect to data consistency between your DAO and Search, it’s still recommended to use
+asynchronous indexing with retries enabled. If you’d prefer to use asynchronous indexing but have the BulkProcessor
+flushed upon every invocation of index/unindex/indexAll/unindexAll, simply enabled <code>para.es.bulk.flush_immediately</code>.
+When this option is enabled, the BulkProcessor’s flush method will be called immediately after adding the documents
+in the request. This option is also useful for writing unit tests where you want ensure the documents flush promptly.</p>
 <h3 id="indexing-modes">Indexing modes</h3>
 <p>This plugin has two indexing modes: <strong>normal</strong> and <strong>nested</strong>. The nested mode was added after v1.28 to protect against
 a possible <a href="https://discuss.elastic.co/t/can-nested-fields-prevent-mapping-explosion/95464">mapping explosion</a> which
@@ -1899,6 +1989,8 @@ and returns a response indicating the number of reindexed objects and the elapse
    <span class="hljs-string">"reindexed"</span>: <span class="hljs-number">154</span>,
    <span class="hljs-string">"tookMillis"</span>: <span class="hljs-number">365</span>
 }
+</code></pre><p>Additionally, you can specify the destination index to reindex into, which must have been created beforehand:</p>
+<pre><code>POST /v1/_elasticsearch/reindex?destinationIndex=yourCustomIndex
 </code></pre><h3 id="search-query-pagination-and-sorting">Search query pagination and sorting</h3>
 <p>The Elasticsearch plugin supports two modes of pagination for query results. The standard mode works with the
 <code>page</code> parameter:</p>
@@ -2227,13 +2319,24 @@ make a signed request to Para as follows:</p>
 and then run a local Grafana server using the instructions at <a href="http://docs.grafana.org/installation/docker/">http://docs.grafana.org/installation/docker/</a>.</p>
 <p>Here’s how to run Graphite with a Docker command:</p>
 <pre><code class="lang-bash">$ docker run -d --name graphite --restart=always -p 80:80 -p 2003-2004:2003-2004 -p 2023-2024:2023-2024 \
-  -p 8125:8125/udp -p 8126:8126 hopsoft/graphite-statsd
+  -p 8125:8125/udp -p 8126:8126 graphiteapp/graphite-statsd
 </code></pre>
 <p>Then point you browser to <code>http://localhost/</code>. Then run Grafana locally with:</p>
 <pre><code class="lang-bash">$ docker run -d -p 3000:3000 -e GF_SECURITY_ADMIN_USER=admin -e GF_SECURITY_ADMIN_PASSWORD=password \
   -e GF_METRICS_GRAPHITE_ADDRESS=localhost:2003 grafana/grafana
 </code></pre>
-<p>Then you can login using admin/password at the login screen.</p>
+<p>Then open Grafana at <code>http://localhost:3000</code> and login using admin/password at the login screen. Finally, add Graphite
+as a data source to Grafana by specifying the Graphite server location at <code>http://localhost</code> using “Browser” access.</p>
+<h3 id="instrumenting-para-plugins">Instrumenting Para plugins</h3>
+<p>You can easily measure any aspect of a Para plugin using the static methods <code>Metrics.counter()</code> and <code>Metrics.time()</code>:</p>
+<pre><code class="lang-java"><span class="hljs-comment">// call this from a method to increment a counter each time it's called</span>
+Metrics.counter(appid, getClass(), <span class="hljs-string">"searchQueryCalled"</span>).inc();
+
+<span class="hljs-comment">// use this to time execution of a block of code</span>
+<span class="hljs-keyword">try</span> (Metrics.Context ctx = Metrics.time(appid, getClass(), <span class="hljs-string">"timedBlock"</span>)) {
+    <span class="hljs-comment">// do stuff...</span>
+}
+</code></pre>
 
 				</section>
 			</article>
@@ -2294,7 +2397,7 @@ like this:</p>
 </ul>
 <p>To change the directory where logs are stored, set the system property <code>para.logs_dir</code> to a folder of your choice
 (should not end with “/“):</p>
-<pre><code>$ java -jar -Dpara.logs_dir=<span class="hljs-regexp">/var/</span>logs/para para.war
+<pre><code>$ java -jar -Dpara.logs_dir=<span class="hljs-regexp">/var/</span>logs/para para.jar
 </code></pre>
 				</section>
 			</article>
@@ -5012,6 +5115,42 @@ Make sure you save it and use it for signing future requests.</p>
 
 				</section>
 			</article>
+			<a id="053-api-reindex" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="POST img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-info">POST</span>
+								<span class="gray">
+									/v1/_reindex 
+								</span>
+							</code>
+							<span class="hidden-xs">Rebuild index</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Rebuilds the entire search index by reading all objects from the data store and reindexing them to a new index.
+This operation is synchronous - the request will return a response once reindexing is complete.</p>
+<p><strong>Example:</strong> <code>POST /v1/_reindex</code></p>
+<h3 id="request-parameters">Request parameters</h3>
+<ul>
+<li><code>destinationIndex</code> - the name of the new index (optional).
+<strong>Use only if you have created the new destination index manually</strong>.</li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>404</code></li>
+</ul>
+<p>Example response - returns the result without envelope:</p>
+<pre><code class="lang-js">{
+   <span class="hljs-string">"reindexed"</span>: <span class="hljs-number">154</span>,
+   <span class="hljs-string">"tookMillis"</span>: <span class="hljs-number">365</span>
+}
+</code></pre>
+
+				</section>
+			</article>
 	</section>
 
 	<!-- Footer Content -->
@@ -5020,7 +5159,7 @@ Make sure you save it and use it for signing future requests.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>04 June 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>05 August 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2018

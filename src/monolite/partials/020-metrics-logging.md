@@ -37,5 +37,5 @@ Logs are stored in 3 files, located in the same directory from which Para is sta
 To change the directory where logs are stored, set the system property `para.logs_dir` to a folder of your choice
 (should not end with "/"):
 ```
-$ java -jar -Dpara.logs_dir=/var/logs/para para.war
+$ java -jar -Dpara.logs_dir=/var/logs/para para.jar
 ```
