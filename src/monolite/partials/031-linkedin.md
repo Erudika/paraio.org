@@ -28,12 +28,15 @@ Para will redirect the user back to your host URL with the generated access toke
 Support for logging in with LinkedIn is implemented by the `LinkedInAuthFilter`. This filter responds to requests at
 `/linkedin_auth`.
 
+The endpoint expects an `appid` value from the 'state' parameter, e.g. `?state={appid}`. If that parameter is missing,
+the default (root) app will be used as authentication target.
+
 To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint:
 ```
 linkedin.com/uas/oauth2/authorization
 ```
 Pass the parameter `redirect_uri=/linkedin_auth` so Para can handle the response from LinkedIn.
-For apps other than the root app use `redirect_uri=/linkedin_auth?appid=myapp` instead.
+For apps other than the root app use `redirect_uri=/linkedin_auth?state=myapp` instead.
 
 **Note:** You need to [register a new application with LinkedIn](https://www.linkedin.com/developer/apps)
 in order to obtain an access and secret keys.
@@ -44,7 +47,7 @@ Below is an example Javascript code for a LinkedIn login button:
 $("#linkedinLoginBtn").click(function() {
 		window.location = "https://www.linkedin.com/uas/oauth2/authorization?" +
 				"response_type=code&client_id={LINKEDIN_APP_ID}" +
-				"&scope=r_emailaddress&state=" + (new Date().getTime()) +
+				"&scope=r_basicprofile%20r_emailaddress&state=" + APPID +
 				"&redirect_uri=" + window.location.origin + "/linkedin_auth";
 		return false;
 });

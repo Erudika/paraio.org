@@ -2978,6 +2978,8 @@ Finally, the filter tries to get the user’s profile with that token, from a sp
 server used for authentication.</p>
 <p>Support for generic OAuth authentication is implemented by the <code>GenericOAuth2Filter</code>. The default URL for this filter is
 <code>/oauth2_auth</code>.</p>
+<p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
+the default (root) app will be used as authentication target.</p>
 <p>These are the configuration options for this filter:</p>
 <table class="table table-striped">
     <thead>
@@ -3043,17 +3045,19 @@ para.fb_secret = <span class="hljs-string">"..."</span>
 Para will redirect the user back to your host URL with the generated access token.</p>
 <p>Support for logging in with Facebook is implemented by the <code>FacebookAuthFilter</code>. This filter responds to requests at
 <code>/facebook_auth</code>.</p>
+<p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
+the default (root) app will be used as authentication target.</p>
 <p>To initiate a login with Facebook just redirect the user to the Facebook OAuth endpoint:</p>
 <pre><code>facebook.com/dialog/oauth
 </code></pre><p>Pass the parameter <code>redirect_uri=/facebook_auth</code> so Para can handle the response from Facebook.
-For apps other than the root app use <code>redirect_uri=/facebook_auth?appid=myapp</code> instead.</p>
+For apps other than the root app use <code>redirect_uri=/facebook_auth?state=myapp</code> instead.</p>
 <p><strong>Note:</strong> You need to <a href="https://developers.facebook.com/">register a new application with Facebook</a>
 in order to obtain an access and secret keys.</p>
 <p>Below is an example Javascript code for a Facebook login button:</p>
 <pre><code class="lang-js">$(<span class="hljs-string">"#facebookLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
         <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://www.facebook.com/dialog/oauth?"</span> +
                 <span class="hljs-string">"response_type=code&amp;client_id={FACEBOOK_APP_ID}"</span> +
-                <span class="hljs-string">"&amp;scope=email&amp;state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) +
+                <span class="hljs-string">"&amp;scope=email&amp;state="</span> + APPID +
                 <span class="hljs-string">"&amp;redirect_uri="</span> + <span class="hljs-built_in">window</span>.location.origin + <span class="hljs-string">"/facebook_auth"</span>;
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 });
@@ -3085,17 +3089,19 @@ para.gh_secret = <span class="hljs-string">"..."</span>
 Para will redirect the user back to your host URL with the generated access token.</p>
 <p>Support for logging in with GitHub is implemented by the <code>GitHubAuthFilter</code>. This filter responds to requests at
 <code>/github_auth</code>.</p>
+<p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
+the default (root) app will be used as authentication target.</p>
 <p>To initiate a login with GitHub just redirect the user to the GitHub OAuth endpoint:</p>
 <pre><code>github.com/login/oauth/authorize
 </code></pre><p>Pass the parameter <code>redirect_uri=/github_auth</code> so Para can handle the response from GitHub.
-For apps other than the root app use <code>redirect_uri=/github_auth?appid=myapp</code> instead.</p>
+For apps other than the root app use <code>redirect_uri=/github_auth?state=myapp</code> instead.</p>
 <p><strong>Note:</strong> You need to <a href="https://github.com/settings/profile">register a new application with GitHub</a>
 in order to obtain an access and secret keys.</p>
 <p>Below is an example Javascript code for a GitHub login button:</p>
 <pre><code class="lang-js">$(<span class="hljs-string">"#githubLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
         <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://github.com/login/oauth/authorize?"</span> +
                 <span class="hljs-string">"response_type=code&amp;client_id={GITHUB_APP_ID}"</span> +
-                <span class="hljs-string">"&amp;scope=user&amp;state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) +
+                <span class="hljs-string">"&amp;scope=user&amp;state="</span> + APPID +
                 <span class="hljs-string">"&amp;redirect_uri="</span> + <span class="hljs-built_in">window</span>.location.origin + <span class="hljs-string">"/github_auth"</span>;
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 });
@@ -3127,10 +3133,12 @@ para.gp_secret = <span class="hljs-string">"..."</span>
 Para will redirect the user back to your host URL with the generated access token.</p>
 <p>Support for logging in with Google acoounts is implemented by the <code>GoogleAuthFilter</code>.
 This filter responds to requests at <code>/google_auth</code>.</p>
+<p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
+the default (root) app will be used as authentication target.</p>
 <p>To initiate a login with Google just redirect the user to the Google OAuth endpoint:</p>
 <pre><code>accounts.google.com/o/oauth2/v2/auth
 </code></pre><p>Pass the parameter <code>redirect_uri=/google_auth</code> so Para can handle the response from Google.
-For apps other than the root app use <code>redirect_uri=/google_auth?appid=myapp</code> instead.</p>
+For apps other than the root app use <code>redirect_uri=/google_auth?state=myapp</code> instead.</p>
 <p><strong>Note:</strong> You need to <a href="https://console.developers.google.com/iam-admin/projects">register a new application with Google</a>
 in order to obtain an access and secret keys.</p>
 <p>Below is an example Javascript code for a Google login button:</p>
@@ -3139,7 +3147,7 @@ in order to obtain an access and secret keys.</p>
         <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://accounts.google.com/o/oauth2/v2/auth?"</span> +
                 <span class="hljs-string">"client_id={GOOGLE_APP_ID}&amp;response_type=code"</span> +
                 <span class="hljs-string">"&amp;scope=openid%20email&amp;redirect_uri="</span> + baseUrl + <span class="hljs-string">"/google_auth"</span> +
-                <span class="hljs-string">"&amp;state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) + <span class="hljs-string">"&amp;"</span> + <span class="hljs-string">"openid.realm="</span> + baseUrl;
+                <span class="hljs-string">"&amp;state="</span> + APPID + <span class="hljs-string">"&amp;"</span> + <span class="hljs-string">"openid.realm="</span> + baseUrl;
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 });
 </code></pre>
@@ -3170,17 +3178,19 @@ para.in_secret = <span class="hljs-string">"..."</span>
 Para will redirect the user back to your host URL with the generated access token.</p>
 <p>Support for logging in with LinkedIn is implemented by the <code>LinkedInAuthFilter</code>. This filter responds to requests at
 <code>/linkedin_auth</code>.</p>
+<p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
+the default (root) app will be used as authentication target.</p>
 <p>To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint:</p>
 <pre><code>linkedin.com/uas/oauth2/authorization
 </code></pre><p>Pass the parameter <code>redirect_uri=/linkedin_auth</code> so Para can handle the response from LinkedIn.
-For apps other than the root app use <code>redirect_uri=/linkedin_auth?appid=myapp</code> instead.</p>
+For apps other than the root app use <code>redirect_uri=/linkedin_auth?state=myapp</code> instead.</p>
 <p><strong>Note:</strong> You need to <a href="https://www.linkedin.com/developer/apps">register a new application with LinkedIn</a>
 in order to obtain an access and secret keys.</p>
 <p>Below is an example Javascript code for a LinkedIn login button:</p>
 <pre><code class="lang-js">$(<span class="hljs-string">"#linkedinLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
         <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://www.linkedin.com/uas/oauth2/authorization?"</span> +
                 <span class="hljs-string">"response_type=code&amp;client_id={LINKEDIN_APP_ID}"</span> +
-                <span class="hljs-string">"&amp;scope=r_emailaddress&amp;state="</span> + (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()) +
+                <span class="hljs-string">"&amp;scope=r_basicprofile%20r_emailaddress&amp;state="</span> + APPID +
                 <span class="hljs-string">"&amp;redirect_uri="</span> + <span class="hljs-built_in">window</span>.location.origin + <span class="hljs-string">"/linkedin_auth"</span>;
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 });
@@ -3214,18 +3224,18 @@ para.security.signin_failure = <span class="hljs-string">"http://failure.url"</s
 Para will redirect the user back to your host URL with the generated access token.</p>
 <p>Support for logging in with Microsoft accounts is implemented by the <code>MicrosoftAuthFilter</code>.
 This filter responds to requests at <code>/microsoft_auth</code>.</p>
+<p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
+the default (root) app will be used as authentication target.</p>
 <p>To initiate a login with Microsoft just redirect the user to the Microsoft OAuth endpoint:</p>
 <pre><code>login.microsoftonline.com/common/oauth2/v2<span class="hljs-number">.0</span>/authorize
-</code></pre><p>Pass the parameter <code>redirect_uri=/microsoft_auth</code> so Para can handle the response from Microsoft.
-<strong>Note:</strong> The v2.0 endpoint for OAuth authentication with Microsoft doesn’t work well with query parameters in
-the <code>redirect_uri</code> parameter. Instead, use the <code>state</code> parameter to remember the <code>appid</code> of your app (see example below).</p>
+</code></pre><p>Pass the parameter <code>redirect_uri=/microsoft_auth?state=myapp</code> so Para can handle the response from Microsoft.</p>
 <p><strong>Note:</strong> You need to <a href="https://apps.dev.microsoft.com/#/appList">register a new application with Microsoft</a>
 in order to obtain an access and secret keys.</p>
 <p>Below is an example Javascript code for a Microsoft login button:</p>
 <pre><code class="lang-js">$("#microsoftLoginBtn").click(function() {
         window.location = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?" +
                 "response_type=code&amp;client_id={MICROSOFT_APP_ID}" +
-                "&amp;scope=https%3A%2F%2Fgraph.microsoft.com%2Fuser.read&amp;state={YOUR_APP_ID}" +
+                "&amp;scope=https%3A%2F%2Fgraph.microsoft.com%2Fuser.read&amp;state=" + APPID +
                 "&amp;redirect_uri=" + window.location.origin + "/microsoft_auth;
         return false;
 });
@@ -3257,8 +3267,10 @@ para.tw_secret = <span class="hljs-string">"..."</span>
 Para will redirect the user back to your host URL with the generated access token.</p>
 <p>Support for logging in with Twitter is implemented by the <code>TwitterAuthFilter</code>. This filter responds to requests at
 <code>/twitter_auth</code>.</p>
+<p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
+the default (root) app will be used as authentication target.</p>
 <p>To initiate a login with Twitter just redirect the user to the <code>/twitter_auth</code>. This will redirect the user to Twitter
-for authentication. For apps other than the root app, redirect to <code>/twitter_auth?appid=myapp</code>.</p>
+for authentication. For apps other than the root app, redirect to <code>/twitter_auth?state=myapp</code>.</p>
 <p><strong>Note:</strong> You need to <a href="https://apps.twitter.com/">register a new application with Twitter</a>
 in order to obtain an access and secret keys.
 The Twitter API does not share users’ emails by default, you have to ask Twitter to
@@ -3267,7 +3279,7 @@ The Twitter API does not share users’ emails by default, you have to ask Twitt
 <pre><code class="lang-js">$(<span class="hljs-string">"#twitterLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
         <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"/twitter_auth"</span>;
         <span class="hljs-comment">// for apps other than the root app use:</span>
-        <span class="hljs-comment">// window.location = "/twitter_auth?appid=myapp";</span>
+        <span class="hljs-comment">// window.location = "/twitter_auth?state=" + APPID;</span>
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 });
 </code></pre>
@@ -5159,7 +5171,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>06 August 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>09 August 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2018

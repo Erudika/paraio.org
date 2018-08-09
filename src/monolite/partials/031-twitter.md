@@ -28,8 +28,11 @@ Para will redirect the user back to your host URL with the generated access toke
 Support for logging in with Twitter is implemented by the `TwitterAuthFilter`. This filter responds to requests at
 `/twitter_auth`.
 
+The endpoint expects an `appid` value from the 'state' parameter, e.g. `?state={appid}`. If that parameter is missing,
+the default (root) app will be used as authentication target.
+
 To initiate a login with Twitter just redirect the user to the `/twitter_auth`. This will redirect the user to Twitter
-for authentication. For apps other than the root app, redirect to `/twitter_auth?appid=myapp`.
+for authentication. For apps other than the root app, redirect to `/twitter_auth?state=myapp`.
 
 **Note:** You need to [register a new application with Twitter](https://apps.twitter.com/)
 in order to obtain an access and secret keys.
@@ -42,7 +45,7 @@ Below is an example Javascript code for a Twitter login button:
 $("#twitterLoginBtn").click(function() {
 		window.location = "/twitter_auth";
 		// for apps other than the root app use:
-		// window.location = "/twitter_auth?appid=myapp";
+		// window.location = "/twitter_auth?state=" + APPID;
 		return false;
 });
 ```

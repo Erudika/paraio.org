@@ -28,12 +28,15 @@ Para will redirect the user back to your host URL with the generated access toke
 Support for logging in with GitHub is implemented by the `GitHubAuthFilter`. This filter responds to requests at
 `/github_auth`.
 
+The endpoint expects an `appid` value from the 'state' parameter, e.g. `?state={appid}`. If that parameter is missing,
+the default (root) app will be used as authentication target.
+
 To initiate a login with GitHub just redirect the user to the GitHub OAuth endpoint:
 ```
 github.com/login/oauth/authorize
 ```
 Pass the parameter `redirect_uri=/github_auth` so Para can handle the response from GitHub.
-For apps other than the root app use `redirect_uri=/github_auth?appid=myapp` instead.
+For apps other than the root app use `redirect_uri=/github_auth?state=myapp` instead.
 
 **Note:** You need to [register a new application with GitHub](https://github.com/settings/profile)
 in order to obtain an access and secret keys.
@@ -44,7 +47,7 @@ Below is an example Javascript code for a GitHub login button:
 $("#githubLoginBtn").click(function() {
 		window.location = "https://github.com/login/oauth/authorize?" +
 				"response_type=code&client_id={GITHUB_APP_ID}" +
-				"&scope=user&state=" + (new Date().getTime()) +
+				"&scope=user&state=" + APPID +
 				"&redirect_uri=" + window.location.origin + "/github_auth";
 		return false;
 });

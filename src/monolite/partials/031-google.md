@@ -28,12 +28,15 @@ Para will redirect the user back to your host URL with the generated access toke
 Support for logging in with Google acoounts is implemented by the `GoogleAuthFilter`.
 This filter responds to requests at `/google_auth`.
 
+The endpoint expects an `appid` value from the 'state' parameter, e.g. `?state={appid}`. If that parameter is missing,
+the default (root) app will be used as authentication target.
+
 To initiate a login with Google just redirect the user to the Google OAuth endpoint:
 ```
 accounts.google.com/o/oauth2/v2/auth
 ```
 Pass the parameter `redirect_uri=/google_auth` so Para can handle the response from Google.
-For apps other than the root app use `redirect_uri=/google_auth?appid=myapp` instead.
+For apps other than the root app use `redirect_uri=/google_auth?state=myapp` instead.
 
 **Note:** You need to [register a new application with Google](https://console.developers.google.com/iam-admin/projects)
 in order to obtain an access and secret keys.
@@ -46,7 +49,7 @@ $("#googleLoginBtn").click(function() {
 		window.location = "https://accounts.google.com/o/oauth2/v2/auth?" +
 				"client_id={GOOGLE_APP_ID}&response_type=code" +
 				"&scope=openid%20email&redirect_uri=" + baseUrl + "/google_auth" +
-				"&state=" + (new Date().getTime()) + "&" + "openid.realm=" + baseUrl;
+				"&state=" + APPID + "&" + "openid.realm=" + baseUrl;
 		return false;
 });
 ```

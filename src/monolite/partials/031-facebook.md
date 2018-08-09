@@ -28,12 +28,15 @@ Para will redirect the user back to your host URL with the generated access toke
 Support for logging in with Facebook is implemented by the `FacebookAuthFilter`. This filter responds to requests at
 `/facebook_auth`.
 
+The endpoint expects an `appid` value from the 'state' parameter, e.g. `?state={appid}`. If that parameter is missing,
+the default (root) app will be used as authentication target.
+
 To initiate a login with Facebook just redirect the user to the Facebook OAuth endpoint:
 ```
 facebook.com/dialog/oauth
 ```
 Pass the parameter `redirect_uri=/facebook_auth` so Para can handle the response from Facebook.
-For apps other than the root app use `redirect_uri=/facebook_auth?appid=myapp` instead.
+For apps other than the root app use `redirect_uri=/facebook_auth?state=myapp` instead.
 
 **Note:** You need to [register a new application with Facebook](https://developers.facebook.com/)
 in order to obtain an access and secret keys.
@@ -44,7 +47,7 @@ Below is an example Javascript code for a Facebook login button:
 $("#facebookLoginBtn").click(function() {
 		window.location = "https://www.facebook.com/dialog/oauth?" +
 				"response_type=code&client_id={FACEBOOK_APP_ID}" +
-				"&scope=email&state=" + (new Date().getTime()) +
+				"&scope=email&state=" + APPID +
 				"&redirect_uri=" + window.location.origin + "/facebook_auth";
 		return false;
 });

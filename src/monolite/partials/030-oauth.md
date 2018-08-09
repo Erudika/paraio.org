@@ -12,6 +12,9 @@ server used for authentication.
 Support for generic OAuth authentication is implemented by the `GenericOAuth2Filter`. The default URL for this filter is
 `/oauth2_auth`.
 
+The endpoint expects an `appid` value from the 'state' parameter, e.g. `?state={appid}`. If that parameter is missing,
+the default (root) app will be used as authentication target.
+
 These are the configuration options for this filter:
 
 <table class="table table-striped">
