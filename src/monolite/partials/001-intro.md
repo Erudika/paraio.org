@@ -79,7 +79,8 @@ Tagged Docker images for Para are located at `erudikaltd/para` on Docker Hub.
 First, create an `application.conf` file in a directory and run this command:
 
 ```
-$ docker run -ti -p 8080:8080 --rm -v $(pwd)/application.conf:/para/application.conf \
+$ docker run -ti -p 8080:8080 --rm -v para-data:/para/data \
+  -v $(pwd)/application.conf:/para/application.conf \
   -e JAVA_OPTS="-Dconfig.file=/para/application.conf" erudikaltd/para
 ```
 
