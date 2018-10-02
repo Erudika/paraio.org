@@ -149,6 +149,7 @@
 				<a href="#Security" class="docs-category" data-toggle="collapse" aria-expanded="false">Security</a>
 				<ul id="Security" class="docs-category-child collapse list-unstyled">
 							<li class=""><a href="#029-passwords">Simple authentication</a></li>
+							<li class=""><a href="#029-saml">SAML support</a></li>
 							<li class=""><a href="#030-ldap">LDAP support</a></li>
 							<li class=""><a href="#030-oauth">OAuth 2.0 support</a></li>
 							<li class=""><a href="#030-openid">OpenID support</a></li>
@@ -2906,6 +2907,134 @@ user object will be returned.</p>
 
 				</section>
 			</article>
+			<a id="029-saml" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>SAML support</h2>
+				<section class="body  img-rounded">
+					<p>Para can act as a SAML service provider and connect to a specified identity provider (IDP). The implementation uses
+OneLogin’s SAML Java Toolkit. Here’s a summary of all the steps required to authenticate users with SAML:</p>
+<ol>
+<li>Generate a X509 certificate and private key for your SP</li>
+<li>Convert the private key to PKCS#8 and Base64-encode both public and private keys</li>
+<li>Specify the metadata URL for your IDP in your config file</li>
+<li>Register Para with your IDP as trusted SP by copying the metadata from <code>/saml_metadata/{appid}</code></li>
+<li>Send users to <code>/saml_auth/{appid}</code> and Para will take care of the rest</li>
+</ol>
+<p>The SP metadata endpoint is <code>/saml_metadata/{appid}</code> where <code>appid</code> is the app id for your Para app. For example, if your
+Para endpoint is <code>paraio.com</code> and your <code>appid</code> is <code>scoold</code>, then the metadata is available at
+<code>https://paraio.com/saml_metadata/scoold</code> as an XML file.</p>
+<p>SAML authentication is initiated by sending users to the Para SAML authentication endpoint <code>/saml_auth/{appid}</code>.
+For example, if your Para endpoint is <code>paraio.com</code> and your <code>appid</code> is <code>scoold</code>, then the user should be sent to
+<code>https://paraio.com/saml_auth/scoold</code>. Para (the service provider) will handle the request and redirect to the SAML IDP.
+Finally, upon successful authentication, the user is redirected back to <code>https://paraio.com/saml_auth/scoold</code> which is
+also the assertion consumer service (ACS).</p>
+<p><strong>Note:</strong> The X509 certificate and private key must be encoded as Base64 in the configuration file. Additionally,
+the private key must be in the <strong>PKCS#8 format</strong> (<code>---BEGIN PRIVATE KEY---</code>). To convert from PKCS#1 to PKCS#8, use this:</p>
+<pre><code>openssl pkcs8 -topk8 -inform pem -nocrypt -<span class="hljs-keyword">in</span> sp.rsa_key -outform pem -out sp.pem
+</code></pre><p>There are lots of configuration options but Para needs only a few of those in order to successfully
+authenticate with your SAML IDP (listed in the first rows below).</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>property</th>
+            <th>default value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>para.security.saml.sp.entityid</code></td><td>blank</td></tr>
+        <tr><td> The SP <code>entityId</code>, a URL in the form of <code>https://paraio.com/saml_auth/{appid}</code>. </td></tr>
+        <tr><td><code>para.security.saml.sp.assertion_consumer_service.url</code></td><td>blank</td></tr>
+        <tr><td> The URL where users will be redirected back to, from the IDP. Same value as the <code>entityId</code> above.</td></tr>
+        <tr><td><code>para.security.saml.sp.nameidformat</code></td><td>blank</td></tr>
+        <tr><td> Specifies constraints on the name identifier to be used to represent the requested subject.</td></tr>
+        <tr><td><code>para.security.saml.sp.x509cert</code></td><td>blank</td></tr>
+        <tr><td> The X509 certificate for the SP, encoded as Base64.</td></tr>
+        <tr><td><code>para.security.saml.sp.privatekey</code></td><td>blank</td></tr>
+        <tr><td> The private key for the X509 certificate, in PKCS#8 format, encoded as Base64.</td></tr>
+
+        <tr><td><code>para.security.saml.idp.entityid</code></td><td>blank</td></tr>
+        <tr><td> The IDP <code>entityId</code>, a URL in the form of <code>https://idphost/idp/metadata.xml</code></td></tr>
+        <tr><td><code>para.security.saml.idp.single_sign_on_service.url</code></td><td>blank</td></tr>
+        <tr><td> SSO endpoint URL of the IdP.</td></tr>
+        <tr><td><code>para.security.saml.idp.x509cert</code></td><td>blank</td></tr>
+        <tr><td> The x509 certificate for the IDP, encoded as Base64.</td></tr>
+        <tr><td><code>para.security.saml.idp.metadata_url</code></td><td>blank</td></tr>
+        <tr><td> The location of IDP’s metadata document. Para will fetch it and the IDP will be auto-configured.</td></tr>
+
+        <tr><td><code>para.security.saml.security.authnrequest_signed</code></td><td>false</td></tr>
+        <tr><td> Enables/disables signing of auth requests to the IDP.</td></tr>
+        <tr><td><code>para.security.saml.security.want_messages_signed</code></td><td>false</td></tr>
+        <tr><td> Enables/disables signing of messages to the IDP.</td></tr>
+        <tr><td><code>para.security.saml.security.want_assertions_signed</code></td><td>false</td></tr>
+        <tr><td> Enables/disables the requirement for signed assertions.</td></tr>
+        <tr><td><code>para.security.saml.security.want_assertions_encrypted</code></td><td>false</td></tr>
+        <tr><td> Enables/disables the requirement for encrypted assertions.</td></tr>
+        <tr><td><code>para.security.saml.security.want_nameid_encrypted</code></td><td>false</td></tr>
+        <tr><td> Enables/disables the requirement for encrypted <code>nameId</code></td></tr>
+        <tr><td><code>para.security.saml.security.sign_metadata</code></td><td>false</td></tr>
+        <tr><td> Enables/disables signing of SP’s metadata.</td></tr>
+        <tr><td><code>para.security.saml.security.want_xml_validation</code></td><td>true</td></tr>
+        <tr><td> Enables/disables XML validation by the SP.</td></tr>
+        <tr><td><code>para.security.saml.security.signature_algorithm</code></td><td>blank</td></tr>
+        <tr><td> Algorithm that the SP will use in the signing process.</td></tr>
+
+        <tr><td><code>para.security.saml.attributes.id</code></td><td>blank</td></tr>
+        <tr><td> Mapping key for the <code>id</code> attribute.</td></tr>
+        <tr><td><code>para.security.saml.attributes.picture</code></td><td>blank</td></tr>
+        <tr><td> Mapping key for the <code>picture</code> attribute.</td></tr>
+        <tr><td><code>para.security.saml.attributes.email</code></td><td>blank</td></tr>
+        <tr><td> Mapping key for the <code>email</code> attribute.</td></tr>
+        <tr><td><code>para.security.saml.attributes.name</code></td><td>blank</td></tr>
+        <tr><td> Mapping key for the <code>name</code> attribute.</td></tr>
+        <tr><td><code>para.security.saml.attributes.firstname</code></td><td>blank</td></tr>
+        <tr><td> Mapping key for the <code>firstname</code> attribute.</td></tr>
+        <tr><td><code>para.security.saml.attributes.lastname</code></td><td>blank</td></tr>
+        <tr><td> Mapping key for the <code>lastname</code> attribute.</td></tr>
+        <tr><td><code>para.security.saml.domain</code></td><td>blank</td></tr>
+        <tr><td> Domain name for users who don’t have a valid email.</td></tr>
+    </tbody>
+</table>
+
+<p>As a bare minimum, you should have the following SAML configuration:</p>
+<pre><code class="lang-ini"># minimal setup
+# IDP metadata URL, e.g. https://idphost/idp/shibboleth
+para.security.saml.idp.metadata_url = &quot;&quot;
+
+# SP endpoint, e.g. https://paraio.com/saml_auth/scoold
+para.security.saml.sp.entityid = &quot;&quot;
+
+# SP public key as Base64(x509 certificate)
+para.security.saml.sp.x509cert = &quot;&quot;
+
+# SP private key as Base64(PKCS#8 key)
+para.security.saml.sp.privatekey = &quot;&quot;
+
+# attribute mappings (usually required)
+# e.g. urn:oid:0.9.2342.19200300.100.1.1
+para.security.saml.attributes.id = &quot;&quot;
+# e.g. urn:oid:0.9.2342.19200300.100.1.3
+para.security.saml.attributes.email = &quot;&quot;
+# e.g. urn:oid:2.5.4.3
+para.security.saml.attributes.name = &quot;&quot;
+</code></pre>
+<p>You can also configure the SAML authentication filter through the <a href="#050-api-settings-put">app settings API</a>:</p>
+<pre><code>{
+    <span class="hljs-string">"security.saml.sp.entityid"</span>: <span class="hljs-string">"https://paraio.com/saml_auth/scoold"</span>,
+    <span class="hljs-string">"security.saml.idp.metadata_url"</span>: <span class="hljs-string">"https://idphost/idp/shibboleth"</span>,
+    <span class="hljs-string">"security.saml.sp.x509cert"</span>: <span class="hljs-string">"LS0tLS1CRUdJTiBDRVJUSUZJQ0..."</span>,
+    <span class="hljs-string">"security.saml.sp.privatekey"</span>: <span class="hljs-string">"LS0tLS1CRUdJTiBQUklWQVRF..."</span>,
+    ...
+    <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>,
+    <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
+}
+</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
+<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
+Para will redirect the user back to your host URL with the generated access token.</p>
+<p>You can also put all of the settings above in a configuration file, but this <em>only works</em> if your app is the
+<strong>root app</strong> (see <a href="#005-config">the config</a>).</p>
+
+				</section>
+			</article>
 			<a id="030-ldap" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
 			<article class=" img-rounded">
 					<h2>LDAP support</h2>
@@ -5182,7 +5311,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>07 September 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>03 October 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2018
