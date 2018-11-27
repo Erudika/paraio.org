@@ -119,7 +119,6 @@ This executes the method `getCount()` and has **no additional parameters**.
 
 - `q` - a search query string (optional). Defaults to `*` (all).
 - `type` - the type of objects to search for (optional).
-`prefix`, `tagged`, `in`, `terms`, `wildcard`, `count`. (see [Search](#015-search))
 - `desc` - sort order - `true` for descending (optional). Default is `true`.
 - `sort` - the field to sort by (optional).
 - `page` - starting page for results (optional). (note: page size is 30 items by default)
