@@ -33,7 +33,7 @@ the default (root) app will be used as authentication target.
 
 To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint:
 ```
-linkedin.com/uas/oauth2/authorization
+https://www.linkedin.com/oauth/v2/authorization
 ```
 Pass the parameter `redirect_uri=/linkedin_auth` so Para can handle the response from LinkedIn.
 For apps other than the root app use `redirect_uri=/linkedin_auth?state=myapp` instead.
@@ -45,9 +45,9 @@ Below is an example Javascript code for a LinkedIn login button:
 
 ```js
 $("#linkedinLoginBtn").click(function() {
-		window.location = "https://www.linkedin.com/uas/oauth2/authorization?" +
+		window.location = "https://www.linkedin.com/oauth/v2/authorization?" +
 				"response_type=code&client_id={LINKEDIN_APP_ID}" +
-				"&scope=r_basicprofile%20r_emailaddress&state=" + APPID +
+				"&scope=r_liteprofile%20r_emailaddress&state=" + APPID +
 				"&redirect_uri=" + window.location.origin + "/linkedin_auth";
 		return false;
 });

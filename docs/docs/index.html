@@ -3187,15 +3187,15 @@ Para will redirect the user back to your host URL with the generated access toke
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
 the default (root) app will be used as authentication target.</p>
 <p>To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint:</p>
-<pre><code>linkedin.com/uas/oauth2/authorization</code></pre><p>Pass the parameter <code>redirect_uri=/linkedin_auth</code> so Para can handle the response from LinkedIn.
+<pre><code>https:<span class="hljs-comment">//www.linkedin.com/oauth/v2/authorization</span></code></pre><p>Pass the parameter <code>redirect_uri=/linkedin_auth</code> so Para can handle the response from LinkedIn.
 For apps other than the root app use <code>redirect_uri=/linkedin_auth?state=myapp</code> instead.</p>
 <p><strong>Note:</strong> You need to <a href="https://www.linkedin.com/developer/apps">register a new application with LinkedIn</a>
 in order to obtain an access and secret keys.</p>
 <p>Below is an example Javascript code for a LinkedIn login button:</p>
 <pre><code class="language-js">$(<span class="hljs-string">"#linkedinLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-        <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://www.linkedin.com/uas/oauth2/authorization?"</span> +
+        <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://www.linkedin.com/oauth/v2/authorization?"</span> +
                 <span class="hljs-string">"response_type=code&amp;client_id={LINKEDIN_APP_ID}"</span> +
-                <span class="hljs-string">"&amp;scope=r_basicprofile%20r_emailaddress&amp;state="</span> + APPID +
+                <span class="hljs-string">"&amp;scope=r_liteprofile%20r_emailaddress&amp;state="</span> + APPID +
                 <span class="hljs-string">"&amp;redirect_uri="</span> + <span class="hljs-built_in">window</span>.location.origin + <span class="hljs-string">"/linkedin_auth"</span>;
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 });</code></pre>
@@ -5126,7 +5126,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>15 December 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>18 December 2018</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2018
