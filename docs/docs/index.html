@@ -3187,7 +3187,7 @@ Para will redirect the user back to your host URL with the generated access toke
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
 the default (root) app will be used as authentication target.</p>
 <p>To initiate a login with LinkedIn just redirect the user to the LinkedIn OAuth endpoint:</p>
-<pre><code>https:<span class="hljs-comment">//www.linkedin.com/oauth/v2/authorization</span></code></pre><p>Pass the parameter <code>redirect_uri=/linkedin_auth</code> so Para can handle the response from LinkedIn.
+<pre><code>www.linkedin.com/oauth/v2/authorization</code></pre><p>Pass the parameter <code>redirect_uri=/linkedin_auth</code> so Para can handle the response from LinkedIn.
 For apps other than the root app use <code>redirect_uri=/linkedin_auth?state=myapp</code> instead.</p>
 <p><strong>Note:</strong> You need to <a href="https://www.linkedin.com/developer/apps">register a new application with LinkedIn</a>
 in order to obtain an access and secret keys.</p>
