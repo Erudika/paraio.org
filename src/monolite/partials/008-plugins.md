@@ -43,7 +43,7 @@ as the Para server or include the plugin through Maven,
 (use the simple class name here)
 3. Start the Para server and the new plugin should be loaded
 
-**Important:** Each plugin must implement and register a `DestroyListener` on initialization where all resources
+> **Important:** Each plugin must implement and register a `DestroyListener` on initialization where all resources
 (connections, streams, pools) should be properly released and closed. Using `Runtime.getRuntime().addShutdownHook()` is
 **not** recommended because in some cases that method is not executed.
 

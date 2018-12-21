@@ -1123,9 +1123,11 @@ as the Para server or include the plugin through Maven,</li>
 (use the simple class name here)</li>
 <li>Start the Para server and the new plugin should be loaded</li>
 </ol>
+<blockquote>
 <p><strong>Important:</strong> Each plugin must implement and register a <code>DestroyListener</code> on initialization where all resources
 (connections, streams, pools) should be properly released and closed. Using <code>Runtime.getRuntime().addShutdownHook()</code> is
 <strong>not</strong> recommended because in some cases that method is not executed.</p>
+</blockquote>
 <h3 id="custom-event-listeners">Custom event listeners</h3>
 <p>To register your own <code>InitializeListener</code>s and <code>DestroyListener</code>s add the following code to one of your constructors
 or inside a static block in one of your classes:</p>
@@ -1795,16 +1797,20 @@ class name of the loaded driver in the main Para configuration file.</p>
 <p>Alternatively you can <a href="https://github.com/Erudika/para-dao-sql/releases">download the JAR</a> and put it in a
 <code>lib</code> folder alongside the server JAR file <code>para-x.y.z.jar</code>. Para will look for plugins inside <code>lib</code> and pick up
 the plugin.</p>
-<p><strong>Important:</strong> You must download the appropriate JDBC driver package for your database and put it in the <code>lib/</code> folder.
-Then you have to set the <code>loader.path=lib</code> system property in order to make the Spring Boot launcher add that folder
+<blockquote>
+<p><strong>Important:</strong> You must download the appropriate JDBC driver package for your database and put it in the <code>lib/</code> folder.</p>
+</blockquote>
+<p>Then you have to set the <code>loader.path=lib</code> system property in order to make the Spring Boot launcher add that folder
 to the classpath. For example:</p>
 <pre><code>java -jar -Dconfig.file=./application.conf -Dloader.path=lib  para.jar</code></pre><p>Finally, set the config property:</p>
 <pre><code>para.dao = <span class="hljs-string">"SqlDAO"</span></code></pre><p>This could be a Java system property or part of a <code>application.conf</code> file on the classpath.
 This tells Para to use the SQL DAO implementation instead of the default.</p>
 <h3 id="schema">Schema</h3>
+<blockquote>
 <p><strong>BREAKING CHANGE:</strong> The schema has changed in v1.30.0 - columns <code>timestamp</code> and <code>updated</code> were removed,
-column <code>json_updates</code> was added. <code>H2DAO</code> attempts to apply these changes automatically or error, but <code>SqlDAO</code> does not.
-<strong>Execute the following statements one after another before switching to the new version:</strong></p>
+column <code>json_updates</code> was added. <code>H2DAO</code> attempts to apply these changes automatically or error, but <code>SqlDAO</code> does not.</p>
+</blockquote>
+<p><strong>Execute the following statements one after another before switching to the new version:</strong></p>
 <pre><code class="language-sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> {app_identifier} <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">COLUMN</span> <span class="hljs-built_in">timestamp</span>, <span class="hljs-keyword">updated</span>;
 <span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> {app_identifier} <span class="hljs-keyword">ADD</span> json_updates <span class="hljs-keyword">NVARCHAR</span>;</code></pre>
 <p>This is not required for tables created after v1.30.0.</p>
@@ -2118,9 +2124,11 @@ and returns a response indicating the number of reindexed objects and the elapse
 <code>page</code> parameter:</p>
 <pre><code>GET /v1/users?limit=<span class="hljs-number">30</span>&amp;page=<span class="hljs-number">2</span></code></pre><p>The other mode is “search after” and uses a stateless cursor to scroll through the results.
 To activate “search after”, append the <code>lastKey</code> query parameter to the search request like so:</p>
-<pre><code>GET /v1/users?limit=<span class="hljs-number">10000</span>&amp;sort=_docid&amp;lastKey=<span class="hljs-number">835146458100404225</span></code></pre><p><strong>Important:</strong> For consistent results when doing “search after” scrolling, set <code>pager.setSortby(&quot;_docid&quot;)</code>
+<pre><code>GET /v1/users?limit=<span class="hljs-number">10000</span>&amp;sort=_docid&amp;lastKey=<span class="hljs-number">835146458100404225</span></code></pre><blockquote>
+<p><strong>Important:</strong> For consistent results when doing “search after” scrolling, set <code>pager.setSortby(&quot;_docid&quot;)</code>
 to sort on the <code>_docid</code> field. Additionally, there’s a limit to the result window imposed by Elasticsearch
 of maximum 10000 documents. See the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings">docs for <code>index.max_result_window</code></a>.</p>
+</blockquote>
 <p>The “search after” method works well for deep pagination or infinite scrolling or search results.
 The <code>lastKey</code> field is returned in the body of the response for each search query. It represents the <code>_docid</code> value
 for a Elasticsearch document - a unique, time-based <code>long</code>. You may have to rebuild your index for “search after” to work.</p>
@@ -2156,8 +2164,10 @@ to <code>para.lucene.dir = &quot;/home/user/lucene&quot;</code> index files will
 <p>Lucene supports two modes of pagination for query results. The standard mode works with the <code>page</code> parameter:</p>
 <pre><code>GET /v1/users?limit=<span class="hljs-number">30</span>&amp;page=<span class="hljs-number">2</span></code></pre><p>The other mode is “search after” and uses a stateless cursor to scroll through the results.
 To activate “search after”, append the <code>lastKey</code> query parameter to the search request like so:</p>
-<pre><code>GET /v1/users?limit=<span class="hljs-number">10000</span>&amp;sort=_docid&amp;lastKey=<span class="hljs-number">835146458100404225</span></code></pre><p><strong>Important:</strong> For consistent results when doing “search after” scrolling, set <code>pager.setSortby(&quot;_docid&quot;)</code>
+<pre><code>GET /v1/users?limit=<span class="hljs-number">10000</span>&amp;sort=_docid&amp;lastKey=<span class="hljs-number">835146458100404225</span></code></pre><blockquote>
+<p><strong>Important:</strong> For consistent results when doing “search after” scrolling, set <code>pager.setSortby(&quot;_docid&quot;)</code>
 to sort on the <code>_docid</code> field.</p>
+</blockquote>
 <p>The “search after” method works well for deep pagination or infinite scrolling or search results.
 The <code>lastKey</code> field is returned in the body of the response for each search query. It represents the <code>_docid</code> value
 for a Lucene document - a unique, time-based <code>long</code>. You may have to rebuild your index for “search after” to work.</p>

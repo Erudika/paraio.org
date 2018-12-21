@@ -24,7 +24,7 @@ To activate "search after", append the `lastKey` query parameter to the search r
 ```
 GET /v1/users?limit=10000&sort=_docid&lastKey=835146458100404225
 ```
-**Important:** For consistent results when doing "search after" scrolling, set `pager.setSortby("_docid")`
+> **Important:** For consistent results when doing "search after" scrolling, set `pager.setSortby("_docid")`
 to sort on the `_docid` field.
 
 The "search after" method works well for deep pagination or infinite scrolling or search results.
