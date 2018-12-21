@@ -18,13 +18,27 @@ There are several configuration properties for MongoDB (these go in your `applic
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>`para.mongodb.host`</td><td> The hostname of the MongoDB server. Defaults to `localhost`.</td></tr>
-		<tr><td>`para.mongodb.port`</td><td> The server port to connect to. Defaults to `27017`.</td></tr>
-		<tr><td>`para.mongodb.database`</td><td> The database name that Para will use. Default is equal to `para.app_name`.</td></tr>
-		<tr><td>`para.mongodb.user`</td><td> The username with access to the database. Defaults to `""`.</td></tr>
-		<tr><td>`para.mongodb.password`</td><td> The password. Defaults to `""`.</td></tr>
-		<tr><td>`para.mongodb.ssl_enabled`</td><td> Enables the secure SSL/TLS transport. Defaults to `false`.</td></tr>
-		<tr><td>`para.mongodb.ssl_allow_all`</td><td> Allows any hostname by skipping the certificate verification. Defaults to `false`.</td></tr>
+		<tr><td>
+
+`para.mongodb.host`</td><td> The hostname of the MongoDB server. Defaults to `localhost`.</td></tr>
+		<tr><td>
+
+`para.mongodb.port`</td><td> The server port to connect to. Defaults to `27017`.</td></tr>
+		<tr><td>
+
+`para.mongodb.database`</td><td> The database name that Para will use. Default is equal to `para.app_name`.</td></tr>
+		<tr><td>
+
+`para.mongodb.user`</td><td> The username with access to the database. Defaults to `""`.</td></tr>
+		<tr><td>
+
+`para.mongodb.password`</td><td> The password. Defaults to `""`.</td></tr>
+		<tr><td>
+
+`para.mongodb.ssl_enabled`</td><td> Enables the secure SSL/TLS transport. Defaults to `false`.</td></tr>
+		<tr><td>
+
+`para.mongodb.ssl_allow_all`</td><td> Allows any hostname by skipping the certificate verification. Defaults to `false`.</td></tr>
 	</tbody>
 </table>
 

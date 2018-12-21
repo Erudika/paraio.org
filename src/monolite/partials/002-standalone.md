@@ -54,53 +54,42 @@ reverse-proxy server like NGINX in front of Para. As an alternative you can use 
 <pre><code>
 server_tokens off;
 add_header X-XSS-Protection "1; mode=block";
-add_header X-Content-Type-Options nosniff;
-
+add_header X-Content-Type-Options nosniff;<br>
 server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
-	server_name www.domain.com domain.com;
-
+	server_name www.domain.com domain.com;<br>
 	# Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
 	return 301 https://$host$request_uri;
-}
-
+}<br>
 server {
 	listen 443 ssl http2;
 	listen [::]:443 ssl http2;
-	server_name www.domain.com domain.com;
-
+	server_name www.domain.com domain.com;<br>
 	# certs sent to the client in SERVER HELLO are concatenated in ssl_certificate
 	ssl_certificate /path/to/signed_cert_plus_intermediates;
 	ssl_certificate_key /path/to/private_key;
 	ssl_session_timeout 1d;
 	ssl_session_cache shared:SSL:50m;
-	ssl_session_tickets off;
-
+	ssl_session_tickets off;<br>
 	# modern configuration. tweak to your needs.
 	ssl_protocols TLSv1.2;
 	ssl_ciphers 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256';
-	ssl_prefer_server_ciphers on;
-
+	ssl_prefer_server_ciphers on;<br>
 	# HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-	add_header Strict-Transport-Security max-age=15768000;
-
+	add_header Strict-Transport-Security max-age=15768000;<br>
 	# OCSP Stapling - fetch OCSP records from URL in ssl_certificate and cache them
 	ssl_stapling on;
-	ssl_stapling_verify on;
-
+	ssl_stapling_verify on;<br>
 	# Verify chain of trust of OCSP response using Root CA and Intermediate certs
-	ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;
-
+	ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;<br>
 	# Cloudflare DNS
-	resolver 1.1.1.1;
-
+	resolver 1.1.1.1;<br>
 	# Required for LE certificate enrollment using certbot
 	location '/.well-known/acme-challenge' {
 		default_type "text/plain";
 		root /var/www/html;
-	}
-
+	}<br>
 	location / {
 		proxy_pass http://localhost:8080;
 		proxy_set_header X-Real-IP $remote_addr;
@@ -109,7 +98,7 @@ server {
 		proxy_set_header Host $http_host;
 	}
 }
-</pre></code>
+</code></pre>
 </details>
 
 <br>

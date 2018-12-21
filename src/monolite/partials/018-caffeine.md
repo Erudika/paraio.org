@@ -20,8 +20,12 @@ These are the configuration properties for Caffeine:
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>`para.caffeine.cache_size`</td><td> Maximum size for the cache map. Defaults to `10000`.</td></tr>
-		<tr><td>`para.caffeine.evict_after_minutes`</td><td> Cache eviction policy - objects are evicted after this time. Defaults to `10` min.</td></tr>
+		<tr><td>
+
+`para.caffeine.cache_size`</td><td> Maximum size for the cache map. Defaults to `10000`.</td></tr>
+		<tr><td>
+
+`para.caffeine.evict_after_minutes`</td><td> Cache eviction policy - objects are evicted after this time. Defaults to `10` min.</td></tr>
 	</tbody>
 </table>
 

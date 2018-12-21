@@ -23,40 +23,74 @@ Adds a new validation constraint to the list of constraints for the given field 
 	</thead>
 	<tbody>
 		<tr>
-			<td>`required`</td><td>none</td>
+			<td>
+
+`required`</td><td>none</td>
 		</tr>
 		<tr>
-			<td>`email`</td><td>none</td>
+			<td>
+
+`email`</td><td>none</td>
 		</tr>
 		<tr>
-			<td>`false`</td><td>none</td>
+			<td>
+
+`false`</td><td>none</td>
 		</tr>
 		<tr>
-			<td>`true`</td><td>none</td>
+			<td>
+
+`true`</td><td>none</td>
 		</tr>
 		<tr>
-			<td>`past`</td><td>none</td>
+			<td>
+
+`past`</td><td>none</td>
 		</tr>
 		<tr>
-			<td>`present`</td><td>none</td>
+			<td>
+
+`present`</td><td>none</td>
 		</tr>
 		<tr>
-			<td>`url`</td><td>none</td>
+			<td>
+
+`url`</td><td>none</td>
 		</tr>
 		<tr>
-			<td>`min`</td><td>`{ "value": 123 }`</td>
+			<td>
+
+`min`</td><td>
+
+`{ "value": 123 }`</td>
 		</tr>
 		<tr>
-			<td>`max`</td><td>`{ "value": 123 }`</td>
+			<td>
+
+`max`</td><td>
+
+`{ "value": 123 }`</td>
 		</tr>
 		<tr>
-			<td>`size`</td><td>`{ "min": 123, "max": 456 }`</td>
+			<td>
+
+`size`</td><td>
+
+`{ "min": 123, "max": 456 }`</td>
 		</tr>
 		<tr>
-			<td>`digits`</td><td>`{ "integer": 4, "fraction": 2 }`</td>
+			<td>
+
+`digits`</td><td>
+
+`{ "integer": 4, "fraction": 2 }`</td>
 		</tr>
 		<tr>
-			<td>`pattern`</td><td>`{ "value": "^[a-zA-Z]+$" }`</td>
+			<td>
+
+`pattern`</td><td>
+
+`{ "value": "^[a-zA-Z]+$" }`</td>
 		</tr>
 	</tbody>
 </table>

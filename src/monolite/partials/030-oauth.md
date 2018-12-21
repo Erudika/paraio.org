@@ -25,15 +25,33 @@ These are the configuration options for this filter:
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>`para.security.oauth.profile_url`</td><td>API endpoint for user profile. </td></tr>
-		<tr><td>`para.security.oauth.token_url`</td><td>The URL from which the access token will be requested (via `POST`). </td></tr>
-		<tr><td>`para.security.oauth.scope`</td><td>The `scope` parameter of the access token request payload.</td></tr>
-		<tr><td>`para.security.oauth.accept_header`</td><td>The `Accept` header - if blank, the header won't be set. (default is blank). </td></tr>
-		<tr><td>`para.security.oauth.parameters.id`</td><td>The `id` parameter for requesting the user profile (default is `sub`). </td></tr>
-		<tr><td>`para.security.oauth.parameters.picture`</td><td>The `picture` parameter for requesting the user profile (default is `picture`). </td></tr>
-		<tr><td>`para.security.oauth.parameters.email`</td><td>The `email` parameter for requesting the user profile (default is `email`). </td></tr>
-		<tr><td>`para.security.oauth.parameters.name`</td><td>The `name` parameter for requesting the user profile (default is `name`). </td></tr>
-		<tr><td>`para.security.oauth.domain`</td><td> This domain name is used if a valid email can't be obtained (optional).</td></tr>
+		<tr><td>
+
+`para.security.oauth.profile_url`</td><td>API endpoint for user profile. </td></tr>
+		<tr><td>
+
+`para.security.oauth.token_url`</td><td>The URL from which the access token will be requested (via `POST`). </td></tr>
+		<tr><td>
+
+`para.security.oauth.scope`</td><td>The `scope` parameter of the access token request payload.</td></tr>
+		<tr><td>
+
+`para.security.oauth.accept_header`</td><td>The `Accept` header - if blank, the header won't be set. (default is blank). </td></tr>
+		<tr><td>
+
+`para.security.oauth.parameters.id`</td><td>The `id` parameter for requesting the user profile (default is `sub`). </td></tr>
+		<tr><td>
+
+`para.security.oauth.parameters.picture`</td><td>The `picture` parameter for requesting the user profile (default is `picture`). </td></tr>
+		<tr><td>
+
+`para.security.oauth.parameters.email`</td><td>The `email` parameter for requesting the user profile (default is `email`). </td></tr>
+		<tr><td>
+
+`para.security.oauth.parameters.name`</td><td>The `name` parameter for requesting the user profile (default is `name`). </td></tr>
+		<tr><td>
+
+`para.security.oauth.domain`</td><td> This domain name is used if a valid email can't be obtained (optional).</td></tr>
 	</tbody>
 </table>
 

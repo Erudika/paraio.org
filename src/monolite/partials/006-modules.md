@@ -49,10 +49,10 @@ ParaServer.initialize(Modules.override(ParaServer.getCoreModules()).with(new Mod
 Also, you could start Para with the default modules like this:
 
 ```java
-// Initialize Para and call each `listener.onInitialize()`
+// Initialize Para and call each listener.onInitialize()
 ParaServer.initialize();
 
-// Finally, destroy all resources by calling each `listener.onDestroy()`
+// Finally, destroy all resources by calling each listener.onDestroy()
 ParaServer.destroy();
 ```
 
@@ -65,7 +65,7 @@ There are two additional methods `Para.initialize()` and `Para.destroy()` which 
 difference between these and the ones above is:
 
 - `Para.initialize()` - invokes all registered `InitializeListener` instances and prints out logo to console;
-- `ParaServer.initialize() - loads all Guice modules, binds them and injects concrete types into each
+- `ParaServer.initialize()` - loads all Guice modules, binds them and injects concrete types into each
 `InitializeListener`, then calls `Para.initialize()`;
 
 - `Para.destroy()` - invokes all registered `DestroyListener` instances and prints out a log message;

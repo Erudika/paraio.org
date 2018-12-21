@@ -22,33 +22,81 @@ There are several configuration properties for Elasticsearch (these go in your `
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>`para.cluster_name`</td><td> Elasticsearch cluster name. Default is `para-prod` when running in production.</td></tr>
-		<tr><td>`para.es.use_nested_custom_fields`</td><td> Switches between "normal" and "nested" indexing modes. Defaults to `false`.</td></tr>
-		<tr><td>`para.es.async_enabled`</td><td> Asynchronous operation when indexing/unindexing. Defaults to `false`.</td></tr>
-		<tr><td>`para.es.shards`</td><td> The number of shards per index. Used when creating an new index. Default is `5`.</td></tr>
-		<tr><td>`para.es.replicas`</td><td> The number of copies of an index. Default is `0`.</td></tr>
-		<tr><td>`para.es.auto_expand_replicas`</td><td> Automatically make a replica copy of the index to the number of nodes specified. Default is `0-1`.</td></tr>
-		<tr><td>`para.es.use_transportclient`</td><td> Use `TransportClient` to connect to a remote ES node. If `false`, the REST client will be used. Default is `false`.</td></tr>
-		<tr><td>`para.es.restclient_scheme`</td><td> Scheme (for REST client). Default is `https` in production, `http` otherwise.</td></tr>
-		<tr><td>`para.es.restclient_host`</td><td> ES server host (for REST client). Default is `localhost`.</td></tr>
-		<tr><td>`para.es.restclient_port`</td><td> ES server port (for REST client). Default is `9200`.</td></tr>
-		<tr><td>`para.es.transportclient_host`</td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is `localhost`.</td></tr>
-		<tr><td>`para.es.transportclient_port`</td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is `9300`.</td></tr>
-		<tr><td>`para.es.fail_on_indexing_errors`</td><td> If enabled, throws an exception if an error occurs during indexing operations. This will cascade back to clients as HTTP `500`. Default is `false`.</td></tr>
+		<tr><td>
 
-		<tr><td>`para.es.bulk.size_limit_mb`</td><td> `BulkProcessor` flush threshold in terms of megabytes. Default is `5`.</td></tr>
-		<tr><td>`para.es.bulk.action_limit`</td><td> `BulkProcessor` flush threshold in terms of batch size. Default is `1000`.</td></tr>
-		<tr><td>`para.es.bulk.concurrent_requests`</td><td> `BulkProcessor` concurrent requests (`0` means synchronous execution). Default is `1`.</td></tr>
-		<tr><td>`para.es.bulk.flush_interval_ms`</td><td> `BulkProcessor` flush interval in milliseconds. Default is `5000`.</td></tr>
-		<tr><td>`para.es.bulk.backoff_initial_delay_ms`</td><td> `BulkProcessor` inital backoff delay in milliseconds. Default is `50`.</td></tr>
-		<tr><td>`para.es.bulk.max_num_retries`</td><td> `BulkProcessor` number of retries. Default is `8`.</td></tr>
-		<tr><td>`para.es.bulk.flush_immediately`</td><td> If set to `true`, `BulkProcessor` will flush immediately on each request, concurrently (in another thread). Default is `true`.</td></tr>
+`para.cluster_name`</td><td> Elasticsearch cluster name. Default is `para-prod` when running in production.</td></tr>
+		<tr><td>
 
-		<tr><td>`para.es.sign_requests_to_aws`</td><td> If enabled, requests will be signed using the AWS V4 algorithm. Default is `false`.</td></tr>
-		<tr><td>`para.es.aws_region`</td><td> Used only for the purposes of signing requests to AWS. Default is `null`.</td></tr>
-		<tr><td>`para.es.proxy_enabled`</td><td> Enables the Elasticsearch proxy endpoint. Default is `false`.</td></tr>
-		<tr><td>`para.es.proxy_path`</td><td> The path to the proxy endpoint. Default is `_elasticsearch`.</td></tr>
-		<tr><td>`para.es.root_index_sharing_enabled`</td><td> Enable/disable root index sharing by child apps with `isSharingIndex` set to `true`. Default is `false`.</td></tr>
+`para.es.use_nested_custom_fields`</td><td> Switches between "normal" and "nested" indexing modes. Defaults to `false`.</td></tr>
+		<tr><td>
+
+`para.es.async_enabled`</td><td> Asynchronous operation when indexing/unindexing. Defaults to `false`.</td></tr>
+		<tr><td>
+
+`para.es.shards`</td><td> The number of shards per index. Used when creating an new index. Default is `5`.</td></tr>
+		<tr><td>
+
+`para.es.replicas`</td><td> The number of copies of an index. Default is `0`.</td></tr>
+		<tr><td>
+
+`para.es.auto_expand_replicas`</td><td> Automatically make a replica copy of the index to the number of nodes specified. Default is `0-1`.</td></tr>
+		<tr><td>
+
+`para.es.use_transportclient`</td><td> Use `TransportClient` to connect to a remote ES node. If `false`, the REST client will be used. Default is `false`.</td></tr>
+		<tr><td>
+
+`para.es.restclient_scheme`</td><td> Scheme (for REST client). Default is `https` in production, `http` otherwise.</td></tr>
+		<tr><td>
+
+`para.es.restclient_host`</td><td> ES server host (for REST client). Default is `localhost`.</td></tr>
+		<tr><td>
+
+`para.es.restclient_port`</td><td> ES server port (for REST client). Default is `9200`.</td></tr>
+		<tr><td>
+
+`para.es.transportclient_host`</td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is `localhost`.</td></tr>
+		<tr><td>
+
+`para.es.transportclient_port`</td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is `9300`.</td></tr>
+		<tr><td>
+
+`para.es.fail_on_indexing_errors`</td><td> If enabled, throws an exception if an error occurs during indexing operations. This will cascade back to clients as HTTP `500`. Default is `false`.</td></tr>
+		<tr><td>
+
+`para.es.bulk.size_limit_mb`</td><td> `BulkProcessor` flush threshold in terms of megabytes. Default is `5`.</td></tr>
+		<tr><td>
+
+`para.es.bulk.action_limit`</td><td> `BulkProcessor` flush threshold in terms of batch size. Default is `1000`.</td></tr>
+		<tr><td>
+
+`para.es.bulk.concurrent_requests`</td><td> `BulkProcessor` concurrent requests (`0` means synchronous execution). Default is `1`.</td></tr>
+		<tr><td>
+
+`para.es.bulk.flush_interval_ms`</td><td> `BulkProcessor` flush interval in milliseconds. Default is `5000`.</td></tr>
+		<tr><td>
+
+`para.es.bulk.backoff_initial_delay_ms`</td><td> `BulkProcessor` inital backoff delay in milliseconds. Default is `50`.</td></tr>
+		<tr><td>
+
+`para.es.bulk.max_num_retries`</td><td> `BulkProcessor` number of retries. Default is `8`.</td></tr>
+		<tr><td>
+
+`para.es.bulk.flush_immediately`</td><td> If set to `true`, `BulkProcessor` will flush immediately on each request, concurrently (in another thread). Default is `true`.</td></tr>
+		<tr><td>
+
+`para.es.sign_requests_to_aws`</td><td> If enabled, requests will be signed using the AWS V4 algorithm. Default is `false`.</td></tr>
+		<tr><td>
+
+`para.es.aws_region`</td><td> Used only for the purposes of signing requests to AWS. Default is `null`.</td></tr>
+		<tr><td>
+
+`para.es.proxy_enabled`</td><td> Enables the Elasticsearch proxy endpoint. Default is `false`.</td></tr>
+		<tr><td>
+
+`para.es.proxy_path`</td><td> The path to the proxy endpoint. Default is `_elasticsearch`.</td></tr>
+		<tr><td>
+
+`para.es.root_index_sharing_enabled`</td><td> Enable/disable root index sharing by child apps with `isSharingIndex` set to `true`. Default is `false`.</td></tr>
 	</tbody>
 </table>
 

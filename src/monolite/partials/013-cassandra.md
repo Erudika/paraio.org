@@ -18,13 +18,27 @@ There are several configuration properties for Cassandra (these go in your `appl
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>`para.cassandra.hosts`</td><td> Comma-separated server hostnames (contact points). Defaults to `localhost`.</td></tr>
-		<tr><td>`para.cassandra.port`</td><td> The server port to connect to. Defaults to `9042`.</td></tr>
-		<tr><td>`para.cassandra.keyspace`</td><td> The keyspace name that Para will use. Default is equal to `para.app_name`.</td></tr>
-		<tr><td>`para.cassandra.user`</td><td> The username with access to the database. Defaults to `""`.</td></tr>
-		<tr><td>`para.cassandra.password`</td><td> The password. Defaults to `""`.</td></tr>
-		<tr><td>`para.cassandra.replication_factor`</td><td> Replication factor for the keyspace. Defaults to `1`.</td></tr>
-		<tr><td>`para.cassandra.ssl_enabled`</td><td> Enables the secure SSL/TLS transport. Defaults to `false`.</td></tr>
+		<tr><td>
+
+`para.cassandra.hosts`</td><td> Comma-separated server hostnames (contact points). Defaults to `localhost`.</td></tr>
+		<tr><td>
+
+`para.cassandra.port`</td><td> The server port to connect to. Defaults to `9042`.</td></tr>
+		<tr><td>
+
+`para.cassandra.keyspace`</td><td> The keyspace name that Para will use. Default is equal to `para.app_name`.</td></tr>
+		<tr><td>
+
+`para.cassandra.user`</td><td> The username with access to the database. Defaults to `""`.</td></tr>
+		<tr><td>
+
+`para.cassandra.password`</td><td> The password. Defaults to `""`.</td></tr>
+		<tr><td>
+
+`para.cassandra.replication_factor`</td><td> Replication factor for the keyspace. Defaults to `1`.</td></tr>
+		<tr><td>
+
+`para.cassandra.ssl_enabled`</td><td> Enables the secure SSL/TLS transport. Defaults to `false`.</td></tr>
 	</tbody>
 </table>
 

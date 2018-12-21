@@ -39,56 +39,101 @@ authenticate with your SAML IDP (listed in the first rows below).
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>`para.security.saml.sp.entityid`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.sp.entityid`</td><td>blank</td></tr>
 		<tr><td> The SP `entityId`, a URL in the form of `https://paraio.com/saml_auth/{appid}`. </td></tr>
-		<tr><td>`para.security.saml.sp.assertion_consumer_service.url`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.sp.assertion_consumer_service.url`</td><td>blank</td></tr>
 		<tr><td> The URL where users will be redirected back to, from the IDP. Same value as the `entityId` above.</td></tr>
-		<tr><td>`para.security.saml.sp.nameidformat`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.sp.nameidformat`</td><td>blank</td></tr>
 		<tr><td> Specifies constraints on the name identifier to be used to represent the requested subject.</td></tr>
-		<tr><td>`para.security.saml.sp.x509cert`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.sp.x509cert`</td><td>blank</td></tr>
 		<tr><td> The X509 certificate for the SP, encoded as Base64.</td></tr>
-		<tr><td>`para.security.saml.sp.privatekey`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.sp.privatekey`</td><td>blank</td></tr>
 		<tr><td> The private key for the X509 certificate, in PKCS#8 format, encoded as Base64.</td></tr>
+		<tr><td>
 
-		<tr><td>`para.security.saml.idp.entityid`</td><td>blank</td></tr>
+`para.security.saml.idp.entityid`</td><td>blank</td></tr>
 		<tr><td> The IDP `entityId`, a URL in the form of `https://idphost/idp/metadata.xml`</td></tr>
-		<tr><td>`para.security.saml.idp.single_sign_on_service.url`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.idp.single_sign_on_service.url`</td><td>blank</td></tr>
 		<tr><td> SSO endpoint URL of the IdP.</td></tr>
-		<tr><td>`para.security.saml.idp.x509cert`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.idp.x509cert`</td><td>blank</td></tr>
 		<tr><td> The x509 certificate for the IDP, encoded as Base64.</td></tr>
-		<tr><td>`para.security.saml.idp.metadata_url`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.idp.metadata_url`</td><td>blank</td></tr>
 		<tr><td> The location of IDP's metadata document. Para will fetch it and the IDP will be auto-configured.</td></tr>
+		<tr><td>
 
-		<tr><td>`para.security.saml.security.authnrequest_signed`</td><td>false</td></tr>
+`para.security.saml.security.authnrequest_signed`</td><td>false</td></tr>
 		<tr><td> Enables/disables signing of auth requests to the IDP.</td></tr>
-		<tr><td>`para.security.saml.security.want_messages_signed`</td><td>false</td></tr>
-		<tr><td> Enables/disables signing of messages to the IDP.</td></tr>
-		<tr><td>`para.security.saml.security.want_assertions_signed`</td><td>false</td></tr>
-		<tr><td> Enables/disables the requirement for signed assertions.</td></tr>
-		<tr><td>`para.security.saml.security.want_assertions_encrypted`</td><td>false</td></tr>
-		<tr><td> Enables/disables the requirement for encrypted assertions.</td></tr>
-		<tr><td>`para.security.saml.security.want_nameid_encrypted`</td><td>false</td></tr>
-		<tr><td> Enables/disables the requirement for encrypted `nameId`</td></tr>
-		<tr><td>`para.security.saml.security.sign_metadata`</td><td>false</td></tr>
-		<tr><td> Enables/disables signing of SP's metadata.</td></tr>
-		<tr><td>`para.security.saml.security.want_xml_validation`</td><td>true</td></tr>
-		<tr><td> Enables/disables XML validation by the SP.</td></tr>
-		<tr><td>`para.security.saml.security.signature_algorithm`</td><td>blank</td></tr>
-		<tr><td> Algorithm that the SP will use in the signing process.</td></tr>
+		<tr><td>
 
-		<tr><td>`para.security.saml.attributes.id`</td><td>blank</td></tr>
+`para.security.saml.security.want_messages_signed`</td><td>false</td></tr>
+		<tr><td> Enables/disables signing of messages to the IDP.</td></tr>
+		<tr><td>
+
+`para.security.saml.security.want_assertions_signed`</td><td>false</td></tr>
+		<tr><td> Enables/disables the requirement for signed assertions.</td></tr>
+		<tr><td>
+
+`para.security.saml.security.want_assertions_encrypted`</td><td>false</td></tr>
+		<tr><td> Enables/disables the requirement for encrypted assertions.</td></tr>
+		<tr><td>
+
+`para.security.saml.security.want_nameid_encrypted`</td><td>false</td></tr>
+		<tr><td> Enables/disables the requirement for encrypted `nameId`</td></tr>
+		<tr><td>
+
+`para.security.saml.security.sign_metadata`</td><td>false</td></tr>
+		<tr><td> Enables/disables signing of SP's metadata.</td></tr>
+		<tr><td>
+
+`para.security.saml.security.want_xml_validation`</td><td>true</td></tr>
+		<tr><td> Enables/disables XML validation by the SP.</td></tr>
+		<tr><td>
+
+`para.security.saml.security.signature_algorithm`</td><td>blank</td></tr>
+		<tr><td> Algorithm that the SP will use in the signing process.</td></tr>
+		<tr><td>
+
+`para.security.saml.attributes.id`</td><td>blank</td></tr>
 		<tr><td> Mapping key for the `id` attribute.</td></tr>
-		<tr><td>`para.security.saml.attributes.picture`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.attributes.picture`</td><td>blank</td></tr>
 		<tr><td> Mapping key for the `picture` attribute.</td></tr>
-		<tr><td>`para.security.saml.attributes.email`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.attributes.email`</td><td>blank</td></tr>
 		<tr><td> Mapping key for the `email` attribute.</td></tr>
-		<tr><td>`para.security.saml.attributes.name`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.attributes.name`</td><td>blank</td></tr>
 		<tr><td> Mapping key for the `name` attribute.</td></tr>
-		<tr><td>`para.security.saml.attributes.firstname`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.attributes.firstname`</td><td>blank</td></tr>
 		<tr><td> Mapping key for the `firstname` attribute.</td></tr>
-		<tr><td>`para.security.saml.attributes.lastname`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.attributes.lastname`</td><td>blank</td></tr>
 		<tr><td> Mapping key for the `lastname` attribute.</td></tr>
-		<tr><td>`para.security.saml.domain`</td><td>blank</td></tr>
+		<tr><td>
+
+`para.security.saml.domain`</td><td>blank</td></tr>
 		<tr><td> Domain name for users who don't have a valid email.</td></tr>
 	</tbody>
 </table>

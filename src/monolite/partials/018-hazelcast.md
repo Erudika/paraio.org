@@ -21,27 +21,71 @@ These are the configuration properties for Hazelcast:
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>`para.hc.async_enabled`</td><td>`false`</td></tr>
+		<tr><td>
+
+`para.hc.async_enabled`</td><td>
+
+`false`</td></tr>
 		<tr><td>Asynchronous operation when putting objects in cache.</td></tr>
-		<tr><td>`para.hc.eviction_policy`</td><td>`LRU`</td></tr>
+		<tr><td>
+
+`para.hc.eviction_policy`</td><td>
+
+`LRU`</td></tr>
 		<tr><td>Cache eviction policy - `LRU` or `LFU`. </td></tr>
-		<tr><td>`para.hc.eviction_percentage`</td><td>`25`</td></tr>
+		<tr><td>
+
+`para.hc.eviction_percentage`</td><td>
+
+`25`</td></tr>
 		<tr><td>Cache eviction percentage. </td></tr>
-		<tr><td>`para.hc.ttl_seconds`</td><td>`3600`</td></tr>
+		<tr><td>
+
+`para.hc.ttl_seconds`</td><td>
+
+`3600`</td></tr>
 		<tr><td>'Time To Live' for cached objects in seconds. </td></tr>
-		<tr><td>`para.hc.max_size`</td><td>`25`</td></tr>
+		<tr><td>
+
+`para.hc.max_size`</td><td>
+
+`25`</td></tr>
 		<tr><td>Cache size as a percentage of used heap. </td></tr>
-		<tr><td>`para.hc.jmx_enabled`</td><td>`true`</td></tr>
+		<tr><td>
+
+`para.hc.jmx_enabled`</td><td>
+
+`true`</td></tr>
 		<tr><td>Enables JMX reporting. </td></tr>
-		<tr><td>`para.hc.ec2_discovery_enabled`</td><td>`true`</td></tr>
+		<tr><td>
+
+`para.hc.ec2_discovery_enabled`</td><td>
+
+`true`</td></tr>
 		<tr><td>Enables AWS EC2 auto discovery. </td></tr>
-		<tr><td>`para.hc.discovery_group`</td><td>`hazelcast`</td></tr>
+		<tr><td>
+
+`para.hc.discovery_group`</td><td>
+
+`hazelcast`</td></tr>
 		<tr><td>Security group for cloud discovery of nodes. </td></tr>
-		<tr><td>`para.hc.password`</td><td>`hcpasswd`</td></tr>
+		<tr><td>
+
+`para.hc.password`</td><td>
+
+`hcpasswd`</td></tr>
 		<tr><td>The Hazelcast cluster password. </td></tr>
-		<tr><td>`para.hc.mancenter_enabled`</td><td>`!IN_PRODUCTION`</td></tr>
+		<tr><td>
+
+`para.hc.mancenter_enabled`</td><td>
+
+`!IN_PRODUCTION`</td></tr>
 		<tr><td>Enables the Hazelcast Management Center. </td></tr>
-		<tr><td>`para.hc.mancenter_url`</td><td>`http://localhost:8001/mancenter`</td></tr>
+		<tr><td>
+
+`para.hc.mancenter_url`</td><td>
+
+`http://localhost:8001/mancenter`</td></tr>
 		<tr><td>The URL for the Management Center server. </td></tr>
 	</tbody>
 </table>
