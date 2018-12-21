@@ -1043,7 +1043,9 @@ difference between these and the ones above is:</p>
 values for it - <code>embedded</code>, <code>development</code>, <code>production</code>, but you can define more.</p>
 <p>When you are in <code>embedded</code> mode Para will use <strong>H2</strong> as a database and pure <strong>Lucene</strong> as a search engine.
 This is the simplest way to get started with Para as you don’t need to configure anything.</p>
+<blockquote>
 <p><strong>Important:</strong> Embedded mode is recommended for <em>local development only</em>.</p>
+</blockquote>
 <p>When you are in <code>development</code> mode Para will try to connect to a DynamoDB server running on <code>localhost</code>. It will also
 try to connect to a local Elasticsearch server. This mode was created so that you can keep your DB and search
 servers running in the background while developing your application rather than loading them on each deploy. This will
