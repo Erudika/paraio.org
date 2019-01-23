@@ -71,12 +71,6 @@ These are the configuration properties for Hazelcast:
 		<tr><td>Security group for cloud discovery of nodes. </td></tr>
 		<tr><td>
 
-`para.hc.password`</td><td>
-
-`hcpasswd`</td></tr>
-		<tr><td>The Hazelcast cluster password. </td></tr>
-		<tr><td>
-
 `para.hc.mancenter_enabled`</td><td>
 
 `!IN_PRODUCTION`</td></tr>
