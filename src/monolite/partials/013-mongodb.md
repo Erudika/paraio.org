@@ -20,6 +20,11 @@ There are several configuration properties for MongoDB (these go in your `applic
 	<tbody>
 		<tr><td>
 
+`para.mongodb.uri`</td><td> The client URI string. See
+[MongoClientURI](https://mongodb.github.io/mongo-java-driver/3.4/javadoc/com/mongodb/MongoClientURI.html). Overrides
+`host`, `port`, `user` and `password` if set. Defaults to blank.</td></tr>
+		<tr><td>
+
 `para.mongodb.host`</td><td> The hostname of the MongoDB server. Defaults to `localhost`.</td></tr>
 		<tr><td>
 
@@ -29,10 +34,10 @@ There are several configuration properties for MongoDB (these go in your `applic
 `para.mongodb.database`</td><td> The database name that Para will use. Default is equal to `para.app_name`.</td></tr>
 		<tr><td>
 
-`para.mongodb.user`</td><td> The username with access to the database. Defaults to `""`.</td></tr>
+`para.mongodb.user`</td><td> The username with access to the database. Defaults to blank.</td></tr>
 		<tr><td>
 
-`para.mongodb.password`</td><td> The password. Defaults to `""`.</td></tr>
+`para.mongodb.password`</td><td> The password. Defaults to blank.</td></tr>
 		<tr><td>
 
 `para.mongodb.ssl_enabled`</td><td> Enables the secure SSL/TLS transport. Defaults to `false`.</td></tr>
