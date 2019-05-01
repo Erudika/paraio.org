@@ -703,6 +703,9 @@ This is important for securing your server because this secret key is used for s
 <p><code>para</code></td></tr>
         <tr><td>The name of the root app - the main app which is used for initializing Para. </td><td></td></tr>
         <tr><td></p>
+<p><code>para.context_path</code>                </td><td>-</td></tr>
+        <tr><td>Context path for the server, relative to the root <code>/</code>. By default, Para is deployed to the root context path under <code>/</code>. </td><td></td></tr>
+        <tr><td></p>
 <p><code>para.app_secret_key</code>                </td><td>md5(‘paraseckey’)</td></tr>
         <tr><td>Para secret key. Set this to a long secure random string. Used for salting other secrets and tokens. </td><td></td></tr>
         <tr><td></p>
@@ -1955,11 +1958,11 @@ These methods are:</p>
 			<article class=" img-rounded">
 					<h2>Elasticsearch</h2>
 				<section class="body  img-rounded">
-					<p><strong>Now part of the <a href="https://github.com/erudika/para-search-elasticsearch">para-search-elasticsearch</a> plugin (v1.25).</strong></p>
-<p>Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v6+ and
-uses either the TCP <code>TransportClient</code> or the high level REST client (default).</p>
+					<p><strong>Now part of the <a href="https://github.com/erudika/para-search-elasticsearch">para-search-elasticsearch</a> plugin.</strong></p>
+<p>Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v7+ and
+uses the high level REST client (default).</p>
 <blockquote>
-<p>Use of the transport client is no longer recommended as it will be deprecated in Elasticsearch 7.x.</p>
+<p>Support for the transport client has been removed as it has been deprecated in Elasticsearch 7.0.</p>
 </blockquote>
 <p>The <code>Search</code> interface is implemented in the <code>ElasticSearch</code> class.</p>
 <p>There are several configuration properties for Elasticsearch (these go in your <code>application.conf</code> file):</p>
@@ -1985,17 +1988,17 @@ uses either the TCP <code>TransportClient</code> or the high level REST client (
         <tr><td></p>
 <p><code>para.es.auto_expand_replicas</code></td><td> Automatically make a replica copy of the index to the number of nodes specified. Default is <code>0-1</code>.</td></tr>
         <tr><td></p>
-<p><code>para.es.use_transportclient</code></td><td> Use <code>TransportClient</code> to connect to a remote ES node. If <code>false</code>, the REST client will be used. Default is <code>false</code>.</td></tr>
-        <tr><td></p>
 <p><code>para.es.restclient_scheme</code></td><td> Scheme (for REST client). Default is <code>https</code> in production, <code>http</code> otherwise.</td></tr>
         <tr><td></p>
 <p><code>para.es.restclient_host</code></td><td> ES server host (for REST client). Default is <code>localhost</code>.</td></tr>
         <tr><td></p>
 <p><code>para.es.restclient_port</code></td><td> ES server port (for REST client). Default is <code>9200</code>.</td></tr>
         <tr><td></p>
-<p><code>para.es.transportclient_host</code></td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is <code>localhost</code>.</td></tr>
+<p><code>para.es.transportclient_host</code></td><td> <strong>DEPRECATED</strong> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is <code>localhost</code>.</td></tr>
         <tr><td></p>
-<p><code>para.es.transportclient_port</code></td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is <code>9300</code>.</td></tr>
+<p><code>para.es.transportclient_port</code></td><td> <strong>DEPRECATED</strong> The port of the Elasticsearch instance or cluster head node to connect to. Default is <code>9300</code>.</td></tr>
+        <tr><td></p>
+<p><code>para.es.track_total_hits</code></td><td> If <code>true</code>, total hits are always counted accurately (slower queries), otherwise they are counted accurately up to 10000 documents (default, faster queries). If set to an integer, the results are counted accurately up to that integer. Default is blank.</td></tr>
         <tr><td></p>
 <p><code>para.es.fail_on_indexing_errors</code></td><td> If enabled, throws an exception if an error occurs during indexing operations. This will cascade back to clients as HTTP <code>500</code>. Default is <code>false</code>.</td></tr>
         <tr><td></p>
@@ -2032,7 +2035,7 @@ uses either the TCP <code>TransportClient</code> or the high level REST client (
   <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>{version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
 <p><strong>Note:</strong> There’s a fork of the plugin which is compatible only with the Elasticsearch 5.x branch and it’s missing
-some of the latest features like AWS Elasticsearch support and it uses only the legacy transport client.
+some of the latest features like AWS Elasticsearch support and it uses <strong>only the legacy transport client</strong>.
 The project’s repository is at <a href="https://github.com/erudika/para-search-elasticsearch-v5">Erudika/para-search-elasticsearch-v5</a>.
 The Maven coordinates for the legacy plugin are:</p>
 <pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
@@ -2065,7 +2068,7 @@ synchronous indexing, the burden falls on the client application to try the inde
 BulkProcessor, however, offers a useful feature to automatically retry indexing requests with exponential
 backoff between retries. If the index request fails with a <code>EsRejectedExecutionException</code>, the request
 will be retried up to <code>para.es.bulk.max_num_retries</code> times. Even if your use case demands a high degree
-of confidence with respect to data consistency between your DAO and Search, it’s still recommended to use
+of confidence with respect to data consistency between your database and index, it’s still recommended to use
 asynchronous indexing with retries enabled. If you’d prefer to use asynchronous indexing but have the BulkProcessor
 flushed upon every invocation of index/unindex/indexAll/unindexAll, simply enabled <code>para.es.bulk.flush_immediately</code>.
 When this option is enabled, the BulkProcessor’s flush method will be called immediately after adding the documents
@@ -5486,7 +5489,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>01 April 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>02 May 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2019

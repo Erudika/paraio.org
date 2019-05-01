@@ -75,6 +75,10 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>The name of the root app - the main app which is used for initializing Para. </td><td></td></tr>
 		<tr><td>
 
+`para.context_path`				</td><td>-</td></tr>
+		<tr><td>Context path for the server, relative to the root `/`. By default, Para is deployed to the root context path under `/`. </td><td></td></tr>
+		<tr><td>
+
 `para.app_secret_key`				</td><td>md5('paraseckey')</td></tr>
 		<tr><td>Para secret key. Set this to a long secure random string. Used for salting other secrets and tokens. </td><td></td></tr>
 		<tr><td>

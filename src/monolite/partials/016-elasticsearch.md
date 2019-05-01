@@ -3,12 +3,12 @@ title: Elasticsearch
 category: Search
 ---
 
-**Now part of the [para-search-elasticsearch](https://github.com/erudika/para-search-elasticsearch) plugin (v1.25).**
+**Now part of the [para-search-elasticsearch](https://github.com/erudika/para-search-elasticsearch) plugin.**
 
-Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v6+ and
-uses either the TCP `TransportClient` or the high level REST client (default).
+Elasticsearch is the right choice as the search engine for Para in production. It supports Elasticsearch v7+ and
+uses the high level REST client (default).
 
-> Use of the transport client is no longer recommended as it will be deprecated in Elasticsearch 7.x.
+> Support for the transport client has been removed as it has been deprecated in Elasticsearch 7.0.
 
 The `Search` interface is implemented in the `ElasticSearch` class.
 
@@ -42,9 +42,6 @@ There are several configuration properties for Elasticsearch (these go in your `
 `para.es.auto_expand_replicas`</td><td> Automatically make a replica copy of the index to the number of nodes specified. Default is `0-1`.</td></tr>
 		<tr><td>
 
-`para.es.use_transportclient`</td><td> Use `TransportClient` to connect to a remote ES node. If `false`, the REST client will be used. Default is `false`.</td></tr>
-		<tr><td>
-
 `para.es.restclient_scheme`</td><td> Scheme (for REST client). Default is `https` in production, `http` otherwise.</td></tr>
 		<tr><td>
 
@@ -54,10 +51,13 @@ There are several configuration properties for Elasticsearch (these go in your `
 `para.es.restclient_port`</td><td> ES server port (for REST client). Default is `9200`.</td></tr>
 		<tr><td>
 
-`para.es.transportclient_host`</td><td> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is `localhost`.</td></tr>
+`para.es.transportclient_host`</td><td> **DEPRECATED** The hostname of the Elasticsearch instance or cluster head node to connect to. Default is `localhost`.</td></tr>
 		<tr><td>
 
-`para.es.transportclient_port`</td><td> The port of the Elasticsearch instance or cluster head node to connect to. Default is `9300`.</td></tr>
+`para.es.transportclient_port`</td><td> **DEPRECATED** The port of the Elasticsearch instance or cluster head node to connect to. Default is `9300`.</td></tr>
+		<tr><td>
+
+`para.es.track_total_hits`</td><td> If `true`, total hits are always counted accurately (slower queries), otherwise they are counted accurately up to 10000 documents (default, faster queries). If set to an integer, the results are counted accurately up to that integer. Default is blank.</td></tr>
 		<tr><td>
 
 `para.es.fail_on_indexing_errors`</td><td> If enabled, throws an exception if an error occurs during indexing operations. This will cascade back to clients as HTTP `500`. Default is `false`.</td></tr>
@@ -111,7 +111,7 @@ The plugin is on Maven Central. Here's the Maven snippet to include in your `pom
 ```
 
 **Note:** There's a fork of the plugin which is compatible only with the Elasticsearch 5.x branch and it's missing
-some of the latest features like AWS Elasticsearch support and it uses only the legacy transport client.
+some of the latest features like AWS Elasticsearch support and it uses **only the legacy transport client**.
 The project's repository is at [Erudika/para-search-elasticsearch-v5](https://github.com/erudika/para-search-elasticsearch-v5).
 The Maven coordinates for the legacy plugin are:
 
@@ -156,7 +156,7 @@ synchronous indexing, the burden falls on the client application to try the inde
 BulkProcessor, however, offers a useful feature to automatically retry indexing requests with exponential
 backoff between retries. If the index request fails with a `EsRejectedExecutionException`, the request
 will be retried up to `para.es.bulk.max_num_retries` times. Even if your use case demands a high degree
-of confidence with respect to data consistency between your DAO and Search, it's still recommended to use
+of confidence with respect to data consistency between your database and index, it's still recommended to use
 asynchronous indexing with retries enabled. If you'd prefer to use asynchronous indexing but have the BulkProcessor
 flushed upon every invocation of index/unindex/indexAll/unindexAll, simply enabled `para.es.bulk.flush_immediately`.
 When this option is enabled, the BulkProcessor's flush method will be called immediately after adding the documents
