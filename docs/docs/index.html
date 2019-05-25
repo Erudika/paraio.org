@@ -3261,7 +3261,8 @@ Example: <code>GET /ldap_auth?username=bob&amp;password=secret</code></p>
         <tr><td>The base DN, aka domain.</td></tr>
         <tr><td></p>
 <p><code>para.security.ldap.bind_dn</code></td><td>-</td></tr>
-        <tr><td>The initial bind DN for a user with search privileges.</td></tr>
+        <tr><td>The initial bind DN for a user with search privileges. The value of this property cannot contain whitespaces.
+Those will automatically be escaped with <code>%20</code>.</td></tr>
         <tr><td></p>
 <p><code>para.security.ldap.bind_pass</code></td><td>-</td></tr>
         <tr><td>The password for a user with search privileges.</td></tr>
@@ -3271,11 +3272,13 @@ Example: <code>GET /ldap_auth?username=bob&amp;password=secret</code></p>
         <tr><td></p>
 <p><code>para.security.ldap.user_search_filter</code></td><td></p>
 <p><code>(cn={0})</code></td></tr>
-        <tr><td>Search filter for user searches.</td></tr>
+        <tr><td>Search filter for user searches. This is combined with <code>user_search_base</code> to form the full DN path to a person in the directory.
+A user search is performed when the person cannot be found directly using <code>user_dn_pattern</code> + <code>base_dn</code>.</td></tr>
         <tr><td></p>
 <p><code>para.security.ldap.user_dn_pattern</code></td><td></p>
-<p><code>uid={0},ou=people</code></td></tr>
-        <tr><td>DN pattern for finding users directly</td></tr>
+<p><code>uid={0}</code></td></tr>
+        <tr><td>DN pattern for finding users directly. This is combined with <code>base_dn</code> to form the full DN path to a person in the directory.
+This property can have multiple values separated by <code>|</code>, e.g. <code>uid={0}|cn={0}</code>.</td></tr>
         <tr><td></p>
 <p><code>para.security.ldap.password_attribute</code></td><td></p>
 <p><code>userPassword</code></td></tr>
@@ -3291,7 +3294,8 @@ Example: <code>GET /ldap_auth?username=bob&amp;password=secret</code></p>
 
 <p><strong>Note:</strong> Active Directory support is enabled when <code>active_directory_domain</code> is set. For AD LDAP, the search filter
 defaults to <code>(&amp;(objectClass=user)(userPrincipalName={0}))</code>. The syntax for this allows either <code>{0}</code>
-(replaced with <code>username@domain</code>) or <code>{1}</code> (replaced with <code>username</code> only).</p>
+(replaced with <code>username@domain</code>) or <code>{1}</code> (replaced with <code>username</code> only). For regular LDAP, only <code>{0}</code> is a valid
+placeholder and it gets replaced with the person’s username.</p>
 <p>You can also configure LDAP through the <a href="#050-api-settings-put">app settings API</a>:</p>
 <pre><code>{
     <span class="hljs-string">"security.ldap.server_url"</span>: <span class="hljs-string">"ldap://localhost:8389/"</span>,
@@ -5489,7 +5493,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>14 May 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>25 May 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2019

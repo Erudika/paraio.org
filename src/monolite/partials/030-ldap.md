@@ -38,7 +38,8 @@ These are the configuration options for this filter:
 		<tr><td>
 
 `para.security.ldap.bind_dn`</td><td>-</td></tr>
-		<tr><td>The initial bind DN for a user with search privileges.</td></tr>
+		<tr><td>The initial bind DN for a user with search privileges. The value of this property cannot contain whitespaces.
+Those will automatically be escaped with `%20`.</td></tr>
 		<tr><td>
 
 `para.security.ldap.bind_pass`</td><td>-</td></tr>
@@ -52,13 +53,15 @@ These are the configuration options for this filter:
 `para.security.ldap.user_search_filter`</td><td>
 
 `(cn={0})`</td></tr>
-		<tr><td>Search filter for user searches.</td></tr>
+		<tr><td>Search filter for user searches. This is combined with `user_search_base` to form the full DN path to a person in the directory.
+A user search is performed when the person cannot be found directly using `user_dn_pattern` + `base_dn`.</td></tr>
 		<tr><td>
 
 `para.security.ldap.user_dn_pattern`</td><td>
 
-`uid={0},ou=people`</td></tr>
-		<tr><td>DN pattern for finding users directly</td></tr>
+`uid={0}`</td></tr>
+		<tr><td>DN pattern for finding users directly. This is combined with `base_dn` to form the full DN path to a person in the directory.
+This property can have multiple values separated by `|`, e.g. `uid={0}|cn={0}`.</td></tr>
 		<tr><td>
 
 `para.security.ldap.password_attribute`</td><td>
@@ -78,7 +81,8 @@ These are the configuration options for this filter:
 
 **Note:** Active Directory support is enabled when `active_directory_domain` is set. For AD LDAP, the search filter
 defaults to `(&(objectClass=user)(userPrincipalName={0}))`. The syntax for this allows either `{0}`
-(replaced with `username@domain`) or `{1}` (replaced with `username` only).
+(replaced with `username@domain`) or `{1}` (replaced with `username` only). For regular LDAP, only `{0}` is a valid
+placeholder and it gets replaced with the person's username.
 
 You can also configure LDAP through the [app settings API](#050-api-settings-put):
 ```
