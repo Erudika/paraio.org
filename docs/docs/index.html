@@ -3262,10 +3262,10 @@ Example: <code>GET /ldap_auth?username=bob&amp;password=secret</code></p>
         <tr><td></p>
 <p><code>para.security.ldap.bind_dn</code></td><td>-</td></tr>
         <tr><td>The initial bind DN for a user with search privileges. The value of this property cannot contain whitespaces.
-Those will automatically be escaped with <code>%20</code>.</td></tr>
+Those will automatically be escaped with <code>%20</code>. Usually this value is left blank.</td></tr>
         <tr><td></p>
 <p><code>para.security.ldap.bind_pass</code></td><td>-</td></tr>
-        <tr><td>The password for a user with search privileges.</td></tr>
+        <tr><td>The password for a user with search privileges. Usually this value is left blank.</td></tr>
         <tr><td></p>
 <p><code>para.security.ldap.user_search_base</code></td><td>-</td></tr>
         <tr><td>Search base for user searches.</td></tr>
@@ -3300,8 +3300,7 @@ placeholder and it gets replaced with the person’s username.</p>
 <pre><code>{
     <span class="hljs-string">"security.ldap.server_url"</span>: <span class="hljs-string">"ldap://localhost:8389/"</span>,
     <span class="hljs-string">"security.ldap.base_dn"</span>: <span class="hljs-string">"dc=springframework,dc=org"</span>,
-    <span class="hljs-string">"security.ldap.bind_dn"</span>: <span class="hljs-string">"admin"</span>,
-    <span class="hljs-string">"security.ldap.bind_pass"</span>: <span class="hljs-string">"secret"</span>,
+    <span class="hljs-string">"security.ldap.user_dn_pattern"</span>: <span class="hljs-string">"uid={0}"</span>
     ...
     <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>,
     <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
@@ -3351,6 +3350,10 @@ the default (root) app will be used as authentication target.</p>
 <p><code>para.security.oauth.parameters.name</code></td><td>The <code>name</code> parameter for requesting the user profile (default is <code>name</code>). </td></tr>
         <tr><td></p>
 <p><code>para.security.oauth.domain</code></td><td> This domain name is used if a valid email can’t be obtained (optional).</td></tr>
+        <tr><td></p>
+<p><code>para.security.oauth.token_delegation_enabled</code></td><td> Enable/disable access token delegation. If enabled, access tokens will be saved
+inside the user object’s <code>password</code> field and sent for validation to the IDP on each authentication request (using JWTs). (default is <code>false</code>).
+        </td></tr>
     </tbody></p>
 </table>
 
@@ -5493,7 +5496,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>25 May 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>31 May 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2019

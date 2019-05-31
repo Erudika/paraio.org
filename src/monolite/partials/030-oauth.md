@@ -52,6 +52,11 @@ These are the configuration options for this filter:
 		<tr><td>
 
 `para.security.oauth.domain`</td><td> This domain name is used if a valid email can't be obtained (optional).</td></tr>
+		<tr><td>
+
+`para.security.oauth.token_delegation_enabled`</td><td> Enable/disable access token delegation. If enabled, access tokens will be saved
+inside the user object's `password` field and sent for validation to the IDP on each authentication request (using JWTs). (default is `false`).
+		</td></tr>
 	</tbody>
 </table>
 

@@ -39,11 +39,11 @@ These are the configuration options for this filter:
 
 `para.security.ldap.bind_dn`</td><td>-</td></tr>
 		<tr><td>The initial bind DN for a user with search privileges. The value of this property cannot contain whitespaces.
-Those will automatically be escaped with `%20`.</td></tr>
+Those will automatically be escaped with `%20`. Usually this value is left blank.</td></tr>
 		<tr><td>
 
 `para.security.ldap.bind_pass`</td><td>-</td></tr>
-		<tr><td>The password for a user with search privileges.</td></tr>
+		<tr><td>The password for a user with search privileges. Usually this value is left blank.</td></tr>
 		<tr><td>
 
 `para.security.ldap.user_search_base`</td><td>-</td></tr>
@@ -89,8 +89,7 @@ You can also configure LDAP through the [app settings API](#050-api-settings-put
 {
 	"security.ldap.server_url": "ldap://localhost:8389/",
 	"security.ldap.base_dn": "dc=springframework,dc=org",
-	"security.ldap.bind_dn": "admin",
-	"security.ldap.bind_pass": "secret",
+	"security.ldap.user_dn_pattern": "uid={0}"
 	...
 	"signin_success": "http://success.url",
 	"signin_failure": "http://failure.url"
