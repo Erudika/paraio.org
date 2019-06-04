@@ -1148,7 +1148,7 @@ Para.addDestroyListener(<span class="hljs-keyword">new</span> DestroyListener() 
         <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> release resources...</span>
     }
 });</code></pre>
-<h3 id="custom-i-o-listeners">Custom I/O listeners</h3>
+<h3 id="custom-io-listeners">Custom I/O listeners</h3>
 <p>An I/O listener is a callback function which is executed after an input/output (CRUD) operation. After a call is made to
 one of the <code>DAO</code> methods like <code>read()</code>, <code>update()</code>, etc., all registered listeners are notified and called.
 It is recommended that the code inside these listeners is asynchronous or less CPU intensive so it does not slow down
@@ -1614,7 +1614,9 @@ either of the two layers and we end up with inconsistent data. So when an object
 database, Para will print out a warning log message. If an object is persisted to DB but an error occurs during indexing,
 you have the option to set <code>para.es.fail_on_indexing_errors</code> (Elasticsearch only). This will cascade an exception back to
 the client and it can decide whether to revert the operation or try again. Additionally, if an update operation fails due
-to a version mismatch (see optimistic locking above), Para automatically prevents the indexing and caching of that object.</p>
+to a version mismatch (see optimistic locking above), Para automatically prevents the indexing and caching of that object.
+In relation to this, <code>para.fail_on_write_errors</code> is <code>true</code> by default, which means that if there’s any error returned
+from the DB on write operations, all subsequent index operations will be skipped.</p>
 
 				</section>
 			</article>
@@ -2536,24 +2538,24 @@ i.e. <code>/v1/_setup</code> is called, the status is updated to “healthy”.<
 Log4j2, etc. By default Para uses Logback. To use another implementation, exclude all Logback packages from <code>pom.xml</code>
 like this:</p>
 <pre><code>&lt;dependency&gt;
-  &lt;groupId&gt;com.erudika&lt;/groupId&gt;
-  &lt;artifactId&gt;para-core&lt;/artifactId&gt;
-  &lt;version&gt;${para.version}&lt;/version&gt;
-  &lt;exclusions&gt;
-    &lt;exclusion&gt;
-      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-      &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
-    &lt;/exclusion&gt;
-    &lt;exclusion&gt;
-      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-      &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
-    &lt;/exclusion&gt;
-    &lt;exclusion&gt;
-      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-      &lt;artifactId&gt;logback-access&lt;/artifactId&gt;
-    &lt;/exclusion&gt;
-  &lt;/exclusions&gt;
-&lt;/dependency&gt;</code></pre><p>Logs are stored in 3 files, located in the same directory from which Para is started:</p>
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.erudika<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span>
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>para-core<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span>
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${para.version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span></span>
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">exclusions</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>ch.qos.logback<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>logback-core<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>ch.qos.logback<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>logback-classic<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>ch.qos.logback<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>logback-access<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">exclusions</span>&gt;</span></span>
+<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span></code></pre><p>Logs are stored in 3 files, located in the same directory from which Para is started:</p>
 <ul>
 <li><code>para.log</code> - main log file, also written to syslog</li>
 <li><code>para-metrics.log</code> - contains all the metrics</li>
@@ -3192,26 +3194,26 @@ authenticate with your SAML IDP (listed in the first rows below).</p>
 </table>
 
 <p>As a bare minimum, you should have the following SAML configuration:</p>
-<pre><code class="language-ini"># minimal setup
-# IDP metadata URL, e.g. https://idphost/idp/shibboleth
-para.security.saml.idp.metadata_url = &quot;&quot;
+<pre><code class="language-ini"><span class="hljs-comment"># minimal setup</span>
+<span class="hljs-comment"># IDP metadata URL, e.g. https://idphost/idp/shibboleth</span>
+<span class="hljs-attr">para.security.saml.idp.metadata_url</span> = <span class="hljs-string">""</span>
 
-# SP endpoint, e.g. https://paraio.com/saml_auth/scoold
-para.security.saml.sp.entityid = &quot;&quot;
+<span class="hljs-comment"># SP endpoint, e.g. https://paraio.com/saml_auth/scoold</span>
+<span class="hljs-attr">para.security.saml.sp.entityid</span> = <span class="hljs-string">""</span>
 
-# SP public key as Base64(x509 certificate)
-para.security.saml.sp.x509cert = &quot;&quot;
+<span class="hljs-comment"># SP public key as Base64(x509 certificate)</span>
+<span class="hljs-attr">para.security.saml.sp.x509cert</span> = <span class="hljs-string">""</span>
 
-# SP private key as Base64(PKCS#8 key)
-para.security.saml.sp.privatekey = &quot;&quot;
+<span class="hljs-comment"># SP private key as Base64(PKCS#8 key)</span>
+<span class="hljs-attr">para.security.saml.sp.privatekey</span> = <span class="hljs-string">""</span>
 
-# attribute mappings (usually required)
-# e.g. urn:oid:0.9.2342.19200300.100.1.1
-para.security.saml.attributes.id = &quot;&quot;
-# e.g. urn:oid:0.9.2342.19200300.100.1.3
-para.security.saml.attributes.email = &quot;&quot;
-# e.g. urn:oid:2.5.4.3
-para.security.saml.attributes.name = &quot;&quot;</code></pre>
+<span class="hljs-comment"># attribute mappings (usually required)</span>
+<span class="hljs-comment"># e.g. urn:oid:0.9.2342.19200300.100.1.1</span>
+<span class="hljs-attr">para.security.saml.attributes.id</span> = <span class="hljs-string">""</span>
+<span class="hljs-comment"># e.g. urn:oid:0.9.2342.19200300.100.1.3</span>
+<span class="hljs-attr">para.security.saml.attributes.email</span> = <span class="hljs-string">""</span>
+<span class="hljs-comment"># e.g. urn:oid:2.5.4.3</span>
+<span class="hljs-attr">para.security.saml.attributes.name</span> = <span class="hljs-string">""</span></code></pre>
 <p>You can also configure the SAML authentication filter through the <a href="#050-api-settings-put">app settings API</a>:</p>
 <pre><code>{
     <span class="hljs-string">"security.saml.sp.entityid"</span>: <span class="hljs-string">"https://paraio.com/saml_auth/scoold"</span>,
@@ -3697,7 +3699,7 @@ Simply specify your access key as a parameter:</p>
 <p>For more information see the <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">AWS documentation</a>
 for REST authentication.</p>
 </blockquote>
-<h3 id="json-web-tokens-client-access-based-on-permissions">JSON Web Tokens - client access based on permissions</h3>
+<h3 id="json-web-tokens---client-access-based-on-permissions">JSON Web Tokens - client access based on permissions</h3>
 <blockquote>
 <p><strong>Important:</strong> Access to the root app can be enabled or disabled for API clients.</p>
 </blockquote>
@@ -5197,8 +5199,8 @@ that has been granted to that subject.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{subjectid}</code> - the subject/user <code>id</code> to grant permissions to (required)</li>
-<li><code>{resource}</code> - the resource path or object type (URL encoded). If omitted,
-<strong>all permissions</strong> for that subject will be revoked. (optional)</li>
+<li><code>{resource}</code> - the resource path or object type (URL encoded). If omitted,</li>
+<li><em>all permissions*</em> for that subject will be revoked. (optional)</li>
 </ul>
 <h3 id="response">Response</h3>
 <p>Returns a JSON object containing the resource permissions for the given user.</p>
@@ -5472,8 +5474,8 @@ This operation is synchronous - the request will return a response once reindexi
 <p><strong>Example:</strong> <code>POST /v1/_reindex</code></p>
 <h3 id="request-parameters">Request parameters</h3>
 <ul>
-<li><code>destinationIndex</code> - the name of the new index (optional).
-<strong>Use only if you have created the new destination index manually</strong>.</li>
+<li><code>destinationIndex</code> - the name of the new index (optional).</li>
+<li><em>Use only if you have created the new destination index manually*</em>.</li>
 </ul>
 <h3 id="response">Response</h3>
 <p>Returns a JSON object.</p>
@@ -5496,7 +5498,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>31 May 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>05 June 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2019
