@@ -1899,7 +1899,7 @@ open up the web console where you can open the Para DB file. The default credent
 <p>To make a backup copy of the entire Para dabatase, including all child app tables, run this command:</p>
 <pre><code>java -cp h2*.jar org.h2.tools.Script -url jdbc:h2:file:<span class="hljs-regexp">/para_folder/</span>data/para -user para -password secret -script para.zip -options compression zip</code></pre><p>To restore an existing backup, run:</p>
 <pre><code>java -cp h2*.jar org.h2.tools.RunScript -url jdbc:h2:file:<span class="hljs-regexp">/para_folder/</span>data/para -user para -password secret -script para.zip -options compression zip</code></pre><blockquote>
-<p>This implementation is works well for both development and production environments.</p>
+<p>This implementation is production-ready and ideal for local development and testing.</p>
 </blockquote>
 
 				</section>
@@ -5498,7 +5498,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>05 June 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>06 June 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2019
