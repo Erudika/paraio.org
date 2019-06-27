@@ -14,3 +14,4 @@ com.erudika.para.security.filters
 com.erudika.para.storage
 com.erudika.para.utils
 com.erudika.para.utils.filters
+com.erudika.para.webhooks

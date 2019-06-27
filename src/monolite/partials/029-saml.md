@@ -122,7 +122,7 @@ authenticate with your SAML IDP (listed in the first rows below).
 		<tr><td>
 
 `para.security.saml.attributes.name`</td><td>blank</td></tr>
-		<tr><td> Mapping key for the `name` attribute.</td></tr>
+		<tr><td> Mapping key for the `name` attribute. If this is set, the values for attributes `firstname` and `lastname` below will be ignored.</td></tr>
 		<tr><td>
 
 `para.security.saml.attributes.firstname`</td><td>blank</td></tr>
@@ -162,6 +162,8 @@ para.security.saml.attributes.email = ""
 # e.g. urn:oid:2.5.4.3
 para.security.saml.attributes.name = ""
 ```
+
+You want to either configure `para.security.saml.attributes.name` or `para.security.saml.attributes.firstname`, but **not both**.
 
 You can also configure the SAML authentication filter through the [app settings API](#050-api-settings-put):
 ```

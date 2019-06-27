@@ -11,10 +11,13 @@ public interface Queue {
 	void push(String task);
 	String getName();
 	void setName(String name);
+	void startPolling();
+	void stopPolling();
 }
 ```
 
-Currently this interface is implemented by the `AWSQueue` class which relies on the AWS Simple Queue Service.
+Currently this interface is implemented by the `AWSQueue` class which relies on the AWS Simple Queue Service, and by
+`LocalQueue` which is based on a `ConcurrentLinkedQueue`.
 
 ### AWSQueue
 
@@ -40,23 +43,24 @@ para.queue.polling_sleep_seconds: 60
 para.queue.polling_interval_seconds: 20
 ```
 
-Messages are in the following JSON format:
+Messages are in the same format as all other Para objects (see `Sysprop`):
 ```json
 {
-	"_id": "id_OR_null",
-	"_appid": "para_app_id",
-	"_type": "para_data_type",
-	"_data": { "key1": "value1" ...}
+	"id": "id_OR_null",
+	"appid": "para_app_id",
+	"type": "para_data_type",
+	"properties": { "key1": "value1" ...}
 }
 ```
 **Notes:**
 
-- The fields `_id` and `_type` are required.
-- If `_data` is missing the data with this id will be deleted from the index.
-- If `_data` is anything other than JSON object we discard it and treat the messages as a delete request.
-- If `_index` is missing it will fallback to the index that was initially configured,
-otherwise the `_index` property overrides the default configuration and allows you to dynamically switch between indexes.
-- If `_id` is an integer it will be converted to `String` because SQS doesn't convert integers to strings automatically.
-- When the queue is empty the river will sleep for `sleep` seconds before sending a new request for messages to the queue.
+- If a `'_delete': true` field exists, the object in the message will be deleted.
+- If `'_create': true` field exists, the object will be recreated, overwriting anything with the same `id`.
+
+When the queue is empty the river will sleep for `sleep` seconds before sending a new request for messages to the queue.
 Long polling is done by the Amazon SQS client using the `waitTimeSeconds` attribute which is set to `longpolling_interval` _(must be between 0 and 20)_.
 
+### LocalQueue
+
+This queue implementation is good for local development, testing and single-machine Para servers. It uses an in-memory
+queue which is not persisted in any way.

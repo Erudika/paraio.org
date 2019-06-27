@@ -64,7 +64,10 @@ This executes the method `findSimilar()` with these **parameters**:
 GET /v1/search/similar?fields=field1&fields=field2
 ```
 - `filterid` - an id filter; excludes a particular object from the results
-- `like` - the source text to use for comparison
+- `like` - the source text to use for comparison. If the `like` parameter starts with `id:`, e.g. `id:123`,
+then the source of the "like" text is read from the object with id `123` and extracted from fields `fields`
+on the server. This operation can be done on the server in situations where the supplied text in `like` is
+too long and causes "URI too long" exceptions.
 
 <hr>
 

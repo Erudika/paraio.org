@@ -131,10 +131,6 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>**Deprecated.** Use credential profiles.</td><td></td></tr>
 		<tr><td>
 
-`para.aws_region`						</td><td>-</td></tr>
-		<tr><td>The AWS region string.</td><td></td></tr>
-		<tr><td>
-
 `para.fb_app_id`						</td><td>-</td></tr>
 		<tr><td>Facebook app id (for OAuth authentication).</td><td></td></tr>
 		<tr><td>
@@ -271,6 +267,12 @@ Here's a list of all configuration properties that can be set in the config file
 
 `true`</td></tr>
 		<tr><td>Enable/disable object indexing in Para. </td><td></td></tr>
+		<tr><td>
+
+`para.webhooks_enabled`					</td><td>
+
+`false`</td></tr>
+		<tr><td>Enable/disable the webhooks functionality around `Webhook` objects. </td><td></td></tr>
 		<tr><td>
 
 `para.iot_enabled`					</td><td>

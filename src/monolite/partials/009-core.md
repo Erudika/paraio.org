@@ -45,6 +45,9 @@ with `type: mytype` through the API and your new type will be automatically regi
 		<tr><td>
 
 `Thing`</td><td> **System class** used for storing IoT devices' state and metadata.</td></tr>
+		<tr><td>
+
+`Webhook`</td><td> **System class** used for storing webhook metadata.</td></tr>
 	</tbody>
 </table>
 

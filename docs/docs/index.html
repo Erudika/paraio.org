@@ -75,6 +75,7 @@
 							<li class=""><a href="#011-apps">Apps</a></li>
 							<li class=""><a href="#011-permissions">Resource permissions</a></li>
 							<li class=""><a href="#011-validations">Validations</a></li>
+							<li class=""><a href="#011-webhooks">Webhooks</a></li>
 				</ul>
 			</li>
 			<li>
@@ -742,9 +743,6 @@ This is important for securing your server because this secret key is used for s
 <p><code>para.aws_secret_key</code>                </td><td>-</td></tr>
         <tr><td><strong>Deprecated.</strong> Use credential profiles.</td><td></td></tr>
         <tr><td></p>
-<p><code>para.aws_region</code>                        </td><td>-</td></tr>
-        <tr><td>The AWS region string.</td><td></td></tr>
-        <tr><td></p>
 <p><code>para.fb_app_id</code>                        </td><td>-</td></tr>
         <tr><td>Facebook app id (for OAuth authentication).</td><td></td></tr>
         <tr><td></p>
@@ -841,6 +839,10 @@ This is important for securing your server because this secret key is used for s
 <p><code>para.search_enabled</code>                </td><td></p>
 <p><code>true</code></td></tr>
         <tr><td>Enable/disable object indexing in Para. </td><td></td></tr>
+        <tr><td></p>
+<p><code>para.webhooks_enabled</code>                    </td><td></p>
+<p><code>false</code></td></tr>
+        <tr><td>Enable/disable the webhooks functionality around <code>Webhook</code> objects. </td><td></td></tr>
         <tr><td></p>
 <p><code>para.iot_enabled</code>                    </td><td></p>
 <p><code>false</code></td></tr>
@@ -1260,6 +1262,8 @@ with <code>type: mytype</code> through the API and your new type will be automat
 <p><code>Linker</code></td><td> <strong>System class</strong> used for implementing a many-to-many relationship between objects. </td></tr>
         <tr><td></p>
 <p><code>Thing</code></td><td> <strong>System class</strong> used for storing IoT devices’ state and metadata.</td></tr>
+        <tr><td></p>
+<p><code>Webhook</code></td><td> <strong>System class</strong> used for storing webhook metadata.</td></tr>
     </tbody></p>
 </table>
 
@@ -1553,6 +1557,74 @@ easily be integrated with other client-side validators.</p>
 <blockquote>
 <p>Para uses <a href="http://hibernate.org/validator/">Hibernate Validator</a> for data validation.</p>
 </blockquote>
+
+				</section>
+			</article>
+			<a id="011-webhooks" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Webhooks</h2>
+				<section class="body  img-rounded">
+					<p>Webhook were implemented in <code>v1.32.0</code>. The implementation is fully asynchronous and uses a queue for decoupling
+the message publishing from the actual processing and delivery of payloads. There’s a <code>LocalQueue</code> implementation which
+holds messages in memory and a <code>LocalRiver</code> (worker) which periodically pulls messages from the queue and forwards them
+to their destinations. The <code>AWSQueue</code> class implements webhooks processing based on AWS SQS queues and is recommended
+for production use. Any other queue server can be potentially supported via a plugin which implements the <code>Queue</code>
+interface.</p>
+<p>To enable the webhooks functionality in Para, add <code>para.webhooks_enabled = true</code> in your <code>application.conf</code>.</p>
+<p>The <code>Webhook</code> class is used for storing webhook metadata. Each <code>Webhook</code> object represents a destination which will
+receive a POST request with a certain payload. The payload is determined by the type of event to which that webhook
+is subscribed to. For example, a webhook might be a subscribed to all <code>update</code> events in Para, and also it might only
+be interested in updated <code>user</code> objects. So we can register a new webhook like so:</p>
+<pre><code>POST /v1/webhooks
+{
+    <span class="hljs-string">"urlEncoded"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">"update"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">"targetUrl"</span>: <span class="hljs-string">"https://destination.url"</span>,
+    <span class="hljs-string">"secret"</span>: <span class="hljs-string">"secret"</span>,
+    <span class="hljs-string">"typeFilter"</span>:<span class="hljs-string">"user"</span>
+}</code></pre><p>The <code>urlEncoded</code> parameter sets the <code>Content-Type</code> header for the payload. By default that’s
+<code>application/x-www-form-urlencoded</code>, but if <code>urlEncoded</code> is false, the content type will be <code>application/json</code>.</p>
+<p>There are 6 event types: <code>update</code>, <code>create</code>, <code>delete</code>, <code>updateAll</code>, <code>createAll</code>, <code>deleteAll</code>. You can also register
+webhooks which are subscribed to all events on all types in Para:</p>
+<pre><code>POST /v1/webhooks
+{
+    <span class="hljs-string">"active"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">"urlEncoded"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">"update"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">"create"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">"delete"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">"updateAll"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">"createAll"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">"deleteAll"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">"targetUrl"</span>: <span class="hljs-string">"https://destination.url"</span>,
+    <span class="hljs-string">"secret"</span>: <span class="hljs-string">"secret"</span>,
+    <span class="hljs-string">"typeFilter"</span>:<span class="hljs-string">"*"</span>
+}</code></pre><p>If the typeFilter is either blank or <code>*</code>, all selected events will be sent to the destination, regardless of the object
+type.</p>
+<p>Webhooks with too many failed deliveries (10 by default) will be disabled automatically. The number of maximum failed
+attemts can be adjusted like so:</p>
+<pre><code>para.max_failed_webhook_attempts = <span class="hljs-number">15</span></code></pre><p>Events are intercepted by the <code>WebhookIOListener</code> which listens for mutating <code>DAO</code> methods and after each method
+invocation sends a message to the queue for all registered <code>Webhook</code> objects. Each message is signed with <code>HmacSHA256</code>
+which is sent to the destination in a <code>X-Webhook-Signature</code> header. The signature takes the webhook secret and uses it
+to sign only the <code>payload</code> JSON string (whitespace removed). The worker node (might be the same machine) then pulls
+messages from the queue and sends them to their destinations using a <code>POST</code> request. Here’s an example <code>POST</code> request:</p>
+<pre><code>POST /test HTTP/<span class="hljs-number">1.1</span>
+Host: parawebhooks.requestcatcher.com
+Accept-Encoding: gzip,deflate
+Connection: Keep-Alive
+Content-Length: <span class="hljs-number">327</span>
+Content-Type: application/json
+User-Agent: Para Webhook Dispacher <span class="hljs-number">1.32</span><span class="hljs-number">.0</span>
+X-Para-Event: update
+X-Webhook-Signature: FFEma4/Uc5gGCs974cJNa873kzsumFgqPGVIGOEexmY=
+
+{<span class="hljs-string">"appid"</span>:<span class="hljs-string">"scoold"</span>,<span class="hljs-string">"event"</span>:<span class="hljs-string">"update"</span>,<span class="hljs-string">"items"</span>:[{<span class="hljs-string">"id"</span>:<span class="hljs-string">"tag:acpi"</span>,<span class="hljs-string">"timestamp"</span>:<span class="hljs-number">1486848081865</span>,<span class="hljs-string">"type"</span>:<span class="hljs-string">"tag"</span>,<span class="hljs-string">"appid"</span>:<span class="hljs-string">"scoold"</span>,<span class="hljs-string">"updated"</span>:<span class="hljs-number">1561644547996</span>,<span class="hljs-string">"name"</span>:<span class="hljs-string">"ParaObject tag:acpi"</span>,<span class="hljs-string">"votes"</span>:<span class="hljs-number">2</span>,<span class="hljs-string">"version"</span>:<span class="hljs-number">0</span>,<span class="hljs-string">"stored"</span>:<span class="hljs-literal">true</span>,<span class="hljs-string">"indexed"</span>:<span class="hljs-literal">true</span>,<span class="hljs-string">"cached"</span>:<span class="hljs-literal">true</span>,<span class="hljs-string">"tag"</span>:<span class="hljs-string">"acpi"</span>,<span class="hljs-string">"count"</span>:<span class="hljs-number">1</span>,<span class="hljs-string">"objectURI"</span>:<span class="hljs-string">"/tags/acpi"</span>,<span class="hljs-string">"plural"</span>:<span class="hljs-string">"tags"</span>}],<span class="hljs-string">"timestamp"</span>:<span class="hljs-number">1561644548430</span>}</code></pre><p>The format of the message is this:</p>
+<pre><code>{
+    <span class="hljs-string">"appid"</span>: <span class="hljs-string">"myapp"</span>,
+    <span class="hljs-string">"event"</span>: <span class="hljs-string">"create"</span>,
+    <span class="hljs-string">"timestamp"</span>: <span class="hljs-number">1486848081865</span>,
+    <span class="hljs-string">"items"</span>: [{}, ...]
+}</code></pre><p>The receiving party should verify the signature of each payload by computing <code>Base64(HmacSHA256(payloadJson, secret))</code>.</p>
 
 				</section>
 			</article>
@@ -2986,8 +3058,11 @@ properties as they are ignored. Also set <code>para.aws_access_key</code> and <c
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(String task)</span></span>;
     <span class="hljs-function">String <span class="hljs-title">getName</span><span class="hljs-params">()</span></span>;
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">startPolling</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">stopPolling</span><span class="hljs-params">()</span></span>;
 }</code></pre>
-<p>Currently this interface is implemented by the <code>AWSQueue</code> class which relies on the AWS Simple Queue Service.</p>
+<p>Currently this interface is implemented by the <code>AWSQueue</code> class which relies on the AWS Simple Queue Service, and by
+<code>LocalQueue</code> which is based on a <code>ConcurrentLinkedQueue</code>.</p>
 <h3 id="awsqueue">AWSQueue</h3>
 <p>The AWS SQS plugin uses Amazon’s SQS as a river by long polling for messages from a given queue.
 This particular implementation was adapted from an earlier project called
@@ -3001,24 +3076,23 @@ List&lt;String&gt; result = AWSQueueUtils.pullMessages(q.getUrl(), <span class="
 <p>To configure, put this in your <code>application.conf</code>:</p>
 <pre><code class="language-bash">para.queue.polling_sleep_seconds: 60
 para.queue.polling_interval_seconds: 20</code></pre>
-<p>Messages are in the following JSON format:</p>
+<p>Messages are in the same format as all other Para objects (see <code>Sysprop</code>):</p>
 <pre><code class="language-json">{
-    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"id_OR_null"</span>,
-    <span class="hljs-attr">"_appid"</span>: <span class="hljs-string">"para_app_id"</span>,
-    <span class="hljs-attr">"_type"</span>: <span class="hljs-string">"para_data_type"</span>,
-    <span class="hljs-attr">"_data"</span>: { <span class="hljs-attr">"key1"</span>: <span class="hljs-string">"value1"</span> ...}
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"id_OR_null"</span>,
+    <span class="hljs-attr">"appid"</span>: <span class="hljs-string">"para_app_id"</span>,
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"para_data_type"</span>,
+    <span class="hljs-attr">"properties"</span>: { <span class="hljs-attr">"key1"</span>: <span class="hljs-string">"value1"</span> ...}
 }</code></pre>
 <p><strong>Notes:</strong></p>
 <ul>
-<li>The fields <code>_id</code> and <code>_type</code> are required.</li>
-<li>If <code>_data</code> is missing the data with this id will be deleted from the index.</li>
-<li>If <code>_data</code> is anything other than JSON object we discard it and treat the messages as a delete request.</li>
-<li>If <code>_index</code> is missing it will fallback to the index that was initially configured,
-otherwise the <code>_index</code> property overrides the default configuration and allows you to dynamically switch between indexes.</li>
-<li>If <code>_id</code> is an integer it will be converted to <code>String</code> because SQS doesn’t convert integers to strings automatically.</li>
-<li>When the queue is empty the river will sleep for <code>sleep</code> seconds before sending a new request for messages to the queue.
-Long polling is done by the Amazon SQS client using the <code>waitTimeSeconds</code> attribute which is set to <code>longpolling_interval</code> <em>(must be between 0 and 20)</em>.</li>
+<li>If a <code>&#39;_delete&#39;: true</code> field exists, the object in the message will be deleted.</li>
+<li>If <code>&#39;_create&#39;: true</code> field exists, the object will be recreated, overwriting anything with the same <code>id</code>.</li>
 </ul>
+<p>When the queue is empty the river will sleep for <code>sleep</code> seconds before sending a new request for messages to the queue.
+Long polling is done by the Amazon SQS client using the <code>waitTimeSeconds</code> attribute which is set to <code>longpolling_interval</code> <em>(must be between 0 and 20)</em>.</p>
+<h3 id="localqueue">LocalQueue</h3>
+<p>This queue implementation is good for local development, testing and single-machine Para servers. It uses an in-memory
+queue which is not persisted in any way.</p>
 
 				</section>
 			</article>
@@ -3180,7 +3254,7 @@ authenticate with your SAML IDP (listed in the first rows below).</p>
         <tr><td> Mapping key for the <code>email</code> attribute.</td></tr>
         <tr><td></p>
 <p><code>para.security.saml.attributes.name</code></td><td>blank</td></tr>
-        <tr><td> Mapping key for the <code>name</code> attribute.</td></tr>
+        <tr><td> Mapping key for the <code>name</code> attribute. If this is set, the values for attributes <code>firstname</code> and <code>lastname</code> below will be ignored.</td></tr>
         <tr><td></p>
 <p><code>para.security.saml.attributes.firstname</code></td><td>blank</td></tr>
         <tr><td> Mapping key for the <code>firstname</code> attribute.</td></tr>
@@ -3214,6 +3288,7 @@ authenticate with your SAML IDP (listed in the first rows below).</p>
 <span class="hljs-attr">para.security.saml.attributes.email</span> = <span class="hljs-string">""</span>
 <span class="hljs-comment"># e.g. urn:oid:2.5.4.3</span>
 <span class="hljs-attr">para.security.saml.attributes.name</span> = <span class="hljs-string">""</span></code></pre>
+<p>You want to either configure <code>para.security.saml.attributes.name</code> or <code>para.security.saml.attributes.firstname</code>, but <strong>not both</strong>.</p>
 <p>You can also configure the SAML authentication filter through the <a href="#050-api-settings-put">app settings API</a>:</p>
 <pre><code>{
     <span class="hljs-string">"security.saml.sp.entityid"</span>: <span class="hljs-string">"https://paraio.com/saml_auth/scoold"</span>,
@@ -4482,7 +4557,10 @@ This executes the method <code>findSimilar()</code> with these <strong>parameter
 <ul>
 <li><code>fields</code> - a list of fields, for example:<pre><code>GET /v1/search/similar?fields=field1&amp;fields=field2</code></pre></li>
 <li><code>filterid</code> - an id filter; excludes a particular object from the results</li>
-<li><code>like</code> - the source text to use for comparison</li>
+<li><code>like</code> - the source text to use for comparison. If the <code>like</code> parameter starts with <code>id:</code>, e.g. <code>id:123</code>,
+then the source of the “like” text is read from the object with id <code>123</code> and extracted from fields <code>fields</code>
+on the server. This operation can be done on the server in situations where the supplied text in <code>like</code> is
+too long and causes “URI too long” exceptions.</li>
 </ul>
 <hr>
 
@@ -5498,7 +5576,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>06 June 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>27 June 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2019
