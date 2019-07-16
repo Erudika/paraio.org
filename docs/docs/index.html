@@ -159,6 +159,7 @@
 							<li class=""><a href="#031-google">Google support</a></li>
 							<li class=""><a href="#031-linkedin">LinkedIn support</a></li>
 							<li class=""><a href="#031-microsoft">Microsoft support</a></li>
+							<li class=""><a href="#031-slack">Slack support</a></li>
 							<li class=""><a href="#031-twitter">Twitter support</a></li>
 							<li class=""><a href="#032-roles">Groups and roles</a></li>
 							<li class=""><a href="#033-csrf">CSRF protection</a></li>
@@ -3301,6 +3302,10 @@ authenticate with your SAML IDP (listed in the first rows below).</p>
 }</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
 Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Another, slightly more secure, option to receive the JWT from Para is to set the query parameter <code>?jwt=incookie</code>, e.g.
+<code>para.signin_success = &quot;http://success.url?jwt=incookie&quot;</code>. This will make Para pass the token inside a cookie header with
+name <code>appid-auth</code> where <code>appid</code> is the app identifier of your client application. For example, the header for an app like
+Scoold will look like <code>Cookie: scoold-auth={jwt_value}</code>.</p>
 <p>You can also put all of the settings above in a configuration file, but this <em>only works</em> if your app is the
 <strong>root app</strong> (see <a href="#005-config">the config</a>).</p>
 
@@ -3483,6 +3488,10 @@ para.fb_secret = <span class="hljs-string">"..."</span></code></pre><p>Or add th
 }</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
 Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Another, slightly more secure, option to receive the JWT from Para is to set the query parameter <code>?jwt=incookie</code>, e.g.
+<code>para.signin_success = &quot;http://success.url?jwt=incookie&quot;</code>. This will make Para pass the token inside a cookie header with
+name <code>appid-auth</code> where <code>appid</code> is the app identifier of your client application. For example, the header for an app like
+Scoold will look like <code>Cookie: scoold-auth={jwt_value}</code>.</p>
 <p>Support for logging in with Facebook is implemented by the <code>FacebookAuthFilter</code>. This filter responds to requests at
 <code>/facebook_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -3523,6 +3532,10 @@ para.gh_secret = <span class="hljs-string">"..."</span></code></pre><p>Or add th
 }</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
 Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Another, slightly more secure, option to receive the JWT from Para is to set the query parameter <code>?jwt=incookie</code>, e.g.
+<code>para.signin_success = &quot;http://success.url?jwt=incookie&quot;</code>. This will make Para pass the token inside a cookie header with
+name <code>appid-auth</code> where <code>appid</code> is the app identifier of your client application. For example, the header for an app like
+Scoold will look like <code>Cookie: scoold-auth={jwt_value}</code>.</p>
 <p>Support for logging in with GitHub is implemented by the <code>GitHubAuthFilter</code>. This filter responds to requests at
 <code>/github_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -3563,6 +3576,10 @@ para.gp_secret = <span class="hljs-string">"..."</span></code></pre><p>Or add th
 }</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
 Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Another, slightly more secure, option to receive the JWT from Para is to set the query parameter <code>?jwt=incookie</code>, e.g.
+<code>para.signin_success = &quot;http://success.url?jwt=incookie&quot;</code>. This will make Para pass the token inside a cookie header with
+name <code>appid-auth</code> where <code>appid</code> is the app identifier of your client application. For example, the header for an app like
+Scoold will look like <code>Cookie: scoold-auth={jwt_value}</code>.</p>
 <p>Support for logging in with Google acoounts is implemented by the <code>GoogleAuthFilter</code>.
 This filter responds to requests at <code>/google_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -3604,6 +3621,10 @@ para.in_secret = <span class="hljs-string">"..."</span></code></pre><p>Or add th
 }</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
 Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Another, slightly more secure, option to receive the JWT from Para is to set the query parameter <code>?jwt=incookie</code>, e.g.
+<code>para.signin_success = &quot;http://success.url?jwt=incookie&quot;</code>. This will make Para pass the token inside a cookie header with
+name <code>appid-auth</code> where <code>appid</code> is the app identifier of your client application. For example, the header for an app like
+Scoold will look like <code>Cookie: scoold-auth={jwt_value}</code>.</p>
 <p>Support for logging in with LinkedIn is implemented by the <code>LinkedInAuthFilter</code>. This filter responds to requests at
 <code>/linkedin_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -3646,6 +3667,10 @@ para.security.signin_failure = <span class="hljs-string">"http://failure.url"</s
 }</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
 Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Another, slightly more secure, option to receive the JWT from Para is to set the query parameter <code>?jwt=incookie</code>, e.g.
+<code>para.signin_success = &quot;http://success.url?jwt=incookie&quot;</code>. This will make Para pass the token inside a cookie header with
+name <code>appid-auth</code> where <code>appid</code> is the app identifier of your client application. For example, the header for an app like
+Scoold will look like <code>Cookie: scoold-auth={jwt_value}</code>.</p>
 <p>Support for logging in with Microsoft accounts is implemented by the <code>MicrosoftAuthFilter</code>.
 This filter responds to requests at <code>/microsoft_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -3660,6 +3685,51 @@ in order to obtain an access and secret keys.</p>
                 "response_type=code&amp;client_id={MICROSOFT_APP_ID}" +
                 "&amp;scope=https%3A%2F%2Fgraph.microsoft.com%2Fuser.read&amp;state=" + APPID +
                 "&amp;redirect_uri=" + window.location.origin + "/microsoft_auth;
+        return false;
+});</code></pre>
+
+				</section>
+			</article>
+			<a id="031-slack" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Slack support</h2>
+				<section class="body  img-rounded">
+					<blockquote>
+<p>This describes the web authentication flow with Slack. You could also login with an existing access token from
+Slack <a href="#034-api-jwt-signin">through the API</a>. This web flow sets a cookie, the API returns a JWT instead.</p>
+</blockquote>
+<p>First of all you need to have your API credentials ready by creating an app on Slack.
+Then add them to your <code>application.conf</code> configuration file:</p>
+<pre><code>para.sl_app_id = <span class="hljs-string">"..."</span>
+para.sl_secret = <span class="hljs-string">"..."</span>
+para.security.signin_success = <span class="hljs-string">"http://success.url"</span>
+para.security.signin_failure = <span class="hljs-string">"http://failure.url"</span></code></pre><p>Or add these through the <a href="#050-api-settings-put">app settings API</a>:</p>
+<pre><code>{
+    <span class="hljs-string">"sl_app_id"</span>: <span class="hljs-string">"..."</span>
+    <span class="hljs-string">"sl_secret"</span>: <span class="hljs-string">"..."</span>
+    <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>
+    <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
+}</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
+<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
+Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Another, slightly more secure, option to receive the JWT from Para is to set the query parameter <code>?jwt=incookie</code>, e.g.
+<code>para.signin_success = &quot;http://success.url?jwt=incookie&quot;</code>. This will make Para pass the token inside a cookie header with
+name <code>appid-auth</code> where <code>appid</code> is the app identifier of your client application. For example, the header for an app like
+Scoold will look like <code>Cookie: scoold-auth={jwt_value}</code>.</p>
+<p>Support for logging in with Slack accounts is implemented by the <code>SlackAuthFilter</code>.
+This filter responds to requests at <code>/slack_auth</code>.</p>
+<p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
+the default (root) app will be used as authentication target.</p>
+<p>To initiate a login with Slack just redirect the user to the Slack OAuth endpoint:</p>
+<pre><code>slack.com/oauth/authorize</code></pre><p>Pass the parameter <code>redirect_uri=/slack_auth?state=myapp</code> so Para can handle the response from Slack.</p>
+<p><strong>Note:</strong> You need to <a href="https://api.slack.com/apps">register a new application with Slack</a>
+in order to obtain an access and secret keys.</p>
+<p>Below is an example Javascript code for a Slack login button:</p>
+<pre><code class="language-js">$("#slackLoginBtn").click(function() {
+        window.location = "https://slack.com/oauth/authorize?" +
+                "response_type=code&amp;client_id={SLACK_APP_ID}" +
+                "&amp;scope=identity.basic%20identity.email%20identity.team%20identity.avatar&amp;state=" + APPID +
+                "&amp;redirect_uri=" + window.location.origin + "/slack_auth;
         return false;
 });</code></pre>
 
@@ -3685,6 +3755,10 @@ para.tw_secret = <span class="hljs-string">"..."</span></code></pre><p>Or add th
 }</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
 Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Another, slightly more secure, option to receive the JWT from Para is to set the query parameter <code>?jwt=incookie</code>, e.g.
+<code>para.signin_success = &quot;http://success.url?jwt=incookie&quot;</code>. This will make Para pass the token inside a cookie header with
+name <code>appid-auth</code> where <code>appid</code> is the app identifier of your client application. For example, the header for an app like
+Scoold will look like <code>Cookie: scoold-auth={jwt_value}</code>.</p>
 <p>Support for logging in with Twitter is implemented by the <code>TwitterAuthFilter</code>. This filter responds to requests at
 <code>/twitter_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -3953,6 +4027,7 @@ one of the following values:</p>
 <li><code>github</code> - sign in with GitHub account,</li>
 <li><code>linkedin</code> - sign in with LinkedIn account,</li>
 <li><code>microsoft</code> - sign in with Microsoft account,</li>
+<li><code>slack</code> - sign in with Slack account,</li>
 <li><code>password</code> - sign in with email and password.</li>
 <li><code>oauth2</code> - sign in with generic OAuth 2.</li>
 <li><code>ldap</code> - sign in with LDAP.</li>
@@ -5576,7 +5651,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>27 June 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>16 July 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2019
