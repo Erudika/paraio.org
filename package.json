@@ -37,9 +37,9 @@
     "grunt-contrib-watch": "^1.1.0",
     "handlebars-helper-mdpartial": "0.6.0",
     "helper-moment": "^0.2.0",
-    "highlight.js": "9.15.8",
-    "lodash": "4.17.11",
-    "marked": "^0.6.2",
+    "highlight.js": "9.15.9",
+    "lodash": "4.17.15",
+    "marked": "^0.7.0",
     "minimatch": "3.0.4"
   },
   "keywords": [
