@@ -25,11 +25,6 @@ If you want Para to generate a JWT token upon successful authentication, add the
 `signin_success` url. For example `{ "signin_success": "http://success.url?jwt=?" }`.
 Para will redirect the user back to your host URL with the generated access token.
 
-Another, slightly more secure, option to receive the JWT from Para is to set the query parameter `?jwt=incookie`, e.g.
-`para.signin_success = "http://success.url?jwt=incookie"`. This will make Para pass the token inside a cookie header with
-name `appid-auth` where `appid` is the app identifier of your client application. For example, the header for an app like
-Scoold will look like `Cookie: scoold-auth={jwt_value}`.
-
 Support for logging in with Google acoounts is implemented by the `GoogleAuthFilter`.
 This filter responds to requests at `/google_auth`.
 
