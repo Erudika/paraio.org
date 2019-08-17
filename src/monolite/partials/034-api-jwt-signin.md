@@ -1,5 +1,5 @@
 ---
-title: Sign in (JWT)
+title: Sign in (JWT, public)
 category: REST API
 path: /jwt_auth
 type: POST
