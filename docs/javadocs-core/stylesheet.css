@@ -89,7 +89,6 @@ Navigation bar styles
 }
 .topNav {
     float:left;
-    padding:0 20px;
     width:100%;
     clear:right;
     height:2.4em;
@@ -99,7 +98,6 @@ Navigation bar styles
 .bottomNav {
     margin-top:10px;
     float:left;
-    padding:0 20px;
     width:100%;
     clear:right;
     height:2.4em;
