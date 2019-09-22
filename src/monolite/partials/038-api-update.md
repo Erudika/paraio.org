@@ -18,6 +18,15 @@ decrements the `votes` field by 1.
 - `{type}` - the plural form of the object's type, e.g. "users"
 - `{id}` - the `id`
 
+A vote request body can look like this:
+```js
+{
+	"_voteup": "obj123",
+	"_vote_locked_after": 60,
+	"_vote_expires_after": 2592000
+}
+```
+
 ### Response
 
 - **status codes** - `200`, `400`, `404`, `412`, `500`, vote requests return `true` or `false`

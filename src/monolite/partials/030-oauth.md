@@ -65,7 +65,8 @@ You can configure the URLs for authentication success and failure in the configu
 You can also set all configuration properties through the [app settings API](#050-api-settings-put):
 ```
 {
-	"security.oauth.authz_url": "https://myidp.com/oauth/authorization",
+	"oa2_app_id": "some_appid",
+	"oa2_secret": "some_secret",
 	"security.oauth.token_url": "https://myidp.com/oauth/token",
 	"security.oauth.profile_url": "https://myidp.com/oauth/userinfo",
 	"security.oauth.scope": "openid email profile",
@@ -74,3 +75,18 @@ You can also set all configuration properties through the [app settings API](#05
 	"signin_failure": "http://failure.url"
 }
 ```
+
+You can add two additional custom OAuth 2.0/OpenID connect providers called "second" and "third". Here's what the settings
+look like for the "second" provider ("third" is identical but replace "second" with "third"):
+```
+{
+	"oa2second_app_id": "some_appid",
+	"oa2second_secret": "some_secret",
+	"security.oauthsecond.token_url": "https://myidp.com/oauth/token",
+	"security.oauthsecond.profile_url": "https://myidp.com/oauth/userinfo",
+	"security.oauthsecond.scope": "openid email profile",
+	...
+}
+```
+
+The endpoints for the "second" and "third" OAuth 2.0 providers are `/oauth2second_auth` and `/oauth2third_auth`, respectively.

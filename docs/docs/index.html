@@ -2177,7 +2177,9 @@ query objects within nested arrays with pinpoint precision, e.g. <code>?q=proper
 A nested query string query is detected if it contains a field with prefix <code>properties.*</code>.
 Examples of query string queries:</p>
 <pre><code>/v1/search?q=term AND properties.owner.age:[* TO <span class="hljs-number">34</span>]
-/v1/search?q=properties.owner.name:alice OR properties.owner.pets[<span class="hljs-number">1</span>].name=whiskers</code></pre><h3 id="calling-elasticsearch-through-the-proxy-endpoint">Calling Elasticsearch through the proxy endpoint</h3>
+/v1/search?q=properties.owner.name:alice OR properties.owner.pets[<span class="hljs-number">1</span>].name=whiskers</code></pre><p><strong>Note:</strong> Sorting on nested fields works only with numeric data. For example, sorting on a field <code>properties.year</code> will
+work, but sorting on <code>properties.month</code> won’t (applicable only to the “nested” mode).</p>
+<h3 id="calling-elasticsearch-through-the-proxy-endpoint">Calling Elasticsearch through the proxy endpoint</h3>
 <p>You can directly call the Elasticsearch API through <code>/v1/_elasticsearch</code>. To enable it, set <code>para.es.proxy_enabled = true</code>.
 Then you must specify the <code>path</code> parameter corresponds to the Elasticsearch API resource path. This is done for every
 <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>PATCH</code> or <code>DELETE</code> request to Elasticsearch. The endpoint accepts request to either
@@ -3063,8 +3065,10 @@ properties as they are ignored. Also set <code>para.aws_access_key</code> and <c
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">stopPolling</span><span class="hljs-params">()</span></span>;
 }</code></pre>
 <p>Currently this interface is implemented by the <code>AWSQueue</code> class which relies on the AWS Simple Queue Service, and by
-<code>LocalQueue</code> which is based on a <code>ConcurrentLinkedQueue</code>.</p>
-<h3 id="awsqueue">AWSQueue</h3>
+<code>LocalQueue</code> which is based on a <code>ConcurrentLinkedQueue</code>. The implementation to load is configurable through:</p>
+<pre><code>para.q = &quot;sqs&quot;
+# or
+para.q = &quot;local&quot;</code></pre><h3 id="awsqueue">AWSQueue</h3>
 <p>The AWS SQS plugin uses Amazon’s SQS as a river by long polling for messages from a given queue.
 This particular implementation was adapted from an earlier project called
 <a href="https://github.com/albogdano/elasticsearch-river-amazonsqs">elasticsearch-river-amazonsqs</a>.</p>
@@ -3438,14 +3442,25 @@ inside the user object’s <code>password</code> field and sent for validation t
 <p>You can configure the URLs for authentication success and failure in the configuration file (see <a href="#005-config">the config</a>)</p>
 <p>You can also set all configuration properties through the <a href="#050-api-settings-put">app settings API</a>:</p>
 <pre><code>{
-    <span class="hljs-string">"security.oauth.authz_url"</span>: <span class="hljs-string">"https://myidp.com/oauth/authorization"</span>,
+    <span class="hljs-string">"oa2_app_id"</span>: <span class="hljs-string">"some_appid"</span>,
+    <span class="hljs-string">"oa2_secret"</span>: <span class="hljs-string">"some_secret"</span>,
     <span class="hljs-string">"security.oauth.token_url"</span>: <span class="hljs-string">"https://myidp.com/oauth/token"</span>,
     <span class="hljs-string">"security.oauth.profile_url"</span>: <span class="hljs-string">"https://myidp.com/oauth/userinfo"</span>,
     <span class="hljs-string">"security.oauth.scope"</span>: <span class="hljs-string">"openid email profile"</span>,
     ...
     <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>,
     <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
-}</code></pre>
+}</code></pre><p>You can add two additional custom OAuth 2.0/OpenID connect providers called “second” and “third”. Here’s what the settings
+look like for the “second” provider (“third” is identical but replace “second” with “third”):</p>
+<pre><code>{
+    <span class="hljs-string">"oa2second_app_id"</span>: <span class="hljs-string">"some_appid"</span>,
+    <span class="hljs-string">"oa2second_secret"</span>: <span class="hljs-string">"some_secret"</span>,
+    <span class="hljs-string">"security.oauthsecond.token_url"</span>: <span class="hljs-string">"https://myidp.com/oauth/token"</span>,
+    <span class="hljs-string">"security.oauthsecond.profile_url"</span>: <span class="hljs-string">"https://myidp.com/oauth/userinfo"</span>,
+    <span class="hljs-string">"security.oauthsecond.scope"</span>: <span class="hljs-string">"openid email profile"</span>,
+    ...
+}</code></pre><p>The endpoints for the “second” and “third” OAuth 2.0 providers are <code>/oauth2second_auth</code> and <code>/oauth2third_auth</code>, respectively.</p>
+
 				</section>
 			</article>
 			<a id="030-openid" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
@@ -3848,7 +3863,8 @@ An encoded token looks like this:</p>
 }</code></pre>
 <p>To authenticate with users with social login use the Para client:</p>
 <pre><code class="language-java">paraClient.signIn(String provider, String providerToken);</code></pre>
-<p>Supported providers are <code>facebook</code>, <code>google</code>, <code>twitter</code>, <code>github</code>, <code>linkedin</code>, <code>microsoft</code>, <code>password</code>, <code>oauth2</code>, <code>ldap</code>.</p>
+<p>Supported providers are <code>facebook</code>, <code>google</code>, <code>twitter</code>, <code>github</code>, <code>linkedin</code>, <code>microsoft</code>, <code>slack</code>, <code>password</code>,
+<code>oauth2</code>, <code>oauth2second</code>, <code>oauth2third</code>, <code>ldap</code>.</p>
 <p>You will have to add the API credentials for each of these in your <code>application.conf</code> configuration file:</p>
 <pre><code class="language-bash"><span class="hljs-comment"># facebook</span>
 para.fb_app_id = <span class="hljs-string">"..."</span>
@@ -3868,9 +3884,18 @@ para.gh_secret = <span class="hljs-string">"..."</span>
 <span class="hljs-comment"># microsoft</span>
 para.ms_app_id = <span class="hljs-string">"..."</span>
 para.ms_secret = <span class="hljs-string">"..."</span>
+<span class="hljs-comment"># slack</span>
+para.sl_app_id = <span class="hljs-string">"..."</span>
+para.sl_secret = <span class="hljs-string">"..."</span>
 <span class="hljs-comment"># generic oauth2</span>
 para.oa2_app_id = <span class="hljs-string">"..."</span>
-para.oa2_secret = <span class="hljs-string">"..."</span></code></pre>
+para.oa2_secret = <span class="hljs-string">"..."</span>
+<span class="hljs-comment"># second generic oauth2</span>
+para.oa2second_app_id = <span class="hljs-string">"..."</span>
+para.oa2second_secret = <span class="hljs-string">"..."</span>
+<span class="hljs-comment"># third generic oauth2</span>
+para.oa2third_app_id = <span class="hljs-string">"..."</span>
+para.oa2third_secret = <span class="hljs-string">"..."</span></code></pre>
 <p>For example calling <code>paraClient.signIn(&quot;facebook&quot;, &quot;facebook_access_token&quot;)</code> should return a new <code>User</code> object and would
 store the JWT token in memory. To get an access token from Facebook, use their JavaScript SDK.</p>
 <p>After you call <code>paraClient.signIn()</code> and the request succeeds, the client caches the access token and <strong>all subsequent
@@ -3998,6 +4023,8 @@ one of the following values:</p>
 <li><code>slack</code> - sign in with Slack account,</li>
 <li><code>password</code> - sign in with email and password.</li>
 <li><code>oauth2</code> - sign in with generic OAuth 2.</li>
+<li><code>oauth2second</code> - sign in with “second” generic OAuth 2 provider.</li>
+<li><code>oauth2third</code> - sign in with “third” generic OAuth 2 provider.</li>
 <li><code>ldap</code> - sign in with LDAP.</li>
 </ul>
 <h3 id="response">Response</h3>
@@ -4270,6 +4297,12 @@ decrements the <code>votes</code> field by 1.</p>
 <li><code>{type}</code> - the plural form of the object’s type, e.g. “users”</li>
 <li><code>{id}</code> - the <code>id</code></li>
 </ul>
+<p>A vote request body can look like this:</p>
+<pre><code class="language-js">{
+    <span class="hljs-string">"_voteup"</span>: <span class="hljs-string">"obj123"</span>,
+    <span class="hljs-string">"_vote_locked_after"</span>: <span class="hljs-number">60</span>,
+    <span class="hljs-string">"_vote_expires_after"</span>: <span class="hljs-number">2592000</span>
+}</code></pre>
 <h3 id="response">Response</h3>
 <ul>
 <li><strong>status codes</strong> - <code>200</code>, <code>400</code>, <code>404</code>, <code>412</code>, <code>500</code>, vote requests return <code>true</code> or <code>false</code></li>
@@ -5619,7 +5652,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>17 August 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>22 September 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2019

@@ -49,6 +49,8 @@ one of the following values:
 - `slack` - sign in with Slack account,
 - `password` - sign in with email and password.
 - `oauth2` - sign in with generic OAuth 2.
+- `oauth2second` - sign in with "second" generic OAuth 2 provider.
+- `oauth2third` - sign in with "third" generic OAuth 2 provider.
 - `ldap` - sign in with LDAP.
 
 ### Response

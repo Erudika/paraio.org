@@ -205,6 +205,8 @@ Examples of query string queries:
 /v1/search?q=term AND properties.owner.age:[* TO 34]
 /v1/search?q=properties.owner.name:alice OR properties.owner.pets[1].name=whiskers
 ```
+**Note:** Sorting on nested fields works only with numeric data. For example, sorting on a field `properties.year` will
+work, but sorting on `properties.month` won't (applicable only to the "nested" mode).
 
 ### Calling Elasticsearch through the proxy endpoint
 

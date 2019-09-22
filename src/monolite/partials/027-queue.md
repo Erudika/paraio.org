@@ -17,7 +17,12 @@ public interface Queue {
 ```
 
 Currently this interface is implemented by the `AWSQueue` class which relies on the AWS Simple Queue Service, and by
-`LocalQueue` which is based on a `ConcurrentLinkedQueue`.
+`LocalQueue` which is based on a `ConcurrentLinkedQueue`. The implementation to load is configurable through:
+```
+para.q = "sqs"
+# or
+para.q = "local"
+```
 
 ### AWSQueue
 
