@@ -80,7 +80,7 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>
 
 `para.app_secret_key`				</td><td>md5('paraseckey')</td></tr>
-		<tr><td>Para secret key. Set this to a long secure random string. Used for salting other secrets and tokens. </td><td></td></tr>
+		<tr><td>Para secret key. Set this to a long secure random string. Used for salting other secrets and tokens and for generating and verifying JWTs, remember me tokens, etc.. </td><td></td></tr>
 		<tr><td>
 
 `para.core_package_name`		</td><td>-</td></tr>

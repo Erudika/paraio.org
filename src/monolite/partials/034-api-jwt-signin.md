@@ -52,6 +52,7 @@ one of the following values:
 - `oauth2second` - sign in with "second" generic OAuth 2 provider.
 - `oauth2third` - sign in with "third" generic OAuth 2 provider.
 - `ldap` - sign in with LDAP.
+- `passwordless` - sign in with an external authentication provider (custom SSO)
 
 ### Response
 

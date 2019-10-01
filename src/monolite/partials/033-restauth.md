@@ -104,7 +104,7 @@ To authenticate with users with social login use the Para client:
 paraClient.signIn(String provider, String providerToken);
 ```
 Supported providers are `facebook`, `google`, `twitter`, `github`, `linkedin`, `microsoft`, `slack`, `password`,
-`oauth2`, `oauth2second`, `oauth2third`, `ldap`.
+`oauth2`, `oauth2second`, `oauth2third`, `ldap`, `passwordless`.
 
 You will have to add the API credentials for each of these in your `application.conf` configuration file:
 ```bash

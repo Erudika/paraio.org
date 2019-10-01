@@ -35,7 +35,7 @@ para.security.allow_unverified_emails = false
 para.clients_can_access_root_app = true
 # if false caching is disabled
 para.cache_enabled = true
-# root app secret, used for token generation, should be a random string
+# a secret used for generating and verifying remember me tokens, JWTs. should be a long random string
 para.app_secret_key = "b8db69a24a43f2ce134909f164a45263"
 # enable API request signature verification
 para.security.api_security = true
