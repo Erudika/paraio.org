@@ -3156,8 +3156,9 @@ For apps other than the root app use <code>/passwordless_auth?appid=myapp</code>
 </ul>
 <p>The JWT signature is verified using the secret key value which you provide in your configuration:</p>
 <pre><code>para.app_secret_key = <span class="hljs-string">"change_to_long_random_string"</span></code></pre><p>This key must be at least 32 symbols in length and random. <strong>This key is different from the Para secret key for your app.</strong>
-The JWT should have a short validity period (e.g. 10 min). Once you generate the JWT on your backend (step 4 above),
-redirect the successful login request back to Para:</p>
+The JWT should have a short validity period (e.g. 10 min). The JWT should also contain the claims <code>iat</code> and <code>exp</code> and
+optionally <code>nbf</code>.</p>
+<p>Once you generate the JWT on your backend (step 4 above), redirect the successful login request back to Para:</p>
 <pre><code>GET https:<span class="hljs-comment">//para-host/passwordless_auth?token=eyJhbGciOiJIUzI1NiI..</span></code></pre>
 				</section>
 			</article>
@@ -5688,7 +5689,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>01 October 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>21 October 2019</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2019

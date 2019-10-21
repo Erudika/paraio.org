@@ -35,8 +35,10 @@ The JWT signature is verified using the secret key value which you provide in yo
 para.app_secret_key = "change_to_long_random_string"
 ```
 This key must be at least 32 symbols in length and random. **This key is different from the Para secret key for your app.**
-The JWT should have a short validity period (e.g. 10 min). Once you generate the JWT on your backend (step 4 above),
-redirect the successful login request back to Para:
+The JWT should have a short validity period (e.g. 10 min). The JWT should also contain the claims `iat` and `exp` and
+optionally `nbf`.
+
+Once you generate the JWT on your backend (step 4 above), redirect the successful login request back to Para:
 ```
 GET https://para-host/passwordless_auth?token=eyJhbGciOiJIUzI1NiI..
 ```
