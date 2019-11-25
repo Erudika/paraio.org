@@ -70,6 +70,12 @@ This property can have multiple values separated by `|`, e.g. `uid={0}|cn={0}`.<
 		<tr><td>The password attribute in the directory</td></tr>
 		<tr><td>
 
+`para.security.ldap.username_as_name`</td><td>
+
+`false`</td></tr>
+		<tr><td>Use a person's username as their name</td></tr>
+		<tr><td>
+
 `para.security.ldap.active_directory_domain`</td><td>-</td></tr>
 		<tr><td>The domain name for AD server. If blank (defaut) AD is disabled.</td></tr>
 		<tr><td>
