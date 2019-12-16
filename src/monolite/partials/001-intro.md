@@ -45,11 +45,13 @@ para.worker_id = 1
 
 1. [Download the JAR](https://github.com/erudika/para/releases)
 2. Run it with `java -jar -Dconfig.file=./application.conf para-*.jar`
-3. Call `curl localhost:8080/v1/_setup` to get the access and secret keys for the root app (required)
-4. Install `para-cli` tool for easy access `npm install -g para-cli` (optional)
-5. Create a new "child" app for regular use (optional):
+3. Call `curl localhost:8080/v1/_setup` and save the access and secret keys for the root app (important!)
+4. Install `para-cli` tool for easy access `$ npm install -g para-cli`
+5. Configure `para-cli` with `$ para-cli setup`
+6. Create a new "child" app for regular use:
 ```bash
-$ para-cli new-app "myapp" --name "My App" --endpoint "http://localhost:8080" --accessKey "app:para" --secretKey "{secret key for root app}"
+$ para-cli new-app "myapp" --name "My App" --endpoint "http://localhost:8080" \
+	--accessKey "app:para" --secretKey "{root app secret}"
 ```
 6. Open the [Para Web Console](https://console.paraio.org) or use one of the provided
 client libraries below to connect to the API.
