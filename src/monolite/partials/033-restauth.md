@@ -227,3 +227,5 @@ Open up Postman and in the "Authorization" tab choose "AWS Signature":
  This should always be `para`.</td></tr>
 	</tbody>
 </table>
+
+**Make sure you don't have extra headers** in your requests because Postman is known to calculate invalid signatures for such requests.
