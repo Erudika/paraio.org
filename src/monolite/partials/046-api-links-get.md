@@ -13,8 +13,8 @@ the request is treated as a "many-to-many" search request.
 
 ### Request
 
-- `{type}` - the type of the first object, e.g. "users"
-- `{id}` - the `id` of the first object
+- `{type}` - the type of the first object, e.g. "users" (required)
+- `{id}` - the `id` of the first object (required)
 - `{type2}` - the `type` of the second object (required)
 - `{id2}` - the `id` field of the second object (optional)
 
@@ -39,7 +39,7 @@ the data inside a `Linker` is.
 
 - **status codes** - `200`, `400` (if `type` parameter is missing)
 
-Example response if `id` is missing:
+Example response if `id2` is missing:
 
 ```js
 {
@@ -50,4 +50,4 @@ Example response if `id` is missing:
 	]
 }
 ```
-Response if `id` is specified: `true` or `false`
+Response if `id2` is specified: `true` or `false`

@@ -4771,8 +4771,8 @@ It will do asearch for child objects directly connected to their parent by the <
 the request is treated as a “many-to-many” search request.</p>
 <h3 id="request">Request</h3>
 <ul>
-<li><code>{type}</code> - the type of the first object, e.g. “users”</li>
-<li><code>{id}</code> - the <code>id</code> of the first object</li>
+<li><code>{type}</code> - the type of the first object, e.g. “users” (required)</li>
+<li><code>{id}</code> - the <code>id</code> of the first object (required)</li>
 <li><code>{type2}</code> - the <code>type</code> of the second object (required)</li>
 <li><code>{id2}</code> - the <code>id</code> field of the second object (optional)</li>
 </ul>
@@ -4800,7 +4800,7 @@ the data inside a <code>Linker</code> is.</li>
 <li><p><strong>status codes</strong> - <code>200</code>, <code>400</code> (if <code>type</code> parameter is missing)</p>
 </li>
 </ul>
-<p>Example response if <code>id</code> is missing:</p>
+<p>Example response if <code>id2</code> is missing:</p>
 <pre><code class="language-js">{
     <span class="hljs-string">"page"</span>:X,
     <span class="hljs-string">"totalHits"</span>:Y,
@@ -4808,7 +4808,7 @@ the data inside a <code>Linker</code> is.</li>
         ...
     ]
 }</code></pre>
-<p>Response if <code>id</code> is specified: <code>true</code> or <code>false</code></p>
+<p>Response if <code>id2</code> is specified: <code>true</code> or <code>false</code></p>
 
 				</section>
 			</article>
@@ -5698,7 +5698,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>13 January 2020</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>16 January 2020</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2020
