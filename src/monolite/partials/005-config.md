@@ -402,6 +402,11 @@ Here's a list of all configuration properties that can be set in the config file
 		This is applicable when `paraClient.signIn()` is used. By default, they have unlimited access. </td><td></td></tr>
 		<tr><td>
 
+`para.debug_request_signatures`										</td><td> `false` </td></tr>
+		<tr><td>Prints out the request signature (AWS V4) for each request, both the incoming signature from clients
+		and the one calculated by the server. </td><td></td></tr>
+		<tr><td>
+
 `para.s3.bucket`										</td><td> `org.paraio.files` </td></tr>
 		<tr><td>The S3 bucket where files will be stored by `FileStore` implementations. </td><td></td></tr>
 		<tr><td>
