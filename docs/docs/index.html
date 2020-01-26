@@ -1983,11 +1983,11 @@ open up the web console where you can open the Para DB file. The default credent
 to access an H2 database with a version incompatible with the H2 version used by the <code>para-dao-sql</code> plugin.
 You can either downgrade the plugin version or migrate the H2 database to the new version.</p>
 <p>Migrating an old version of the H2 database to a new one requires you to first backup the data using the
-<strong>old</strong> H2 engine JAR, then restore the data using the <strong>new</strong> engin JAR like so:</p>
+<strong>old</strong> H2 engine JAR, then restore the data using the <strong>new</strong> engine JAR like so:</p>
 <ol>
 <li>Stop Para</li>
 <li>Open a terminal in the <code>para_folder/data</code> directory</li>
-<li>Execute:<pre><code class="language-sh">$ java -cp h2-{OLD_H2_VERSION}.jar org.h2.tools.Script -url jdbc:h2:./para -user para -password secret -script para.zip -options compression zip
+<li>Download the H2 JARs and execute:<pre><code class="language-sh">$ java -cp h2-{OLD_H2_VERSION}.jar org.h2.tools.Script -url jdbc:h2:./para -user para -password secret -script para.zip -options compression zip
 $ rm para.mv.db para.trace.db
 $ java -cp h2-{NEW_H2_VERSION}.jar org.h2.tools.RunScript -url jdbc:h2:./para -user para -password secret -script para.zip -options compression zip</code></pre>
 </li>
