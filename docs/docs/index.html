@@ -1987,9 +1987,12 @@ You can either downgrade the plugin version or migrate the H2 database to the ne
 <ol>
 <li>Stop Para</li>
 <li>Open a terminal in the <code>para_folder/data</code> directory</li>
-<li>Download the H2 JARs and execute:<pre><code class="language-sh">$ java -cp h2-{OLD_H2_VERSION}.jar org.h2.tools.Script -url jdbc:h2:./para -user para -password secret -script para.zip -options compression zip
-$ rm para.mv.db para.trace.db
-$ java -cp h2-{NEW_H2_VERSION}.jar org.h2.tools.RunScript -url jdbc:h2:./para -user para -password secret -script para.zip -options compression zip</code></pre>
+<li>Download the H2 JARs and backup the <code>para</code> database:<pre><code class="language-sh">$ java -cp h2-{OLD_H2_VERSION}.jar org.h2.tools.Script -url jdbc:h2:./para -user para -password secret -script para.sql</code></pre>
+</li>
+<li>Delete the old files and create a new <code>para</code> database using the Shell tool:<pre><code class="language-sh">$ rm para.mv.db para.trace.db
+$ java -cp h2-{NEW_H2_VERSION}.jar org.h2.tools.Shell</code></pre>
+</li>
+<li>Restore the backup to the newly created <code>para</code> database<pre><code class="language-sh">$ java -cp h2-{NEW_H2_VERSION}.jar org.h2.tools.RunScript -url jdbc:h2:./para -user para -password secret -script para.sql</code></pre>
 </li>
 <li>Start Para again</li>
 </ol>
@@ -5717,7 +5720,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>26 January 2020</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>27 January 2020</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2020
