@@ -165,6 +165,13 @@ pc.me();
 		</a>
 	</div>
 </div>
+<div class="row">
+  <div class="col-sm-4 text-center">
+		<a href="https://github.com/Erudika/para-client-python" class="btn-client">
+			<i class="devicon-python-plain-wordmark"></i>
+		</a>
+	</div>
+</div>
 
 ### Building Para
 
