@@ -166,7 +166,7 @@ pc.me();
 	</div>
 </div>
 <div class="row">
-  <div class="col-sm-4 text-center">
+  <div class="col-sm-12 text-center">
 		<a href="https://github.com/Erudika/para-client-python" class="btn-client">
 			<i class="devicon-python-plain-wordmark"></i>
 		</a>
