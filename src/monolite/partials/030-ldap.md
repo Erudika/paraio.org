@@ -80,6 +80,14 @@ This property can have multiple values separated by `|`, e.g. `uid={0}|cn={0}`.<
 		<tr><td>The domain name for AD server. If blank (defaut) AD is disabled.</td></tr>
 		<tr><td>
 
+`para.security.ldap.mods_group_node`</td><td>-</td></tr>
+		<tr><td>Maps LDAP node like `cn=Mods` to Para user group `mods`.</td></tr>
+		<tr><td>
+
+`para.security.ldap.admins_group_node`</td><td>-</td></tr>
+		<tr><td>Maps LDAP node like `cn=Admins` to Para user group `admins`.</td></tr>
+		<tr><td>
+
 `para.security.ldap.compare_passwords`</td><td>-</td></tr>
 		<tr><td>If set to any value, will switch to password comparison strategy instead of default "bind" method.</td></tr>
 	</tbody>
