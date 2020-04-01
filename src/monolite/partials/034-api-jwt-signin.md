@@ -47,6 +47,7 @@ one of the following values:
 - `linkedin` - sign in with LinkedIn account,
 - `microsoft` - sign in with Microsoft account,
 - `slack` - sign in with Slack account,
+- `amazon` - sign in with Amazon account,
 - `password` - sign in with email and password.
 - `oauth2` - sign in with generic OAuth 2.
 - `oauth2second` - sign in with "second" generic OAuth 2 provider.

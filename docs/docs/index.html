@@ -162,6 +162,7 @@
 							<li class=""><a href="#031-microsoft">Microsoft support</a></li>
 							<li class=""><a href="#031-slack">Slack support</a></li>
 							<li class=""><a href="#031-twitter">Twitter support</a></li>
+							<li class=""><a href="#032-amazon">Amazon support</a></li>
 							<li class=""><a href="#032-roles">Groups and roles</a></li>
 							<li class=""><a href="#033-csrf">CSRF protection</a></li>
 				</ul>
@@ -1639,7 +1640,28 @@ X-Webhook-Signature: FFEma4/Uc5gGCs974cJNa873kzsumFgqPGVIGOEexmY=
     <span class="hljs-string">"event"</span>: <span class="hljs-string">"create"</span>,
     <span class="hljs-string">"timestamp"</span>: <span class="hljs-number">1486848081865</span>,
     <span class="hljs-string">"items"</span>: [{}, ...]
-}</code></pre><p>The receiving party should verify the signature of each payload by computing <code>Base64(HmacSHA256(payloadJson, secret))</code>.</p>
+}</code></pre><p>The receiving party should verify the signature of each payload by computing <code>Base64(HmacSHA256(payload, secret))</code>.</p>
+<h3 id="custom-events">Custom events</h3>
+<p>In addition to the standard <code>create</code>, <code>update</code>, <code>delete</code> events you can create webhooks which are subscribed to custom
+events. For example you can have a webhook which is subscribed to events like <code>post.like</code> or <code>user.mention</code>. These events
+are triggered from the code of your application using the Para API. Let’s say we have a post which is liked by someone -
+the code which handles the like event will notify Para that <code>post.like</code> has occured along with a custom payload, in this
+case the post object and the object of the user who liked the post. Para will then dispatch that payload to the appropriate
+target URLs (subscribers). Custom events allow you to create applications which follow the best practices of
+<a href="https://resthooks.org/">RESTHooks</a> and this makes it easy to integrate them with other applications (see Zapier).
+Here’s an example request which would trigger a custom event <code>post.like</code> via the API:</p>
+<pre><code>POST /v1/webhooks
+{
+    <span class="hljs-string">"triggeredEvent"</span>: <span class="hljs-string">"post.like"</span>,
+    <span class="hljs-string">"customPayload"</span>: {
+        <span class="hljs-string">"post_id"</span>: <span class="hljs-string">"5129509320"</span>,
+        <span class="hljs-string">"title"</span>: <span class="hljs-string">"Hello world"</span>,
+        <span class="hljs-string">"liked_by"</span>: {
+            <span class="hljs-string">"user_id"</span>: <span class="hljs-string">"581703234"</span>,
+            <span class="hljs-string">"name"</span>: <span class="hljs-string">"Gordon"</span>
+        }
+    }
+}</code></pre><p>The response object returned from this request should be ignored.</p>
 
 				</section>
 			</article>
@@ -3839,6 +3861,47 @@ The Twitter API does not share users’ emails by default, you have to ask Twitt
 
 				</section>
 			</article>
+			<a id="032-amazon" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Amazon support</h2>
+				<section class="body  img-rounded">
+					<blockquote>
+<p>This describes the web authentication flow with Amazon. You could also login with an existing access token from
+Amazon <a href="#034-api-jwt-signin">through the API</a>. This web flow sets a cookie, the API returns a JWT instead.</p>
+</blockquote>
+<p>First of all you need to have your API credentials ready by creating an app on Amazon.
+Then add them to your <code>application.conf</code> configuration file:</p>
+<pre><code>para.az_app_id = <span class="hljs-string">"..."</span>
+para.az_secret = <span class="hljs-string">"..."</span>
+para.security.signin_success = <span class="hljs-string">"http://success.url"</span>
+para.security.signin_failure = <span class="hljs-string">"http://failure.url"</span></code></pre><p>Or add these through the <a href="#050-api-settings-put">app settings API</a>:</p>
+<pre><code>{
+    <span class="hljs-string">"az_app_id"</span>: <span class="hljs-string">"..."</span>
+    <span class="hljs-string">"az_secret"</span>: <span class="hljs-string">"..."</span>
+    <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>
+    <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
+}</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
+<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
+Para will redirect the user back to your host URL with the generated access token.</p>
+<p>Support for logging in with Amazon accounts is implemented by the <code>AmazonAuthFilter</code>.
+This filter responds to requests at <code>/amazon_auth</code>.</p>
+<p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
+the default (root) app will be used as authentication target.</p>
+<p>To initiate a login with Amazon just redirect the user to the Amazon OAuth endpoint:</p>
+<pre><code>www.amazon.com/ap/oa</code></pre><p>Pass the parameter <code>redirect_uri=/amazon_auth?state=myapp</code> so Para can handle the response from Amazon.</p>
+<p><strong>Note:</strong> You need to <a href="https://developer.amazon.com/loginwithamazon/console/site/lwa/overview.html">register a new application with Amazon</a>
+in order to obtain an access and secret keys.</p>
+<p>Below is an example Javascript code for a Amazon login button:</p>
+<pre><code class="language-js">$(<span class="hljs-string">"#amazonLoginBtn"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">window</span>.location = <span class="hljs-string">"https://www.amazon.com/ap/oa?"</span> +
+                <span class="hljs-string">"response_type=code&amp;client_id="</span> + AMAZON_APP_ID +
+                <span class="hljs-string">"&amp;scope=profile&amp;state="</span> + APPID +
+                <span class="hljs-string">"&amp;redirect_uri="</span> + ENDPOINT + <span class="hljs-string">"/amazon_auth"</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+});</code></pre>
+
+				</section>
+			</article>
 			<a id="032-roles" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
 			<article class=" img-rounded">
 					<h2>Groups and roles</h2>
@@ -4101,6 +4164,7 @@ one of the following values:</p>
 <li><code>linkedin</code> - sign in with LinkedIn account,</li>
 <li><code>microsoft</code> - sign in with Microsoft account,</li>
 <li><code>slack</code> - sign in with Slack account,</li>
+<li><code>amazon</code> - sign in with Amazon account,</li>
 <li><code>password</code> - sign in with email and password.</li>
 <li><code>oauth2</code> - sign in with generic OAuth 2.</li>
 <li><code>oauth2second</code> - sign in with “second” generic OAuth 2 provider.</li>
@@ -5733,7 +5797,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>25 March 2020</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>01 April 2020</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2020

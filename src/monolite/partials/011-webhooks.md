@@ -87,4 +87,31 @@ The format of the message is this:
 }
 ```
 
-The receiving party should verify the signature of each payload by computing `Base64(HmacSHA256(payloadJson, secret))`.
+The receiving party should verify the signature of each payload by computing `Base64(HmacSHA256(payload, secret))`.
+
+### Custom events
+
+In addition to the standard `create`, `update`, `delete` events you can create webhooks which are subscribed to custom
+events. For example you can have a webhook which is subscribed to events like `post.like` or `user.mention`. These events
+are triggered from the code of your application using the Para API. Let's say we have a post which is liked by someone -
+the code which handles the like event will notify Para that `post.like` has occured along with a custom payload, in this
+case the post object and the object of the user who liked the post. Para will then dispatch that payload to the appropriate
+target URLs (subscribers). Custom events allow you to create applications which follow the best practices of
+[RESTHooks](https://resthooks.org/) and this makes it easy to integrate them with other applications (see Zapier).
+Here's an example request which would trigger a custom event `post.like` via the API:
+
+```
+POST /v1/webhooks
+{
+	"triggeredEvent": "post.like",
+	"customPayload": {
+		"post_id": "5129509320",
+		"title": "Hello world",
+		"liked_by": {
+			"user_id": "581703234",
+			"name": "Gordon"
+		}
+	}
+}
+```
+The response object returned from this request should be ignored.
