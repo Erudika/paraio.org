@@ -38,7 +38,7 @@
     "handlebars-helper-mdpartial": "0.6.0",
     "helper-moment": "^0.2.0",
     "highlight.js": "9.15.9",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "marked": "^0.7.0",
     "minimatch": "3.0.4"
   },
