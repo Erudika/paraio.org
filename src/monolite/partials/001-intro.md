@@ -95,13 +95,16 @@ $ docker run -ti -p 8080:8080 --rm -v para-data:/para/data \
 
 To use plugins, create a new `Dockerfile-plugins` which does a multi-stage build like so:
 ```
-# change X.Y.Z with latest tag
-FROM erudikaltd/para:vX.Y.Z-base
-
-FROM erudikaltd/para-dao-mongodb:X.Y.Z
+# change X.Y.Z to the version you want to use
+FROM erudikaltd/para:v1.XY.Z-base AS base
+FROM erudikaltd/para-search-lucene:1.XY.Z AS search
+FROM erudikaltd/para-dao-mongodb:1.XY.Z AS dao
+FROM base AS final
+COPY --from=search /para/lib/*.jar /para/lib
+COPY --from=dao /para/lib/*.jar /para/lib
 ```
 
-Then simply run `$ docker build -f Dockerfile-plugins -t ParaMongo`.
+Then simply run `$ docker build -f Dockerfile-plugins -t para-mongo .`
 
 ### Maven
 
