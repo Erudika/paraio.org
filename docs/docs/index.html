@@ -154,7 +154,6 @@
 							<li class=""><a href="#029-saml">SAML support</a></li>
 							<li class=""><a href="#030-ldap">LDAP support</a></li>
 							<li class=""><a href="#030-oauth">OAuth 2.0 support</a></li>
-							<li class=""><a href="#030-openid">OpenID support</a></li>
 							<li class=""><a href="#031-facebook">Facebook support</a></li>
 							<li class=""><a href="#031-github">GitHub support</a></li>
 							<li class=""><a href="#031-google">Google support</a></li>
@@ -208,6 +207,8 @@
 							<li class="POST"><a href="#051-api-newkeys">Reset API keys</a></li>
 							<li class="GET"><a href="#052-api-utils">Utilities</a></li>
 							<li class="POST"><a href="#053-api-reindex">Rebuild index</a></li>
+							<li class="GET"><a href="#054-api-export">Data Export</a></li>
+							<li class="PUT"><a href="#054-api-import">Data Import</a></li>
 				</ul>
 			</li>
 	</ul>
@@ -3565,22 +3566,6 @@ look like for the “second” provider (“third” is identical but replace �
 
 				</section>
 			</article>
-			<a id="030-openid" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-			<article class=" img-rounded">
-					<h2>OpenID support</h2>
-				<section class="body  img-rounded">
-					<p><strong>DEPRECATED</strong></p>
-<p><strong>Note</strong>: OpenID 2.0 is no longer supported by Google, and we recommend using one of the other authentication providers
-or JWT-based authentication.</p>
-<p>Support for OpenID authentication is implemented by the <code>OpenIDAuthFilter</code>. The default URL for this filter is
-<code>/openid_auth</code>.</p>
-<p>The filter takes a request with the <code>openid_identifier</code> parameter and redirects the user to their OpenID provider for
-verification. Once the user’s identity is verified, the provider redirects the user back to our filter and the user gets
-either logged in or registered.</p>
-<p>You can configure the URLs for authentication success and failure in the configuration file (see <a href="#005-config">the config</a>)</p>
-
-				</section>
-			</article>
 			<a id="031-facebook" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
 			<article class=" img-rounded">
 					<h2>Facebook support</h2>
@@ -5792,6 +5777,72 @@ This operation is synchronous - the request will return a response once reindexi
 
 				</section>
 			</article>
+			<a id="054-api-export" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="GET img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-success">GET</span>
+								<span class="gray">
+									/v1/_export 
+								</span>
+							</code>
+							<span class="hidden-xs">Data Export</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Exports a ZIP backup archive of all the data in a Para app. The archive contains multiple JSON files
+containing the Para objects.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><code>{method}</code> - the name of the method to call (one of the above)</li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns <code>application/zip</code> response - the ZIP backup file.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code></li>
+</ul>
+
+				</section>
+			</article>
+			<a id="054-api-import" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="PUT img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-warning">PUT</span>
+								<span class="gray">
+									/v1/_import 
+								</span>
+							</code>
+							<span class="hidden-xs">Data Import</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Imports a ZIP backup archive into an app, overwriting all existing objects.</p>
+<h3 id="request">Request</h3>
+<p>Accepts only a <code>application/zip</code> request body which should be a previously exported ZIP backup file.</p>
+<h4 id="parameters">Parameters</h4>
+<ul>
+<li><code>filename</code> - the name of the file which is being restored. This will be saved as a record of the executed import job.</li>
+</ul>
+<h3 id="response">Response</h3>
+<p>Returns an import summary object as JSON.</p>
+<ul>
+<li><strong>status codes</strong> - <code>200</code>, <code>400</code> (if import job failed)</li>
+</ul>
+<p>Example response - returns the result without envelope:</p>
+<pre><code class="language-js">{
+  <span class="hljs-string">"id"</span>: <span class="hljs-string">"1232047097503551488"</span>,
+  <span class="hljs-string">"timestamp"</span>: <span class="hljs-number">1603827503065</span>,
+  <span class="hljs-string">"type"</span>: <span class="hljs-string">"paraimport"</span>,
+  <span class="hljs-string">"appid"</span>: <span class="hljs-string">"test1"</span>,
+  <span class="hljs-string">"count"</span>: <span class="hljs-number">4502</span>,
+  <span class="hljs-string">"name"</span>: <span class="hljs-string">"myapp_20201026_155306.zip"</span>
+}</code></pre>
+
+				</section>
+			</article>
 	</section>
 
 	<!-- Footer Content -->
@@ -5800,7 +5851,7 @@ This operation is synchronous - the request will return a response once reindexi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>15 September 2020</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>28 October 2020</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2020
