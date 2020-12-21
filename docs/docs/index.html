@@ -1798,8 +1798,11 @@ It simply executes all update requests in a sequence.</p>
 <p>The implementation adds a default prefix <code>para-</code> to DynamoDB tables, so if you have an app called “myapp” your table for
 that will be called <code>para-myapp</code>.</p>
 <p>This <code>DAO</code> implementation <strong>supports optimistic locking</strong> through conditional update expressions in DynamoDB.</p>
-<p>It also supports server-side encryption (SSE, encryption-at-rest). This is turned off by default. To turn it on, set:</p>
-<pre><code>para.dynamodb.sse_enabled = <span class="hljs-literal">true</span></code></pre><p><strong>Note:</strong> SSE will work for newly created tables only. Currently, you can’t enable encryption at rest on an existing table.
+<p>Server-side encryption (SSE, encryption-at-rest) is enabled by default for all tables.
+To switch between from AWS-owned CMK to using your account’s KMS, the following property:</p>
+<pre><code>para.dynamodb.sse_enabled = <span class="hljs-literal">true</span></code></pre><p>When this is <code>true</code>, your account’s KMS will be used for encrypting the data in the table, otherwise an AWS-owned CMK
+will be used. Defaults to <code>false</code>.
+<strong>Note:</strong> SSE will work for newly created tables only. Currently, you can’t enable encryption at rest on an existing table.
 After encryption at rest is enabled, it <strong>can’t</strong> be disabled.</p>
 <h3 id="table-sharing">Table sharing</h3>
 <p>In v1.21, we added new functionality to <code>AWSDynamoDAO</code> which enables apps to share the same table. This is useful
@@ -5851,7 +5854,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>27 November 2020</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>21 December 2020</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2020

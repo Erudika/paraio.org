@@ -15,10 +15,13 @@ that will be called `para-myapp`.
 
 This `DAO` implementation **supports optimistic locking** through conditional update expressions in DynamoDB.
 
-It also supports server-side encryption (SSE, encryption-at-rest). This is turned off by default. To turn it on, set:
+Server-side encryption (SSE, encryption-at-rest) is enabled by default for all tables.
+To switch between from AWS-owned CMK to using your account's KMS, the following property:
 ```
 para.dynamodb.sse_enabled = true
 ```
+When this is `true`, your account's KMS will be used for encrypting the data in the table, otherwise an AWS-owned CMK
+will be used. Defaults to `false`.
 **Note:** SSE will work for newly created tables only. Currently, you can't enable encryption at rest on an existing table.
 After encryption at rest is enabled, it **can't** be disabled.
 
