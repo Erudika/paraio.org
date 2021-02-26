@@ -7,8 +7,7 @@ type: GET
 
 **Requires authentication with the root app access/secret keys**
 
-Creates a new child app and generates the first pair of API keys. You are responsible for creating the database table
-and index for the new app. Equivalent to calling `Para.newApp()` from your Java code.
+Creates a new child app and generates the first pair of API keys. Equivalent to calling `Para.newApp()` from your Java code.
 
 ### Request
 
@@ -18,6 +17,7 @@ and index for the new app. Equivalent to calling `Para.newApp()` from your Java 
 
 - `sharedTable` - Set it to `false` if the app should have its own table
 - `sharedIndex` - Set it to `false` if the app should have its own index
+- `creatorid` - The `id` of the `User` who will be the owner of this app
 
 ### Response
 

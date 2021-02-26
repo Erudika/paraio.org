@@ -77,7 +77,11 @@ This property can have multiple values separated by `|`, e.g. `uid={0}|cn={0}`.<
 		<tr><td>
 
 `para.security.ldap.active_directory_domain`</td><td>-</td></tr>
-		<tr><td>The domain name for AD server. If blank (defaut) AD is disabled.</td></tr>
+		<tr><td>The domain name for AD server. If blank (defaut) AD is disabled, unless `ad_mode_enabled` is `true`.</td></tr>
+		<tr><td>
+
+`para.security.ldap.ad_mode_enabled`</td><td>-</td></tr>
+		<tr><td>Explicitly enables support for authenticating with Active Directory. If `true` AD is enabled.</td></tr>
 		<tr><td>
 
 `para.security.ldap.mods_group_node`</td><td>-</td></tr>

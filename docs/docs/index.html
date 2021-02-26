@@ -3467,7 +3467,10 @@ This property can have multiple values separated by <code>|</code>, e.g. <code>u
         <tr><td>Use a person’s username as their name</td></tr>
         <tr><td></p>
 <p><code>para.security.ldap.active_directory_domain</code></td><td>-</td></tr>
-        <tr><td>The domain name for AD server. If blank (defaut) AD is disabled.</td></tr>
+        <tr><td>The domain name for AD server. If blank (defaut) AD is disabled, unless <code>ad_mode_enabled</code> is <code>true</code>.</td></tr>
+        <tr><td></p>
+<p><code>para.security.ldap.ad_mode_enabled</code></td><td>-</td></tr>
+        <tr><td>Explicitly enables support for authenticating with Active Directory. If <code>true</code> AD is enabled.</td></tr>
         <tr><td></p>
 <p><code>para.security.ldap.mods_group_node</code></td><td>-</td></tr>
         <tr><td>Maps LDAP node like <code>cn=Mods</code> to Para user group <code>mods</code>.</td></tr>
@@ -5616,8 +5619,7 @@ the JSON in the body of the request.</li>
 					</a>
 				<section class="body api-body img-rounded">
 					<p><strong>Requires authentication with the root app access/secret keys</strong></p>
-<p>Creates a new child app and generates the first pair of API keys. You are responsible for creating the database table
-and index for the new app. Equivalent to calling <code>Para.newApp()</code> from your Java code.</p>
+<p>Creates a new child app and generates the first pair of API keys. Equivalent to calling <code>Para.newApp()</code> from your Java code.</p>
 <h3 id="request">Request</h3>
 <ul>
 <li><code>{app_name}</code> - the name of the child app</li>
@@ -5626,6 +5628,7 @@ and index for the new app. Equivalent to calling <code>Para.newApp()</code> from
 <ul>
 <li><code>sharedTable</code> - Set it to <code>false</code> if the app should have its own table</li>
 <li><code>sharedIndex</code> - Set it to <code>false</code> if the app should have its own index</li>
+<li><code>creatorid</code> - The <code>id</code> of the <code>User</code> who will be the owner of this app</li>
 </ul>
 <h3 id="response">Response</h3>
 <p>Returns the access and secret keys for this application which will be used for request signing.</p>
@@ -5854,7 +5857,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>11 January 2021</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>26 February 2021</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2021
@@ -5876,14 +5879,5 @@ containing the Para objects.</p>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 		<script src="/js/main.js?v=5"></script>
 
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-			ga('create', 'UA-51972923-1', 'paraio.org');
-			ga('set', 'anonymizeIp', true);
-			ga('send', 'pageview');
-		</script>
 	</body>
 </html>
