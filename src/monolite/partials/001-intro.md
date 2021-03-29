@@ -78,12 +78,14 @@ Users are created either from Java code `paraClient.signIn(...)` or by making an
 ### Docker
 
 Tagged Docker images for Para are located at `erudikaltd/para` on Docker Hub.
+**It's highly recommended that you pull only release images like `:1.39.0` or `:latest_stable`
+because the `:latest` tag can be broken or unstable.**
 First, create an `application.conf` file in a directory and run this command:
 
 ```
 $ docker run -ti -p 8080:8080 --rm -v para-data:/para/data \
   -v $(pwd)/application.conf:/para/application.conf \
-  -e JAVA_OPTS="-Dconfig.file=/para/application.conf" erudikaltd/para
+  -e JAVA_OPTS="-Dconfig.file=/para/application.conf" erudikaltd/para:latest_stable
 ```
 
 **Environment variables**
