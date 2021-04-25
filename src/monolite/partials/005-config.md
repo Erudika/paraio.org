@@ -275,13 +275,9 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>Enable/disable the webhooks functionality around `Webhook` objects. </td><td></td></tr>
 		<tr><td>
 
-`para.iot_enabled`					</td><td>
+`para.metrics_enabled`	</td><td>
 
-`false`</td></tr>
-		<tr><td>Enable/disable the IoT functionality around `Thing` objects. </td><td></td></tr>
-		<tr><td>
-
-`para.metrics_enabled`	</td><td> `true` </td></tr>
+`true` </td></tr>
 		<tr><td>Enable/disable all metrics. </td><td></td></tr>
 		<tr><td>
 

@@ -121,13 +121,6 @@
 				</ul>
 			</li>
 			<li>
-				<a href="#IoT" class="docs-category" data-toggle="collapse" aria-expanded="false">IoT</a>
-				<ul id="IoT" class="docs-category-child collapse list-unstyled">
-							<li class=""><a href="#021-iot-aws">AWS IoT</a></li>
-							<li class=""><a href="#021-iot-azure">Azure IoT</a></li>
-				</ul>
-			</li>
-			<li>
 				<a href="#I18n" class="docs-category" data-toggle="collapse" aria-expanded="false">I18n</a>
 				<ul id="I18n" class="docs-category-child collapse list-unstyled">
 							<li class=""><a href="#021-translations">Translations</a></li>
@@ -862,11 +855,8 @@ This is important for securing your server because this secret key is used for s
 <p><code>false</code></td></tr>
         <tr><td>Enable/disable the webhooks functionality around <code>Webhook</code> objects. </td><td></td></tr>
         <tr><td></p>
-<p><code>para.iot_enabled</code>                    </td><td></p>
-<p><code>false</code></td></tr>
-        <tr><td>Enable/disable the IoT functionality around <code>Thing</code> objects. </td><td></td></tr>
-        <tr><td></p>
-<p><code>para.metrics_enabled</code>    </td><td> <code>true</code> </td></tr>
+<p><code>para.metrics_enabled</code>    </td><td></p>
+<p><code>true</code> </td></tr>
         <tr><td>Enable/disable all metrics. </td><td></td></tr>
         <tr><td></p>
 <p><code>para.health_check_enabled</code>    </td><td> <code>true</code> </td></tr>
@@ -1283,8 +1273,6 @@ with <code>type: mytype</code> through the API and your new type will be automat
         <tr><td></p>
 <p><code>Linker</code></td><td> <strong>System class</strong> used for implementing a many-to-many relationship between objects. </td></tr>
         <tr><td></p>
-<p><code>Thing</code></td><td> <strong>System class</strong> used for storing IoT devices’ state and metadata.</td></tr>
-        <tr><td></p>
 <p><code>Webhook</code></td><td> <strong>System class</strong> used for storing webhook metadata.</td></tr>
     </tbody></p>
 </table>
@@ -1623,8 +1611,8 @@ webhooks which are subscribed to all events on all types in Para:</p>
     <span class="hljs-string">"typeFilter"</span>:<span class="hljs-string">"*"</span>
 }</code></pre><p>If the typeFilter is either blank or <code>*</code>, all selected events will be sent to the destination, regardless of the object
 type.</p>
-<p>Webhooks with too many failed deliveries (10 by default) will be disabled automatically. The number of maximum failed
-attemts can be adjusted like so:</p>
+<p>If the webhook’s response code is not <code>2xx</code>, it is considered as failed. Webhooks with too many failed deliveries
+(10 by default) will be disabled automatically. The number of maximum failed attemts can be adjusted like so:</p>
 <pre><code>para.max_failed_webhook_attempts = <span class="hljs-number">15</span></code></pre><p>Events are intercepted by the <code>WebhookIOListener</code> which listens for mutating <code>DAO</code> methods and after each method
 invocation sends a message to the queue for all registered <code>Webhook</code> objects. Each message is signed with <code>HmacSHA256</code>
 which is sent to the destination in a <code>X-Webhook-Signature</code> header. The signature takes the webhook secret and uses it
@@ -2702,123 +2690,6 @@ like this:</p>
 <p>To change the directory where logs are stored, set the system property <code>para.logs_dir</code> to a folder of your choice
 (should not end with “/“):</p>
 <pre><code>$ java -jar -Dpara.logs_dir=<span class="hljs-regexp">/var/</span>logs/para para.jar</code></pre>
-				</section>
-			</article>
-			<a id="021-iot-aws" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-			<article class=" img-rounded">
-					<h2>AWS IoT</h2>
-				<section class="body  img-rounded">
-					<p>Para is integrated with the AWS IoT cloud which means that you can create <code>Thing</code> objects through the Para API and have
-them sync their state with the AWS cloud. When you create a <code>Thing</code> it is also created on the AWS cloud and a
-certificate is generated for it which is saved within the <code>Thing</code> object. The certificate, private and public keys
-and other information about the device are only shown once the <code>Thing</code> is created. Here’s an example create request:</p>
-<pre><code>POST /v1/things
-{
-    <span class="hljs-string">"name"</span>: <span class="hljs-string">"MyThing"</span>,
-    <span class="hljs-string">"serviceBroker"</span>: <span class="hljs-string">"AWS"</span>
-}</code></pre><p>The response would be something like this:</p>
-<pre><code>{
-  <span class="hljs-string">"id"</span>: <span class="hljs-string">"664870213421895680"</span>,
-  <span class="hljs-string">"timestamp"</span>: <span class="hljs-number">1468601996535</span>,
-  <span class="hljs-string">"type"</span>: <span class="hljs-string">"thing"</span>,
-  <span class="hljs-string">"appid"</span>: <span class="hljs-string">"myapp"</span>,
-  <span class="hljs-string">"name"</span>: <span class="hljs-string">"MyThing"</span>
-  <span class="hljs-string">"serviceBroker"</span>: <span class="hljs-string">"AWS"</span>,
-  <span class="hljs-string">"deviceState"</span>: {},
-  <span class="hljs-string">"deviceMetadata"</span>: {
-    <span class="hljs-string">"thingId"</span>: <span class="hljs-string">"664870213421895680"</span>,
-    <span class="hljs-string">"thingName"</span>: <span class="hljs-string">"MyThing"</span>,
-    <span class="hljs-string">"thingARN"</span>: <span class="hljs-string">"arn:aws:iot:eu-west-1:123456789:thing/MyThing"</span>,
-    <span class="hljs-string">"clientId"</span>: <span class="hljs-string">"MyThing"</span>,
-    <span class="hljs-string">"clientCertId"</span>: <span class="hljs-string">"1abee5f25a5e1b1c66b66dd462dda32000621b429f6eb1ddb179ec3b"</span>,
-    <span class="hljs-string">"clientCertARN"</span>: <span class="hljs-string">"arn:aws:iot:eu-west-1:123456789:cert/1abee5f25a5e1b1c66b66dd462dda32000621b429f6eb1ddb179ec3b"</span>,
-    <span class="hljs-string">"clientCert"</span>: <span class="hljs-string">"-----BEGIN CERTIFICATE-----\n ... \n-----END CERTIFICATE-----\n"</span>,
-    <span class="hljs-string">"privateKey"</span>: <span class="hljs-string">"-----BEGIN RSA PRIVATE KEY-----\n ... \n-----END RSA PRIVATE KEY-----\n"</span>,
-    <span class="hljs-string">"publicKey"</span>: <span class="hljs-string">"-----BEGIN PUBLIC KEY-----\n ... \n-----END PUBLIC KEY-----\n"</span>,
-    <span class="hljs-string">"region"</span>: <span class="hljs-string">"eu-west-1"</span>,
-    <span class="hljs-string">"port"</span>: <span class="hljs-number">8883</span>,
-    <span class="hljs-string">"host"</span>: <span class="hljs-string">"b2chw4axefhujt.iot.eu-west-1.amazonaws.com"</span>
-  }
-}</code></pre><p>Note that the field <code>deviceDetails</code> is only showed once and the device’s metadata is hidden on read.
-Now you can connect your device to the AWS cloud using the generated certificates and start sending messages with the
-state of the device. Para will check with AWS for shadow updates on each read and sync the <code>Thing</code> object’s
-state with the state that is stored in the cloud. If the <code>Thing</code> object is updated from the Para API, the AWS IoT
-shadow is updated accordingly so the two are in sync again. Finally, deleting the <code>Thing</code> object also deletes it from
-AWS along with the certificate and policy attached to it.</p>
-<p>In order to use the IoT integration feature, Para needs to get your AWS credentials from the config file or from the
-instance it is deployed on. Also you have to enable IoT features in Para with <code>para.iot_enabled = true</code>.</p>
-<h3 id="getting-started-with-para-and-aws-iot">Getting started with Para and AWS IoT</h3>
-<ol>
-<li>Get an account from AWS and create a user with permissions to call the IoT API</li>
-<li>Set the <code>para.aws_access_key</code> and <code>para.aws_secret_key</code> properties in your Para config file</li>
-<li>Start the Para instance and create a <code>Thing</code> object through the API:<pre><code>POST /v1/things
-{
- <span class="hljs-string">"name"</span>: <span class="hljs-string">"myDevice"</span>,
- <span class="hljs-string">"serviceBroker"</span>: <span class="hljs-string">"AWS"</span>
-}</code></pre></li>
-<li>Take note of the <code>deviceDetails</code> field retured by this request as it contains certificates for your device</li>
-<li>Use the certificates to set up your device and connect it to AWS IoT</li>
-<li>The <code>deviceState</code> field inside the Para <code>Thing</code> object is synced with the device shadow on AWS on every <code>GET</code> request</li>
-<li>Update the <code>deviceState</code> from the Para API and it will be synced with the device shadow on AWS on every <code>PATCH</code> request.</li>
-</ol>
-
-				</section>
-			</article>
-			<a id="021-iot-azure" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
-			<article class=" img-rounded">
-					<h2>Azure IoT</h2>
-				<section class="body  img-rounded">
-					<p>Para is integrated with the Microsoft’s Azure IoT Hub which means that you can create <code>Thing</code> objects through the Para
-API and have them sync their state with the Azure cloud. When you create a <code>Thing</code> it is also created as a device on
-the Azure cloud and primary/secondary keys are generated for it which are saved within the <code>Thing</code> object. These keys
-and other information about the device are only shown once the <code>Thing</code> is created. Here’s an example create request:</p>
-<pre><code>POST /v1/things
-{
-    <span class="hljs-string">"name"</span>: <span class="hljs-string">"MyThing"</span>,
-    <span class="hljs-string">"serviceBroker"</span>: <span class="hljs-string">"Azure"</span>
-}</code></pre><p>The response would be something like this:</p>
-<pre><code>{
-  <span class="hljs-string">"id"</span>: <span class="hljs-string">"664870213421895680"</span>,
-  <span class="hljs-string">"timestamp"</span>: <span class="hljs-number">1468601996535</span>,
-  <span class="hljs-string">"type"</span>: <span class="hljs-string">"thing"</span>,
-  <span class="hljs-string">"appid"</span>: <span class="hljs-string">"myapp"</span>,
-  <span class="hljs-string">"name"</span>: <span class="hljs-string">"MyThing"</span>
-  <span class="hljs-string">"serviceBroker"</span>: <span class="hljs-string">"Azure"</span>,
-  <span class="hljs-string">"deviceState"</span>: {},
-  <span class="hljs-string">"deviceDetails"</span>: {
-    <span class="hljs-string">"thingId"</span>: <span class="hljs-string">"664870213421895680"</span>,
-    <span class="hljs-string">"thingName"</span>: <span class="hljs-string">"MyThing"</span>,
-    <span class="hljs-string">"primaryKey"</span>: <span class="hljs-string">"1abee5f25a5e1b1c66b66dd462dda"</span>,
-    <span class="hljs-string">"secondaryKey"</span>: <span class="hljs-string">"32000621b429f6eb1ddb179ec3b"</span>,
-    <span class="hljs-string">"status"</span>: <span class="hljs-string">"enabled"</span>,
-    <span class="hljs-string">"lastActivity"</span>: <span class="hljs-string">"{timestamp}"</span>,
-    <span class="hljs-string">"connectionState"</span>: <span class="hljs-string">"disconnected"</span>,
-    <span class="hljs-string">"connectionString"</span>: <span class="hljs-string">"HostName=abc.def.com;DeviceId=664870213421895680;SharedAccessKey=1abee5f25a5e1b1c66b66dd462dda"</span>,
-  }
-}</code></pre><p>Note that the field <code>deviceDetails</code> is only showed once and the device’s metadata is hidden on read.
-Now you can connect your device to the Azure cloud using the generated primary/secondary keys and start sending messages
-with the state of the device. Para will automatically check with Azure for device messages and sync the <code>Thing</code> object’s
-state with the state that is stored in the cloud. If the <code>Thing</code> object is updated from the Para API, the Azure IoT
-device is updated accordingly so the two are in sync again. Finally, deleting the <code>Thing</code> object also deletes it from
-the Azure IoT Hub.</p>
-<p>In order to use the IoT integration feature, Para needs to get your AWS credentials from the config file or from the
-instance it is deployed on. Also you have to enable IoT features in Para with <code>para.iot_enabled = true</code>.</p>
-<h3 id="getting-started-with-para-and-azure-iot">Getting started with Para and Azure IoT</h3>
-<ol>
-<li>Get an account from Azure and create an IoT hub</li>
-<li>Set the <code>para.azure.iot_hostname</code>, <code>para.azure.iot_access_key</code>, <code>para.azure.iot_eventhub_name</code> and
-<code>para.azure.iot_eventhub_endpoint</code> properties in your Para config file (these can be found in your IoT console)</li>
-<li>Start the Para instance and create a <code>Thing</code> object through the API:<pre><code>POST /v1/things
-{
- <span class="hljs-string">"name"</span>: <span class="hljs-string">"myDevice"</span>,
- <span class="hljs-string">"serviceBroker"</span>: <span class="hljs-string">"Azure"</span>
-}</code></pre></li>
-<li>Take note of the <code>deviceDetails</code> field retured by this request as it contains primary/secondary keys for your device</li>
-<li>Use the primary/secondary keys to set up your device and connect it to Azure IoT Hub</li>
-<li>The <code>deviceState</code> field inside the Para <code>Thing</code> object is synced with the device on Azure automatically in the background</li>
-<li>Update the <code>deviceState</code> from the Para API and it will be synced with the device shadow on Azure on every <code>PATCH</code> request.</li>
-</ol>
-
 				</section>
 			</article>
 			<a id="021-translations" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
@@ -5859,7 +5730,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>29 March 2021</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>25 April 2021</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2021

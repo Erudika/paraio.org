@@ -52,8 +52,8 @@ POST /v1/webhooks
 If the typeFilter is either blank or `*`, all selected events will be sent to the destination, regardless of the object
 type.
 
-Webhooks with too many failed deliveries (10 by default) will be disabled automatically. The number of maximum failed
-attemts can be adjusted like so:
+If the webhook's response code is not `2xx`, it is considered as failed. Webhooks with too many failed deliveries
+(10 by default) will be disabled automatically. The number of maximum failed attemts can be adjusted like so:
 ```
 para.max_failed_webhook_attempts = 15
 ```

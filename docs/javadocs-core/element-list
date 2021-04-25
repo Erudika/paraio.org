@@ -5,7 +5,6 @@ com.erudika.para.core
 com.erudika.para.core.utils
 com.erudika.para.email
 com.erudika.para.i18n
-com.erudika.para.iot
 com.erudika.para.metrics
 com.erudika.para.persistence
 com.erudika.para.queue
