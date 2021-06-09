@@ -2,7 +2,6 @@ com.erudika.para
 com.erudika.para.aop
 com.erudika.para.cache
 com.erudika.para.email
-com.erudika.para.i18n
 com.erudika.para.metrics
 com.erudika.para.persistence
 com.erudika.para.queue

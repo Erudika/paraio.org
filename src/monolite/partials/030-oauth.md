@@ -39,16 +39,22 @@ These are the configuration options for this filter:
 `para.security.oauth.accept_header`</td><td>The `Accept` header - if blank, the header won't be set. (default is blank). </td></tr>
 		<tr><td>
 
-`para.security.oauth.parameters.id`</td><td>The `id` parameter for requesting the user profile (default is `sub`). </td></tr>
+`para.security.oauth.parameters.id`</td><td>The `id` parameter for requesting the user `id` (default is `sub`). </td></tr>
 		<tr><td>
 
-`para.security.oauth.parameters.picture`</td><td>The `picture` parameter for requesting the user profile (default is `picture`). </td></tr>
+`para.security.oauth.parameters.picture`</td><td>The `picture` parameter for requesting the user's avatar (default is `picture`). </td></tr>
 		<tr><td>
 
-`para.security.oauth.parameters.email`</td><td>The `email` parameter for requesting the user profile (default is `email`). </td></tr>
+`para.security.oauth.parameters.email`</td><td>The `email` parameter for requesting the user's email (default is `email`). </td></tr>
 		<tr><td>
 
-`para.security.oauth.parameters.name`</td><td>The `name` parameter for requesting the user profile (default is `name`). </td></tr>
+`para.security.oauth.parameters.name`</td><td>The `name` parameter for requesting the user's full name (default is `name`). </td></tr>
+		<tr><td>
+
+`para.security.oauth.parameters.given_name`</td><td>The `given_name` parameter for requesting the user's first name (default is `given_name`). </td></tr>
+		<tr><td>
+
+`para.security.oauth.parameters.family_name`</td><td>The `family_name` parameter for requesting the user's last name (default is `family_name`). </td></tr>
 		<tr><td>
 
 `para.security.oauth.domain`</td><td> This domain name is used if a valid email can't be obtained (optional).</td></tr>
