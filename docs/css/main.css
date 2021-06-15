@@ -611,6 +611,18 @@ a.article, a.article:hover {
 	color: #ededed;
 }
 
+@media (prefers-color-scheme: dark) {
+	#dark-matter {
+		display: block;
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	#dark-matter {
+		display: none;
+	}
+}
+
 /***** Syntax Highlighting Theme *****/
 
 .hljs {

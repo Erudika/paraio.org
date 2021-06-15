@@ -106,7 +106,7 @@ $("#theme-switch-btn").click(function () {
 
 var settings = loadSettings();
 
-setTheme(settings.theme);
+setTheme(settings.theme || ($("#dark-matter").is(":visible") ? 'dark' : 'light')); // auto-detect with CSS queries
 
 if (settings.expandedCategories) {
 	$(Object.keys(settings.expandedCategories).join(',')).collapse();
