@@ -101,7 +101,62 @@ server {
 </code></pre>
 </details>
 
+As an alternative, you can enable SSL and HTTP2 directly in Para:
+1. Run the script [`gencerts.sh`](https://raw.githubusercontent.com/Erudika/para/master/gencerts.sh) to generate the
+required self-signed certificates
+```
+echo "para.local" | sudo tee -a /etc/hosts
+./gencerts.sh para.local secret
+```
+The result of that command will be 8 files - `ParaRootCA.(crt,key,pem)`, `para.local.(crt,key,pem)` as well as a
+Java Keystore file `para-keystore.p12` and a Truststore file `para-truststore.p12`.
+Optionally, you can run generate the server certificates using an existing `RootCA.pem` and `RootCA.key` files like so:
+```
+./gencerts.sh para.local secret /path/to/ca/RootCA
+```
+
+2. Run Para using the following command which enables SSL and HTTP2:
+```
+java -jar -Dconfig.file=./application.conf \
+ -Dserver.ssl.key-store-type=PKCS12 \
+ -Dserver.ssl.key-store=para-keystore.p12 \
+ -Dserver.ssl.key-store-password=secret \
+ -Dserver.ssl.key-password=secret \
+ -Dserver.ssl.key-alias=para \
+ -Dserver.ssl.enabled=true \
+ -Dserver.http2.enabled=true \
+para-*.jar
+```
+3. Trust the root CA file `ParaRootCA.crt` by importing it in you OS keyring or browser (check Google for instructions).
+4. Open `https://para.local:8000`
+
 <br>
+
+Para also supports mTLS (mutual authentication) for Java clients.
+<details><summary>Command to enable TLS, HTTP2 and mTLS.</summary>
+<pre><code>
+java -jar -Dconfig.file=/para/application.conf \
+ -Dserver.ssl.key-store-type=PKCS12 \
+ -Dserver.ssl.key-store=para-keystore.p12 \
+ -Dserver.ssl.key-store-password=secret \
+ -Dserver.ssl.key-password=secret \
+ -Dserver.ssl.trust-store=para-truststore.p12 \
+ -Dserver.ssl.trust-store-password=secret \
+ -Dserver.ssl.key-alias=para \
+ -Dserver.ssl.client-auth=need \
+ -Dserver.ssl.enabled=true \
+ -Dserver.http2.enabled=true
+para-*.jar
+</code></pre>
+</details>
+
+The Para client for Java should be configured appropriately:
+```
+para.client.ssl_keystore = "/path/to/client-keystore.p12"
+para.client.ssl_keystore_password = secret
+para.client.ssl_truststore = "/path/to/client-truststore.p12"
+para.client.ssl_truststore_password = secret
+```
 
 > Visit the [releases page](https://github.com/erudika/para/releases) for the latest package.
 

@@ -516,9 +516,55 @@ server {
 </code></pre>
 </details>
 
+<p>As an alternative, you can enable SSL and HTTP2 directly in Para:</p>
+<ol>
+<li><p>Run the script <a href="https://raw.githubusercontent.com/Erudika/para/master/gencerts.sh"><code>gencerts.sh</code></a> to generate the
+required self-signed certificates</p>
+<pre><code>echo <span class="hljs-string">"para.local"</span> | sudo tee -a /etc/hosts
+./gencerts.sh para.local secret</code></pre><p>The result of that command will be 8 files - <code>ParaRootCA.(crt,key,pem)</code>, <code>para.local.(crt,key,pem)</code> as well as a
+Java Keystore file <code>para-keystore.p12</code> and a Truststore file <code>para-truststore.p12</code>.
+Optionally, you can run generate the server certificates using an existing <code>RootCA.pem</code> and <code>RootCA.key</code> files like so:</p>
+<pre><code>./gencerts.sh para.local secret /path/to/ca/RootCA</code></pre></li>
+<li><p>Run Para using the following command which enables SSL and HTTP2:</p>
+<pre><code>java -jar -Dconfig.file=./application.conf \
+-Dserver.ssl.key-store-type=PKCS12 \
+-Dserver.ssl.key-store=para-keystore.p12 \
+-Dserver.ssl.key-store-password=secret \
+-Dserver.ssl.key-password=secret \
+-Dserver.ssl.key-alias=para \
+-Dserver.ssl.enabled=<span class="hljs-literal">true</span> \
+-Dserver.http2.enabled=<span class="hljs-literal">true</span> \
+para-*.jar</code></pre></li>
+<li><p>Trust the root CA file <code>ParaRootCA.crt</code> by importing it in you OS keyring or browser (check Google for instructions).</p>
+</li>
+<li><p>Open <code>https://para.local:8000</code></p>
+</li>
+</ol>
 <br>
 
-<blockquote>
+<p>Para also supports mTLS (mutual authentication) for Java clients.</p>
+<details><summary>Command to enable TLS, HTTP2 and mTLS.</summary>
+<pre><code>
+java -jar -Dconfig.file=/para/application.conf \
+ -Dserver.ssl.key-store-type=PKCS12 \
+ -Dserver.ssl.key-store=para-keystore.p12 \
+ -Dserver.ssl.key-store-password=secret \
+ -Dserver.ssl.key-password=secret \
+ -Dserver.ssl.trust-store=para-truststore.p12 \
+ -Dserver.ssl.trust-store-password=secret \
+ -Dserver.ssl.key-alias=para \
+ -Dserver.ssl.client-auth=need \
+ -Dserver.ssl.enabled=true \
+ -Dserver.http2.enabled=true
+para-*.jar
+</code></pre>
+</details>
+
+<p>The Para client for Java should be configured appropriately:</p>
+<pre><code>para.client.ssl_keystore = <span class="hljs-string">"/path/to/client-keystore.p12"</span>
+para.client.ssl_keystore_password = secret
+para.client.ssl_truststore = <span class="hljs-string">"/path/to/client-truststore.p12"</span>
+para.client.ssl_truststore_password = secret</code></pre><blockquote>
 <p>Visit the <a href="https://github.com/erudika/para/releases">releases page</a> for the latest package.</p>
 </blockquote>
 <h2 id="hosted-service">Hosted service</h2>
@@ -999,7 +1045,6 @@ For more information about how it works, see the README for it.</p>
 <li><code>CacheModule</code> - defines the core cache class implementation</li>
 <li><code>EmailModule</code> - defines an email service implementation for sending emails</li>
 <li><code>AOPModule</code> - manages the indexing and caching aspects of Para objects</li>
-<li><code>I18nModule</code> - defines a currency converter service implementation</li>
 <li><code>QueueModule</code> - defines a queue service implementation</li>
 <li><code>StorageModule</code> - defines a file storage service, e.g. Amazon S3</li>
 </ul>
@@ -5764,7 +5809,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>05 August 2021</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>27 August 2021</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2021

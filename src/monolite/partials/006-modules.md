@@ -10,7 +10,6 @@ In the `para-server` package, there are several core modules:
 - `CacheModule` - defines the core cache class implementation
 - `EmailModule` - defines an email service implementation for sending emails
 - `AOPModule` - manages the indexing and caching aspects of Para objects
-- `I18nModule` - defines a currency converter service implementation
 - `QueueModule` - defines a queue service implementation
 - `StorageModule` - defines a file storage service, e.g. Amazon S3
 
