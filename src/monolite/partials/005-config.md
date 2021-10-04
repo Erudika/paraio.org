@@ -423,6 +423,10 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>The directory where Para logs will be stored. If not specified, logs are stored in the current directory. </td><td></td></tr>
 		<tr><td>
 
+`para.markdown_soft_break`	</td><td> `<br>` </td></tr>
+		<tr><td>Soft break character to use when parsing Markdown to HTML. </td><td></td></tr>
+		<tr><td>
+
 `para.metrics.logging_rate`	</td><td> 60 </td></tr>
 		<tr><td>The rate at which the metrics logger will write to file, in seconds. </td><td></td></tr>
 		<tr><td>

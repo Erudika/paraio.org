@@ -39,6 +39,10 @@ These are the configuration options for this filter:
 `para.security.oauth.accept_header`</td><td>The `Accept` header - if blank, the header won't be set. (default is blank). </td></tr>
 		<tr><td>
 
+`para.security.oauth.download_avatars`</td><td>If `true`, Para will fetch profile pictures from IDP and store them
+locally or to a cloud storage provider. (default is `false`). </td></tr>
+		<tr><td>
+
 `para.security.oauth.parameters.id`</td><td>The `id` parameter for requesting the user `id` (default is `sub`). </td></tr>
 		<tr><td>
 

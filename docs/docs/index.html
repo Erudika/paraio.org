@@ -1011,6 +1011,9 @@ This is important for securing your server because this secret key is used for s
 <p><code>para.logs_dir</code>    </td><td> <code>.</code> </td></tr>
         <tr><td>The directory where Para logs will be stored. If not specified, logs are stored in the current directory. </td><td></td></tr>
         <tr><td></p>
+<p><code>para.markdown_soft_break</code>    </td><td> <code>&lt;br&gt;</code> </td></tr>
+        <tr><td>Soft break character to use when parsing Markdown to HTML. </td><td></td></tr>
+        <tr><td></p>
 <p><code>para.metrics.logging_rate</code>    </td><td> 60 </td></tr>
         <tr><td>The rate at which the metrics logger will write to file, in seconds. </td><td></td></tr>
         <tr><td></p>
@@ -3484,6 +3487,9 @@ the default (root) app will be used as authentication target.</p>
         <tr><td></p>
 <p><code>para.security.oauth.accept_header</code></td><td>The <code>Accept</code> header - if blank, the header won’t be set. (default is blank). </td></tr>
         <tr><td></p>
+<p><code>para.security.oauth.download_avatars</code></td><td>If <code>true</code>, Para will fetch profile pictures from IDP and store them
+locally or to a cloud storage provider. (default is <code>false</code>). </td></tr>
+        <tr><td></p>
 <p><code>para.security.oauth.parameters.id</code></td><td>The <code>id</code> parameter for requesting the user <code>id</code> (default is <code>sub</code>). </td></tr>
         <tr><td></p>
 <p><code>para.security.oauth.parameters.picture</code></td><td>The <code>picture</code> parameter for requesting the user’s avatar (default is <code>picture</code>). </td></tr>
@@ -5809,7 +5815,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>27 August 2021</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>04 October 2021</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2021
