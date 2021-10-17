@@ -123,14 +123,6 @@ Here's a list of all configuration properties that can be set in the config file
 		<tr><td>The minimum length of passwords. </td><td></td></tr>
 		<tr><td>
 
-`para.aws_access_key`				</td><td>-</td></tr>
-		<tr><td>**Deprecated.** Use credential profiles.</td><td></td></tr>
-		<tr><td>
-
-`para.aws_secret_key`				</td><td>-</td></tr>
-		<tr><td>**Deprecated.** Use credential profiles.</td><td></td></tr>
-		<tr><td>
-
 `para.fb_app_id`						</td><td>-</td></tr>
 		<tr><td>Facebook app id (for OAuth authentication).</td><td></td></tr>
 		<tr><td>

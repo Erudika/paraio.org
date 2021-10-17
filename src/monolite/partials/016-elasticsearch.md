@@ -51,12 +51,6 @@ There are several configuration properties for Elasticsearch (these go in your `
 `para.es.restclient_port`</td><td> ES server port (for REST client). Default is `9200`.</td></tr>
 		<tr><td>
 
-`para.es.transportclient_host`</td><td> **DEPRECATED** The hostname of the Elasticsearch instance or cluster head node to connect to. Default is `localhost`.</td></tr>
-		<tr><td>
-
-`para.es.transportclient_port`</td><td> **DEPRECATED** The port of the Elasticsearch instance or cluster head node to connect to. Default is `9300`.</td></tr>
-		<tr><td>
-
 `para.es.track_total_hits`</td><td> If `true`, total hits are always counted accurately (slower queries), otherwise they are counted accurately up to 10000 documents (default, faster queries). If set to an integer, the results are counted accurately up to that integer. Default is blank.</td></tr>
 		<tr><td>
 

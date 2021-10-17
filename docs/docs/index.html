@@ -795,12 +795,6 @@ This is important for securing your server because this secret key is used for s
 <p><code>6</code></td></tr>
         <tr><td>The minimum length of passwords. </td><td></td></tr>
         <tr><td></p>
-<p><code>para.aws_access_key</code>                </td><td>-</td></tr>
-        <tr><td><strong>Deprecated.</strong> Use credential profiles.</td><td></td></tr>
-        <tr><td></p>
-<p><code>para.aws_secret_key</code>                </td><td>-</td></tr>
-        <tr><td><strong>Deprecated.</strong> Use credential profiles.</td><td></td></tr>
-        <tr><td></p>
 <p><code>para.fb_app_id</code>                        </td><td>-</td></tr>
         <tr><td>Facebook app id (for OAuth authentication).</td><td></td></tr>
         <tr><td></p>
@@ -2202,10 +2196,6 @@ uses the high level REST client (default).</p>
         <tr><td></p>
 <p><code>para.es.restclient_port</code></td><td> ES server port (for REST client). Default is <code>9200</code>.</td></tr>
         <tr><td></p>
-<p><code>para.es.transportclient_host</code></td><td> <strong>DEPRECATED</strong> The hostname of the Elasticsearch instance or cluster head node to connect to. Default is <code>localhost</code>.</td></tr>
-        <tr><td></p>
-<p><code>para.es.transportclient_port</code></td><td> <strong>DEPRECATED</strong> The port of the Elasticsearch instance or cluster head node to connect to. Default is <code>9300</code>.</td></tr>
-        <tr><td></p>
 <p><code>para.es.track_total_hits</code></td><td> If <code>true</code>, total hits are always counted accurately (slower queries), otherwise they are counted accurately up to 10000 documents (default, faster queries). If set to an integer, the results are counted accurately up to that integer. Default is blank.</td></tr>
         <tr><td></p>
 <p><code>para.es.fail_on_indexing_errors</code></td><td> If enabled, throws an exception if an error occurs during indexing operations. This will cascade back to clients as HTTP <code>500</code>. Default is <code>false</code>.</td></tr>
@@ -3063,7 +3053,7 @@ para.mail.ssl = <span class="hljs-literal">false</span></code></pre><p>Email tem
 <pre><code class="language-java">Emailer.class.getClassLoader().getResourceAsStream(<span class="hljs-string">"emails/template.html"</span>)</code></pre>
 <p>Para supports basic variable substitutions through Mustache with <code>Utils.compileMustache(data, template)</code>.</p>
 <p>Set <code>para.emailer = &quot;aws&quot;</code> to use the AWS Simple Email Service and comment out the <code>para.mail.*</code>
-properties as they are ignored. Also set <code>para.aws_access_key</code> and <code>para.aws_secret_key</code>.</p>
+properties as they are ignored. AWS credentials are picked up from the environment, like the <code>AWS_PROFILE</code> env. variable.</p>
 
 				</section>
 			</article>
@@ -5815,7 +5805,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>05 October 2021</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>17 October 2021</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2021
