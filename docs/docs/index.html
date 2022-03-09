@@ -289,55 +289,27 @@ This is made possible by the REST API which talks JSON to your apps, and with th
 it’s easy to get started. If you’re building an application on the JVM, you can also add Para as Maven dependency to
 your project. You can still keep the REST API or turn it off completely.</p>
 <h3 id="quick-start">Quick start</h3>
-<p>Create a configuration file <code>application.conf</code> file in the same directory as the Para package.
-Here’s an example default configuration:</p>
-<pre><code class="language-bash"><span class="hljs-comment"># the name of the root app</span>
-para.app_name = <span class="hljs-string">"Para"</span>
-<span class="hljs-comment"># or set it to 'production'</span>
-para.env = <span class="hljs-string">"embedded"</span>
-<span class="hljs-comment"># if true, users can be created without verifying their emails</span>
-para.security.allow_unverified_emails = <span class="hljs-literal">false</span>
-<span class="hljs-comment"># if hosting multiple apps on Para, set this to false</span>
-para.clients_can_access_root_app = <span class="hljs-literal">true</span>
-<span class="hljs-comment"># if false caching is disabled</span>
-para.cache_enabled = <span class="hljs-literal">true</span>
-<span class="hljs-comment"># a secret used for generating and verifying remember me tokens, JWTs. should be a long random string</span>
-para.app_secret_key = <span class="hljs-string">"b8db69a24a43f2ce134909f164a45263"</span>
-<span class="hljs-comment"># enable API request signature verification</span>
-para.security.api_security = <span class="hljs-literal">true</span>
-<span class="hljs-comment"># the node number from 1 to 1024, used for distributed ID generation</span>
-para.worker_id = 1</code></pre>
 <ol>
-<li><a href="https://github.com/erudika/para/releases">Download the JAR</a></li>
-<li>Run it with <code>java -jar -Dconfig.file=./application.conf para-*.jar</code></li>
-<li>Call <code>curl localhost:8080/v1/_setup</code> and save the access and secret keys for the root app (important!)</li>
-<li>Install <code>para-cli</code> tool for easy access <code>$ npm install -g para-cli</code></li>
-<li>Configure <code>para-cli</code> with <code>$ para-cli setup</code></li>
-<li>Create a new “child” app for regular use:<pre><code class="language-bash">$ para-cli new-app <span class="hljs-string">"myapp"</span> --name <span class="hljs-string">"My App"</span> --endpoint <span class="hljs-string">"http://localhost:8080"</span> \
- --accessKey <span class="hljs-string">"app:para"</span> --secretKey <span class="hljs-string">"{root app secret}"</span></code></pre>
-</li>
-<li>Open the <a href="https://console.paraio.org">Para Web Console</a> or use one of the provided
-client libraries below to connect to the API.</li>
-</ol>
-<p>The root app (the initial Para app) is always created first. If you want to create multiple apps then you must
-use <a href="https://github.com/Erudika/para-cli">Para CLI tool</a> as shown above. Alternatively, you can call <code>Para.newApp()</code>
-or make an authenticated request to the API <code>GET /v1/_setup/{app_name}</code>.</p>
-<p>The quickest way to interact with Para is through the <a href="https://github.com/Erudika/para-cli">command-line tool</a> (CLI):</p>
-<pre><code>$ npm install -g para-cli
-# run setup and set endpoint to either 'http://localhost:8080' or 'https://paraio.com'
+<li><a href="https://github.com/Erudika/para/releases">Download the latest executable JAR</a></li>
+<li>Create a configuration file <code>application.conf</code> file in the same directory as the JAR package.</li>
+<li>Start Para with <code>java -jar -Dconfig.file=./application.conf para-*.jar</code></li>
+<li>Install <a href="https://github.com/Erudika/para-cli">Para CLI</a> with <code>npm install -g para-cli</code></li>
+<li>Create a new dedicated app for your project and save the access keys:<pre><code class="language-bash"><span class="hljs-comment"># run setup and set endpoint to either 'http://localhost:8080' or 'https://paraio.com'</span>
+<span class="hljs-comment"># the keys for the root app are inside application.conf</span>
 $ para-cli setup
-$ para-cli ping
-$ echo "{\"type\":\"todo\", \"name\": \"buy milk\"}" &gt; todo.json
-$ para-cli create todo.json --id todo1 --encodeId false
-$ para-cli read --id todo1
-$ para-cli search "type:todo"</code></pre><p>Users are created either from Java code <code>paraClient.signIn(...)</code> or by making an API request to <code>POST /v1/jwt_auth</code>. See
+$ para-cli new-app <span class="hljs-string">"myapp"</span> --name <span class="hljs-string">"My App"</span></code></pre>
+Alternatively, you can use the <a href="https://console.paraio.org">Para Web Console</a> to manage data,
+or integrate Para directly into your project with one of the API clients below.</li>
+</ol>
+<p>Users are created either programmatically with <code>paraClient.signIn(...)</code> or with an API request to <code>POST /v1/jwt_auth</code>. See
 <a href="#034-api-jwt-signin">Sign in</a> or <a href="#033-restauth">Authentication</a> sections for more details.</p>
 <h3 id="docker">Docker</h3>
 <p>Tagged Docker images for Para are located at <code>erudikaltd/para</code> on Docker Hub.
-<strong>It’s highly recommended that you pull only release images like <code>:1.39.0</code> or <code>:latest_stable</code>
+<strong>It’s highly recommended that you pull only release images like <code>:1.45.1</code> or <code>:latest_stable</code>
 because the <code>:latest</code> tag can be broken or unstable.</strong>
-First, create an <code>application.conf</code> file in a directory and run this command:</p>
-<pre><code>$ docker run -ti -p <span class="hljs-number">8080</span>:<span class="hljs-number">8080</span> --rm -v para-data:<span class="hljs-regexp">/para/</span>data \
+First, create an <code>application.conf</code> file and a <code>data</code> folder and start the Para container:</p>
+<pre><code>$ touch application.conf &amp;&amp; mkdir data
+$ docker run -ti -p <span class="hljs-number">8080</span>:<span class="hljs-number">8080</span> --rm -v $(pwd)/data:<span class="hljs-regexp">/para/</span>data \
   -v $(pwd)/application.conf:<span class="hljs-regexp">/para/</span>application.conf \
   -e JAVA_OPTS=<span class="hljs-string">"-Dconfig.file=/para/application.conf"</span> erudikaltd/para:latest_stable</code></pre><p><strong>Environment variables</strong></p>
 <p><code>JAVA_OPTS</code> - Java system properties, e.g. <code>-Dpara.port=8000</code>
@@ -5859,7 +5831,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>07 March 2022</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>09 March 2022</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2022
