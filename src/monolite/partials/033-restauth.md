@@ -45,28 +45,11 @@ GET /v1/public/resource?accessKey=app:myapp
 
 Call `POST /v1/_newkeys` to generate a new secret key (*the request must be signed with the old keys*).
 
-### Disabling API security
-
-To disable the API security completely, set the config parameter `para.security.api_security` to `false`.
-
-If you wish to disable all API functions completely, set the config parameter `para.api_enabled` to `false`.
-
-> For more information see the [AWS documentation](http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
-for REST authentication.
-
 ### JSON Web Tokens - client access based on permissions
 
-> **Important:** Access to the root app can be enabled or disabled for API clients.
+> **Important:** Access to the root app is disabled for API clients holding a bearer JSON web token.
 
-To allow clients with access tokens to make API calls to the root app, use this configuration property:
-```
-para.clients_can_access_root_app = true
-```
-This is useful if you only have one app on the server. When hosting multiple apps on Para, this should be set to `false`.
-This does not affect clients that use an `accessKey` and a `secretKey`, only those that use access tokens (JWT).
-
-In production, when Para is deployed as a multitenant server (hosting many apps), it is recommended that API clients
-are not allowed to access root app through the API with `para.clients_can_access_root_app = false`.
+This is not the case for clients that use an `accessKey` and a `secretKey`, only those that use access tokens (JWT).
 
 Para apps can create new users and grant them specific permissions by implementing social login (identity federation).
 First a user authenticates with their social identity provider such as Facebook, then comes back to Para with the

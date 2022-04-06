@@ -704,9 +704,8 @@ To load your own configuration you need to set one of the following system prope
 <p>You need to set these properties before calling <code>Para.initialize()</code> or at the startup of your servlet container.
 If you have a file called <code>application.conf</code> or <code>application.json</code> on the classpath, Para will pick it up automatically.</p>
 <p>Here’s a sample <code>application.conf</code> file:</p>
-<pre><code class="language-bash">para.env = <span class="hljs-string">"embedded"</span>
+<pre><code class="language-bash">para.env = <span class="hljs-string">"production"</span>
 para.print_logo = <span class="hljs-literal">true</span>
-para.security.api_security = <span class="hljs-literal">true</span>
 para.security.csrf_protection = <span class="hljs-literal">true</span></code></pre>
 <p>The configuration logic is to read system properties first, then environment properties and finally check the config file.
 So the order of precedence is as follows:</p>
@@ -923,10 +922,6 @@ This is important for securing your server because this secret key is used for s
         <tr><td>Enable/disable table sharing functionality by prepending the <code>appid</code> with a space. <code>DAO</code> implementations
         can detect that and switch tables based on it. </td><td></td></tr>
         <tr><td></p>
-<p><code>para.security.api_security</code>                </td><td> <code>true</code> </td></tr>
-        <tr><td>Enable/disable the API security mechanism. If <code>false</code>, the API endpoint will <strong>not</strong> check request
-        signatures and all requests will go through. <strong>For development only</strong>.</td><td></td></tr>
-        <tr><td></p>
 <p><code>para.security.csrf_protection</code>            </td><td> <code>true</code> </td></tr>
         <tr><td>Enable/disable CSRF protection which checks for valid CSRF tokens in write requests. </td><td></td></tr>
         <tr><td></p>
@@ -967,10 +962,6 @@ This is important for securing your server because this secret key is used for s
 <p><code>para.security.allow_unverified_emails</code>    </td><td> <code>false</code> </td></tr>
         <tr><td>Enable/disable user email verification. When <code>false</code> user accounts are locked until
         the user checks their email and confirms it. </td><td></td></tr>
-        <tr><td></p>
-<p><code>para.security.admins_have_full_api_access</code>            </td><td> <code>true</code> </td></tr>
-        <tr><td>If set to <code>false</code> admin users will be subject to standard resource permissions when accessing the API.
-        This is applicable when <code>paraClient.signIn()</code> is used. By default, they have unlimited access. </td><td></td></tr>
         <tr><td></p>
 <p><code>para.debug_request_signatures</code>                                        </td><td> <code>false</code> </td></tr>
         <tr><td>Prints out the request signature (AWS V4) for each request, both the incoming signature from clients
@@ -3936,22 +3927,11 @@ have their own separate keys (see <a href="#34">Apps</a>).</p>
 Simply specify your access key as a parameter:</p>
 <pre><code>GET /v1/public/resource?accessKey=app:myapp</code></pre><h3 id="changing-keys">Changing keys</h3>
 <p>Call <code>POST /v1/_newkeys</code> to generate a new secret key (<em>the request must be signed with the old keys</em>).</p>
-<h3 id="disabling-api-security">Disabling API security</h3>
-<p>To disable the API security completely, set the config parameter <code>para.security.api_security</code> to <code>false</code>.</p>
-<p>If you wish to disable all API functions completely, set the config parameter <code>para.api_enabled</code> to <code>false</code>.</p>
-<blockquote>
-<p>For more information see the <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">AWS documentation</a>
-for REST authentication.</p>
-</blockquote>
 <h3 id="json-web-tokens---client-access-based-on-permissions">JSON Web Tokens - client access based on permissions</h3>
 <blockquote>
-<p><strong>Important:</strong> Access to the root app can be enabled or disabled for API clients.</p>
+<p><strong>Important:</strong> Access to the root app is disabled for API clients holding a bearer JSON web token.</p>
 </blockquote>
-<p>To allow clients with access tokens to make API calls to the root app, use this configuration property:</p>
-<pre><code>para.clients_can_access_root_app = <span class="hljs-literal">true</span></code></pre><p>This is useful if you only have one app on the server. When hosting multiple apps on Para, this should be set to <code>false</code>.
-This does not affect clients that use an <code>accessKey</code> and a <code>secretKey</code>, only those that use access tokens (JWT).</p>
-<p>In production, when Para is deployed as a multitenant server (hosting many apps), it is recommended that API clients
-are not allowed to access root app through the API with <code>para.clients_can_access_root_app = false</code>.</p>
+<p>This is not the case for clients that use an <code>accessKey</code> and a <code>secretKey</code>, only those that use access tokens (JWT).</p>
 <p>Para apps can create new users and grant them specific permissions by implementing social login (identity federation).
 First a user authenticates with their social identity provider such as Facebook, then comes back to Para with the
 <code>access_token</code> and is issued a new JSON Web Token that allows him to access the REST API.</p>
@@ -5831,7 +5811,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>31 March 2022</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>06 April 2022</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2022

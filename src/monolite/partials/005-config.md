@@ -16,9 +16,8 @@ If you have a file called `application.conf` or `application.json` on the classp
 Here's a sample `application.conf` file:
 
 ```bash
-para.env = "embedded"
+para.env = "production"
 para.print_logo = true
-para.security.api_security = true
 para.security.csrf_protection = true
 ```
 
@@ -327,11 +326,6 @@ Here's a list of all configuration properties that can be set in the config file
 		can detect that and switch tables based on it. </td><td></td></tr>
 		<tr><td>
 
-`para.security.api_security`				</td><td> `true` </td></tr>
-		<tr><td>Enable/disable the API security mechanism. If `false`, the API endpoint will **not** check request
-		signatures and all requests will go through. **For development only**.</td><td></td></tr>
-		<tr><td>
-
 `para.security.csrf_protection`			</td><td> `true` </td></tr>
 		<tr><td>Enable/disable CSRF protection which checks for valid CSRF tokens in write requests. </td><td></td></tr>
 		<tr><td>
@@ -383,11 +377,6 @@ Here's a list of all configuration properties that can be set in the config file
 `para.security.allow_unverified_emails`	</td><td> `false` </td></tr>
 		<tr><td>Enable/disable user email verification. When `false` user accounts are locked until
 		the user checks their email and confirms it. </td><td></td></tr>
-		<tr><td>
-
-`para.security.admins_have_full_api_access`			</td><td> `true` </td></tr>
-		<tr><td>If set to `false` admin users will be subject to standard resource permissions when accessing the API.
-		This is applicable when `paraClient.signIn()` is used. By default, they have unlimited access. </td><td></td></tr>
 		<tr><td>
 
 `para.debug_request_signatures`										</td><td> `false` </td></tr>
