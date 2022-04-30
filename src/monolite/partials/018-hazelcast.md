@@ -84,7 +84,7 @@ These are the configuration properties for Hazelcast:
 	</tbody>
 </table>
 
-In case you have enabled EC2 auto discovery, you must set `para.aws_access_key`,
-`para.aws_secret_key` and `para.aws_region` accordingly.
+In case you have enabled EC2 auto discovery, you must set `para.hc.aws_access_key`,
+`para.hc.aws_secret_key` and `para.hc.aws_region` accordingly.
 
 > For more information see the [Hazelcast docs](http://www.hazelcast.org/docs/latest/manual/html-single).
