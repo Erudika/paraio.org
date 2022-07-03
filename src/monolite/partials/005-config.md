@@ -301,6 +301,7 @@ List of ALL Para configuration properties
 |`para.print_version`<br>Enable/disable version number printing in Para logs. | `true` | `Boolean`|
 |`para.print_logo`<br>Enable/disable printing the Para ASCII logo on startup. | `true` | `Boolean`|
 |`para.markdown_soft_break`<br>Sets the Markdown soft break character. | `<br>` | `String`|
+|`para.markdown_allowed_follow_domains`<br>A whitelist of domains, links to which will be allowed to be followed by web crawlers (comma-separated list). | ` ` | `String`|
 |`para.aws_ses_region`<br>AWS region to use in the `AWSEmailer` implementation. | `eu-west-1` | `String`|
 |`para.pidfile_enabled`<br>Enable/disable PID file generation on startup. | `true` | `Boolean`|
 |`para.default_separator`<br>String separator - default is colon `:`. | `:` | `String`|
