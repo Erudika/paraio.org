@@ -3946,8 +3946,8 @@ For apps other than the root app use <code>/passwordless_auth?appid=myapp</code>
 <ul>
 <li><code>email</code> - user’s email address</li>
 <li><code>name</code> - user’s display name</li>
-<li><code>identifier</code> - some unique ID for that user</li>
-<li><code>appid</code> - the app id (optional)</li>
+<li><code>identifier</code> - some unique ID for that user in the format <code>custom:1234</code></li>
+<li><code>appid</code> - the Para app identifier (optional)</li>
 </ul>
 <p>The JWT signature is verified using the secret key value which you provide in your configuration:</p>
 <pre><code>para.app_secret_key = <span class="hljs-string">"change_to_long_random_string"</span></code></pre><p>This key must be at least 32 symbols in length and random. <strong>This key is different from the Para secret key for your app.</strong>
@@ -4138,10 +4138,6 @@ authenticate with your SAML IDP (listed in the first rows below).</p>
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=id&quot; }</code>. The <code>id</code> value of the parameter
 will be replaced with the actual JWT ID token, which you can use to call <code>paraClient.signIn(&quot;passwordless&quot;, idToken)</code> to
 get the long-lived session token.</p>
-<p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
-<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
-Para will redirect the user back to your host URL with the generated access token.
-<strong>Warning: this is less secure and not recommended because the JWT is present in the URL of a <code>GET</code> request.</strong></p>
 <p>You can also put all of the settings above in a configuration file, but this <em>only works</em> if your app is the
 <strong>root app</strong> (see <a href="#005-config">the config</a>).</p>
 
@@ -4340,10 +4336,6 @@ para.fb_secret = <span class="hljs-string">"..."</span></code></pre><p>Or add th
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=id&quot; }</code>. The <code>id</code> value of the parameter
 will be replaced with the actual JWT ID token, which you can use to call <code>paraClient.signIn(&quot;passwordless&quot;, idToken)</code> to
 get the long-lived session token.</p>
-<p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
-<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
-Para will redirect the user back to your host URL with the generated access token.
-<strong>Warning: this is less secure and not recommended because the JWT is present in the URL of a <code>GET</code> request.</strong></p>
 <p>Support for logging in with Facebook is implemented by the <code>FacebookAuthFilter</code>. This filter responds to requests at
 <code>/facebook_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -4385,10 +4377,6 @@ para.gh_secret = <span class="hljs-string">"..."</span></code></pre><p>Or add th
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=id&quot; }</code>. The <code>id</code> value of the parameter
 will be replaced with the actual JWT ID token, which you can use to call <code>paraClient.signIn(&quot;passwordless&quot;, idToken)</code> to
 get the long-lived session token.</p>
-<p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
-<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
-Para will redirect the user back to your host URL with the generated access token.
-<strong>Warning: this is less secure and not recommended because the JWT is present in the URL of a <code>GET</code> request.</strong></p>
 <p>Support for logging in with GitHub is implemented by the <code>GitHubAuthFilter</code>. This filter responds to requests at
 <code>/github_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -4430,10 +4418,6 @@ para.gp_secret = <span class="hljs-string">"..."</span></code></pre><p>Or add th
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=id&quot; }</code>. The <code>id</code> value of the parameter
 will be replaced with the actual JWT ID token, which you can use to call <code>paraClient.signIn(&quot;passwordless&quot;, idToken)</code> to
 get the long-lived session token.</p>
-<p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
-<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
-Para will redirect the user back to your host URL with the generated access token.
-<strong>Warning: this is less secure and not recommended because the JWT is present in the URL of a <code>GET</code> request.</strong></p>
 <p>Support for logging in with Google acoounts is implemented by the <code>GoogleAuthFilter</code>.
 This filter responds to requests at <code>/google_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -4476,10 +4460,6 @@ para.in_secret = <span class="hljs-string">"..."</span></code></pre><p>Or add th
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=id&quot; }</code>. The <code>id</code> value of the parameter
 will be replaced with the actual JWT ID token, which you can use to call <code>paraClient.signIn(&quot;passwordless&quot;, idToken)</code> to
 get the long-lived session token.</p>
-<p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
-<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
-Para will redirect the user back to your host URL with the generated access token.
-<strong>Warning: this is less secure and not recommended because the JWT is present in the URL of a <code>GET</code> request.</strong></p>
 <p>Support for logging in with LinkedIn is implemented by the <code>LinkedInAuthFilter</code>. This filter responds to requests at
 <code>/linkedin_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -4523,10 +4503,6 @@ para.security.signin_failure = <span class="hljs-string">"http://failure.url"</s
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=id&quot; }</code>. The <code>id</code> value of the parameter
 will be replaced with the actual JWT ID token, which you can use to call <code>paraClient.signIn(&quot;passwordless&quot;, idToken)</code> to
 get the long-lived session token.</p>
-<p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
-<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
-Para will redirect the user back to your host URL with the generated access token.
-<strong>Warning: this is less secure and not recommended because the JWT is present in the URL of a <code>GET</code> request.</strong></p>
 <p>Support for logging in with Microsoft accounts is implemented by the <code>MicrosoftAuthFilter</code>.
 This filter responds to requests at <code>/microsoft_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -4569,10 +4545,6 @@ para.security.signin_failure = <span class="hljs-string">"http://failure.url"</s
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=id&quot; }</code>. The <code>id</code> value of the parameter
 will be replaced with the actual JWT ID token, which you can use to call <code>paraClient.signIn(&quot;passwordless&quot;, idToken)</code> to
 get the long-lived session token.</p>
-<p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
-<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
-Para will redirect the user back to your host URL with the generated access token.
-<strong>Warning: this is less secure and not recommended because the JWT is present in the URL of a <code>GET</code> request.</strong></p>
 <p>Support for logging in with Slack accounts is implemented by the <code>SlackAuthFilter</code>.
 This filter responds to requests at <code>/slack_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -4613,10 +4585,6 @@ para.tw_secret = <span class="hljs-string">"..."</span></code></pre><p>Or add th
 <code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=id&quot; }</code>. The <code>id</code> value of the parameter
 will be replaced with the actual JWT ID token, which you can use to call <code>paraClient.signIn(&quot;passwordless&quot;, idToken)</code> to
 get the long-lived session token.</p>
-<p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
-<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
-Para will redirect the user back to your host URL with the generated access token.
-<strong>Warning: this is less secure and not recommended because the JWT is present in the URL of a <code>GET</code> request.</strong></p>
 <p>Support for logging in with Twitter is implemented by the <code>TwitterAuthFilter</code>. This filter responds to requests at
 <code>/twitter_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -4656,9 +4624,10 @@ para.security.signin_failure = <span class="hljs-string">"http://failure.url"</s
     <span class="hljs-string">"az_secret"</span>: <span class="hljs-string">"..."</span>
     <span class="hljs-string">"signin_success"</span>: <span class="hljs-string">"http://success.url"</span>
     <span class="hljs-string">"signin_failure"</span>: <span class="hljs-string">"http://failure.url"</span>
-}</code></pre><p>If you want Para to generate a JWT token upon successful authentication, add the <code>jwt=?</code> parameter to your
-<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=?&quot; }</code>.
-Para will redirect the user back to your host URL with the generated access token.</p>
+}</code></pre><p>Para can return a short-lived ID token back to the client which initiated the request. Add <code>jwt=id</code> to your
+<code>signin_success</code> url. For example <code>{ &quot;signin_success&quot;: &quot;http://success.url?jwt=id&quot; }</code>. The <code>id</code> value of the parameter
+will be replaced with the actual JWT ID token, which you can use to call <code>paraClient.signIn(&quot;passwordless&quot;, idToken)</code> to
+get the long-lived session token.</p>
 <p>Support for logging in with Amazon accounts is implemented by the <code>AmazonAuthFilter</code>.
 This filter responds to requests at <code>/amazon_auth</code>.</p>
 <p>The endpoint expects an <code>appid</code> value from the ‘state’ parameter, e.g. <code>?state={appid}</code>. If that parameter is missing,
@@ -6624,10 +6593,10 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>10 November 2022</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>15 January 2023</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
-						2022
+						2023
 						<a href="https://erudika.com">Erudika</a></p>
 				</div>
 			</div>

@@ -27,8 +27,8 @@ The JWT must contain the following claims:
 
 - `email` - user's email address
 - `name` - user's display name
-- `identifier` - some unique ID for that user
-- `appid` - the app id (optional)
+- `identifier` - some unique ID for that user in the format `custom:1234`
+- `appid` - the Para app identifier (optional)
 
 The JWT signature is verified using the secret key value which you provide in your configuration:
 ```
