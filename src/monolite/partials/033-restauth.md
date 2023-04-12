@@ -150,9 +150,9 @@ The Para client takes care of refreshing the JWT tokens every hour and by defaul
 ### Creating "super" tokens
 
 Since v1.18.3 we've added the support for "super" JSON web tokens. These are just like normal tokens for users, but
-instead of authenticating users we can authenticate apps with them. The give clients full access to the API, bypassing
-permissions. You don't need to connect to a social identity provider like Facebook or Twitter - you simply generate
-the tokens on the client-side. Your code will need both the access key and secret key for this purpose.
+instead of authenticating users we can authenticate apps with them. Such tokens give clients full access to the API.
+Super tokens can also be generated on the client-side but your code will need both the Para access key and secret key.
+**Be careful not to expose your Para secret key when using this method.**
 
 For example, lets assume we have some JavaScript app running in the browser and we need admin access to our Para app.
 We could use the [JavaScript client for Para](https://github.com/Erudika/para-client-js) but putting the secret key

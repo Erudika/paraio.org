@@ -4785,9 +4785,9 @@ paraClient.setAccessToken(String token);</code></pre>
 The Para client takes care of refreshing the JWT tokens every hour and by default all tokens are valid for a week.</p>
 <h3 id="creating-super-tokens">Creating “super” tokens</h3>
 <p>Since v1.18.3 we’ve added the support for “super” JSON web tokens. These are just like normal tokens for users, but
-instead of authenticating users we can authenticate apps with them. The give clients full access to the API, bypassing
-permissions. You don’t need to connect to a social identity provider like Facebook or Twitter - you simply generate
-the tokens on the client-side. Your code will need both the access key and secret key for this purpose.</p>
+instead of authenticating users we can authenticate apps with them. Such tokens give clients full access to the API.
+Super tokens can also be generated on the client-side but your code will need both the Para access key and secret key.
+<strong>Be careful not to expose your Para secret key when using this method.</strong></p>
 <p>For example, lets assume we have some JavaScript app running in the browser and we need admin access to our Para app.
 We could use the <a href="https://github.com/Erudika/para-client-js">JavaScript client for Para</a> but putting the secret key
 inside client-side code on the browser is <em>not a smart move</em>. So we pull in a library for generating JWT, like
@@ -6593,7 +6593,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>05 April 2023</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>12 April 2023</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2023
