@@ -108,10 +108,12 @@ List of ALL Para configuration properties
 |`para.session_timeout`<br>Expiration period for the login session, in seconds. | `86400` | `Integer`|
 |`para.min_password_length`<br>The minimum length of user passwords. | `8` | `Integer`|
 |`para.pass_reset_timeout`<br>The time window in which passwords can be reset, in seconds. After that the token in the email expires. | `1800` | `Integer`|
+|`para.max_pass_matching_attemts`<br>The maximum number of passord matching attempts for user accounts per time unit. After that the account is locked and user cannot login until the lock has expired. | `20` | `Integer`|
+|`para.pass_matching_lock_period_hours`<br>The time to force a user to wait until they can try to log back in, in hours. | `1` | `Integer`|
 |`para.returnto_cookie`<br>The name of the cookie used to remember which URL the user requested and will be redirected to after login. | `para-returnto` | `String`|
 |`para.support_email`<br>The email of the webmaster/support team. Para will send emails to this email. | `support@myapp.co` | `String`|
 |`para.security.allow_unverified_emails`<br>Enable/disable email verification after the initial user registration. Users with unverified emails won't be able to sign in, unless they use a social login provider. | `false` | `Boolean`|
-|`para.security.protected`<br>Protects a named resource by requiring users to authenticated before accessing it. A protected resource has a `{name}` and value like this `["/{path}", "/{path}/**", ["{role}" or {http_method}]]`. The value is an array of relative paths which are matche by an ANT pattern matcher. This array can contain a subarray which lists all the HTTP methods that require authentication and the user roles that are allowed to access this particular resource. No HTTP methods means that all requests to this resource require authentication. | ` ` | `ConfigObject`|
+|`para.security.protected`<br>Protects a named resource by requiring users to authenticated before accessing it. A protected resource has a `{name}` and value like this `[\"/{path}\", \"/{path}/**\", [\"{role}\" or {http_method}]]`. The value is an array of relative paths which are matche by an ANT pattern matcher. This array can contain a subarray which lists all the HTTP methods that require authentication and the user roles that are allowed to access this particular resource. No HTTP methods means that all requests to this resource require authentication. | ` ` | `ConfigObject`|
 |`para.security.signin`<br>The path to the login page. | `/signin` | `String`|
 |`para.security.signin_success`<br>The default page to send users to when they login. | `/` | `String`|
 |`para.security.signin_failure`<br>The default page to send users to when login fails. | `/signin?error` | `String`|
@@ -228,7 +230,7 @@ List of ALL Para configuration properties
 
 | Property key & Description | Default Value | Type |
 |  ---                       | ---           | ---  |
-|`para.db.hostname`<br>The hostname of the H2 server. Setting this will enable H2â€™s â€œserver modeâ€ and start a TCP server. | ` ` | `String`|
+|`para.db.hostname`<br>The hostname of the H2 server. Setting this will enable H2’s “server mode” and start a TCP server. | ` ` | `String`|
 |`para.db.dir`<br>The data directory for storing H2 databases. | `./data` | `String`|
 |`para.db.user`<br>The username with access to the H2 database. | `para` | `String`|
 |`para.db.tcpServer`<br>Parameters for the H2 TCP server. | ` ` | `String`|
@@ -258,7 +260,12 @@ List of ALL Para configuration properties
 
 | Property key & Description | Default Value | Type |
 |  ---                       | ---           | ---  |
-|`para.dynamodb.`<br>Enable/disable SSE (encryption-at-rest) using own KMS, instead of AWS-owned CMK for all newly created DynamoDB tables. | `false` | `Boolean`|
+|`para.dynamodb.sse_enabled`<br>Enable/disable SSE (encryption-at-rest) using own KMS, instead of AWS-owned CMK for all newly created DynamoDB tables. | `false` | `Boolean`|
+|`para.dynamodb.replica_regions`<br>Toggles global table settings for the specified regions. | ` ` | `String`|
+|`para.dynamodb.backups_enabled`<br>Enable/disable point-in-time backups in DynamoDB. | `false` | `Boolean`|
+|`para.dynamodb.provisioned_mode_enabled`<br>Enable/disable provisioned billing as an alternative to on-demand billing in DynamoDB. | `false` | `Boolean`|
+|`para.dynamodb.max_read_capacity`<br>The maximum read capacity when creating a table with provisioned mode enabled. | `10` | `Integer`|
+|`para.dynamodb.max_write_capacity`<br>The maximum write capacity when creating a table with provisioned mode enabled. | ` ` | `Integer`|
 
 ## Caffeine Cache
 
