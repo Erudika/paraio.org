@@ -1,0 +1,16 @@
+module:com.erudika.para.core
+com.erudika.para.core
+com.erudika.para.core.annotations
+com.erudika.para.core.cache
+com.erudika.para.core.email
+com.erudika.para.core.i18n
+com.erudika.para.core.listeners
+com.erudika.para.core.metrics
+com.erudika.para.core.persistence
+com.erudika.para.core.queue
+com.erudika.para.core.rest
+com.erudika.para.core.search
+com.erudika.para.core.storage
+com.erudika.para.core.utils
+com.erudika.para.core.validation
+com.erudika.para.utils
