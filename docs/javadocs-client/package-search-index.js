@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.erudika.para.client","l":"com.erudika.para.client"}];updateSearchResults();
