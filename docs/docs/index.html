@@ -407,8 +407,7 @@ $ mvn install -DskipTests=<span class="hljs-literal">true</span></code></pre>
 Two JAR files will be generated in total - the fat one is a bit bigger in size.</p>
 <p>To run a local instance of Para for development, use:</p>
 <pre><code class="language-sh">$ mvn spring-boot:run</code></pre>
-<p>Alternatively, you can build a WAR file and deploy it to your favorite servlet container:</p>
-<pre><code>$ cd para-war &amp;&amp; mvn package</code></pre>
+
 				</section>
 			</article>
 			<a id="002-standalone" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
@@ -982,11 +981,6 @@ This is important for securing your server because this secret key is used for s
 <td><code>para.security.csrf_protection</code><br>Enable/disable CSRF protection which checks for valid CSRF tokens in write requests.</td>
 <td><code>true</code></td>
 <td><code>Boolean</code></td>
-</tr>
-<tr>
-<td><code>para.security.csrf_cookie</code><br>The name of the CSRF cookie.</td>
-<td><code>para-csrf-token</code></td>
-<td><code>String</code></td>
 </tr>
 <tr>
 <td><code>para.auth_cookie</code><br>The name of the authorization cookie.</td>
@@ -2459,7 +2453,8 @@ be interested in updated <code>user</code> objects. So we can register a new web
     <span class="hljs-string">"update"</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">"targetUrl"</span>: <span class="hljs-string">"https://destination.url"</span>,
     <span class="hljs-string">"secret"</span>: <span class="hljs-string">"secret"</span>,
-    <span class="hljs-string">"typeFilter"</span>:<span class="hljs-string">"user"</span>
+    <span class="hljs-string">"typeFilter"</span>:<span class="hljs-string">"user"</span>,
+  <span class="hljs-string">"propertyFilter"</span>: <span class="hljs-string">""</span>
 }</code></pre><p>The <code>urlEncoded</code> parameter sets the <code>Content-Type</code> header for the payload. By default that’s
 <code>application/x-www-form-urlencoded</code>, but if <code>urlEncoded</code> is false, the content type will be <code>application/json</code>.</p>
 <p>There are 6 event types: <code>update</code>, <code>create</code>, <code>delete</code>, <code>updateAll</code>, <code>createAll</code>, <code>deleteAll</code>. You can also register
@@ -2476,7 +2471,8 @@ webhooks which are subscribed to all events on all types in Para:</p>
     <span class="hljs-string">"deleteAll"</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-string">"targetUrl"</span>: <span class="hljs-string">"https://destination.url"</span>,
     <span class="hljs-string">"secret"</span>: <span class="hljs-string">"secret"</span>,
-    <span class="hljs-string">"typeFilter"</span>:<span class="hljs-string">"*"</span>
+    <span class="hljs-string">"typeFilter"</span>:<span class="hljs-string">"*"</span>,
+  <span class="hljs-string">"propertyFilter"</span>: <span class="hljs-string">""</span>
 }</code></pre><p>If the typeFilter is either blank or <code>*</code>, all selected events will be sent to the destination, regardless of the object
 type.</p>
 <p>If the webhook’s response code is not <code>2xx</code>, it is considered as failed. Webhooks with too many failed deliveries
@@ -2524,6 +2520,17 @@ Here’s an example request which would trigger a custom event <code>post.like</
         }
     }
 }</code></pre><p>The response object returned from this request should be ignored.</p>
+<p>Finally, you can configure a webhook so that it is only fired when the payload matches a certain filter.
+A filter could contain one or more values of a property, e.g. <code>tags:tag1,tag2</code>. If the payload inside the webhook matches
+the filter, then the payload is sent to the target URL, otherwise it is ignored.
+Here are some examples of webhook property filters (as field <code>propertyFilter</code>):</p>
+<ul>
+<li><code>tags:tag1,tag2</code> - payload must contain a <strong>list</strong> property <code>tags</code> and it must have <strong>both</strong> <code>tag1</code> and <code>tag2</code> in it</li>
+<li><code>tags:tag1|tag2</code> - payload must contain a <strong>list</strong> property <code>tags</code> and it must have <strong>either</strong> <code>tag1</code> or <code>tag2</code> in it</li>
+<li><code>name:Gordon</code> - payload must contain a <strong>String</strong> property and it must be <code>Gordon</code></li>
+<li><code>name:Gordon|Joe</code> - payload must contain a <strong>String</strong> property and it must be <strong>either</strong> <code>Gordon</code> or <code>Joe</code></li>
+<li><code>tags:-</code> - payload must contain a <strong>list</strong> or <strong>string</strong> property <code>tags</code> and it <strong>must be empty</strong></li>
+</ul>
 
 				</section>
 			</article>
@@ -2820,7 +2827,7 @@ and verify that it exists in the classpath. If the driver cannot be found, the S
 the DAO cannot be used.</p>
 <p>In addition to specifying the driver name, you need to ensure the JAR file containing the SQL driver corresponding to
 your database is on your classpath when launching Para Server. The easiest way to do this is to add your SQL driver’s
-JAR file to the <code>lib/</code> directory relative to the location of the Para Server WAR file <code>para-x.y.z.war</code>.</p>
+JAR file to the <code>lib/</code> directory relative to the location of the Para Server JAR file <code>para-x.y.z.jar</code>.</p>
 <h3 id="working-with-oracle-database">Working with Oracle database</h3>
 <p>To use Oracle DB you need to create a user (schema) for Para, with <code>CREATE SESSION</code> and <code>CREATE TABLE</code> privileges.
 You also need to enable writes on the USERS tablespace if you get an error like
@@ -4720,15 +4727,11 @@ in order to obtain an access and secret keys.</p>
 					<p>Cross-Site Request Forgery protection is enabled by default for all <code>POST</code>, <code>PUT</code> and <code>DELETE</code> requests.
 It works by verifying that incoming requests contain a security token (CSRF token) and it matches the one stored on the
 server. CSRF protection is disabled for API requests.</p>
-<p>To disable the CSRF protection set <code>para.security.csrf_protection</code> to <code>false</code>. You can also tell Para to send a cookie
-containing the CSRF token by setting <code>para.security.csrf_cookie</code> as the cookie name. Leaving this parameter blank will
-disable the CSRF cookie.</p>
+<p>To disable the CSRF protection set <code>para.security.csrf_protection</code> to <code>false</code>.</p>
 <p>For example, if you wish to integrate CSRF protection with AngularJS you can do so by setting
 the cookie name to <code>XSRF-TOKEN</code> which is the default cookie used by AngularJS. Also you need to configure AngularJS to
 send the correct CSRF header to Para which is <code>X-CSRF-TOKEN</code> like so:</p>
 <pre><code class="language-js">$httpProvider.defaults.xsrfHeaderName = <span class="hljs-string">"X-CSRF-TOKEN"</span>;</code></pre>
-<p>In order to get a CSRF token from the server you need to send a <code>POST</code> request to a protected resource
-like <code>POST /protected/ping</code> and the server will return the token as cookie.</p>
 
 				</section>
 			</article>
@@ -6645,7 +6648,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>08 April 2024</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>07 June 2024</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2024

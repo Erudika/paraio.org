@@ -24,7 +24,8 @@ POST /v1/webhooks
 	"update": true,
 	"targetUrl": "https://destination.url",
 	"secret": "secret",
-	"typeFilter":"user"
+	"typeFilter":"user",
+  "propertyFilter": ""
 }
 ```
 
@@ -46,7 +47,8 @@ POST /v1/webhooks
 	"deleteAll": true,
 	"targetUrl": "https://destination.url",
 	"secret": "secret",
-	"typeFilter":"*"
+	"typeFilter":"*",
+  "propertyFilter": ""
 }
 ```
 If the typeFilter is either blank or `*`, all selected events will be sent to the destination, regardless of the object
@@ -115,3 +117,13 @@ POST /v1/webhooks
 }
 ```
 The response object returned from this request should be ignored.
+
+Finally, you can configure a webhook so that it is only fired when the payload matches a certain filter.
+A filter could contain one or more values of a property, e.g. `tags:tag1,tag2`. If the payload inside the webhook matches
+the filter, then the payload is sent to the target URL, otherwise it is ignored.
+Here are some examples of webhook property filters (as field `propertyFilter`):
+- `tags:tag1,tag2` - payload must contain a **list** property `tags` and it must have **both** `tag1` and `tag2` in it
+- `tags:tag1|tag2` - payload must contain a **list** property `tags` and it must have **either** `tag1` or `tag2` in it
+- `name:Gordon` - payload must contain a **String** property and it must be `Gordon`
+- `name:Gordon|Joe` - payload must contain a **String** property and it must be **either** `Gordon` or `Joe`
+- `tags:-` - payload must contain a **list** or **string** property `tags` and it **must be empty**

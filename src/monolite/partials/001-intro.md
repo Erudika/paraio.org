@@ -174,7 +174,3 @@ To run a local instance of Para for development, use:
 ```sh
 $ mvn spring-boot:run
 ```
-Alternatively, you can build a WAR file and deploy it to your favorite servlet container:
-```
-$ cd para-war && mvn package
-```
