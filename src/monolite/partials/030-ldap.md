@@ -70,6 +70,12 @@ This property can have multiple values separated by `|`, e.g. `uid={0}|cn={0}`.<
 		<tr><td>The password attribute in the directory</td></tr>
 		<tr><td>
 
+`para.security.ldap.displayname_attribute`</td><td>
+
+`cn`</td></tr>
+		<tr><td>Maps an LDAP property to the full name of the person. By default, the value of CN is used as the name of the Para user. Acceptable values are `cn`, `displayname`, `uid`, `username`, `sn`.</td></tr>
+		<tr><td>
+
 `para.security.ldap.username_as_name`</td><td>
 
 `false`</td></tr>
