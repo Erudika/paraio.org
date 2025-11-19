@@ -308,21 +308,112 @@ or integrate Para directly into your project with one of the API clients below.<
 <strong>It’s highly recommended that you pull only release images like <code>:1.45.1</code> or <code>:latest_stable</code>
 because the <code>:latest</code> tag can be broken or unstable.</strong>
 First, create an <code>application.conf</code> file and a <code>data</code> folder and start the Para container:</p>
-<pre><code>$ touch application.conf &amp;&amp; mkdir data
-$ docker run -ti -p <span class="hljs-number">8080</span>:<span class="hljs-number">8080</span> --rm -v $(pwd)/data:<span class="hljs-regexp">/para/</span>data \
-  -v $(pwd)/application.conf:<span class="hljs-regexp">/para/</span>application.conf \
-  -e JAVA_OPTS=<span class="hljs-string">"-Dconfig.file=/para/application.conf"</span> erudikaltd/para:latest_stable</code></pre><p><strong>Environment variables</strong></p>
+<pre><code class="language-bash">$ touch application.conf &amp;&amp; mkdir data
+$ docker run -ti -p 8080:8080 --rm -v $(<span class="hljs-built_in">pwd</span>)/data:/para/data \
+  -v $(<span class="hljs-built_in">pwd</span>)/application.conf:/para/application.conf \
+  -e JAVA_OPTS=<span class="hljs-string">"-Dconfig.file=/para/application.conf"</span> erudikaltd/para:latest_stable</code></pre>
+<p><strong>Environment variables</strong></p>
 <p><code>JAVA_OPTS</code> - Java system properties, e.g. <code>-Dpara.port=8000</code>
 <code>BOOT_SLEEP</code> - Startup delay, in seconds</p>
 <p><strong>Plugins</strong></p>
-<p>To use plugins, create a new <code>Dockerfile-plugins</code> which does a multi-stage build like so:</p>
-<pre><code># change X.Y.Z to the version you want to use
-FROM erudikaltd/para:v1.XY.Z-base AS base
-FROM erudikaltd/para-search-lucene:1.XY.Z AS search
-FROM erudikaltd/para-dao-mongodb:1.XY.Z AS dao
-FROM base AS final
-COPY --from=search /para/lib/*.jar /para/lib
-COPY --from=dao /para/lib/*.jar /para/lib</code></pre><p>Then simply run <code>$ docker build -f Dockerfile-plugins -t para-mongo .</code></p>
+<p>You can create a custom Para container with all plugins and JDBC drivers you need by using <code>docker compose</code>.
+Below is an example build of Para, using <code>para-dao-sql</code>, <code>para-search-lucene</code> and PosgreSQL as a database.</p>
+<ol>
+<li>First, create a new <code>Dockerfile-plugins</code> which does a multi-stage build like so:</li>
+</ol>
+<ul><li>
+<details>
+    <summary>View contents of <code>Dockerfile-plugins</code></summary>
+
+<pre><code class="language-docker"><span class="hljs-keyword">ARG</span> PARA_VERSION=<span class="hljs-string">"0.0.0"</span>
+<span class="hljs-keyword">ARG</span> SQL_DAO_VERSION=<span class="hljs-string">"0.0.0"</span>
+<span class="hljs-keyword">FROM</span> erudikaltd/para:v${PARA_VERSION} AS base
+<span class="hljs-keyword">FROM</span> erudikaltd/para-dao-sql:${SQL_DAO_VERSION} AS dao
+<span class="hljs-keyword">FROM</span> erudikaltd/para-search-lucene:${SEARCH_VERSION} AS search
+<span class="hljs-keyword">FROM</span> base AS final
+<span class="hljs-keyword">COPY</span><span class="bash"> --from=dao /para/lib/*.jar /para/lib</span>
+<span class="hljs-keyword">COPY</span><span class="bash"> --from=search /para/lib/*.jar /para/lib</span>
+
+<span class="hljs-comment"># EXAMPLE: Add a PostgreSQL JDBC Driver</span>
+<span class="hljs-keyword">ARG</span> PG_JDBC_VERSION=<span class="hljs-string">"0.0.0"</span>
+<span class="hljs-keyword">ADD</span><span class="bash"> https://jdbc.postgresql.org/download/postgresql-<span class="hljs-variable">${PG_JDBC_VERSION}</span>.jar /para/lib/</span></code></pre>
+</details>
+</li></ul>
+
+<ol start="2">
+<li>Then, create a <code>docker-compose.yml</code> file:</li>
+</ol>
+<ul><li>
+<details>
+    <summary>View contents of <code>docker-compose.yml</code></summary>
+
+<pre><code class="language-yml"><span class="hljs-attr">services:</span>
+<span class="hljs-attr">   para:</span>
+<span class="hljs-attr">     depends_on:</span>
+<span class="hljs-bullet">       -</span> <span class="hljs-string">db</span>
+<span class="hljs-attr">     build:</span>
+<span class="hljs-attr">       context:</span> <span class="hljs-string">.</span>
+<span class="hljs-attr">       dockerfile:</span> <span class="hljs-string">Dockerfile</span>
+<span class="hljs-attr">       args:</span>
+<span class="hljs-attr">         PARA_VERSION:</span> <span class="hljs-string">"1.51.0"</span>
+<span class="hljs-attr">         SQL_DAO_VERSION:</span> <span class="hljs-string">"1.49.1"</span>
+<span class="hljs-attr">         PG_JDBC_VERSION:</span> <span class="hljs-string">"42.7.7"</span>
+<span class="hljs-attr">     image:</span> <span class="hljs-attr">para-base:latest</span>
+<span class="hljs-attr">     pull_policy:</span> <span class="hljs-string">never</span>
+<span class="hljs-attr">     ports:</span>
+<span class="hljs-bullet">       -</span> <span class="hljs-string">"8080:8080"</span>
+<span class="hljs-attr">     volumes:</span>
+<span class="hljs-attr">       - type:</span> <span class="hljs-string">volume</span>
+<span class="hljs-attr">         source:</span> <span class="hljs-string">paraData</span>
+<span class="hljs-attr">         target:</span> <span class="hljs-string">/para/data</span>
+<span class="hljs-attr">       - type:</span> <span class="hljs-string">volume</span>
+<span class="hljs-attr">         source:</span> <span class="hljs-string">paraLib</span>
+<span class="hljs-attr">         target:</span> <span class="hljs-string">/para/lib</span>
+<span class="hljs-attr">       - type:</span> <span class="hljs-string">bind</span>
+<span class="hljs-attr">         source:</span> <span class="hljs-string">./para-application.conf</span>
+<span class="hljs-attr">         target:</span> <span class="hljs-string">/para/application.conf</span>
+<span class="hljs-attr">     restart:</span> <span class="hljs-string">always</span>
+<span class="hljs-attr">     environment:</span>
+<span class="hljs-bullet">       -</span> <span class="hljs-string">JAVA_OPTS=-Dconfig.file=/para/application.conf</span> <span class="hljs-bullet">-Dloader.path=/para/lib</span>
+
+<span class="hljs-attr">   db:</span>
+<span class="hljs-attr">     image:</span> <span class="hljs-attr">postgres:latest</span>
+<span class="hljs-attr">     ports:</span>
+<span class="hljs-bullet">       -</span> <span class="hljs-string">"5432:5432"</span>
+<span class="hljs-attr">     volumes:</span>
+<span class="hljs-attr">       - type:</span> <span class="hljs-string">volume</span>
+<span class="hljs-attr">         source:</span> <span class="hljs-string">postgresData</span>
+<span class="hljs-attr">         target:</span> <span class="hljs-string">/var/lib/postgresql/data</span>
+<span class="hljs-attr">     restart:</span> <span class="hljs-string">always</span>
+<span class="hljs-attr">     environment:</span>
+<span class="hljs-bullet">       -</span> <span class="hljs-string">POSTGRES_PASSWORD=mysecretpassword</span>
+<span class="hljs-bullet">       -</span> <span class="hljs-string">PGDATA=/var/lib/postgresql/data</span>
+<span class="hljs-attr">volumes:</span>
+<span class="hljs-attr">  paraData:</span>
+<span class="hljs-attr">  paraLib:</span>
+<span class="hljs-attr">  postgresData:</span></code></pre>
+</details>
+</li></ul>
+
+<ol start="3">
+<li>Also reate the Para configuration file <code>para-application.conf</code>:</li>
+</ol>
+<ul><li>
+<details>
+    <summary>View contents of <code>para-application.conf</code></summary>
+
+<pre><code class="language-ini"><span class="hljs-attr">para.env</span> = <span class="hljs-string">"production"</span>
+<span class="hljs-attr">para.dao</span> = <span class="hljs-string">"SqlDAO"</span>
+<span class="hljs-attr">para.sql.driver</span> = <span class="hljs-string">"org.postgresql.Driver"</span>
+<span class="hljs-attr">para.sql.url</span> = <span class="hljs-string">"postgresql://db:5432/para"</span>
+<span class="hljs-attr">para.sql.user</span> = <span class="hljs-string">"postgres"</span>
+<span class="hljs-attr">para.sql.password</span> = <span class="hljs-string">"mysecretpassword"</span></code></pre>
+</details>
+</li></ul>
+
+<ol start="4">
+<li>Finally, run <code>docker compose build para &amp;&amp; docker compose up</code></li>
+</ol>
 <h3 id="maven">Maven</h3>
 <p>The Java client for Para is a separate module with these Maven coordinates:</p>
 <pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
@@ -6652,7 +6743,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>21 October 2025</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>19 November 2025</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2025
