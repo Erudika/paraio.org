@@ -43,6 +43,7 @@ List of ALL Para configuration properties
 | Property key & Description | Default Value | Type |
 |  ---                       | ---           | ---  |
 |`para.app_name`<br>The formal name of the web application. | `para` | `String`|
+|`para.root_secret_override`<br>Overrides the secret key for the root Para app `app:para` once, upon first initialization. | ` ` | `String`|
 |`para.context_path` <kbd>requires restart</kbd><br>The context path (subpath) of the web application, defaults to the root path `/`. | ` ` | `String`|
 |`para.port` <kbd>requires restart</kbd><br>The network port of this Para server. Port number should be a number above `1024`. | `8080` | `Integer`|
 |`para.dao` <kbd>requires restart</kbd><br>Selects the `DAO` implementation at runtime. Can be `AWSDynamoDAO`, `MongoDBDAO`, `CassandraDAO`, etc. Each implementation has its own configuration properties. | `H2DAO` | `String`|

@@ -245,6 +245,17 @@ pc.me();
 	</div>
 </div>
 
+## Kubernetes
+
+There's a Helm chart inside the `helm/` folder. First edit `helm/para/values.yaml` and then you can deploy Para to
+Kubernetes with a single command:
+
+```
+cd helm; helm install para ./para
+```
+
+For more info, check the quick start guide at [`helm/README.md`](https://github.com/Erudika/para/blob/master/helm/README.md).
+
 ### Building Para
 
 Para can be compiled with JDK 8 and up.
