@@ -9,6 +9,7 @@ if [ -n "$1" ]; then
   wget -O jdocs3.zip https://repo1.maven.org/maven2/com/erudika/para-client/$1/para-client-$1-javadoc.jar
 fi
 grunt cb
+rm -rf ${DIST}/javadocs-core ${DIST}/javadocs-server ${DIST}/javadocs-client
 unzip jdocs1.zip -d ${DIST}/javadocs-core
 unzip jdocs2.zip -d ${DIST}/javadocs-server
 unzip jdocs3.zip -d ${DIST}/javadocs-client
