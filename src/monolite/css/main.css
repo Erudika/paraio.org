@@ -196,7 +196,7 @@ a:focus {
 .intro-cmd code {
 	padding: 10px;
 	color: #444444;
-	background-color: transparent;
+	background-color: #F5F5F5;
 	line-height: 25px;
 }
 
@@ -237,10 +237,10 @@ a:focus {
 }
 
 pre.maven-coords {
-	width: 28em;
+	width: 50em;
 	background-color: #444444;
 	color: white;
-	margin: 0 auto;
+	margin: 10px auto;
 }
 
 .contact-section {

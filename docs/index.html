@@ -89,9 +89,10 @@
 					<h4 class="intro-cmd">
 						<code>docker run -it erudikaltd/para:latest_stable</code>
 					</h4>
+<!--					<br>
 					<h4>
 						<a href="https://console.paraio.org">console.paraio.org</a>
-					</h4>
+					</h4>-->
 				</div>
 			</div>
 		</div>
@@ -160,7 +161,7 @@
 		<li><a href="https://github.com/erudika/para/archive/master.zip" class="btn btn-default">Source code (.zip)</a>
 		</li>
 		<li><a href="https://repo1.maven.org/maven2/com/erudika/para-jar/1.51.4/para-jar-1.51.4.jar"
-					 class="btn btn-default">Executable JAR</a>
+					 class="btn btn-default">Download Executable JAR</a>
 		</li>
 		<!-- <li><a href="https://repo1.maven.org/maven2/com/erudika/para-war/1.51.4/para-war-1.51.4.war"
 					 class="btn btn-default">WAR</a>
@@ -169,34 +170,28 @@
 
 	<h3>Para server</h3>
 
-	<div class="text-center">
-		<a href="https://repo1.maven.org/maven2/com/erudika/para-jar/1.51.4/para-jar-1.51.4.jar"
-							 class="btn btn-default"><i class="glyphicon glyphicon-download"></i> Download</a>
-	</div>
-
 	<pre class="maven-coords text-left"><code>  &lt;dependency&gt;
     &lt;groupId&gt;com.erudika&lt;/groupId&gt;
     &lt;artifactId&gt;para-server&lt;/artifactId&gt;
     &lt;version&gt;1.51.4&lt;/version&gt;
-  &lt;/dependency&gt;
+  &lt;/dependency&gt;</code></pre>
 
-    // Gradle
-	  dependencies {
-      compileOnly group: 'com.erudika', name: 'para-server', version: '1.51.4'
-    }
-   </code></pre>
+	<pre class="maven-coords text-left"><code>  // Gradle
+  dependencies {
+   compileOnly group: 'com.erudika', name: 'para-server', version: '1.51.4'
+  }</code></pre>
 
 	<h3>Para client for Java</h3>
 	<pre class="maven-coords text-left"><code>  &lt;dependency&gt;
     &lt;groupId&gt;com.erudika&lt;/groupId&gt;
     &lt;artifactId&gt;para-client&lt;/artifactId&gt;
     &lt;version&gt;1.51.4&lt;/version&gt;
-  &lt;/dependency&gt;
+  &lt;/dependency&gt;</code></pre>
 
-		// Gradle
-	  dependencies {
-      compileOnly group: 'com.erudika', name: 'para-client', version: '1.51.4'
-    }</code></pre>
+	<pre class="maven-coords text-left"><code>  // Gradle
+  dependencies {
+   compileOnly group: 'com.erudika', name: 'para-client', version: '1.51.4'
+  }</code></pre>
 
 	<h3>Docker</h3>
 	<pre class="maven-coords text-left text-center"><code>docker run erudikaltd/para:v1.51.4</code></pre>
