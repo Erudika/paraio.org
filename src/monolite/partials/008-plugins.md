@@ -141,7 +141,7 @@ your own filters and servlets. These initializer classes also act as an alternat
 Since version 1.7, you can register custom API resources by implementing the `CustomResourceHandler` interface.
 Use the `ServiceLoader` mechanism to tell Para to load your handlers - add them to a file named:
 ```
-com.erudika.para.rest.CustomResourceHandler
+com.erudika.para.core.rest.CustomResourceHandler
 ```
 in `META-INF/services` where each line contains the full class name
 of your custom resource handler class. On startup Para will load these and register them as API resource handlers.
@@ -149,18 +149,20 @@ of your custom resource handler class. On startup Para will load these and regis
 The `CustomResourceHandler` interface is simple:
 
 ```java
-public interface CustomResourceHandler {
-	// the path of the resource, e.g. "my-resource"
-	String getRelativePath();
-	// handle GET requests
-	Response handleGet(ContainerRequestContext ctx);
-	// handle PUT requests
-	Response handlePut(ContainerRequestContext ctx);
-	// handle POST requests
-	Response handlePost(ContainerRequestContext ctx);
-	// handle DELETE requests
-	Response handleDelete(ContainerRequestContext ctx);
+public interface CustomResourceHandler { }
+```
+Here's an example of a custom REST resource handler:
+
+```java
+@RestController
+@RequestMapping(value = "/myresource", produces = "application/json")
+public class MyCustomResource implements CustomResourceHandler {
+	@GetMapping("/test")
+	public Map test() {
+		return Map.of("body", "json");
+	}
 }
 ```
+
 
 You can use `@Inject` in your custom handlers to inject any object managed by Para.

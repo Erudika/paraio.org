@@ -82,12 +82,12 @@
 						<span>console tools</span>
 						<span>prototypes</span>
 					</p>
-					<div class="page-scroll">
+<!--					<div class="page-scroll">
 						<a href="https://repo1.maven.org/maven2/com/erudika/para-jar/1.51.4/para-jar-1.51.4.jar"
 							 class="btn btn-default"><i class="glyphicon glyphicon-download"></i> Download</a>
-					</div>
+					</div>-->
 					<h4 class="intro-cmd">
-						<code>java -jar para-*.jar</code>
+						<code>docker run -it erudikaltd/para:latest_stable</code>
 					</h4>
 					<h4>
 						<a href="https://console.paraio.org">console.paraio.org</a>
@@ -167,19 +167,36 @@
 		</li> -->
 	</ul>
 
-	<h3>Maven - Para server</h3>
+	<h3>Para server</h3>
+
+	<div class="text-center">
+		<a href="https://repo1.maven.org/maven2/com/erudika/para-jar/1.51.4/para-jar-1.51.4.jar"
+							 class="btn btn-default"><i class="glyphicon glyphicon-download"></i> Download</a>
+	</div>
+
 	<pre class="maven-coords text-left"><code>  &lt;dependency&gt;
     &lt;groupId&gt;com.erudika&lt;/groupId&gt;
     &lt;artifactId&gt;para-server&lt;/artifactId&gt;
     &lt;version&gt;1.51.4&lt;/version&gt;
-  &lt;/dependency&gt;</code></pre>
+  &lt;/dependency&gt;
 
-	<h3>Maven - Para client for Java</h3>
+    // Gradle
+	  dependencies {
+      compileOnly group: 'com.erudika', name: 'para-server', version: '1.51.4'
+    }
+   </code></pre>
+
+	<h3>Para client for Java</h3>
 	<pre class="maven-coords text-left"><code>  &lt;dependency&gt;
     &lt;groupId&gt;com.erudika&lt;/groupId&gt;
     &lt;artifactId&gt;para-client&lt;/artifactId&gt;
     &lt;version&gt;1.51.4&lt;/version&gt;
-  &lt;/dependency&gt;</code></pre>
+  &lt;/dependency&gt;
+
+		// Gradle
+	  dependencies {
+      compileOnly group: 'com.erudika', name: 'para-client', version: '1.51.4'
+    }</code></pre>
 
 	<h3>Docker</h3>
 	<pre class="maven-coords text-left text-center"><code>docker run erudikaltd/para:v1.51.4</code></pre>
@@ -242,9 +259,9 @@
 				<li><a href="mailto:para@erudika.com" class="btn btn-default">
 						<span class="network-name">Email</span></a>
 				</li>
-				<li><a href="https://twitter.com/para_io" class="btn btn-default">
+<!--				<li><a href="https://twitter.com/para_io" class="btn btn-default">
 						<span class="network-name">Twitter</span></a>
-				</li>
+				</li>-->
 				<li><a href="https://gitter.im/Erudika/para" class="btn btn-default">
 						<span class="network-name">Chat</span></a>
 				</li>
@@ -274,7 +291,7 @@
 	<footer>
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<p>Generated on <i>26 November 2025</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+				<p>Generated on <i>11 December 2025</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 					and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 				<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 					2025
