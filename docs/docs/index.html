@@ -1082,6 +1082,11 @@ This is important for securing your server because this secret key is used for s
 <td><code>Boolean</code></td>
 </tr>
 <tr>
+<td><code>para.security.csrf_protection_with_spa</code><br>Enable/disable CSRF protection with single-page application mode enabled.</td>
+<td><code>false</code></td>
+<td><code>Boolean</code></td>
+</tr>
+<tr>
 <td><code>para.auth_cookie</code><br>The name of the authorization cookie.</td>
 <td><code>para-auth</code></td>
 <td><code>String</code></td>
@@ -4069,11 +4074,11 @@ content encoding header to be set. The extension is removed before upload.</p>
 info to Para and it will authenticate that user automatically without passwords.</p>
 <p>This mechanism is implemented in the <code>PasswordlessAuthFilter</code> class.</p>
 <p>The default URL for this filter is <code>/passwordless_auth</code> and all requests to this location will be intercepted and processed
-by it. It accepts the following parameters:</p>
+by it. It accepts the following query parameters:</p>
 <ul>
-<li><code>token</code> - a JWT generated on an external backend (for example your login server).</li>
+<li><code>token</code> or <code>jwt</code> - a JWT generated on an external backend (for example your login server), or a short-lived ID token from Para (e.g. returned after social login succeeds).</li>
 <li><code>appid</code> - the Para app identifier</li>
-<li><code>redirect</code> - if set to <code>false</code> redirects are disabled and JWT is returned in response body</li>
+<li><code>redirect</code> - if set to <code>false</code> redirects are disabled and JWT is returned in response body as plain text</li>
 </ul>
 <p>Also see the configuration properties <code>para.security.signin_success</code> and <code>para.security.signin_failure</code> in section Config.
 These can be set for each app individually as <code>signin_success</code> and <code>signin_failure</code> in the app’s settings.
@@ -4086,11 +4091,11 @@ the actual Para JWT which can later be presented to the <code>/v1/_me</code> end
 <li>A user wants to sign in to Para and clicks a button</li>
 <li>The button redirects the user to a remote login page you or your company set up.</li>
 <li>The user enters their credentials and logs in.</li>
-<li>If the credentials are valid, you send back a special JSON Web Token (JWT) to Para with the user’s basic information.</li>
+<li>If the credentials are valid, your backend generates a JSON Web Token (JWT) and sends it to Para at <code>/passwordless_auth?token=?</code> containing the user’s data.</li>
 <li>Para verifies the token and if it’s valid, the request is redirected to the <code>signin_success</code> URL, otherwise to the
 <code>signin_failure</code> URL</li>
 </ol>
-<p>The JWT must contain the following claims:</p>
+<p>The token sent to the passwordless authentication filter must be in the JWT format and must contain the following claims:</p>
 <ul>
 <li><code>email</code> - user’s email address</li>
 <li><code>name</code> - user’s display name</li>
@@ -4110,7 +4115,23 @@ The JWT should have a short validity period (e.g. 10 min). The JWT should also c
 optionally <code>nbf</code>.</li>
 </ul>
 <p>Once you generate the JWT on your backend (step 4 above), redirect the successful login request back to Para:</p>
-<pre><code>GET https:<span class="hljs-comment">//para-host/passwordless_auth?appid=myapp&amp;token=eyJhbGciOiJIUzI1NiI..</span></code></pre>
+<pre><code>GET https:<span class="hljs-comment">//para-host/passwordless_auth?appid=myapp&amp;token=eyJhbGciOiJIUzI1NiI..</span></code></pre><p>Here’s another example for an authentication flow, alternative to the above, combining social login and the passwordless authentication filter:
+Let’s say you have the following configuration:</p>
+<pre><code class="language-ini"><span class="hljs-attr">para.gp_app_id</span> = <span class="hljs-string">"google app id"</span>
+<span class="hljs-attr">para.gp_secret</span> = <span class="hljs-string">"google app secret"</span>
+<span class="hljs-attr">para.security.returnto</span> = <span class="hljs-string">"http://localhost:8080/dashboard"</span>
+<span class="hljs-attr">para.security.signin_success</span> = <span class="hljs-string">"http://localhost:8080/passwordless_auth?jwt=id&amp;httpOnlyCookie=true&amp;sameSiteCookie=Lax"</span>
+<span class="hljs-attr">para.security.signin_failure</span> = <span class="hljs-string">"http://localhost:8080/signin?error?cause=?"</span></code></pre>
+<ol>
+<li>A user wants to sign in with their Google account to your application and clicks “Sign in with a Google account”</li>
+<li>The button redirects the user to the Google sign-in page.</li>
+<li>The user enters their credentials and logs in.</li>
+<li>If the credentials are valid, Google redirects the user back to <code>http://locahost:8080/google_auth</code> (make sure that URL is whitelisted with Google).</li>
+<li>Para verifies authentication and, if it’s valid, redirects the user to <code>http://localhost:8080/passwordless_auth?jwt=id</code></li>
+<li>The passwordless authentication filter takes the supplied ID token and saves it as a cookie in the user’s browser then redirects to <code>http://localhost:8080/dashboard</code></li>
+</ol>
+<p>If there’s a failure, Para redirects the user to <code>http://localhost:8080/signin?error?cause=?</code> and fills in the parameter <code>cause</code> with an error message.</p>
+
 				</section>
 			</article>
 			<a id="029-passwords" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
@@ -6749,7 +6770,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>11 December 2025</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>22 December 2025</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2025

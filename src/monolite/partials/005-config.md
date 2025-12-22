@@ -100,6 +100,7 @@ List of ALL Para configuration properties
 |  ---                       | ---           | ---  |
 |`para.cors_enabled`<br>Enable/disable the CORS filter. It adds CORS headers to API responses. | `true` | `Boolean`|
 |`para.security.csrf_protection`<br>Enable/disable CSRF protection which checks for valid CSRF tokens in write requests. | `true` | `Boolean`|
+|`para.security.csrf_protection_with_spa`<br>Enable/disable CSRF protection with single-page application mode enabled. | `false` | `Boolean`|
 |`para.auth_cookie`<br>The name of the authorization cookie. | `para-auth` | `String`|
 |`para.request_expires_after`<br>Expiration period for signed API request, in seconds. | `900` | `Integer`|
 |`para.jwt_expires_after`<br>Expiration period for JWTs (access token), in seconds. | `86400` | `Integer`|
