@@ -1,7 +1,6 @@
-module:com.erudika.para.server
 com.erudika.para.server
-com.erudika.para.server.aop
 com.erudika.para.server.cache
+com.erudika.para.server.controllers
 com.erudika.para.server.email
 com.erudika.para.server.metrics
 com.erudika.para.server.persistence

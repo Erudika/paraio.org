@@ -16,9 +16,9 @@ public interface FileStore {
 
 ### AWSFileStore
 
-This implementation uses AWS S3 as file storage location. The location of each file is controlled by the bucket name
-cofiguration property `para.s3.bucket`. There is also the `para.s3.max_filesize_mb` property which restricts the size of
-the upload.
+The [AWS S3 Storage plugin](https://github.com/erudika/para-storage-s3) uses S3 as file storage provider.
+The location of each file is controlled by the bucket name cofiguration property `para.s3.bucket`.
+There is also the `para.s3.max_filesize_mb` property which restricts the size of the upload.
 
 Before each upload, files are prepended with a timestamp, for example `myfile.txt` becomes `1405632454930.myfile.txt`.
 Currently all files are set to be stored with "Reduced Redundancy" turned on.

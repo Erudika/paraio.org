@@ -12,10 +12,5 @@ The CORS filter enables cross-origin requests for the Para API. It is enabled wi
 
 ### Gzip
 
-The `GZipServletFilter` is enabled by `para.gzip_enabled` and provides on-the-fly Gzip encoding for static resources,
+Response compression with gzip is enabled by `para.gzip_enabled` and provides on-the-fly Gzip encoding for static resources,
 as well as, the Para API JSON responses.
-
-### Caching
-
-The `CachingHttpHeadersFilter` is not used by Para but you can use it to enable `Cache-Control` headers for all static
-resources.

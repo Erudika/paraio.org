@@ -300,7 +300,7 @@ List of ALL Para configuration properties
 |`para.shared_table_name`<br>The name of the shared database table, used by shared apps. | `0` | `String`|
 |`para.fail_on_write_errors`<br>Enable/disable throwing an exception when a write operation fails with errors. | `true` | `Boolean`|
 |`para.import_batch_size`<br>The maximum number of objects to import, in each batch, when restoring data from backup. | `100` | `Integer`|
-|`para.gzip_enabled`<br>Enable/disable the GZIP filter for compressing API response entities. | `false` | `Boolean`|
+|`para.gzip_enabled`<br>Enable/disable the GZIP filter for compressing API response entities. | `true` | `Boolean`|
 |`para.debug_request_signatures`<br>Enable/disable debuging info for each AWS V4 request signature. | `false` | `Boolean`|
 |`para.vote_expires_after`<br>Vote expiration timeout, in seconds. Users can vote again on the same content after this period has elapsed. Default is 30 days. | `2592000` | `Integer`|
 |`para.vote_locked_after`<br>Vote locking period, in seconds. Vote cannot be changed after this period has elapsed. Default is 30 sec. | `30` | `Integer`|

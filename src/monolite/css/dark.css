@@ -16,6 +16,10 @@ code, #content pre, .intro-cmd code {
 	background-color: #444;
 }
 
+thead>tr>th {
+	background-color: black;
+}
+
 #content article a h2 {
 	border: 1px solid #888;
 }

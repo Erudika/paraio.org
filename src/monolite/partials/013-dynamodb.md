@@ -3,9 +3,9 @@ title: DynamoDB
 category: Persistence
 ---
 
-Para can work with DynamoDB by using the `AWSDynamoDAO` implementation. That class is responsible for connecting
-to [Amazon's DynamoDB](http://aws.amazon.com/dynamodb/) server and storing/retrieving objects (items) to/from it.
-All operations are carried out using the latest AWS Java SDK.
+Para can work with DynamoDB by using the [DynamoDB DAO plugin](https://github.com/Erudika/para-dao-dynamodb) which provides
+the `AWSDynamoDAO` implementation. That class is responsible for connecting to [Amazon's DynamoDB](http://aws.amazon.com/dynamodb/)
+server and storing/retrieving objects (items) to/from it. All operations are carried out using the latest AWS Java SDK.
 
 **Note:** DynamoDB doesn't support batch update requests so `AWSDynamoDAO` does not batch update requests.
 It simply executes all update requests in a sequence.

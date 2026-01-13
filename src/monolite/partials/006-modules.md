@@ -9,7 +9,6 @@ In the `para-server` package, there are several core modules:
 - `SearchModule` - defines the core search class implementation
 - `CacheModule` - defines the core cache class implementation
 - `EmailModule` - defines an email service implementation for sending emails
-- `AOPModule` - manages the indexing and caching aspects of Para objects
 - `QueueModule` - defines a queue service implementation
 - `StorageModule` - defines a file storage service, e.g. Amazon S3
 
@@ -64,11 +63,10 @@ There are two additional methods `Para.initialize()` and `Para.destroy()` which 
 difference between these and the ones above is:
 
 - `Para.initialize()` - invokes all registered `InitializeListener` instances and prints out logo to console;
-- `ParaServer.initialize()` - loads all Guice modules, binds them and injects concrete types into each
-`InitializeListener`, then calls `Para.initialize()`;
+- `ParaServer.initialize()` - loads all modules, and starts all registered `InitializeListener` objects, then calls `Para.initialize()`;
 
 - `Para.destroy()` - invokes all registered `DestroyListener` instances and prints out a log message;
 - `ParaServer.destroy()` - injects concrete types into each `DestroyListener` and calls `Para.destroy()`.
 
 
-> Para uses [Google Guice](https://github.com/google/guice) as its module manager and DI system.
+> Para uses [Spring](https://spring.org) for injection and module management.

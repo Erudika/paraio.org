@@ -1873,7 +1873,7 @@ This is important for securing your server because this secret key is used for s
 </tr>
 <tr>
 <td><code>para.gzip_enabled</code><br>Enable/disable the GZIP filter for compressing API response entities.</td>
-<td><code>false</code></td>
+<td><code>true</code></td>
 <td><code>Boolean</code></td>
 </tr>
 <tr>
@@ -1964,7 +1964,6 @@ For more information about how it works, see the README for it.</p>
 <li><code>SearchModule</code> - defines the core search class implementation</li>
 <li><code>CacheModule</code> - defines the core cache class implementation</li>
 <li><code>EmailModule</code> - defines an email service implementation for sending emails</li>
-<li><code>AOPModule</code> - manages the indexing and caching aspects of Para objects</li>
 <li><code>QueueModule</code> - defines a queue service implementation</li>
 <li><code>StorageModule</code> - defines a file storage service, e.g. Amazon S3</li>
 </ul>
@@ -2004,8 +2003,7 @@ difference between these and the ones above is:</p>
 <ul>
 <li><p><code>Para.initialize()</code> - invokes all registered <code>InitializeListener</code> instances and prints out logo to console;</p>
 </li>
-<li><p><code>ParaServer.initialize()</code> - loads all Guice modules, binds them and injects concrete types into each
-<code>InitializeListener</code>, then calls <code>Para.initialize()</code>;</p>
+<li><p><code>ParaServer.initialize()</code> - loads all modules, and starts all registered <code>InitializeListener</code> objects, then calls <code>Para.initialize()</code>;</p>
 </li>
 <li><p><code>Para.destroy()</code> - invokes all registered <code>DestroyListener</code> instances and prints out a log message;</p>
 </li>
@@ -2013,7 +2011,7 @@ difference between these and the ones above is:</p>
 </li>
 </ul>
 <blockquote>
-<p>Para uses <a href="https://github.com/google/guice">Google Guice</a> as its module manager and DI system.</p>
+<p>Para uses <a href="https://spring.org">Spring</a> for injection and module management.</p>
 </blockquote>
 
 				</section>
@@ -2757,9 +2755,9 @@ This tells Para to use the Cassandra Data Access Object (DAO) implementation ins
 			<article class=" img-rounded">
 					<h2>DynamoDB</h2>
 				<section class="body  img-rounded">
-					<p>Para can work with DynamoDB by using the <code>AWSDynamoDAO</code> implementation. That class is responsible for connecting
-to <a href="http://aws.amazon.com/dynamodb/">Amazon’s DynamoDB</a> server and storing/retrieving objects (items) to/from it.
-All operations are carried out using the latest AWS Java SDK.</p>
+					<p>Para can work with DynamoDB by using the <a href="https://github.com/Erudika/para-dao-dynamodb">DynamoDB DAO plugin</a> which provides
+the <code>AWSDynamoDAO</code> implementation. That class is responsible for connecting to <a href="http://aws.amazon.com/dynamodb/">Amazon’s DynamoDB</a>
+server and storing/retrieving objects (items) to/from it. All operations are carried out using the latest AWS Java SDK.</p>
 <p><strong>Note:</strong> DynamoDB doesn’t support batch update requests so <code>AWSDynamoDAO</code> does not batch update requests.
 It simply executes all update requests in a sequence.</p>
 <p>The implementation adds a default prefix <code>para-</code> to DynamoDB tables, so if you have an app called “myapp” your table for
@@ -3739,11 +3737,8 @@ You can set default languages, write languages to a database and load them.</p>
 <p>The CORS filter enables cross-origin requests for the Para API. It is enabled with the configuration property
 <code>para.cors_enabled</code> set to <code>true</code>. The implementation is based on the open source <code>CORSFilter</code> by Ebay.</p>
 <h3 id="gzip">Gzip</h3>
-<p>The <code>GZipServletFilter</code> is enabled by <code>para.gzip_enabled</code> and provides on-the-fly Gzip encoding for static resources,
+<p>Response compression with gzip is enabled by <code>para.gzip_enabled</code> and provides on-the-fly Gzip encoding for static resources,
 as well as, the Para API JSON responses.</p>
-<h3 id="caching">Caching</h3>
-<p>The <code>CachingHttpHeadersFilter</code> is not used by Para but you can use it to enable <code>Cache-Control</code> headers for all static
-resources.</p>
 
 				</section>
 			</article>
@@ -3986,8 +3981,10 @@ para.mail.tls = <span class="hljs-literal">true</span>
 para.mail.ssl = <span class="hljs-literal">false</span></code></pre><p>Email templates can be loaded with:</p>
 <pre><code class="language-java">Emailer.class.getClassLoader().getResourceAsStream(<span class="hljs-string">"emails/template.html"</span>)</code></pre>
 <p>Para supports basic variable substitutions through Mustache with <code>Utils.compileMustache(data, template)</code>.</p>
-<p>Set <code>para.emailer = &quot;aws&quot;</code> to use the AWS Simple Email Service and comment out the <code>para.mail.*</code>
-properties as they are ignored. AWS credentials are picked up from the environment, like the <code>AWS_PROFILE</code> env. variable.</p>
+<p>You can switch to a different <code>Emailer</code> implementation, e.g. Amazon SES, by loading the
+<a href="https://github.com/erudika/para-email-ses">para-email-ses</a> plugin and setting
+<code>para.emailer = &quot;AWSEmailer&quot;</code>. Also comment out the <code>para.mail.*</code> properties as they are ignored.
+AWS credentials are picked up from the environment, like the <code>AWS_PROFILE</code> env. variable.</p>
 
 				</section>
 			</article>
@@ -4009,9 +4006,7 @@ properties as they are ignored. AWS credentials are picked up from the environme
 <pre><code>para.q = &quot;sqs&quot;
 # or
 para.q = &quot;local&quot;</code></pre><h3 id="awsqueue">AWSQueue</h3>
-<p>The AWS SQS plugin uses Amazon’s SQS as a river by long polling for messages from a given queue.
-This particular implementation was adapted from an earlier project called
-<a href="https://github.com/albogdano/elasticsearch-river-amazonsqs">elasticsearch-river-amazonsqs</a>.</p>
+<p>The <a href="https://github.com/erudika/para-queue-sqs">AWS SQS plugin</a> uses Amazon’s SQS as a river by long polling for messages from a given queue.</p>
 <p>The code continuously pulls messages from an SQS queue. After a message is processed, it gets deleted from the queue.
 To enable this functionality, set <code>para.queue_link_enabled = true</code> in the Para configuration file.</p>
 <p>Sample code:</p>
@@ -4053,9 +4048,9 @@ your application. You can save and load files from disk or cloud storage service
     <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">delete</span><span class="hljs-params">(String path)</span></span>;
 }</code></pre>
 <h3 id="awsfilestore">AWSFileStore</h3>
-<p>This implementation uses AWS S3 as file storage location. The location of each file is controlled by the bucket name
-cofiguration property <code>para.s3.bucket</code>. There is also the <code>para.s3.max_filesize_mb</code> property which restricts the size of
-the upload.</p>
+<p>The <a href="https://github.com/erudika/para-storage-s3">AWS S3 Storage plugin</a> uses S3 as file storage provider.
+The location of each file is controlled by the bucket name cofiguration property <code>para.s3.bucket</code>.
+There is also the <code>para.s3.max_filesize_mb</code> property which restricts the size of the upload.</p>
 <p>Before each upload, files are prepended with a timestamp, for example <code>myfile.txt</code> becomes <code>1405632454930.myfile.txt</code>.
 Currently all files are set to be stored with “Reduced Redundancy” turned on.</p>
 <p>You can Gzip compress files before uploading uploading but you must append the <code>.gz</code> extension in order for the correct
@@ -6770,10 +6765,10 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>22 December 2025</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>13 January 2026</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
-						2025
+						2026
 						<a href="https://erudika.com">Erudika</a></p>
 				</div>
 			</div>

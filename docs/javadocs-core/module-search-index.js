@@ -1,1 +1,1 @@
-moduleSearchIndex = [{"l":"com.erudika.para.core"}];updateSearchResults();
+moduleSearchIndex = [];updateSearchResults();

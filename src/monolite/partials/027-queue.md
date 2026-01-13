@@ -26,9 +26,7 @@ para.q = "local"
 
 ### AWSQueue
 
-The AWS SQS plugin uses Amazon's SQS as a river by long polling for messages from a given queue.
-This particular implementation was adapted from an earlier project called
-[elasticsearch-river-amazonsqs](https://github.com/albogdano/elasticsearch-river-amazonsqs).
+The [AWS SQS plugin](https://github.com/erudika/para-queue-sqs) uses Amazon's SQS as a river by long polling for messages from a given queue.
 
 The code continuously pulls messages from an SQS queue. After a message is processed, it gets deleted from the queue.
 To enable this functionality, set `para.queue_link_enabled = true` in the Para configuration file.
