@@ -3,13 +3,20 @@ title: Standalone mode
 category: Getting Started
 ---
 
-There are two ways to run Para as a standalone server. The first one is by downloading the executable JAR file and executing it:
+Either download the executable JAR file and run it, or build it from scratch after cloning the Para repository.
+To build the "uber JAR" (fat JAR) file you need to enable it with the following Maven profiles:
+
+```bash
+mvn -Pfatjar,sql,lucene -DskipTests=true package
+```
+
+Finally, run Para server:
 
 ```bash
 java -jar para-X.Y.Z.jar
 ```
 
-The JAR contains an embedded Jetty server and bundles together all the necessary libraries. This is the simplest and
+The JAR contains an embedde server and bundles together all the necessary libraries. This is the simplest and
 recommended way to run Para.
 
 Running a standalone server allows you to build a cluster of distributed Para nodes and connect to it
@@ -37,14 +44,9 @@ through the REST API. Here's a simple diagram of this architecture:
 
 </pre>
 
-## Deploying to a servlet container or a self-hosted environment
+## Deploying a self-hosted environment
 
-Another option is to build and deploy the WAR file to a servlet container like Tomcat or GlassFish, for example.
-
-**Note:** We recommend deploying the Para at the root context `/`. You can do this by renaming the WAR file
-to `ROOT.war` before deploying. See [the Config](#005-config) for more details about configuring your deployment.
-
-Para can also be deployed easily to a PaaS environment like Heroku or AWS Elastic Beanstalk. The JAR file is executable
+Para can be deployed easily to any PaaS environment like Heroku or AWS Elastic Beanstalk. The JAR file is executable
 and should "just work" by setting the execution command to `java -jar para-X.Y.Z.jar`.
 
 In a self-hosted environment where you want to manage your own SSL certificates, it is recommended to run a
