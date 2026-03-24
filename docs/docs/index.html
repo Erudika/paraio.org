@@ -134,7 +134,8 @@
 							<li class=""><a href="#023-utilities">Misc. utilities</a></li>
 							<li class=""><a href="#024-humantime">HumanTime</a></li>
 							<li class=""><a href="#025-pager">Pager</a></li>
-							<li class=""><a href="#026-email">Email</a></li>
+							<li class=""><a href="#026-email">Email &amp; SMTP</a></li>
+							<li class=""><a href="#026-forms">Form handling</a></li>
 							<li class=""><a href="#027-queue">Queue</a></li>
 							<li class=""><a href="#028-storage">Storage</a></li>
 				</ul>
@@ -202,6 +203,8 @@
 							<li class="POST"><a href="#053-api-reindex">Rebuild index</a></li>
 							<li class="GET"><a href="#054-api-export">Data Export</a></li>
 							<li class="PUT"><a href="#054-api-import">Data Import</a></li>
+							<li class="POST"><a href="#055-emails">Emails</a></li>
+							<li class="POST"><a href="#056-forms">HTML Form handling</a></li>
 				</ul>
 			</li>
 	</ul>
@@ -2236,6 +2239,8 @@ with <code>type: mytype</code> through the API and your new type will be automat
 <p><code>Linker</code></td><td> <strong>System class</strong> used for implementing a many-to-many relationship between objects. </td></tr>
         <tr><td></p>
 <p><code>Webhook</code></td><td> <strong>System class</strong> used for storing webhook metadata.</td></tr>
+        <tr><td></p>
+<p><code>Form</code></td><td> Used for HTML form handling and storing the configuration for each form.</td></tr>
     </tbody></p>
 </table>
 
@@ -3963,14 +3968,41 @@ List&lt;Cat&gt; catsPage;
 			</article>
 			<a id="026-email" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
 			<article class=" img-rounded">
-					<h2>Email</h2>
+					<h2>Email &amp; SMTP</h2>
 				<section class="body  img-rounded">
-					<p>The <code>Emailer</code> interface has a simple API for sending email messages.</p>
+					<p>Para has a dedicated API endpoint for sending emails at <code>/v1/_emails</code>.
+It allows you to send transactional emails with a direct API request to <code>/v1/_emails</code>, authenticated by API key or request signature.
+For attaching files, add the <code>file</code> field - it must have a value encoded as Data URI.
+Example JSON payload with attachment:</p>
+<pre><code class="language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Jane Doe"</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"jane@example.com"</span>,
+  <span class="hljs-attr">"toEmails"</span>: [<span class="hljs-string">"support@example.com"</span>],
+  <span class="hljs-attr">"subject"</span>: <span class="hljs-string">"Attached message"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"See attached."</span>,
+  <span class="hljs-attr">"plaintextOnly"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"markdownEnabled"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"file"</span>: <span class="hljs-string">"data:text/plain;base64,SGVsbG8gd29ybGQ="</span>
+}</code></pre>
+<p><strong>Formatting rules</strong></p>
+<p>Message rendering is resolved in this order:</p>
+<ol>
+<li>If <code>plaintextOnly</code> is <code>true</code>, HTML is stripped from <code>message</code>.</li>
+<li>Otherwise, if <code>markdownEnabled</code> is <code>true</code>, Markdown is converted to HTML.</li>
+<li>Otherwise, the raw <code>message</code> value is used as-is.</li>
+</ol>
+<p>For public forms, formatting flags come from the stored <code>Form</code> object and override any client-provided values.</p>
+<h4 id="programmatic-access-to-the-emailer-instance">Programmatic access to the <code>Emailer</code> instance</h4>
+<p>The <code>Emailer</code> interface has a simple API for sending email messages.</p>
 <pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Emailer</span> </span>{
     <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">sendEmail</span><span class="hljs-params">(List&lt;String&gt; emails, String subject, String body)</span></span>;
 }</code></pre>
-<p>Para can either use the JavaMail API or AWS SES to send emails. This is used for email verification, password recovery
-and notifications. Set <code>support_email</code> to be the email address used by the system. An example config for JavaMail:</p>
+<p>You can access the available emailer instance with:</p>
+<pre><code class="language-java">Para.getEmailer().sendEmail(List.of(<span class="hljs-string">"user@domain.com"</span>), <span class="hljs-string">"Hello"</span>, <span class="hljs-string">"How are you?"</span>);</code></pre>
+<p>There are several implementations of the <code>Emailer</code> class - one for JavaMail API and one using AWS SES to send emails (separate plugin).
+Para uses the <code>Emailer</code> APi for email verification, password recovery emails and email notifications. 
+Set <code>support_email</code> to be the email address used by the system. </p>
+<p>An example SMTP configuration for JavaMail:</p>
 <pre><code>para.emailer = <span class="hljs-string">"javamail"</span>
 para.support_email = <span class="hljs-string">"support@example.com"</span>
 para.mail.host = <span class="hljs-string">"smtp.example.com"</span>
@@ -3985,6 +4017,203 @@ para.mail.ssl = <span class="hljs-literal">false</span></code></pre><p>Email tem
 <a href="https://github.com/erudika/para-email-ses">para-email-ses</a> plugin and setting
 <code>para.emailer = &quot;AWSEmailer&quot;</code>. Also comment out the <code>para.mail.*</code> properties as they are ignored.
 AWS credentials are picked up from the environment, like the <code>AWS_PROFILE</code> env. variable.</p>
+
+				</section>
+			</article>
+			<a id="026-forms" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>Form handling</h2>
+				<section class="body  img-rounded">
+					<p>Para provides HTML form handling and sending emails from structured form submissions in two modes:</p>
+<ul>
+<li>Authenticated direct API calls to <code>POST /v1/_emails</code> (without CAPTCHA)</li>
+<li>Public HTML form submissions to <code>POST /v1/_forms/{appid}/{formid}</code> (CAPTCHA configuration required)</li>
+</ul>
+<p>Public form submissions are configured through the <code>form</code> object and can:</p>
+<ul>
+<li>enforce CAPTCHA validation</li>
+<li>send notifications to a predefined recipient list (max 10 emails per request)</li>
+<li>optionally store submitted messages</li>
+<li>optionally redirect the browser after submission</li>
+<li>control whether the message body is treated as plain text, raw HTML, or Markdown-rendered HTML</li>
+</ul>
+<p>Authenticated email sending does not require a stored <code>Form</code> object. The client provides the recipients and 
+content formatting flags directly in the request payload.</p>
+<p>The public <code>/v1/_forms/{appid}/{formid}</code> URL is used only after a new <code>form</code> object has been created in Para through the standard object API. 
+Once created, the form has an <code>id</code> and a computed <code>formActionURI</code> which can be used directly as the HTML form action URL.</p>
+<h3 id="the-form-object">The <code>form</code> object</h3>
+<p>The <code>form</code> object is defined in <code>para-core</code> &gt; <code>Form.java</code> and configures the behavior of a public email form.</p>
+<h3 id="fields">Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td><code>String</code></td>
+<td>yes</td>
+<td>Used as <code>{formid}</code> in the public endpoint.</td>
+</tr>
+<tr>
+<td><code>appid</code></td>
+<td><code>String</code></td>
+<td>yes</td>
+<td>Used as <code>{appid}</code> in the public endpoint.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>String</code></td>
+<td>no</td>
+<td>Used as a prefix in the outgoing email subject for public forms.</td>
+</tr>
+<tr>
+<td><code>captchaSecretKey</code></td>
+<td><code>String</code></td>
+<td>yes</td>
+<td>Secret used to verify CAPTCHA responses.</td>
+</tr>
+<tr>
+<td><code>notifyEmails</code></td>
+<td><code>String[]</code></td>
+<td>yes</td>
+<td>Destination email addresses for public submissions. Limited to 10 recipients.</td>
+</tr>
+<tr>
+<td><code>messageStorageEnabled</code></td>
+<td><code>boolean</code></td>
+<td>no</td>
+<td>When <code>true</code>, successful submissions are stored as <code>Sysprop</code> objects. Default: <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>plaintextOnly</code></td>
+<td><code>boolean</code></td>
+<td>no</td>
+<td>When <code>true</code>, HTML is stripped from the message body. Default: <code>true</code>.</td>
+</tr>
+<tr>
+<td><code>markdownEnabled</code></td>
+<td><code>boolean</code></td>
+<td>no</td>
+<td>Enables Markdown-to-HTML conversion, but only when <code>plaintextOnly</code> is <code>false</code>. Default: <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>redirectTo</code></td>
+<td><code>String</code></td>
+<td>no</td>
+<td>Optional absolute URL to redirect the browser to after submission.</td>
+</tr>
+</tbody></table>
+<h3 id="form-action-url">Form action URL</h3>
+<p>The public submission URL generated by <code>Form.getFormActionURI()</code> is:</p>
+<pre><code>/v1/_forms/{appid}/{formid}</code></pre><h3 id="creating-a-public-html-form">Creating a public HTML form</h3>
+<p>Before the public endpoint can be used, create a <code>Form</code> object through the standard Para object API:</p>
+<pre><code class="language-http">POST /v1/form</code></pre>
+<p>Example payload:</p>
+<pre><code class="language-json">{
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"form"</span>,
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"My Website Contact Form"</span>,
+  <span class="hljs-attr">"captchaSecretKey"</span>: <span class="hljs-string">"YOUR_CAPTCHA_SECRET_KEY"</span>,
+  <span class="hljs-attr">"notifyEmails"</span>: [<span class="hljs-string">"webmaster@domain.com"</span>],
+  <span class="hljs-attr">"messageStorageEnabled"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"plaintextOnly"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"markdownEnabled"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"redirectTo"</span>: <span class="hljs-string">"https://yoursite.com/thanks-page"</span>
+}</code></pre>
+<p>After creation, the stored object can be referenced by:</p>
+<ul>
+<li><code>id</code>, for example <code>123456</code></li>
+<li><code>formActionURI</code>, for example <code>/v1/_forms/myapp/123456</code></li>
+</ul>
+<p>After the form has been created, configure the client-side HTML and CAPTCHA scripts.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"https://paraio.com/v1/_forms/myapp/123456"</span> 
+    <span class="hljs-attr">method</span>=<span class="hljs-string">"post"</span> <span class="hljs-attr">enctype</span>=<span class="hljs-string">"multipart/form-data"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"name"</span> <span class="hljs-attr">required</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"email"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"subject"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">textarea</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"message"</span> <span class="hljs-attr">required</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">textarea</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"file"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"file"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"hidden"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"cf-turnstile-response"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"TOKEN_FROM_WIDGET"</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- Cloudflare Turnstile widget --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"cf-turnstile"</span> <span class="hljs-attr">data-sitekey</span>=<span class="hljs-string">"YOUR_TURNSTILE_SITE_KEY"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Send<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre>
+<p>The endpoint is public and does not require authentication. It is intended only for browser-based HTML forms or 
+other unauthenticated clients submitting <code>multipart/form-data</code>. Request behavior:</p>
+<ul>
+<li>The target <code>form</code> object is loaded by <code>{appid}</code> and <code>{formid}</code>.</li>
+<li>The field <code>notifyEmails</code> replaces any recipient list from the incoming request.</li>
+<li><code>plaintextOnly</code> and <code>markdownEnabled</code> replace any formatting flags from the incoming request.</li>
+<li>CAPTCHA verification is required before sending the email.</li>
+<li>If sending succeeds and the form is configured with <code>messageStorageEnabled: true</code> the submitted messages are stored as Para objects with type <code>formdata</code> </li>
+</ul>
+<p>Supported CAPTCHA services:</p>
+<ul>
+<li>reCAPTCHA v3</li>
+<li>hCaptcha</li>
+<li>Cloudflare Turnstile</li>
+</ul>
+<p>The client is expected to render and complete a CAPTCHA challenge before submitting the form. The resulting token must be submitted with the form request.
+The server accepts any one of the following request parameters:</p>
+<ul>
+<li><code>g-recaptcha-response</code></li>
+<li><code>h-captcha-response</code></li>
+<li><code>cf-turnstile-response</code></li>
+</ul>
+<p>The verification target is selected automatically based on which parameter is present.</p>
+<p>If you want to allow Markdown formatting in the message body, set <code>plaintextOnly: false</code> and <code>markdownEnabled: true</code> on your <code>Form</code> object.
+By default, Para will simply treat each message as plain text and strip all HTML tags from it.
+Optionally, you can enable HTML tags in the form body with <code>plaintextOnly: false</code> and <code>markdownEnabled: false</code>.</p>
+<p><strong>Comparison table</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Public endpoint <code>/v1/_forms</code></th>
+<th>API endpoint <code>/v1/_emails</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authentication</td>
+<td>None (CAPTCHA required)</td>
+<td>API key / signed request</td>
+</tr>
+<tr>
+<td>Request content type</td>
+<td><code>multipart/form-data</code></td>
+<td><code>application/json</code></td>
+</tr>
+<tr>
+<td>CAPTCHA</td>
+<td>Required</td>
+<td>Not required</td>
+</tr>
+<tr>
+<td>Recipients</td>
+<td>Set on <code>Form</code> object</td>
+<td>Set in request payload</td>
+</tr>
+<tr>
+<td>File attachment</td>
+<td>Yes</td>
+<td>Yes (base64 data URI)</td>
+</tr>
+<tr>
+<td>Message storage</td>
+<td>Optional via <code>Form</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Redirect</td>
+<td>Optional via <code>Form</code></td>
+<td>No</td>
+</tr>
+</tbody></table>
 
 				</section>
 			</article>
@@ -6757,6 +6986,129 @@ containing the Para objects.</p>
 
 				</section>
 			</article>
+			<a id="055-emails" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="POST img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-info">POST</span>
+								<span class="gray">
+									/v1/_emails 
+								</span>
+							</code>
+							<span class="hidden-xs">Emails</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p>Protected endpoint for sending transactional emails to a set of recipients (max. 10 at a time).
+Messages to multiple email addresses are sent as BCC.
+Messages are treated as plain text by default, unless you set <code>plaintextOnly: false</code>.
+Markwdown in message body is supported if you set <code>markdownEnabled: true</code>.</p>
+<h3 id="request">Request</h3>
+<p>Accepts only a <code>application/json</code> request body. Optionally, a <code>file</code> field can be sent with Data URI encoded value.</p>
+<p>Example JSON payload with base64 Data URI attachment:</p>
+<pre><code class="language-json">{
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Gordon Freeman"</span>,
+  <span class="hljs-attr">"subject"</span>: <span class="hljs-string">"Subject line"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Hello! Sent from the *API*: `code` and [links](https://x.com)"</span>,
+  <span class="hljs-attr">"plaintextOnly"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"markdownEnabled"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"email"</span>: <span class="hljs-string">"noreply@blackmesa.gov"</span>,
+  <span class="hljs-attr">"toEmails"</span>: [<span class="hljs-string">"user1@domain.com"</span>, <span class="hljs-string">"user2@domain.com"</span>],
+  <span class="hljs-attr">"file"</span>: <span class="hljs-string">"data:image/png;base64,iVBORw0KGgoA..."</span>
+}</code></pre>
+<h4 id="parameters">Parameters</h4>
+<p><strong>No parameters</strong>.</p>
+<h3 id="response">Response</h3>
+<p>Returns a JSON object with the status code and a list of errors, if any.</p>
+<p><strong>status codes</strong>: </p>
+<ul>
+<li><code>200</code> message was sent to the recipients</li>
+<li><code>400</code> bad request - missing data, message not sent</li>
+<li><code>429</code> if rate limit was exceeded, message not sent</li>
+</ul>
+<p>Example response - returns the result without envelope:</p>
+<pre><code class="language-js">{
+  <span class="hljs-string">"status"</span>: <span class="hljs-number">200</span>,
+  <span class="hljs-string">"details"</span>: <span class="hljs-string">"ok"</span>
+}</code></pre>
+
+				</section>
+			</article>
+			<a id="056-forms" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class="POST img-rounded">
+					<a href="#">
+						<h2 class="img-rounded">
+							<code>
+									<span class="img-rounded label-info">POST</span>
+								<span class="gray">
+									/v1/_forms/{appid}/{formid} 
+								</span>
+							</code>
+							<span class="hidden-xs">HTML Form handling</span>
+						</h2>
+					</a>
+				<section class="body api-body img-rounded">
+					<p><strong>This endpoint is public by default and requires no authentication.</strong></p>
+<p>HTML Form handling endpoint, accepting a <code>multipart/form-data</code> request body.
+Form settings are stored in a <code>form</code> object - create a form first and use the form <code>id</code> in the request.</p>
+<h3 id="request">Request</h3>
+<ul>
+<li><code>appid</code> - the Para app identifier i.e. <code>myapp</code>.</li>
+<li><code>formid</code> - <code>id</code> of an existing <code>form</code> object</li>
+</ul>
+<p>Accepts only a <code>multipart/form-data</code> request body without authentication. </p>
+<p>Example payload:</p>
+<pre><code>POST /_forms/myapp/<span class="hljs-number">18359295923346</span> HTTP/<span class="hljs-number">1.1</span>
+HOST: paraio.com
+Connection: Keep-Alive
+Content-Type: multipart/form-data; boundary=<span class="hljs-number">12345</span>
+
+-<span class="hljs-number">-12345</span>
+Content-Disposition: form-data; name=<span class="hljs-string">"name"</span>
+
+Jane Doe
+-<span class="hljs-number">-12345</span>
+Content-Disposition: form-data; name=<span class="hljs-string">"email"</span>
+
+jane@example.com
+-<span class="hljs-number">-12345</span>
+Content-Disposition: form-data; name=<span class="hljs-string">"message"</span>
+
+message=Hello <span class="hljs-keyword">from</span> the website.
+-<span class="hljs-number">-12345</span>
+Content-Disposition: form-data; name=<span class="hljs-string">"cf-turnstile-response"</span>
+
+{CAPTCHA RESPONSE FROM CLIENTSIDE}
+-<span class="hljs-number">-12345</span>
+Content-Disposition: form-data; name=<span class="hljs-string">"file"</span> filename=<span class="hljs-string">"filename.txt"</span>
+
+content <span class="hljs-keyword">of</span> filename.txt that you upload <span class="hljs-keyword">in</span> your form <span class="hljs-keyword">with</span> input[type=file]
+-<span class="hljs-number">-12345</span>
+Content-Disposition: form-data; name=<span class="hljs-string">"image"</span> filename=<span class="hljs-string">"picture_of_sunset.jpg"</span>
+
+content <span class="hljs-keyword">of</span> picture_of_sunset.jpg ...
+-<span class="hljs-number">-12345</span>--</code></pre><h4 id="parameters">Parameters</h4>
+<p><strong>No parameters</strong>.</p>
+<h3 id="response">Response</h3>
+<p>Returns a redirect code <code>302</code> with a location, specified in the field <code>redirectTo</code> of the <code>form</code> object.
+If the redirect was not configured for that form, a JSON response is returned with the status code and a list of errors, if any.</p>
+<p><strong>status codes</strong>: </p>
+<ul>
+<li><code>200</code> message was sent to the recipients</li>
+<li><code>302</code> redirect if configured</li>
+<li><code>400</code> bad request - missing data</li>
+<li><code>403</code> if captcha response is invalid</li>
+<li><code>429</code> if rate limit was exceeded</li>
+</ul>
+<p>Example response - returns the result without envelope:</p>
+<pre><code class="language-js">{
+  <span class="hljs-string">"status"</span>: <span class="hljs-number">200</span>,
+  <span class="hljs-string">"details"</span>: <span class="hljs-string">"ok"</span>
+}</code></pre>
+
+				</section>
+			</article>
 	</section>
 
 	<!-- Footer Content -->
@@ -6765,7 +7117,7 @@ containing the Para objects.</p>
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>13 February 2026</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>24 March 2026</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2026

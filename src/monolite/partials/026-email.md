@@ -1,7 +1,35 @@
 ---
-title: Email
+title: Email & SMTP
 category: Utilities
 ---
+
+Para has a dedicated API endpoint for sending emails at `/v1/_emails`.
+It allows you to send transactional emails with a direct API request to `/v1/_emails`, authenticated by API key or request signature.
+For attaching files, add the `file` field - it must have a value encoded as Data URI.
+Example JSON payload with attachment:
+
+```json
+{
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "toEmails": ["support@example.com"],
+  "subject": "Attached message",
+  "message": "See attached.",
+  "plaintextOnly": true,
+  "markdownEnabled": false,
+  "file": "data:text/plain;base64,SGVsbG8gd29ybGQ="
+}
+```
+**Formatting rules**
+
+Message rendering is resolved in this order:
+1. If `plaintextOnly` is `true`, HTML is stripped from `message`.
+2. Otherwise, if `markdownEnabled` is `true`, Markdown is converted to HTML.
+3. Otherwise, the raw `message` value is used as-is.
+
+For public forms, formatting flags come from the stored `Form` object and override any client-provided values.
+
+#### Programmatic access to the `Emailer` instance
 
 The `Emailer` interface has a simple API for sending email messages.
 
@@ -10,8 +38,17 @@ public interface Emailer {
 	boolean sendEmail(List<String> emails, String subject, String body);
 }
 ```
-Para can either use the JavaMail API or AWS SES to send emails. This is used for email verification, password recovery
-and notifications. Set `support_email` to be the email address used by the system. An example config for JavaMail:
+You can access the available emailer instance with:
+
+```java
+Para.getEmailer().sendEmail(List.of("user@domain.com"), "Hello", "How are you?");
+```
+
+There are several implementations of the `Emailer` class - one for JavaMail API and one using AWS SES to send emails (separate plugin).
+Para uses the `Emailer` APi for email verification, password recovery emails and email notifications. 
+Set `support_email` to be the email address used by the system. 
+
+An example SMTP configuration for JavaMail:
 
 ```
 para.emailer = "javamail"

@@ -45,6 +45,9 @@ with `type: mytype` through the API and your new type will be automatically regi
 		<tr><td>
 
 `Webhook`</td><td> **System class** used for storing webhook metadata.</td></tr>
+		<tr><td>
+
+`Form`</td><td> Used for HTML form handling and storing the configuration for each form.</td></tr>
 	</tbody>
 </table>
 
