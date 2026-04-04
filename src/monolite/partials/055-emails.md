@@ -45,7 +45,9 @@ Returns a JSON object with the status code and a list of errors, if any.
 Example response - returns the result without envelope:
 ```js
 {
-  "status": 200,
-  "details": "ok"
+  "detail": "Bad Request",
+  "instance": "/v1/_emails",
+  "status": 400,
+  "title": "Bad Request"
 }
 ```

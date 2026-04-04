@@ -54,6 +54,7 @@
 				<ul id="Getting-Started" class="docs-category-child collapse list-unstyled">
 							<li class=""><a href="#002-standalone">Standalone mode</a></li>
 							<li class=""><a href="#003-maven">Maven</a></li>
+							<li class=""><a href="#004-mcp-server">MCP Server</a></li>
 							<li class=""><a href="#004-paraobject">The ParaObject interface</a></li>
 				</ul>
 			</li>
@@ -706,6 +707,228 @@ Here’s a simple diagram of this architecture:</p>
 <p><a href="/javadocs-core/" class="btn btn-default">para-core</a> &nbsp;
 <a href="/javadocs-server/" class="btn btn-default">para-server</a> &nbsp;
 <a href="/javadocs-client/" class="btn btn-default">para-client</a></p>
+
+				</section>
+			</article>
+			<a id="004-mcp-server" href="#" class="doc-anchor"><i class="glyphicon glyphicon-link"></i></a>
+			<article class=" img-rounded">
+					<h2>MCP Server</h2>
+				<section class="body  img-rounded">
+					<p>The Para MCP server exposes Para’s backend services over the Model Context Protocol, 
+enabling AI assistants like Claude to interact with your Para backend for configuration management,
+data operations, and full-text search.</p>
+<h3 id="1-enable-the-mcp-server-in-para">1. Enable the MCP Server in Para</h3>
+<p>The MCP server is disabled by default. To enable the Para MCP server, choose either 
+“r” for read-only mode, or “rw” for full access, then add this to your <code>application.conf</code>:</p>
+<pre><code class="language-ini"><span class="hljs-comment"># Para MCP Mode (off, r=read-only, rw=read-write)</span>
+<span class="hljs-attr">para.mcp_server_mode</span> = <span class="hljs-string">"rw"</span></code></pre>
+<p><strong>MCP Server Modes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Off</strong></td>
+<td><code>off</code></td>
+<td>MCP server disabled (default)</td>
+</tr>
+<tr>
+<td><strong>Read-only</strong></td>
+<td><code>r</code></td>
+<td>Only read operations allowed (recommended for production)</td>
+</tr>
+<tr>
+<td><strong>Read+Write</strong></td>
+<td><code>rw</code></td>
+<td>Full CRUD access including create/update/delete operations</td>
+</tr>
+</tbody></table>
+<h3 id="2-get-your-para-app-bearer-token">2. Get Your Para App Bearer Token</h3>
+<p>The MCP server requires authentication using a JWT Bearer token (see ‘super tokens’ below).</p>
+<p><strong>Option 1:</strong> Generate the token using Para CLI</p>
+<ol>
+<li>Start Para server and run <code>npx para-cli setup</code></li>
+<li>Configure Para CLI to connect to your Para app</li>
+<li>Run <code>npx para-cli new-jwt --print</code></li>
+<li>Copy the access token and paste it in your MCP configuration as shown below</li>
+</ol>
+<p><strong>Option 2:</strong> Genearte the token manually using a JWT library of your choice</p>
+<ol>
+<li>Copy the secret key for your Para app</li>
+<li>Follow the section on “super tokens” below for the exact format</li>
+<li>Generate and sign a new JWT with the secret key as a signing secret.</li>
+</ol>
+<h3 id="3-configure-your-mcp-client">3. Configure Your MCP Client</h3>
+<p><strong>Claude Desktop and Claude Code</strong></p>
+<p>Add this configuration to your MCP settings file:</p>
+<p><strong>Location:</strong></p>
+<ul>
+<li><strong>macOS:</strong> <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></li>
+<li><strong>Windows:</strong> <code>%APPDATA%\Claude\claude_desktop_config.json</code></li>
+<li><strong>Linux:</strong> <code>~/.config/Claude/claude_desktop_config.json</code></li>
+</ul>
+<p><strong>Configuration:</strong></p>
+<pre><code class="language-json">{
+  <span class="hljs-attr">"mcpServers"</span>: {
+    <span class="hljs-attr">"para"</span>: {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"http"</span>,
+      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"http://localhost:8080/v1/_mcp"</span>,
+      <span class="hljs-attr">"mode"</span>: <span class="hljs-string">"streamable"</span>,
+      <span class="hljs-attr">"headers"</span>: {
+        <span class="hljs-attr">"Authorization"</span>: <span class="hljs-string">"Bearer {PARA_JWT_TOKEN}"</span>
+      }
+    }
+  }
+}</code></pre>
+<h3 id="4-test-the-connection">4. Test the Connection</h3>
+<p>Restart your MCP client (Claude Desktop/Code) and verify the connection.
+Usually the commands are <code>/mcp refresh</code> and <code>/mcp list</code>. You should see Para as an MCP server.</p>
+<h3 id="available-resources">Available Resources</h3>
+<p>Resources provide browsable context that can be loaded into your AI agent’s context window.</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>URI</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Root Index</strong></td>
+<td><code>para:///</code></td>
+<td>Basic server info and overview</td>
+</tr>
+<tr>
+<td><strong>Para Server metadata</strong></td>
+<td><code>para:///metadata</code></td>
+<td>Health status, modules, current app, version, etc.</td>
+</tr>
+<tr>
+<td><strong>Configuration Reference</strong></td>
+<td><code>para:///config</code></td>
+<td>Complete Para configuration documentation (Markdown)</td>
+</tr>
+</tbody></table>
+<p><strong>Example usage in your AI agent:</strong></p>
+<pre><code>Show me the para:<span class="hljs-comment">///metadata resource</span>
+What configuration options are available? (para:<span class="hljs-comment">///config)</span></code></pre><h3 id="available-tools">Available Tools</h3>
+<p>Tools are actions that AI agents can invoke to query or modify Para data.</p>
+<h3 id="read-only-tools-mode-r-or-rw">Read-Only Tools (Mode: <code>r</code> or <code>rw</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+<th>Parameters</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>config_search</strong></td>
+<td>Fuzzy search across configuration metadata</td>
+<td><code>query</code> (string, optional), <code>limit</code> (int, default 10)</td>
+</tr>
+<tr>
+<td><strong>get_config_by_key</strong></td>
+<td>Get info about a single configuration property</td>
+<td><code>key</code> config key</td>
+</tr>
+<tr>
+<td><strong>list_types</strong></td>
+<td>A list of all Para object types which are currently registered in Para</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>search</strong></td>
+<td>Full-text search for Para objects using Lucene syntax</td>
+<td><code>q</code> (string, default <code>*</code>), <code>type</code> (string, optional), <code>limit</code> (int, default 10), <code>page</code> (int, default 1)</td>
+</tr>
+<tr>
+<td><strong>get_user_by_email</strong></td>
+<td>Find a user by email address</td>
+<td><code>email</code> (string, required)</td>
+</tr>
+<tr>
+<td><strong>get_object_by_id</strong></td>
+<td>Retrieve a Para object by ID</td>
+<td><code>objectId</code> (string, required)</td>
+</tr>
+<tr>
+<td><strong>get_app_settings</strong></td>
+<td>A list of all Para app settings for the current app</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="write-tools-mode-rw-only">Write Tools (Mode: <code>rw</code> only)</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+<th>Parameters</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>create_app</strong></td>
+<td>Create a new Para application</td>
+<td><code>appIdentifier</code> (required), <code>name</code>, <code>creatorId</code>, <code>sharedIndex</code>, <code>sharedTable</code> <strong>Root app only</strong></td>
+</tr>
+<tr>
+<td><strong>create_object</strong></td>
+<td>Create a new Para object</td>
+<td>Dynamically shows which fields are required</td>
+</tr>
+<tr>
+<td><strong>update_object</strong></td>
+<td>Update an existing Para object</td>
+<td><code>objectId</code> (required) and also shows required fields</td>
+</tr>
+<tr>
+<td><strong>delete_object</strong></td>
+<td>Delete a Para object</td>
+<td><code>objectId</code> (required) + confirmation</td>
+</tr>
+<tr>
+<td><strong>put_app_setting</strong></td>
+<td>Adds a new Para app setting for the current app</td>
+<td><code>key</code> (string), <code>value</code> (any)</td>
+</tr>
+<tr>
+<td><strong>rebuild_index</strong></td>
+<td>Rebuilds the search index for the current app</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>clear_cache</strong></td>
+<td>Clears the object cache for the current app</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="usage-examples">Usage Examples</h2>
+<p><strong>Ask your AI agent:</strong></p>
+<pre><code>Search <span class="hljs-keyword">for</span> all Para configuration options related to security</code></pre><p><strong>AI agent will invoke:</strong></p>
+<pre><code>config_search(query=<span class="hljs-string">"security"</span>, limit=<span class="hljs-number">10</span>)</code></pre><p><strong>Ask your AI agent:</strong></p>
+<pre><code>Find all users <span class="hljs-keyword">with</span> email addresses ending <span class="hljs-keyword">in</span> @example.com</code></pre><p><strong>AI agent will invoke:</strong></p>
+<pre><code>search(q=<span class="hljs-string">"email:*@example.com"</span>, type=<span class="hljs-string">"user"</span>, limit=<span class="hljs-number">10</span>)</code></pre><p><strong>Ask your AI agent:</strong></p>
+<pre><code>Get the details <span class="hljs-keyword">for</span> object ID abc123</code></pre><p><strong>AI agent will invoke:</strong></p>
+<pre><code>get_object_by_id(objectId=<span class="hljs-string">"abc123"</span>)</code></pre><p><strong>Ask Claude:</strong></p>
+<pre><code>Create a <span class="hljs-keyword">new</span> Para app called <span class="hljs-string">"blog-api"</span></code></pre><p><strong>AI agent will invoke:</strong></p>
+<pre><code>create_app(appIdentifier=<span class="hljs-string">"blog-api"</span>, name=<span class="hljs-string">"Blog API"</span>)</code></pre><p>The MCP server automatically redacts sensitive configuration values as <code>&lt;redacted&gt;</code> instead of printing out the actual value.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="connection-failed">Connection Failed</h3>
+<p><strong>Problem:</strong> Claude can’t connect to Para MCP server</p>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li>Verify Para server is running: <code>curl http://localhost:8080/v1/_mcp</code></li>
+<li>Check if MCP server is enabled and your Bearer JWT is valid</li>
+<li>Verify firewall allows connections on port 8080</li>
+<li>Check Para logs for MCP server startup messages</li>
+</ol>
+<p>If Para is behind a reverse proxy or load balancer use this system property when starting Para:</p>
+<pre><code class="language-properties"><span class="hljs-meta">spring.ai.mcp.server.base-url</span>=<span class="hljs-string">https://api.example.com</span></code></pre>
 
 				</section>
 			</article>
@@ -7029,8 +7252,10 @@ Markwdown in message body is supported if you set <code>markdownEnabled: true</c
 </ul>
 <p>Example response - returns the result without envelope:</p>
 <pre><code class="language-js">{
-  <span class="hljs-string">"status"</span>: <span class="hljs-number">200</span>,
-  <span class="hljs-string">"details"</span>: <span class="hljs-string">"ok"</span>
+  <span class="hljs-string">"detail"</span>: <span class="hljs-string">"Bad Request"</span>,
+  <span class="hljs-string">"instance"</span>: <span class="hljs-string">"/v1/_emails"</span>,
+  <span class="hljs-string">"status"</span>: <span class="hljs-number">400</span>,
+  <span class="hljs-string">"title"</span>: <span class="hljs-string">"Bad Request"</span>
 }</code></pre>
 
 				</section>
@@ -7117,7 +7342,7 @@ If the redirect was not configured for that form, a JSON response is returned wi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>24 March 2026</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>04 April 2026</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2026
