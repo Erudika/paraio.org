@@ -185,7 +185,13 @@ pc.throwExceptionOnHTTPError(false);
 pc.me();
 ```
 
-> We've built a full-blown StackOverflow clone with Para in just about 4000 lines of code - check it out at https://scoold.com
+The Java, JavaScript and Android Para client libraries have asynchronous versions of every API method.
+The rest of the client libraries only have synchronous methods.
+
+In certain environments like serverless (AWS Lambda, CloudFlare Workers, etc.) the environment restricts code to run on a single thread.
+In those cases, applications connecting to Para with a client must not use async functions or set `para.executor_service_enabled = false`.
+
+> We've built a full-blown StackOverflow clone with Para - check it out at https://scoold.com
 
 ### Client libraries
 

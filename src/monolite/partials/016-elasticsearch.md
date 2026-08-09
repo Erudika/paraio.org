@@ -291,7 +291,7 @@ The "search after" method works well for deep pagination or infinite scrolling o
 The `lastKey` field is returned in the body of the response for each search query. It represents the `_docid` value
 for a Elasticsearch document - a unique, time-based `long`. You may have to rebuild your index for "search after" to work.
 
-Sorting is done on the `timestamp` field by default, in `desc` (descending) order. To sort on a different field, set
+Sorting is done on the `_score` field by default (relevance-based sorting), in `desc` (descending) order. To sort on a different field, set
 `pager.setSortBy(field)`. Sorting on multiple fields is also possible by separating them with a comma. For example:
 ```
 GET /v1/users?sort=name,timestamp
