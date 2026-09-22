@@ -168,3 +168,7 @@ Don't want to deal with servers and performance issues? We offer hosting and pre
 [ParaIO.com](https://paraio.com) where you can try Para online with a **free developer account**.
 Browse and manage your users and objects, do backups and edit permissions with a few clicks in the web console.
 By upgrading to a premium account you will be able to scale you projects up and down in seconds and manage multiple apps.
+
+**Other hosting providers**
+
+[![Deploy on Hostinger](https://assets.hostinger.com/vps/deploy.svg)](https://www.hostg.xyz/aff_c?offer_id=815&aff_id=243576&url_id=6844)
