@@ -2308,13 +2308,115 @@ or run it locally.</p>
 				<section class="body  img-rounded">
 					<p>Para will look for various plugins like <code>IOListener</code>s, <code>CustomResourceHandler</code>s, <code>DAO</code>s etc, on startup.
 The folder in which plugins JARs should be placed is <code>./lib/</code>, by default, but it can be configured like so:</p>
-<pre><code>para.plugin_folder = <span class="hljs-string">"plugins/"</span></code></pre><h3 id="dao-search-and-cache-plugins"><code>DAO</code>, <code>Search</code> and <code>Cache</code> plugins</h3>
-<p>In version 1.18 we expanded the support for plugins. Para can now load third-party plugins for various <code>DAO</code>
-implementations, like <a href="https://github.com/Erudika/para-dao-mongodb">MongoDB</a> for example. The plugin <code>para-dao-mongodb</code>
-is loaded using the <code>ServiceLoader</code> mechanism from the classpath and replaces the default <code>AWSDynamoDAO</code> implementation.</p>
-<p>To create a plugin you have to create a new project and import <code>para-core</code> with Maven and extend one of the three
-interfaces - <code>DAO</code>, <code>Search</code>, <code>Cache</code>. Implement one of these interfaces and name your project by following the
-convention:</p>
+<pre><code>para.plugin_folder = <span class="hljs-string">"plugins/"</span></code></pre><h3 id="official-plugins">Official plugins</h3>
+<p>Para ships with ten official plugins:</p>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Type</th>
+<th>Configuration property</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>para-dao-sql</code></td>
+<td><code>DAO</code></td>
+<td><code>para.dao</code></td>
+</tr>
+<tr>
+<td><code>para-dao-mongodb</code></td>
+<td><code>DAO</code></td>
+<td><code>para.dao</code></td>
+</tr>
+<tr>
+<td><code>para-dao-cassandra</code></td>
+<td><code>DAO</code></td>
+<td><code>para.dao</code></td>
+</tr>
+<tr>
+<td><code>para-dao-dynamodb</code></td>
+<td><code>DAO</code></td>
+<td><code>para.dao</code></td>
+</tr>
+<tr>
+<td><code>para-search-lucene</code></td>
+<td><code>Search</code></td>
+<td><code>para.search</code></td>
+</tr>
+<tr>
+<td><code>para-search-elasticsearch</code></td>
+<td><code>Search</code></td>
+<td><code>para.search</code></td>
+</tr>
+<tr>
+<td><code>para-cache-hazelcast</code></td>
+<td><code>Cache</code></td>
+<td><code>para.cache</code></td>
+</tr>
+<tr>
+<td><code>para-storage-s3</code></td>
+<td><code>FileStore</code></td>
+<td><code>para.fs</code></td>
+</tr>
+<tr>
+<td><code>para-queue-sqs</code></td>
+<td><code>Queue</code></td>
+<td><code>para.q</code></td>
+</tr>
+<tr>
+<td><code>para-email-ses</code></td>
+<td><code>Emailer</code></td>
+<td><code>para.emailer</code></td>
+</tr>
+</tbody></table>
+<p>Plugins are <strong>thin JARs</strong>, published to Maven Central. Each one carries a manifest of its own runtime
+dependencies in <code>META-INF/para/plugin-deps.txt</code>, so installing a plugin means downloading the JAR plus
+that list of dependencies. Every downloaded artifact is verified against the SHA-256 checksum published
+by Maven Central before it is written to disk. If no SHA-256 exists, SHA-1 is accepted and a warning is
+logged; if neither is published, the artifact is rejected rather than installed unverified.</p>
+<p>Two plugins are baked into the default Para release: <code>para-dao-sql</code> and <code>para-search-lucene</code>. All the
+others can be installed at runtime through the <a href="#plugin-api">plugin API</a> below.</p>
+<h4 id="installing-a-plugin">Installing a plugin</h4>
+<pre><code class="language-console"><span class="hljs-meta">$</span><span class="bash"> curl -X POST https://localhost:8080/v1/_plugins/para-dao-mongodb/install</span>
+{"installed":true,"artifactId":"para-dao-mongodb","version":"1.52.1","dependencies":4,
+ "newlyDownloaded":4,"restartRequired":true,"message":"Plugin installed. Restart Para to load it."}</code></pre>
+<p>Optionally, the payload may specify a version:</p>
+<pre><code class="language-console"><span class="hljs-meta">$</span><span class="bash"> curl -X POST -H <span class="hljs-string">'Content-Type: application/json'</span> \</span>
+    -d '{"version":"1.52.1"}' \
+    https://localhost:8080/v1/_plugins/para-dao-mongodb/install</code></pre>
+<p>Use <code>GET /v1/_plugins/{artifactId}/preview</code> to find out what an install would fetch, without writing
+anything to disk. This is what a confirmation prompt in an admin UI should call.</p>
+<blockquote>
+<p><strong>Important:</strong> Para must be <strong>restarted</strong> after installing or removing a plugin. The plugin
+classloader is built once during startup and cached, so a running server does not pick up new JARs.</p>
+</blockquote>
+<blockquote>
+<p><strong>Security:</strong> All <code>/v1/*</code> paths require an authenticated user. To restrict plugin management to
+administrators, add the path to <code>security.protected</code>:</p>
+</blockquote>
+<pre><code>para.security.protected = {
+    <span class="hljs-string">"/v1/_plugins/**"</span> = [{role = <span class="hljs-string">"ROOT"</span>}]
+}</code></pre><h3 id="jdbc-drivers">JDBC drivers</h3>
+<p>JDBC drivers are <strong>not</strong> plugins and are not published to Maven Central, so the plugin API cannot
+install them. Which driver you need depends on your database. Drop the JAR into the plugin folder, or
+into <code>lib/</code> next to the Para JAR:</p>
+<pre><code>lib/mysql-connector-j<span class="hljs-number">-9.1</span><span class="hljs-number">.0</span>.jar</code></pre><p>For this to work the Para process must put that folder on the classpath:</p>
+<pre><code class="language-console">java -Dloader.path=lib -jar para.jar</code></pre>
+<p><code>-Dloader.path</code> is honoured only by Spring Boot’s <code>PropertiesLauncher</code>. The official Para release JAR
+is built with it, so the flag works out of the box. The Docker image sets <code>JAVA_OPTS=-Dloader.path=lib</code>
+and the Helm chart sets <code>-Dloader.path=/para/lib</code> for the same reason. If you build Para yourself,
+build with the <code>fatjar</code> Maven profile, which uses <code>layout=ZIP</code> and therefore <code>PropertiesLauncher</code>:</p>
+<pre><code class="language-console">mvn -Pfatjar,sql,lucene -DskipTests=true package</code></pre>
+<p>If you use <code>JarLauncher</code> instead, <code>lib/</code> is ignored and <code>Class.forName()</code> on a driver class will fail
+with <code>ClassNotFoundException</code>.</p>
+<h3 id="writing-your-own-plugin">Writing your own plugin</h3>
+<p>In version 1.18 we expanded the support for plugins. Para can load third-party plugins for various
+<code>DAO</code> implementations, like <a href="https://github.com/Erudika/para-dao-mongodb">MongoDB</a> for example. The
+plugin <code>para-dao-mongodb</code> is loaded using the <code>ServiceLoader</code> mechanism from the classpath and replaces
+the default <code>AWSDynamoDAO</code> implementation.</p>
+<p>To create a plugin you have to create a new project and import <code>para-core</code> with Maven and extend one of
+the three interfaces - <code>DAO</code>, <code>Search</code>, <code>Cache</code>. Implement one of these interfaces and name your project
+by following the convention:</p>
 <ul>
 <li><code>para-dao-mydao</code> for <code>DAO</code> plugins,</li>
 <li><code>para-search-mysearch</code> for <code>Search</code> plugins,</li>
@@ -2322,27 +2424,108 @@ convention:</p>
 </ul>
 <p>For example, the <a href="https://github.com/Erudika/para-dao-mongodb">plugin for MongoDB</a> is called <code>para-dao-mongodb</code> and
 implements the <code>DAO</code> interface with the MongoDB driver for Java.</p>
-<p>You also need to create one file inside <code>src/main/resources/META-INF/services/</code> in your plugin project:</p>
+<p>You also need to create one file inside <code>src/main/resources/META-INF/services/</code> in your plugin project,
+named after the interface it implements:</p>
 <ul>
-<li><code>com.erudika.para.persistence.DAO</code> for <code>DAO</code> plugins,</li>
-<li><code>com.erudika.para.search.Search</code> for <code>Search</code> plugins,</li>
-<li><code>com.erudika.para.cache.Cache</code> for <code>Cache</code> plugins.</li>
+<li><code>com.erudika.para.core.persistence.DAO</code> for <code>DAO</code> plugins,</li>
+<li><code>com.erudika.para.core.search.Search</code> for <code>Search</code> plugins,</li>
+<li><code>com.erudika.para.core.cache.Cache</code> for <code>Cache</code> plugins,</li>
+<li><code>com.erudika.para.core.storage.FileStore</code> for <code>FileStore</code> plugins,</li>
+<li><code>com.erudika.para.core.queue.Queue</code> for <code>Queue</code> plugins,</li>
+<li><code>com.erudika.para.core.email.Emailer</code> for <code>Emailer</code> plugins.</li>
 </ul>
-<p>Inside this file you put the full class name of your implementation, for example <code>com.erudika.para.persistence.MyDAO</code>,
-on one line and save the file.</p>
-<p>To load a plugin follow these steps:</p>
+<p>Inside this file you put the full class name of your implementation, for example
+<code>com.erudika.para.server.persistence.MyDAO</code>, on one line and save the file. A single plugin may register
+several implementations; <code>para-dao-sql</code> for instance registers both <code>H2DAO</code> and <code>SqlDAO</code>.</p>
+<p>Do <strong>not</strong> use <code>maven-shade-plugin</code>. A shaded JAR is 30 to 65 MB and cannot be installed by the plugin
+API, because it has no readable dependency manifest. Instead, ship a thin JAR and let the plugin API
+resolve dependencies. To make your plugin installable through the API, have
+<code>maven-dependency-plugin</code> write the dependency list into your JAR:</p>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-dependency-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.9.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">executions</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">execution</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>write-plugin-deps<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">phase</span>&gt;</span>generate-resources<span class="hljs-tag">&lt;/<span class="hljs-name">phase</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">goals</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">goal</span>&gt;</span>list<span class="hljs-tag">&lt;/<span class="hljs-name">goal</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">goals</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">includeScope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">includeScope</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">outputFile</span>&gt;</span>${project.build.outputDirectory}/META-INF/para/plugin-deps.txt<span class="hljs-tag">&lt;/<span class="hljs-name">outputFile</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">outputAbsoluteArtifactFilename</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">outputAbsoluteArtifactFilename</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">execution</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">executions</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></code></pre>
+<p>Declare <code>para-core</code> with <code>&lt;scope&gt;provided&lt;/scope&gt;</code>. It is supplied by the Para server, and the resolver
+must never download a second copy of it.</p>
+<p>To load your own plugin, follow these steps:</p>
 <ol>
-<li>Place the plugin JAR in a folder called <code>lib</code> (depends on configuration) or <code>WEB-INF/lib</code> in the same folder
-as the Para server or include the plugin through Maven,</li>
-<li>Set the configuration property <code>para.dao = &quot;MyDAO&quot;</code> or <code>para.search = &quot;MySearch&quot;</code> or <code>para.cache = &quot;MyCache&quot;</code>
-(use the simple class name here)</li>
-<li>Start the Para server and the new plugin should be loaded</li>
+<li>Publish the plugin JAR to Maven Central, or place it, plus its dependencies, in the plugin folder
+(<code>lib/</code> by default) or <code>WEB-INF/lib</code> next to the Para server,</li>
+<li>Set the configuration property to the simple class name, for example <code>para.dao = &quot;MyDAO&quot;</code>,
+<code>para.search = &quot;MySearch&quot;</code> or <code>para.cache = &quot;MyCache&quot;</code>,</li>
+<li>Start the Para server and the new plugin should be loaded.</li>
 </ol>
 <blockquote>
 <p><strong>Important:</strong> Each plugin must implement and register a <code>DestroyListener</code> on initialization where all resources
 (connections, streams, pools) should be properly released and closed. Using <code>Runtime.getRuntime().addShutdownHook()</code> is
 <strong>not</strong> recommended because in some cases that method is not executed.</p>
 </blockquote>
+<h3 id="plugin-api">Plugin API</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>GET</code></td>
+<td><code>/v1/_plugins</code></td>
+<td>Lists official plugins with type, config key, installed, selected</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/v1/_plugins/installed</code></td>
+<td>Lists every JAR in the plugin folder</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/v1/_plugins/{artifactId}/preview</code></td>
+<td>Reports the dependencies and download size of a plugin</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/v1/_plugins/{artifactId}/install</code></td>
+<td>Downloads and verifies a plugin and its dependencies</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/v1/_plugins/{artifactId}/{version}</code></td>
+<td>Removes a plugin JAR</td>
+</tr>
+</tbody></table>
+<p><code>GET /v1/_plugins</code> returns one entry per plugin:</p>
+<pre><code class="language-json">{
+  <span class="hljs-attr">"para-dao-mongodb"</span>: {
+    <span class="hljs-attr">"artifactId"</span>: <span class="hljs-string">"para-dao-mongodb"</span>,
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"MongoDB"</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"MongoDB document store DAO"</span>,
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"DAO"</span>,
+    <span class="hljs-attr">"implementationClasses"</span>: [<span class="hljs-string">"MongoDBDAO"</span>],
+    <span class="hljs-attr">"configKey"</span>: <span class="hljs-string">"dao"</span>,
+    <span class="hljs-attr">"installed"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"selected"</span>: <span class="hljs-literal">false</span>
+  }
+}</code></pre>
+<p>Use <code>configKey</code> and <code>implementationClasses</code> to tell the user what to set in <code>application.conf</code>. For
+example, installing <code>para-dao-mongodb</code> and then selecting it means setting <code>para.dao = &quot;MongoDBDAO&quot;</code>
+and restarting.</p>
 <h3 id="custom-event-listeners">Custom event listeners</h3>
 <p>To register your own <code>InitializeListener</code>s and <code>DestroyListener</code>s add the following code to one of your constructors
 or inside a static block in one of your classes:</p>
@@ -7348,7 +7531,7 @@ If the redirect was not configured for that form, a JSON response is returned wi
 		<footer>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<p>Generated on <i>01 October 2026</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
+					<p>Generated on <i>09 October 2026</i> by <a href="https://github.com/albogdano/bootup">bootUP</a>
 						and hosted on <a href="https://github.com/erudika/paraio.org">GitHub</a></p>
 					<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Some rights reserved</a> <tt>(cc)</tt>
 						2026
